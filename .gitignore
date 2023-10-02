@@ -1,0 +1,22 @@
+# Unignore all with extensions
+!*.*
+!Makefile
+
+# Unignore all dirs
+!*/
+
+a.out
+*.o
+*.exe
+*/datasets/
+
+
+*/build
+input*.txt
+
+# Ignore idea
+/.idea/
+/.vscode/
+
+
+
