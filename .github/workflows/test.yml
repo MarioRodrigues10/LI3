@@ -1,5 +1,5 @@
-name: C Test
-
+name: Test
+on: [push, pull_request]
 on:
   push:
     branches:
@@ -17,8 +17,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y cmake gcc
-    
+        
+    - name: Make
+      run: |
+        make all
+
     - name: Run program-tests
       run: |
         ./program-tests
-
