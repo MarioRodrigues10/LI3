@@ -10,18 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Install CMake and GCC
       run: |
         sudo apt-get update
         sudo apt-get install -y cmake gcc
         
-    - name: Make
-      run: |
-        make all
-
     - name: Run program-tests
       run: |
+        make all
         ./program-tests
