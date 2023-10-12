@@ -18,5 +18,7 @@ input*.txt
 /.idea/
 /.vscode/
 
+# Ignore CSV
 
+*.csv
 
