@@ -18,7 +18,10 @@ OBJ_TEST := $(filter-out build/main.o, $(OBJ)) $(SRC_TEST:tests/%.c=build/%.o)
 INCLUDE_FILES := $(shell find includes/ -name "*.h")
 
 .PHONY: all
-all: $(EXEC) $(EXEC_TEST)
+all: build $(EXEC) $(EXEC_TEST)
+
+build:
+	mkdir -p build
 
 $(EXEC): $(OBJ)
 	@$(CC) $(FLAGS) $^ ${PKG_CONFIG} $(LIBS) -o $@ ; echo "[Compiling] $@"
