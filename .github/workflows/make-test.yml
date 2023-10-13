@@ -1,0 +1,11 @@
+name: make
+on: [push, pull_request]
+jobs:
+  building-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Build Project
+        run: cd trabalho-pratico && make all
+
