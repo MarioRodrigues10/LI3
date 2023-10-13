@@ -2,19 +2,19 @@ import argparse
 import string
 import random
 
-# Listas de dados para gerar os CSV
+#Data lists to generate the CSV 
 users = []
 flights = []
 passengers = []
 reservations = []
 
-# Dados de exemplo para os casos específicos
+# Sample data for specific cases
 first_names = ['Joao', 'Maria', 'Jose', 'Ana', 'Manuel', 'Rita', 'Carlos', 'Sofia', 'Pedro', 'Ines', '']
 last_names = ['Silva', 'Santos', 'Ferreira', 'Lopes', 'Pereira', 'Almeida', 'Rocha', 'Costa', 'Gomes', 'Martins', '']
 cities = ['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Faro', 'Setubal', 'Viseu', 'Aveiro', 'Braganca', 'Leiria', '']
 alphanumeric_characters_list = list(string.ascii_uppercase + string.digits)
 
-# Gerar uma data no formato YYYY/MM/DD HH:MM:SS
+# Generate a date in the format YYYY/MM/DD HH:MM:SS
 def generate_datetime():
     year = random.randint(2010, 2028)
     month = random.randint(1, 13)
@@ -24,7 +24,7 @@ def generate_datetime():
     second = random.randint(0, 61)
     return f"{year:04d}/{month:02d}/{day:02d} {hour:02d}:{minute:02d}:{second:02d}"
 
-# Gerar um ID único (número de 12 dígitos)
+# Generate an unique ID (number of 12 digits)
 def generate_unique_id(existing_ids):
     while True:
         new_id = str(random.randint(1e11, 1e12 - 1))
@@ -32,22 +32,22 @@ def generate_unique_id(existing_ids):
             existing_ids.add(new_id)
             return new_id
 
-# Gerar uma data no formato DD/MM/YYYY
+# Generate a date in the format DD/MM/YYYY
 def generate_date_of_birth():
     day = random.randint(1, 31)
     month = random.randint(1, 13)
     year = random.randint(1950, 2040)
     return f"{day:02d}/{month:02d}/{year}"
 
-# Gerar um nome aleatório
+# Generate a random name
 def generate_random_name():
     return random.choice(first_names) + " " + random.choice(last_names)
 
-# Escolher um elemento aleatório de uma lista
+# Choose a random element from the list
 def choice(values):
     return random.choice(values)
 
-# Escolher um elemento de uma lista com base em probabilidades
+# Choose an element from a list based on probabilities
 def choice_prob(options, probs):
     x = random.random()
     cum = 0
@@ -59,15 +59,15 @@ def choice_prob(options, probs):
             break
     return options[index]
 
-# Gerar uma cidade aleatória
+# Generate a random city
 def generate_random_city():
     return random.choice(cities)
 
-# Gerar um código de país aleatório
+# Generate a random country
 def generate_random_country_code():
     return choice(["PT", "FR", "EN", "ES", "OSS", "oassa", "oo"])
 
-# Geração de arquivo CSV para utilizadores
+# Generate CSV file for users
 def generate_users_csv(filename, num_users):
     with open(filename, 'w') as f:
         f.write('id;name;email;phone_number;birth_date;sex;passport;country_code;address;account_creation;pay_method;account_status\n')
@@ -90,7 +90,7 @@ def generate_users_csv(filename, num_users):
             users.append(user_data)
             f.write(";".join(str(item) for item in user_data) + "\n")
 
-# Geração de arquivo CSV para voos
+# Generate CSV file for flights
 def generate_flights_csv(filename, num_flights):
     with open(filename, 'w') as f:
         f.write('id;airline;plane_model;total_seats;origin;destination;schedule_departure_date;schedule_arrival_date;real_departure_date;real_arrival_date;pilot;copilot;notes\n')
@@ -116,7 +116,7 @@ def generate_flights_csv(filename, num_flights):
             flights.append(flight_data)
             f.write(";".join(str(item) for item in flight_data) + "\n")
 
-# Geração de arquivo CSV para passageiros
+# Generate CSV file for passengers
 def generate_passengers_csv(filename):
     with open(filename, 'w') as f:
         f.write('flight_id;user_id\n')
@@ -128,7 +128,7 @@ def generate_passengers_csv(filename):
                 passengers.append(passenger_data)
                 f.write(";".join(str(item) for item in passenger_data) + "\n")
 
-# Geração de arquivo CSV para reservas
+# Generate CSV file for reservations
 def generate_reservations_csv(filename, num_reservations):
     with open(filename, 'w') as f:
         f.write('id;user_id;hotel_id;hotel_name;hotel_stars;city_tax;address;begin_date;end_date;price_per_night;includes_breakfast;room_details;rating;comment\n')
@@ -153,7 +153,7 @@ def generate_reservations_csv(filename, num_reservations):
             reservations.append(reservation_data)
             f.write(";".join(str(item) for item in reservation_data) + "\n")
 
-# Funções para gerar os CSV e input de tamanho dos DataSets
+# Function to generate the CSV files and input of the lenght for the DataSets
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-users-size', help='Number of lines of users.csv')
@@ -174,4 +174,4 @@ if __name__ == '__main__':
     generate_passengers_csv(output_dir + '/passengers.csv')
     generate_reservations_csv(output_dir + '/reservations.csv', reservations_size)
     
-    print("Ficheiros gerados com sucesso.")
+    print("Files generated successfully.")
