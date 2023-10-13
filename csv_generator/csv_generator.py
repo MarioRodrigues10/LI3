@@ -9,19 +9,19 @@ passengers = []
 reservations = []
 
 # Dados de exemplo para os casos específicos
-first_names = ['Joao', 'Maria', 'Jose', 'Ana', 'Manuel', 'Rita', 'Carlos', 'Sofia', 'Pedro', 'Ines']
-last_names = ['Silva', 'Santos', 'Ferreira', 'Lopes', 'Pereira', 'Almeida', 'Rocha', 'Costa', 'Gomes', 'Martins']
-cities = ['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Faro', 'Setubal', 'Viseu', 'Aveiro', 'Braganca', 'Leiria']
+first_names = ['Joao', 'Maria', 'Jose', 'Ana', 'Manuel', 'Rita', 'Carlos', 'Sofia', 'Pedro', 'Ines', '']
+last_names = ['Silva', 'Santos', 'Ferreira', 'Lopes', 'Pereira', 'Almeida', 'Rocha', 'Costa', 'Gomes', 'Martins', '']
+cities = ['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Faro', 'Setubal', 'Viseu', 'Aveiro', 'Braganca', 'Leiria', '']
 alphanumeric_characters_list = list(string.ascii_uppercase + string.digits)
 
 # Gerar uma data no formato YYYY/MM/DD HH:MM:SS
 def generate_datetime():
-    year = random.randint(2010, 2021)
-    month = random.randint(1, 12)
-    day = random.randint(1, 28)
-    hour = random.randint(0, 23)
-    minute = random.randint(0, 59)
-    second = random.randint(0, 59)
+    year = random.randint(2010, 2028)
+    month = random.randint(1, 13)
+    day = random.randint(1, 31)
+    hour = random.randint(0, 24)
+    minute = random.randint(0, 77)
+    second = random.randint(0, 61)
     return f"{year:04d}/{month:02d}/{day:02d} {hour:02d}:{minute:02d}:{second:02d}"
 
 # Gerar um ID único (número de 12 dígitos)
@@ -34,9 +34,9 @@ def generate_unique_id(existing_ids):
 
 # Gerar uma data no formato DD/MM/YYYY
 def generate_date_of_birth():
-    day = random.randint(1, 28)
-    month = random.randint(1, 12)
-    year = random.randint(1950, 2005)
+    day = random.randint(1, 31)
+    month = random.randint(1, 13)
+    year = random.randint(1950, 2040)
     return f"{day:02d}/{month:02d}/{year}"
 
 # Gerar um nome aleatório
@@ -65,7 +65,7 @@ def generate_random_city():
 
 # Gerar um código de país aleatório
 def generate_random_country_code():
-    return choice(["PT", "FR", "EN", "ES"])
+    return choice(["PT", "FR", "EN", "ES", "OSS", "oassa", "oo"])
 
 # Geração de arquivo CSV para utilizadores
 def generate_users_csv(filename, num_users):
@@ -78,13 +78,13 @@ def generate_users_csv(filename, num_users):
             user_email = f"{user_name.lower().replace(' ', '.')}@example.com"
             user_phone = f"+1-{random.randint(100, 999)}-{random.randint(100, 999)}-{random.randint(1000, 9999)}"
             user_birth_date = generate_date_of_birth()
-            user_sex = choice(["M", "F"])
+            user_sex = choice(["M", "F", "O", ""])
             user_passport = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
             user_country_code = generate_random_country_code() 
             user_address = f"{random.randint(1, 100)} {generate_random_city()}, {user_country_code}"
             account_creation = generate_datetime()
-            pay_method = choice(['cash', 'debit_card', 'credit_card'])
-            account_status = choice_prob(['active', 'inactive'], probs=[0.99, 0.01])
+            pay_method = choice(['cash', 'debit_card', 'credit_card', ''])
+            account_status = choice_prob(['active', 'inactive'], probs=[0.80, 0.20])
             user_data = [user_id, user_name, user_email, user_phone, user_birth_date, user_sex, user_passport,
                          user_country_code, user_address, account_creation, pay_method, account_status]
             users.append(user_data)
@@ -97,9 +97,9 @@ def generate_flights_csv(filename, num_flights):
         flight_ids = set()
         for i in range(num_flights):
             flight_id = generate_unique_id(flight_ids)
-            airline = choice(["OPO", "ABB", "DEP"])
-            plane_model = choice(["Boeing 737", "Airbus A320", "Boeing 777"])
-            total_seats = random.randint(100, 300)
+            airline = choice(["OPO", "ABB", "DEP", "", "osd", "SOd", ""])
+            plane_model = choice(["Boeing 737", "Airbus A320", "Boeing 777", ""])
+            total_seats = random.randint(-50, 300)
             origin = generate_random_city()
             destination = generate_random_city()
             while destination == origin:
@@ -110,7 +110,7 @@ def generate_flights_csv(filename, num_flights):
             real_arrival_date = generate_datetime()
             pilot = generate_random_name()
             copilot = generate_random_name()
-            notes = choice(["On time", "Delayed", "Cancelled"])
+            notes = choice(["On time", "Delayed", "Cancelled", ""])
             flight_data = [flight_id, airline, plane_model, total_seats, origin, destination, schedule_departure_date,
                            schedule_arrival_date, real_departure_date, real_arrival_date, pilot, copilot, notes]
             flights.append(flight_data)
@@ -136,17 +136,17 @@ def generate_reservations_csv(filename, num_reservations):
         for i in range(num_reservations):
             reservation_id = generate_unique_id(reservation_ids)
             user_id = random.choice(users)[0]
-            hotel_id = random.randint(1, 1000)
+            hotel_id = random.randint(-50, 1000)
             hotel_name = f"Hotel {hotel_id}"
-            hotel_stars = random.randint(1, 5)
+            hotel_stars = random.randint(-2, 5)
             city_tax = random.uniform(0, 0.2)
             address = f"{random.randint(1, 100)} {generate_random_city()}, {generate_random_country_code()}"
             begin_date = generate_datetime()
             end_date = generate_datetime()
-            price_per_night = random.randint(50, 300)
-            includes_breakfast = random.choice([True, False])
-            room_details = choice(["Single", "Double", "Suite"])
-            rating = random.randint(1, 5)
+            price_per_night = random.randint(-50, 300)
+            includes_breakfast = random.choice(['f', 'false', '0', '', 't', 'true', '1'])
+            room_details = choice(["Single", "Double", "Suite", ""])
+            rating = random.choice(['-1', '0', '1', '2', '3', '4', '5', 'NULL'])
             comment = choice(["Great stay!", "Terrible service", "Average experience"])
             reservation_data = [reservation_id, user_id, hotel_id, hotel_name, hotel_stars, city_tax, address, begin_date,
                                 end_date, price_per_night, includes_breakfast, room_details, rating, comment]
