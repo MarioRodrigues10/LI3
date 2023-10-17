@@ -21,14 +21,14 @@ typedef struct Flight {
 
 typedef struct Passenger {
   long long int flight_id;
-  long long int user_id;
+  char user_id[MAX_FIELD_SIZE];
   struct Passenger* next;
 } Passenger;
 
 typedef struct Reservation {
-  long long id;
-  long long user_id;
-  long long hotel_id;
+  char id[MAX_FIELD_SIZE];
+  char user_id[MAX_FIELD_SIZE];
+  char hotel_id[MAX_FIELD_SIZE];
   char hotel_name[MAX_FIELD_SIZE];
   int hotel_stars;
   double city_tax;
@@ -44,7 +44,7 @@ typedef struct Reservation {
 } Reservation;
 
 typedef struct User {
-  long long id;
+  char id[MAX_FIELD_SIZE];
   char name[MAX_FIELD_SIZE];
   char email[MAX_FIELD_SIZE];
   char phone_number[MAX_FIELD_SIZE];
@@ -59,14 +59,11 @@ typedef struct User {
   struct User* next;
 } User;
 
-int isInvalidDateTime(const char* datetime);
-int isInvalidDate(const char* datetime);
+int isLineValid(char* line, char* pattern);
 
 Flight* parse_flights(char* filename);
-void free_flights(Flight* flights);
 
 Passenger* parse_passengers(char* filename);
-void free_passengers(Passenger* passengers);
 
 Reservation* parse_reservations(char* filename);
 
