@@ -13,7 +13,6 @@ int isLineValid(char* line, char* pattern) {
   }
 
   int result = regexec(&regex, line, 0, NULL, 0);
-  printf("%d\n", result);
   regfree(&regex);
   return result;
 }
@@ -117,7 +116,6 @@ Reservation* parse_reservations(char* filename) {
                      "[0-9]{2};[0-9]+;(true|false);[^;]+;[0-9]+;[^;]+")) {
       Reservation* newReservation = (Reservation*)malloc(sizeof(Reservation));
       strcpy(newReservation->id, strtok(line, ";"));
-      printf("ID: %s\n", newReservation->id);
       strcpy(newReservation->user_id, (strtok(NULL, ";")));
       strcpy(newReservation->hotel_id, strtok(NULL, ";"));
       strcpy(newReservation->hotel_name, strtok(NULL, ";"));
@@ -130,7 +128,7 @@ Reservation* parse_reservations(char* filename) {
       newReservation->includes_breakfast = atoi(strtok(NULL, ";"));
       strcpy(newReservation->room_details, strtok(NULL, ";"));
       newReservation->rating = atof(strtok(NULL, ";"));
-      strcpy(newReservation->comment, strtok(NULL, ";"));
+      strcpy(newReservation->comment, strtok(NULL, "\0"));
 
       newReservation->next = NULL;
 
@@ -167,17 +165,15 @@ User* parse_users(char* filename) {
   }
 
   while (fgets(line, sizeof(line), file) != NULL) {
-    printf("%s\n", line);
-    if (!isLineValid(line,
-                     "^(.+);(.+);([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{"
-                     "2,});\\(\\d+\\) "
-                     "\\d{3}-\\d{4};\\d{4}/\\d{2}/"
-                     "\\d{2};[MF];[A-Z0-9]+;[A-Z]{2};(.+);\\d{4}/\\d{2}/\\d{2} "
-                     "\\d{2}:\\d{2}:\\d{2};(debit_card|credit_card|cash);("
-                     "active|inactive|Active|Inactive)$")) {
+    if (!isLineValid(
+            line,
+            "^[^;]+;[^;]+;[^;]+@[a-zA-Z0-9]+.[a-zA-Z]+;[^;]+;[0-9]{4}/[0-9]{2}/"
+            "[0-9]{2};(M|F);[A-Z]{2}[0-9]{6};[A-Z]{2};[^;]+;[0-9]{4}/[0-9]{2}/"
+            "[0-9]{2} "
+            "[0-9]{2}:[0-9]{2}:[0-9]{2};(debit_card|credit_card);(active|"
+            "inactive)")) {
       User* user = (User*)malloc(sizeof(User));
       strcpy(user->id, strtok(line, ";"));
-      printf("USER ID: %s\n", user->id);
       strcpy(user->name, strtok(NULL, ";"));
       strcpy(user->email, strtok(NULL, ";"));
       strcpy(user->phone_number, strtok(NULL, ";"));
