@@ -10,7 +10,19 @@
 
 typedef struct line* Line;
 
-Line parseLines(char* filename);
-void parse_file(char* filename, int size, int type);
+/**
+ * @brief Parses a line
+ * @param line The line to be parsed
+ * @return The parsed line and its size
+ */
+Line parseLines(char* line);
+
+/**
+ * @brief Parses a file
+ * @param filename The path of the file to be parsed
+ * @param size The length of the line to be parsed
+ * @param type The type of the file to be parsed
+ */
+void parse_file(char* filename, int size);
 
 #endif

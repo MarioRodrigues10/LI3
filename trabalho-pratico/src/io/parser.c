@@ -35,7 +35,7 @@ Line parseLines(char* line) {
   return lineStruct;
 }
 
-void parse_file(char* filename, int size, int type) {
+void parse_file(char* filename, int size) {
   FILE* file = fopen(filename, "r");
   if (file == NULL) {
     printf("Error opening file\n");
