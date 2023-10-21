@@ -3,7 +3,9 @@
 
 
 typedef struct passengers_catalog *PASSENGERS_CATALOG;
+typedef struct passengers *PASSENGERS;
 
-typedef struct passsengers *PASSENGERS;
+PASSENGERS_CATALOG creat_passengers_catalog();
+
 
 #endif
