@@ -1,11 +1,11 @@
-#include "entities/flights.h"
+#include "entities/flight.h"
 
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-struct flights{
+struct flight{
     gpointer id;
     char *arline;
     char *plane_model;
@@ -21,64 +21,64 @@ struct flights{
     char *notes;
 };
 
-FLIGHTS creat_flight(){ 
-    FLIGHTS new_flights = g_malloc(sizeof(struct flights));
-    new_flights -> id   = NULL;
+Flight creat_flight(){ 
+    Flight new_flight = g_malloc(sizeof(struct flight));
+    new_flight -> id   = NULL;
 
     return new_flights;
 }
 
-void set_flight_id(FLIGHTS flight ,char *id){
-     int id_int = string_to_int(id);
-     gpointer id_pointer = GINT_TO_POINTER(id_int);
-     flight->id = id_pointer;
+void set_flight_id(Flight flight ,char *id){
+    int id_int = string_to_int(id);
+    gpointer id_pointer = GINT_TO_POINTER(id_int);
+    flight->id = id_pointer;
 }
 
-void set_flight_airline(FLIGHTS flight,char *airline){
+void set_flight_airline(Flight flight,char *airline){
     flight -> airline = g_strdup(airline); 
 }
 
-void set_flight_planel_model(FLIGHTS flight ,char *planel_model){
+void set_flight_planel_model(Flight flight ,char *planel_model){
     flight -> plane_model = g_strdup(planel_model);
 }
 
-void set_flight_total_seats(FLIGHTS flight ,int total_seats){
+void set_flight_total_seats(Flight flight ,int total_seats){
     flight -> total_seats = total_seats;
 }
 
-void set_flight_origin(FLIGHTS flight ,char *origin){
+void set_flight_origin(Flight flight ,char *origin){
     flight -> origin = g_strdup(origin);
 }
 
-void set_flight_schedule_departure_date(FLIGHTS flight, char *schedule_departure_date){
+void set_flight_schedule_departure_date(Flight flight, char *schedule_departure_date){
     flight -> schedule_departure_date = g_strdup(schedule_departure_date);
 }
 
-void set_flight_schedule_arrival_date(FLIGHTS flight, char *schedule_arrival_date){
+void set_flight_schedule_arrival_date(Flight flight, char *schedule_arrival_date){
     flight -> schedule_arrival_date = g_strdup(schedule_arrival_date);
 }
 
-void set_flight_real_departure_date(FLIGHTS flight, char *real_departure_date){
+void set_flight_real_departure_date(Flight flight, char *real_departure_date){
     flight -> real_departure_date = g_strdup(real_departure_date);
 }
 
-void set_flight_real_arrival_date(FLIGHTS flight, char *real_arrival_date){
+void set_flight_real_arrival_date(Flight flight, char *real_arrival_date){
     flight -> real_arrival_date = g_strdup(real_arrival_date);
 }
 
-void set_flight_pilot(FLIGHTS flight, char *pilot){
+void set_flight_pilot(Flight flight, char *pilot){
     flight -> pilot = g_strdup(pilot);
 }
 
-void set_flight_copilot(FLIGHTS flight, char *copilot){
+void set_flight_copilot(Flight flight, char *copilot){
     flight -> copilot = g_strdup(copilot);
 }
 
-void set_flight_note(FLIGHTS flight, char *notes){
+void set_flight_note(Flight flight, char *notes){
     flight -> notes = g_strdup(notes);
 }
 
-void free_flights(FLIGHTS flight){
+void free_flight(Flight flight){
    g_free(flight -> name);
    g_free(flight -> arline);
    g_free(flight -> plane_model);
