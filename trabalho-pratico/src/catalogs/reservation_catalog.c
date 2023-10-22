@@ -14,5 +14,8 @@ Reservation_Catalog create_reservations_catalog() {
     return new_catalog;
 }
 
-
+void free_reservations_catalog(Reservation_Catalog catalog) {
+    g_hash_table_destroy(catalog -> reservations);
+    free(catalog);
+}
    
