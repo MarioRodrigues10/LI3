@@ -4,47 +4,62 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../includes/entities/flights.h"
-#include "../includes/entities/passengers.h"
-#include "../includes/entities/reservations.h"
-#include "../includes/entities/users.h"
-
-struct line {
-  char** tokens;
-  int size;
-};
-
-Line parseLines(char* line) {
+char** parseLine(char* line) {
   char* token;
-  char** lines = NULL;
-
+  char** tokens = NULL;
+  int size = 0;
   token = strtok(line, SEPARATOR);
-  int counter = 0;
+  int iterator = 0;
+
   while (token != NULL) {
-    lines = (char**)realloc(lines, sizeof(char*) * (strlen(token) + 1));
-    lines[strlen(token)] = (char*)malloc(sizeof(char) * (strlen(token) + 1));
-    strcpy(lines[strlen(token)], token);
+    if (iterator >= size) {
+      size = (size == 0) ? 1 : size * 2;
+      tokens = (char**)realloc(tokens, sizeof(char*) * size);
+    }
+    tokens[iterator] = (char*)malloc(sizeof(char) * (strlen(token) + 1));
+    strcpy(tokens[iterator], token);
     token = strtok(NULL, SEPARATOR);
-    counter++;
+    iterator++;
   }
 
-  Line lineStruct = malloc(sizeof(Line));
-  lineStruct->tokens = lines;
-  lineStruct->size = counter;
-  return lineStruct;
+  return tokens;
 }
 
-void parseFile(char* filename) {
+char*** parseFile(char* filename) {
   FILE* file = fopen(filename, "r");
 
   if (file == NULL) {
     printf("Error opening file\n");
     exit(1);
   }
+
   char line[MAX_FIELD_SIZE * 13];
+  char*** lines = NULL;
+  int counter = 0;
+  int size = 0;
 
   while (fgets(line, sizeof(line), file) != NULL) {
-    Line line_parsed = parseLines(line);
+    char** parsedLine = parseLine(line);
+    if (parsedLine == NULL) {
+      break;
+    }
+    if (counter >= size) {
+      size = (size == 0) ? 1 : size * 2;
+      lines = (char***)realloc(lines, sizeof(char**) * size);
+    }
+    lines[counter] = (char**)malloc(sizeof(char*) * (MAX_FIELD_SIZE + 1));
+    int iterator = 0;
+    while (parsedLine[iterator] != NULL) {
+      lines[counter][iterator] =
+          (char*)malloc(sizeof(char) * (strlen(parsedLine[iterator]) + 1));
+      strcpy(lines[counter][iterator], parsedLine[iterator]);
+      free(parsedLine[iterator]);
+      iterator++;
+    }
+    free(parsedLine);
+    counter++;
   }
   fclose(file);
+
+  return lines;
 }

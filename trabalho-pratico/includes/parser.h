@@ -7,21 +7,22 @@
 #include "../includes/entities/users.h"
 
 #define SEPARATOR ";"
+#define MAX_LINE_SIZE 1024
 
 typedef struct line* Line;
 
 /**
  * @brief Parses a line
  * @param line The line to be parsed
- * @return The parsed line and its size
+ * @return an array of strings
  */
-Line parseLines(char* line);
+char** parseLine(char* line);
 
 /**
  * @brief Parses a file
  * @param filename The path of the file to be parsed
- * @return The parsed file
+ * @return an array of parsed lines
  */
-void parseFile(char* filename);
+char*** parseFile(char* filename);
 
 #endif
