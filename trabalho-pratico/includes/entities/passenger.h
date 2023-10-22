@@ -5,11 +5,11 @@
 typedef struct passenger *Passenger;
 
 /**
- * @brief Creat a new Passenger
+ * @brief Create a new Passenger
  * 
  * @return new_passenger - The new user of type 'Passenger' 
  */
-creat_passenger creat_passenger();
+Passenger create_passenger();
 
 /**
  * @brief Set a flight id

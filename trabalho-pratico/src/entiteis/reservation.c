@@ -23,7 +23,7 @@ struct reservation {
 };
 
 
-Reservation creat_reservation(){
+Reservation create_reservation(){
     Reservation new_reservation = g_malloc(sizeof(struct reservation));
     new_reservation -> id = NULL;
 

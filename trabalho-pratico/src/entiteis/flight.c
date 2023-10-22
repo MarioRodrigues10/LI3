@@ -21,7 +21,7 @@ struct flight{
     char *notes;
 };
 
-Flight creat_flight(){ 
+Flight create_flight(){ 
     Flight new_flight = g_malloc(sizeof(struct flight));
     new_flight -> id   = NULL;
 

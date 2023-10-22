@@ -4,11 +4,11 @@
 typedef struct reservation *Reservation;
 
 /**
- * @brief Creates a new reservations
+ * @brief Create a new reservations
  *
  * @return new_driver - The new driver of type `Resevations`
  */
-Reservation creat_reservation();
+Reservation create_reservation();
 
 /**
  * @brief Set the reservation id

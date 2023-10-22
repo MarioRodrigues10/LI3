@@ -5,11 +5,11 @@
 typedef struct Flight *Flight;
 
 /**
- * @brief Creat a new flight
+ * @brief Create a new flight
  * 
  * @return new_flight - The new flight of type 'Flight' 
  */
-Flight creat_flight();
+Flight create_flight();
 
 /**
  * @brief Set the flight id
@@ -106,7 +106,7 @@ void set_flight_copilot(Flight flight, char *copilot);
  * @param flight - The flight of type 'User'
  * @param notes - The notes string of type 'char*'
  */
-void set_flight_note(flight flight, char *notes);
+void set_flight_note(Flight flight, char *notes);
 
 /**
  * @brief Frees the memory allocated to store a flight

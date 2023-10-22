@@ -10,7 +10,7 @@ struct passenger{
     gpointer user_id;
 };
 
-Passenger creat_passenger(){
+Passenger create_passenger(){
     Passenger new_passenger = g_malloc(sizeof(struct passenger));
     new_passenger -> flight_id = NULL;
     new_passenger -> user_id = NULL;

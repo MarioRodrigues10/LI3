@@ -20,7 +20,7 @@ struct user{
     char* account_status;
 };
 
-User creat_user(){
+User create_user(){
     User new_user = malloc(sizeof(struct user));
     new_user -> id = NULL;
 

@@ -2,11 +2,20 @@
 #define FLIGHT_CATALOG_H
 
 
-typedef struct flight_catalog *FLIGHT_Catalog;
+typedef struct flight_catalog *Flight_Catalog;
 
 typedef struct flight *Flight;
 
-// Create the catalog for the flights.
-Flight_Catalog creat_flight_catalog();
+/**
+ * @brief Create the flight catalog  
+ */
+Flight_Catalog create_flight_catalog(void);
+
+/**
+ * @brief Free the memory alocated to the flight catalog
+ * 
+ * @param flight_catalog  - The flight catalog to be freed
+ */
+void free_flight_catalog(Flight_Catalog flight_catalog);
 
 #endif

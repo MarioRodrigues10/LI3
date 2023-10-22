@@ -4,11 +4,11 @@
 typedef struct user *User; 
 
 /**
- * @brief Creat a new user
+ * @brief Create a new user
  * 
  * @return new_user - The new user of type 'User' 
  */
-User creat_user();
+User create_user();
 
 /**
  * @brief Set the user id
