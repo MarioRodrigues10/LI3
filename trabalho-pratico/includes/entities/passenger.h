@@ -9,7 +9,17 @@ typedef struct passenger *Passenger;
  * 
  * @return new_passenger - The new user of type 'Passenger' 
  */
-Passenger create_passenger();
+Passenger createPassenger();
+
+/**
+ * @brief Verify if the parameters are valid to create a new passenger (paramenters : flight_id, user_id)
+ * 
+ * @param parameters - The parameters of type 'char**'
+ * 
+ * @return 1 - If the input is valid
+ * @return 0 - If the input is invalid
+ */
+int verifyPassengerInput(char **parameters){
 
 /**
  * @brief Set a flight id
@@ -18,7 +28,7 @@ Passenger create_passenger();
  * 
  *@param id - The flight id string of type 'char*'
  */
-void set_passenger_flight_id(Passenger passenger, char *id);
+void setPassengerFlightId(Passenger passenger, char *id);
 
 /**
  * @brief Set a user id
@@ -27,7 +37,31 @@ void set_passenger_flight_id(Passenger passenger, char *id);
  * 
  *@param id - The user id string of type 'char*'
  */
-void set_passenger_user_id(Passenger passenger, char *id);
+void setPassengerUserId(Passenger passenger, char *id);
 
+/**
+ * @brief Frees the memory allocated to store a passenger
+ * 
+ * @param passenger - The passenger of type 'Passenger'
+ */
+void freePassenger(Passenger passenger);
+
+/**
+ * @brief Get the flight id
+ * 
+ * @param passenger - The passenger of type 'Passenger'
+ * 
+ * @return id - The flight id of type 'int'
+ */
+int getPassengerFlightId(Passenger passenger);
+
+/**
+ * @brief Get the user id
+ * 
+ * @param passenger - The passenger of type 'Passenger'
+ * 
+ * @return id - The user id of type 'int'
+ */
+int getPassengerUserId(Passenger passenger);
 
 #endif
