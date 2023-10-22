@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_FIELD_SIZE 256
-
 struct flight {
   long long int id;
   char airline[MAX_FIELD_SIZE];

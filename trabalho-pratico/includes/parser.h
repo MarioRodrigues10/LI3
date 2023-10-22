@@ -6,7 +6,7 @@
 #include "../includes/entities/reservations.h"
 #include "../includes/entities/users.h"
 
-#define MAX_FIELD_SIZE 256
+#define SEPARATOR ";"
 
 typedef struct line* Line;
 
@@ -20,9 +20,8 @@ Line parseLines(char* line);
 /**
  * @brief Parses a file
  * @param filename The path of the file to be parsed
- * @param size The length of the line to be parsed
- * @param type The type of the file to be parsed
+ * @return The parsed file
  */
-void parse_file(char* filename, int size);
+void parseFile(char* filename);
 
 #endif

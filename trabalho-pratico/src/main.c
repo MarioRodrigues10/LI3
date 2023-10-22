@@ -10,10 +10,10 @@
 #include "../includes/parser.h"
 
 int main() {
-  parse_file("datasets/dataset/data/users_errors.csv", 12);
-  parse_file("datasets/dataset/data/flights.csv", 12);
-  parse_file("datasets/dataset/data/passengers.csv", 2);
-  parse_file("datasets/dataset/data/reservations.csv", 13);
+  parseFile("datasets/dataset/data/users_errors.csv");
+  parseFile("datasets/dataset/data/flights.csv");
+  parseFile("datasets/dataset/data/passengers.csv");
+  parseFile("datasets/dataset/data/reservations.csv");
 
   return 0;
 }

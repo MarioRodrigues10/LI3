@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_FIELD_SIZE 256
-
 struct reservation {
   char id[MAX_FIELD_SIZE];
   char user_id[MAX_FIELD_SIZE];
