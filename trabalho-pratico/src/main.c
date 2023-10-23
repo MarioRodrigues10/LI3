@@ -6,7 +6,7 @@
 #include "../includes/entities/passengers.h"
 #include "../includes/entities/reservations.h"
 #include "../includes/entities/users.h"
-#include "../includes/parser.h"
+#include "../includes/io/parser.h"
 
 int main() {
   parse_file("datasets/dataset/data/users.csv");
