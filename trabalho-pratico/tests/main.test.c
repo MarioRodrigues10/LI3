@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-  printf("Testar o make do testes\n");
+  printf("Test the command make test\n");
 
   return 0;
 }

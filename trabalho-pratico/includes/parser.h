@@ -9,20 +9,18 @@
 #define SEPARATOR ";"
 #define MAX_LINE_SIZE 1024
 
-typedef struct line* Line;
-
 /**
  * @brief Parses a line
  * @param line The line to be parsed
  * @return an array of strings
  */
-char** parseLine(char* line);
+char** parse_line(char* line);
 
 /**
  * @brief Parses a file
  * @param filename The path of the file to be parsed
  * @return an array of parsed lines
  */
-char*** parseFile(char* filename);
+char*** parse_file(char* filename);
 
 #endif

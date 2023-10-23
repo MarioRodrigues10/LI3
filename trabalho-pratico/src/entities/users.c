@@ -16,5 +16,4 @@ struct user {
   char account_creation[MAX_FIELD_SIZE];
   char pay_method[MAX_FIELD_SIZE];
   char account_status[MAX_FIELD_SIZE];
-  struct User* next;
 };

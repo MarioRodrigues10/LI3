@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char** parseLine(char* line) {
+char** parse_line(char* line) {
   char* token;
   char** tokens = NULL;
   int size = 0;
@@ -21,11 +21,11 @@ char** parseLine(char* line) {
     token = strtok(NULL, SEPARATOR);
     iterator++;
   }
-
+  free(token);
   return tokens;
 }
 
-char*** parseFile(char* filename) {
+char*** parse_file(char* filename) {
   FILE* file = fopen(filename, "r");
 
   if (file == NULL) {
@@ -33,31 +33,31 @@ char*** parseFile(char* filename) {
     exit(1);
   }
 
-  char line[MAX_FIELD_SIZE * 13];
+  char line[MAX_FIELD_SIZE];
   char*** lines = NULL;
-  int counter = 0;
+  int counter_lines = 0;
   int size = 0;
 
   while (fgets(line, sizeof(line), file) != NULL) {
-    char** parsedLine = parseLine(line);
+    char** parsedLine = parse_line(line);
     if (parsedLine == NULL) {
       break;
     }
-    if (counter >= size) {
+    if (counter_lines >= size) {
       size = (size == 0) ? 1 : size * 2;
       lines = (char***)realloc(lines, sizeof(char**) * size);
     }
-    lines[counter] = (char**)malloc(sizeof(char*) * (MAX_FIELD_SIZE + 1));
+    lines[counter_lines] = (char**)malloc(sizeof(char*) * (MAX_FIELD_SIZE + 1));
     int iterator = 0;
     while (parsedLine[iterator] != NULL) {
-      lines[counter][iterator] =
+      lines[counter_lines][iterator] =
           (char*)malloc(sizeof(char) * (strlen(parsedLine[iterator]) + 1));
-      strcpy(lines[counter][iterator], parsedLine[iterator]);
+      strcpy(lines[counter_lines][iterator], parsedLine[iterator]);
       free(parsedLine[iterator]);
       iterator++;
     }
     free(parsedLine);
-    counter++;
+    counter_lines++;
   }
   fclose(file);
 

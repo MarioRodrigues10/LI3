@@ -18,5 +18,4 @@ struct reservation {
   char room_details[MAX_FIELD_SIZE];
   int rating;
   char comment[MAX_FIELD_SIZE];
-  struct Reservation* next;
 };

@@ -6,5 +6,4 @@
 struct passenger {
   long long int flight_id;
   char user_id[MAX_FIELD_SIZE];
-  struct Passenger* next;
 };

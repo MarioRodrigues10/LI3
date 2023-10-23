@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 struct flight {
-  long long int id;
+  int id;
   char airline[MAX_FIELD_SIZE];
   char plane_model[MAX_FIELD_SIZE];
   int total_seats;
@@ -17,5 +17,4 @@ struct flight {
   char pilot[MAX_FIELD_SIZE];
   char copilot[MAX_FIELD_SIZE];
   char notes[MAX_FIELD_SIZE];
-  struct Flight* next;
 };
