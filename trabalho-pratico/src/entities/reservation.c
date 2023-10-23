@@ -22,7 +22,7 @@ struct reservation {
   char *comment;
 };
 
-int verifyReservationInput(char **parameters) {
+int verify_reservation_input(char **parameters) {
   if (!parameters[0]) return 0;
   if (!parameters[1]) return 0;
   if (!parameters[2]) return 0;
@@ -42,77 +42,77 @@ int verifyReservationInput(char **parameters) {
   return 1;
 }
 
-Reservation createReservation() {
+Reservation create_reservation() {
   Reservation new_reservation = g_malloc(sizeof(struct reservation));
   new_reservation->id = NULL;
 
   return new_reservation;
 }
 
-void setReservationId(Reservation reservation, char *id) {
+void set_reservation_id(Reservation reservation, char *id) {
   gpointer id_pointer = id;
   reservation->id = id_pointer;
 }
 
-void setReservationUserId(Reservation reservation, char *id) {
+void set_reservation_user_id(Reservation reservation, char *id) {
   int id_int = string_to_int(id);
   gpointer id_pointer = GINT_TO_POINTER(id_int);
   reservation->user_id = id_pointer;
 }
 
-void setReservationHotelId(Reservation reservation, char *id) {
+void set_reservation_hotel_id(Reservation reservation, char *id) {
   l int id_int = string_to_int(id);
   gpointer id_pointer = GINT_TO_POINTER(id_int);
   reservation->hotel_id = id_pointer;
 }
 
-void setReservationHotelName(Reservation reservation, char *hotel_name) {
+void set_reservation_hotel_name(Reservation reservation, char *hotel_name) {
   reservation->hotel_name = g_strdup(hotel_name);
 }
 
-void setReservationHotelStarts(Reservation reservation, int starts) {
+void set_reservation_hotel_starts(Reservation reservation, int starts) {
   reservation->hotel_start = starts;
 }
 
-void setReservationCityTax(Reservation reservation, int tax) {
+void set_reservation_city_tax(Reservation reservation, int tax) {
   reservation->city_tax = tax;
 }
 
-void setReservationAddress(Reservation reservation, char *address) {
+void set_reservation_address(Reservation reservation, char *address) {
   reservation->address = g_strdup(address);
 }
 
-void setReservationBeginDate(Reservation reservation, char *begin_date) {
+void set_reservation_begin_date(Reservation reservation, char *begin_date) {
   reservation->begin_date = g_strdup(begin_date);
 }
 
-void setReservationEndDate(Reservation reservation, char *end_date) {
+void set_reservation_end_date(Reservation reservation, char *end_date) {
   reservation->end_date = g_strdup(end_date);
 }
 
-void setReservationPricePerNight(Reservation reservation,
-                                 int price_per_ninght) {
+void set_reservation_price_per_night(Reservation reservation,
+                                     int price_per_ninght) {
   reservation->price_per_ninght = price_per_ninght;
 }
 
-void setReservationIncludeBreakfast(Reservation reservation,
-                                    char *include_breakfast) {
+void set_reservation_include_breakfast(Reservation reservation,
+                                       char *include_breakfast) {
   reservation->include_breakfast = g_strdup(include_breakfast);
 }
 
-void setReservationRoomDetail(Reservation reservation, char *room_detail) {
+void set_reservation_room_detail(Reservation reservation, char *room_detail) {
   reservation->room_detail = g_strdup(room_detail);
 }
 
-void setReservationRating(Reservation reservation, int rating) {
+void set_reservation_rating(Reservation reservation, int rating) {
   reservation->rating = rating;
 }
 
-void setReservationComment(Reservation reservation, char *comment) {
+void set_reservation_comment(Reservation reservation, char *comment) {
   reservation->comment = g_strdup(comment);
 }
 
-void freeReservation(Reservation reservation) {
+void free_reservation(Reservation reservation) {
   g_free(reservation->hotel_name);
   g_free(reservation->address);
   g_free(reservation->begin_date);
@@ -122,72 +122,72 @@ void freeReservation(Reservation reservation) {
   g_free(reservation->comment);
 }
 
-int getUserId(Reservation reservation) {
+int get_user_id(Reservation reservation) {
   int id = GPOINTER_TO_INT(reservation->user_id);
   return id
 }
 
-int getHotelId(Reservation reservation) {
+int get_hotel_id(Reservation reservation) {
   int id = GPOINTER_TO_INT(reservation->hotel_id);
   return id
 }
 
-int getReservationId(Reservation reservation) {
+int get_reservation_id(Reservation reservation) {
   int id = GPOINTER_TO_INT(reservation->id);
   return id
 }
 
-char *getReservationHotelName(Reservation reservation) {
+char *get_reservation_hotel_name(Reservation reservation) {
   char *hotel_name = strdup(reservation->hotel_name);
   return hotel_name;
 }
 
-int getReservationHotelStarts(Reservation reservation) {
+int get_reservation_hotel_starts(Reservation reservation) {
   int starts = reservation->hotel_start;
   return starts;
 }
 
-double getReservationCityTax(Reservation reservation) {
+double get_reservation_city_tax(Reservation reservation) {
   double tax = reservation->city_tax;
   return tax;
 }
 
-char *getReservationAddress(Reservation reservation) {
+char *get_reservation_address(Reservation reservation) {
   char *address = strdup(reservation->address);
   return address;
 }
 
-char *getReservationBeginDate(Reservation reservation) {
+char *get_reservation_begin_date(Reservation reservation) {
   char *begin_date = strdup(reservation->begin_date);
   return begin_date;
 }
 
-char *getReservationEndDate(Reservation reservation) {
+char *get_reservation_end_date(Reservation reservation) {
   char *end_date = strdup(reservation->end_date);
   return end_date;
 }
 
-int getReservationPricePerNight(Reservation reservation) {
+int get_reservation_price_per_night(Reservation reservation) {
   int price_per_ninght = reservation->price_per_ninght;
   return price_per_ninght;
 }
 
-char *getReservationIncludeBreakfast(Reservation reservation) {
+char *get_reservation_include_breakfast(Reservation reservation) {
   char *include_breakfast = strdup(reservation->include_breakfast);
   return include_breakfast;
 }
 
-char *getReservationRoomDetail(Reservation reservation) {
+char *get_reservation_room_detail(Reservation reservation) {
   char *room_detail = strdup(reservation->room_detail);
   return room_detail;
 }
 
-int getReservationRating(Reservation reservation) {
+int get_reservation_rating(Reservation reservation) {
   int rating = reservation->rating;
   return rating;
 }
 
-char *getReservationComment(Reservation reservation) {
+char *get_reservation_comment(Reservation reservation) {
   char *comment = strdup(reservation->comment);
   return comment;
 }
