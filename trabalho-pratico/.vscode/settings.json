@@ -3,6 +3,7 @@
         "users.h": "c",
         "parser.h": "c",
         "string.h": "c",
-        "reservations.h": "c"
+        "reservations.h": "c",
+        "flights.h": "c"
     }
 }

@@ -8,11 +8,4 @@
 #include "../includes/entities/users.h"
 #include "../includes/io/parser.h"
 
-int main() {
-  parse_file("datasets/dataset/data/users.csv");
-  parse_file("datasets/dataset/data/flights.csv");
-  parse_file("datasets/dataset/data/passengers.csv");
-  parse_file("datasets/dataset/data/reservations.csv");
-
-  return 0;
-}
+int main() { return 0; }
