@@ -33,7 +33,7 @@ char*** parse_file(char* filename) {
     exit(1);
   }
 
-  char line[MAX_FIELD_SIZE];
+  char line[MAX_LINE_SIZE];
   char*** lines = NULL;
   int counter_lines = 0;
   int size = 0;
@@ -47,7 +47,7 @@ char*** parse_file(char* filename) {
       size = (size == 0) ? 1 : size * 2;
       lines = (char***)realloc(lines, sizeof(char**) * size);
     }
-    lines[counter_lines] = (char**)malloc(sizeof(char*) * (MAX_FIELD_SIZE + 1));
+    lines[counter_lines] = (char**)malloc(sizeof(char*) * (MAX_LINE_SIZE + 1));
     int iterator = 0;
     while (parsedLine[iterator] != NULL) {
       lines[counter_lines][iterator] =
