@@ -1,19 +1,21 @@
-#ifndef PASSENGER_CATALOG_H
-#define PASSENGER_CATALOG_H
+#ifndef PASSENGERS_CATALOG_H
+#define PASSENGERS_CATALOG_H
 
-typedef struct passenger_catalog *Passenger_Catalog;
-typedef struct passenger *Passenger;
+#include "entities/passenger.h"
+
+typedef struct passenger_catalog *PASSENGERS_CATALOG;
+typedef struct passenger *PASSENGER;
 
 /**
  * @brief Create the passenger catalog
  */
-Passenger_Catalog create_passenger_catalog();
+PASSENGERS_CATALOG create_passengers_catalog();
 
 /**
  * @brief Free the memory alocated to the passenger catalog
  *
  * @param passenger_catalog  - The passenger catalog to be free
  */
-void free_passenger_catalog(Passenger_Catalog passenger_catalog);
+void free_passengesrs_catalog(PASSENGERS_CATALOG passenger_catalog);
 
 #endif

@@ -39,66 +39,66 @@ int verify_flight_input(char **parameters) {
   return 1;
 }
 
-Flight create_flight() {
-  Flight newflight = gmalloc(sizeof(struct flight));
+FLIGHT create_flight() {
+  FLIGHT newflight = gmalloc(sizeof(struct flight));
   newflight->id = NULL;
 
   return newflights;
 }
 
-void set_flight_d(Flight flight, char *id) {
+void set_flight_d(FLIGHT flight, char *id) {
   int idint = stringtoint(id);
   gpointer idpointer = GINTTOPOINTER(idint);
   flight->id = idpointer;
 }
 
-void set_flight_airline(Flight flight, char *airline) {
+void set_flight_airline(FLIGHT flight, char *airline) {
   flight->airline = g_strdup(airline);
 }
 
-void set_flight_planel_model(Flight flight, char *planelmodel) {
+void set_flight_planel_model(FLIGHT flight, char *planelmodel) {
   flight->planemodel = g_strdup(planelmodel);
 }
 
-void set_flight_total_seats(Flight flight, int totalseats) {
+void set_flight_total_seats(FLIGHT flight, int totalseats) {
   flight->totalseats = totalseats;
 }
 
-void set_flight_origin(Flight flight, char *origin) {
+void set_flight_origin(FLIGHT flight, char *origin) {
   flight->origin = g_strdup(origin);
 }
 
-void set_flight_schedule_departure_date(Flight flight,
+void set_flight_schedule_departure_date(FLIGHT flight,
                                         char *schedule_departure_date) {
   flight->schedule_departure_date = g_strdup(schedule_departure_date);
 }
 
-void set_flight_schedule_arrival_date(Flight flight,
+void set_flight_schedule_arrival_date(FLIGHT flight,
                                       char *schedule_arrival_date) {
   flight->schedule_arrival_date = g_strdup(schedule_arrival_date);
 }
 
-void set_flight_real_departure_date(Flight flight, char *real_departure_date) {
+void set_flight_real_departure_date(FLIGHT flight, char *real_departure_date) {
   flight->real_departure_date = g_strdup(real_departure_date);
 }
 
-void set_flight_real_arrival_date(Flight flight, char *real_arrival_date) {
+void set_flight_real_arrival_date(FLIGHT flight, char *real_arrival_date) {
   flight->real_arrival_date = g_strdup(real_arrival_date);
 }
 
-void set_flight_pilot(Flight flight, char *pilot) {
+void set_flight_pilot(FLIGHT flight, char *pilot) {
   flight->pilot = g_strdup(pilot);
 }
 
-void set_flight_copilot(Flight flight, char *copilot) {
+void set_flight_copilot(FLIGHT flight, char *copilot) {
   flight->copilot = g_strdup(copilot);
 }
 
-void set_flight_note(Flight flight, char *notes) {
+void set_flight_note(FLIGHT flight, char *notes) {
   flight->notes = g_strdup(notes);
 }
 
-void free_flight(Flight flight) {
+void free_flight(FLIGHT flight) {
   g_free(flight->name);
   g_free(flight->arline);
   g_free(flight->plane_model);
@@ -112,62 +112,62 @@ void free_flight(Flight flight) {
   g_free(flight->notes);
 }
 
-int get_flight_Id(Flight flight) {
+int get_flight_Id(FLIGHT flight) {
   int id = GPOINTER_TO_INT(flight->id);
   return id;
 }
 
-char *get_flight_airline(Flight flight) {
+char *get_flight_airline(FLIGHT flight) {
   char *airline = strdup(flight->airline);
   return airline;
 }
 
-char *get_flight_plane_model(Flight flight) {
+char *get_flight_plane_model(FLIGHT flight) {
   char *plane_model = strdup(flight->plane_model);
   return plane_model;
 }
 
-int get_flight_total_seats(Flight flight) {
+int get_flight_total_seats(FLIGHT flight) {
   int totalseats = flight->totalseats;
   return totalseats;
 }
 
-char *get_flight_origin(Flight flight) {
+char *get_flight_origin(FLIGHT flight) {
   char *origin = strdup(flight->origin);
   return origin;
 }
 
-char *get_flight_schedule_departure_date(Flight flight) {
+char *get_flight_schedule_departure_date(FLIGHT flight) {
   char *schedule_departure_date = strdup(flight->schedule_departure_date);
   return schedule_departure_date;
 }
 
-char *get_flight_schedule_arrival_date(Flight flight) {
+char *get_flight_schedule_arrival_date(FLIGHT flight) {
   char *schedule_arrival_date = strdup(flight->schedule_arrival_date);
   return schedule_arrival_date;
 }
 
-char *get_flight_real_departure_date(Flight flight) {
+char *get_flight_real_departure_date(FLIGHT flight) {
   char *real_departure_date = strdup(flight->real_departure_date);
   return real_departure_date;
 }
 
-char *get_flight_real_arrival_date(Flight flight) {
+char *get_flight_real_arrival_date(FLIGHT flight) {
   char *real_arrival_date = strdup(flight->real_arrival_date);
   return real_arrival_date;
 }
 
-char *get_flight_pilot(Flight flight) {
+char *get_flight_pilot(FLIGHT flight) {
   char *pilot = strdup(flight->pilot);
   return pilot;
 }
 
-char *get_flight_copilot(Flight flight) {
+char *get_flight_copilot(FLIGHT flight) {
   char *copilot = strdup(flight->copilot);
   return copilot;
 }
 
-char *get_flight_notes(Flight flight) {
+char *get_flight_notes(FLIGHT flight) {
   char *notes = strdup(flight->notes);
   return notes;
 }

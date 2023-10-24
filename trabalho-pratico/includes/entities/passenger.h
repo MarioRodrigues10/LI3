@@ -1,14 +1,14 @@
 #ifndef PASSENGER_H
 #define PASSENGER_H
 
-typedef struct passenger *Passenger;
+typedef struct passenger *PASSENGER;
 
 /**
- * @brief Create a new Passenger
+ * @brief Create a new PASSENGER
  *
- * @return new_passenger - The new user of type 'Passenger'
+ * @return new_passenger - The new user of type 'PASSENGER'
  */
-Passenger create_passenger();
+PASSENGER create_passenger();
 
 /**
  * @brief Verify if the parameters are valid to create a new passenger
@@ -23,44 +23,44 @@ int verify_passenger_input(char **parameters) {
   /**
    * @brief Set a flight id
    *
-   * @param passengers - The passenger type 'Passenger'
+   * @param passengers - The passenger type 'PASSENGER'
    *
    *@param id - The flight id string of type 'char*'
    */
-  void set_passenger_flight_id(Passenger passenger, char *id);
+  void set_passenger_flight_id(PASSENGER passenger, char *id);
 
   /**
    * @brief Set a user id
    *
-   * @param passengers - The passenger type 'Passenger'
+   * @param passengers - The passenger type 'PASSENGER'
    *
    *@param id - The user id string of type 'char*'
    */
-  void set_passenger_user_id(Passenger passenger, char *id);
+  void set_passenger_user_id(PASSENGER passenger, char *id);
 
   /**
    * @brief Frees the memory allocated to store a passenger
    *
-   * @param passenger - The passenger of type 'Passenger'
+   * @param passenger - The passenger of type 'PASSENGER'
    */
-  void free_passenger(Passenger passenger);
+  void free_passenger(PASSENGER passenger);
 
   /**
    * @brief Get the flight id
    *
-   * @param passenger - The passenger of type 'Passenger'
+   * @param passenger - The passenger of type 'PASSENGER'
    *
    * @return id - The flight id of type 'int'
    */
-  int get_passenger_flight_id(Passenger passenger);
+  int get_passenger_flight_id(PASSENGER passenger);
 
   /**
    * @brief Get the user id
    *
-   * @param passenger - The passenger of type 'Passenger'
+   * @param passenger - The passenger of type 'PASSENGER'
    *
    * @return id - The user id of type 'int'
    */
-  int get_passenger_user_id(Passenger passenger);
+  int get_passenger_user_id(PASSENGER passenger);
 
 #endif

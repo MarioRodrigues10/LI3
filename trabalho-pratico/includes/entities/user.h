@@ -1,7 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-typedef struct user *User;
+typedef struct user *USER;
 
 /**
  * @brief Verifies if the parameters are valid to create a new user (id, name,
@@ -15,207 +15,207 @@ int verify_flight_input(char **parameters);
 /**
  * @brief Create a new user
  *
- * @return new_user - The new user of type 'User'
+ * @return new_user - The new user of type 'USER'
  */
-User create_user();
+USER create_user();
 
 /**
  * @brief Set the user id
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param id - The id string of type 'char*'
  */
-void set_user_id(User user, char *id);
+void set_user_id(USER user, char *id);
 
 /**
  * @brief Set the user name
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param name - The name string of type 'char*'
  */
-void set_user_name(User user, char *name);
+void set_user_name(USER user, char *name);
 
 /**
  * @brief Set the user email
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param email - The email string of type 'char*'
  */
-void set_user_email(User user, char *email);
+void set_user_email(USER user, char *email);
 
 /**
  * @brief Set the user phone number
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param phone_number - The phone number string of type 'char*'
  */
-void set_user_phone_number(User user, char *phone_number);
+void set_user_phone_number(USER user, char *phone_number);
 
 /**
  * @brief Set the user email
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param email - The email string of type 'char*'
  */
-void set_user_birth_date(User user, char *birth_date);
+void set_user_birth_date(USER user, char *birth_date);
 
 /**
  * @brief Set the user sex
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param sex - The sex string of type 'char*'
  */
-void set_user_sex(User user, char *sex);
+void set_user_sex(USER user, char *sex);
 
 /**
  * @brief Set the user passport
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param passport - The passport string of type 'char*'
  */
-void set_user_passport(User user, char *passport);
+void set_user_passport(USER user, char *passport);
 
 /**
  * @brief Set the user country code
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param country_code - The country code string of type 'char*'
  */
-void set_user_country_code(User user, char *country_code);
+void set_user_country_code(USER user, char *country_code);
 
 /**
  * @brief Set the user address
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param address - The address string of type 'char*'
  */
-void set_user_address(User user, char *address);
+void set_user_address(USER user, char *address);
 
 /**
  * @brief Set the user account creation
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param account_creation - The account creation string of type 'char*'
  */
-void set_user_account_creation(User user, char *account_creation);
+void set_user_account_creation(USER user, char *account_creation);
 
 /**
  * @brief Set the user pay method
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param pay_method - The pay method string of type 'char*'
  */
-void set_user_pay_method(User user, char *pay_method);
+void set_user_pay_method(USER user, char *pay_method);
 
 /**
  * @brief Set the user account status
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @param account_status - The account status string of type 'char*'
  */
-void set_user_account_status(User user, char *account_status);
+void set_user_account_status(USER user, char *account_status);
 
 /**
  * @brief Frees the memory allocated to store a user
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  */
-void free_user(User user);
+void free_user(USER user);
 
 /**
  * @brief Get the user id
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return id - The id integer of type 'int'
  */
-int get_user_id(User user);
+int get_user_id(USER user);
 
 /**
  * @brief Get the user name
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return name - The name string of type 'char*'
  */
-char *get_user_name(User user);
+char *get_user_name(USER user);
 
 /**
  * @brief Get the user email
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return email - The email string of type 'char*'
  */
-char *get_user_email(User user);
+char *get_user_email(USER user);
 
 /**
  * @brief Get the user phone number
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return phone_number - The phone number string of type 'char*'
  */
-char *get_user_phone_number(User user);
+char *get_user_phone_number(USER user);
 
 /**
  * @brief Get the user email
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return email - The email string of type 'char*'
  */
-char *get_user_birth_date(User user);
+char *get_user_birth_date(USER user);
 
 /**
  * @brief Get the user sex
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return sex - The sex string of type 'char*'
  */
-char *get_user_sex(User user);
+char *get_user_sex(USER user);
 
 /**
  * @brief Get the user passport
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return passport - The passport string of type 'char*'
  */
-char *get_user_passport(User user);
+char *get_user_passport(USER user);
 
 /**
  * @brief Get the user country code
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return country_code - The country code string of type 'char*'
  */
-char *get_user_country_code(User user);
+char *get_user_country_code(USER user);
 
 /**
  * @brief Get the user address
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return address - The address string of type 'char*'
  */
-char *get_user_address(User user);
+char *get_user_address(USER user);
 
 /**
  * @brief Get the user account creation
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return account_creation - The account creation string of type 'char*'
  */
-char *get_user_account_creation(User user);
+char *get_user_account_creation(USER user);
 
 /**
  * @brief Get the user pay method
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return pay_method - The pay method string of type 'char*'
  */
-char *get_user_pay_method(User user);
+char *get_user_pay_method(USER user);
 
 /**
  * @brief Get the user account status
  *
- * @param user - The user of type 'User'
+ * @param user - The user of type 'USER'
  * @return account_status - The account status string of type 'char*'
  */
-char *get_user_account_status(User user);
+char *get_user_account_status(USER user);
 
 #endif
