@@ -1,8 +1,7 @@
-#include "catalogs/passenger_catalog.h"
-#include "entities/passenger.h"
-
 #include <glib.h>
 
+#include "catalogs/passengers_catalog.h"
+#include "entities/passenger.h"
 
 struct passengers_catalog {
   GHashTable *passenger;
@@ -16,7 +15,7 @@ PASSENGERS_CATALOG create_passengers_catalog() {
   return new_catalog;
 }
 
-void free_passengesrs_catalog(PASSENGERS_CATALOG passengers_catalog){
+void free_passengesrs_catalog(PASSENGERS_CATALOG passengers_catalog) {
   g_hash_table_destroy(passengers_catalog->passenger);
   g_free(passengers_catalog);
 }
