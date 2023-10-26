@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-char** parse_line(char* line, int line_size) {
+char** parse_line(char* line, int num_tokens) {
   char* token;
-  char** tokens = (char**)malloc(sizeof(char**) * line_size);
+  char** tokens = (char**)malloc(sizeof(char**) * num_tokens);
   token = strtok(line, SEPARATOR);
   int iterator = 0;
 
