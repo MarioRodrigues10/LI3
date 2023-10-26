@@ -15,13 +15,13 @@ INC_TEST := $(INC)
 SRC_TEST := $(shell find tests/ -name "*.c")
 OBJ_TEST := $(filter-out build/main.o, $(OBJ)) $(SRC_TEST:tests/%.c=build/%.o)
 
+BUILD_DIR := $(shell mkdir -p build/views build/base build/io build/entities build/utils build/catalogs build/queries)
 INCLUDE_FILES := $(shell find includes/ -name "*.h")
 
 .PHONY: all
 all: build $(EXEC) $(EXEC_TEST)
 
 build:
-	mkdir -p build
 
 $(EXEC): $(OBJ)
 	@$(CC) $(FLAGS) $^ ${PKG_CONFIG} $(LIBS) -o $@ ; echo "[Compiling] $@"
@@ -44,6 +44,6 @@ clean:
 
 .PHONY: format
 format:
-	clang-format -i src/*.c includes/*.h tests/*.c
+	clang-format -i -style=file src/*.c includes/*.h tests/*.c
 
 

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv) {
-  printf("Testar o make do testes\n");
+int main() {
+  printf("Test the command make test\n");
 
   return 0;
 }
