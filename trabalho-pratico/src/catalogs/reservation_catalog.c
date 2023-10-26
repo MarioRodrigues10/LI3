@@ -4,7 +4,7 @@
 #include "entities/reservations.h"
 
 struct reservations_catalog {
-  GHashTable *reservation;
+  GHashTable *reservations;
 };
 
 RESERVATIONS_CATALOG create_reservations_catalog() {

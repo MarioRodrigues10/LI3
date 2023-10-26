@@ -4,18 +4,18 @@
 #include "entities/passengers.h"
 
 struct passengers_catalog {
-  GHashTable *passenger;
+  GHashTable *passengers;
 };
 
 PASSENGERS_CATALOG create_passengers_catalog() {
   PASSENGERS_CATALOG new_catalog = malloc(sizeof(struct passengers_catalog));
-  new_catalog->passenger = g_hash_table_new_full(
-      NULL, g_direct_equal, NULL, (GDestroyNotify)free_passenger);
+  new_catalog->passengers = g_hash_table_new_full(
+      NULL, g_direct_equal, NULL, (GDestroyNotify)free_passengers_catalog);
 
   return new_catalog;
 }
 
-void free_passengesrs_catalog(PASSENGERS_CATALOG passengers_catalog) {
-  g_hash_table_destroy(passengers_catalog->passenger);
+void free_passengers_catalog(PASSENGERS_CATALOG passengers_catalog) {
+  g_hash_table_destroy(passengers_catalog->passengers);
   g_free(passengers_catalog);
 }
