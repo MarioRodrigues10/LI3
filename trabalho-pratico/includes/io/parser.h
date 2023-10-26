@@ -16,11 +16,4 @@
  */
 char** parse_line(char* line, int line_size);
 
-/**
- * @brief Parses a file
- * @param filename The path of the file to be parsed
- * @return an array of parsed lines
- */
-char*** parse_file(char* filename);
-
 #endif
