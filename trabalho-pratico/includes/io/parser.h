@@ -14,7 +14,7 @@
  * @param line The line to be parsed
  * @return an array of strings
  */
-char** parse_line(char* line);
+char** parse_line(char* line, int line_size);
 
 /**
  * @brief Parses a file
