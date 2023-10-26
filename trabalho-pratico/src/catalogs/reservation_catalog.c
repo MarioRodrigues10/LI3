@@ -1,7 +1,7 @@
 #include <glib.h>
 
 #include "catalogs/reservations_catalog.h"
-#include "entities/reservation.h"
+#include "entities/reservations.h"
 
 struct reservations_catalog {
   GHashTable *reservation;

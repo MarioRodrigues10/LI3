@@ -1,4 +1,4 @@
-#include "entities/user.h"
+#include "entities/users.h"
 
 #include <glib.h>
 #include <stdio.h>

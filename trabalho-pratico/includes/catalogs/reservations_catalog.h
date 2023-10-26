@@ -1,7 +1,7 @@
 #ifndef RESERVATIONS_CATALOG_H
 #define RESERVATIONS_CATALOG_H
 
-#include "entities/reservation.h"
+#include "entities/reservations.h"
 
 typedef struct reservations_catalog *RESERVATIONS_CATALOG;
 

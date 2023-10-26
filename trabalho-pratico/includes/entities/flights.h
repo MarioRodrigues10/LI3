@@ -1,5 +1,5 @@
-#ifndef FLIGHT_H
-#define FLIGHT_H
+#ifndef FLIGHTS_H
+#define FLIGHTS_H
 
 typedef struct Flight *FLIGHT;
 
@@ -222,7 +222,7 @@ char *get_flight_real_arrival_date(FLIGHT flight);
  *
  * @return pilot - The flight pilot of type 'char*'
  */
-char *get_flight_pilot(Flight flight);
+char *get_flight_pilot(FLIGHT flight);
 
 /**
  * @brief Get the flight copilot
@@ -231,7 +231,7 @@ char *get_flight_pilot(Flight flight);
  *
  * @return copilot - The flight copilot of type 'char*'
  */
-char *get_flight_copilot(Flight flight);
+char *get_flight_copilot(FLIGHT flight);
 
 /**
  * @brief Get the flight notes
@@ -240,6 +240,6 @@ char *get_flight_copilot(Flight flight);
  *
  * @return notes - The flight notes of type 'char*'
  */
-char *get_flight_notes(Flight flight);
+char *get_flight_notes(FLIGHT flight);
 
 #endif

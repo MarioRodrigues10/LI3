@@ -1,4 +1,4 @@
-#include "entities/reservation.h"
+#include "entities/reservations.h"
 
 #include <glib.h>
 #include <stdio.h>
@@ -6,9 +6,9 @@
 #include <string.h>
 
 struct reservation {
-  gpointer *id;
-  gpointer *user_id;
-  gpointer *hotel_id;
+  gpointer id;
+  gpointer user_id;
+  gpointer hotel_id;
   char *hotel_name;
   int hotel_start;
   double city_tax;
@@ -33,7 +33,6 @@ int verify_reservation_input(char **parameters) {
   if (!parameters[7]) return 0;
   if (!parameters[8]) return 0;
   if (!parameters[9]) return 0;
-  if (!parameters[10]) return 0;  // breakfast  can be null
   if (!parameters[11]) return 0;
   if (!parameters[12]) return 0;
   if (!parameters[13]) return 0;

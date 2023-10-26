@@ -1,7 +1,7 @@
 #include <glib.h>
 
 #include "catalogs/flights_catalog.h"
-#include "entities/flight.h"
+#include "entities/flights.h"
 
 struct flights_catalog {
   GHashTable *flight;

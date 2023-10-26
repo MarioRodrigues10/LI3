@@ -1,4 +1,4 @@
-#include "entities/flight.h"
+#include "entities/flights.h"
 
 #include <glib.h>
 #include <stdio.h>

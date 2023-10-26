@@ -1,7 +1,7 @@
 #ifndef FLIGHTS_CATOLOG_H
 #define FLIGHTS_CATALOG_H
 
-#include "entities/flight.h"
+#include "entities/flights.h"
 
 typedef struct flights_catalog *FlIGHTS_CATALOG;
 
