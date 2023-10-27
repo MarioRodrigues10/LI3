@@ -13,7 +13,7 @@ FlIGHTS_CATALOG create_flights_catalog() {
       NULL, g_direct_equal, NULL, (GDestroyNotify)free_flights_catalog);
 
   return new_catalog;
-};
+}
 
 void free_flights_catalog(FlIGHTS_CATALOG flights_catalog) {
   g_hash_table_destroy(flights_catalog->flights);

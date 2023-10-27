@@ -5,8 +5,6 @@
 
 typedef struct reservations_catalog *RESERVATIONS_CATALOG;
 
-typedef struct reservations *RESERVATION;
-
 /**
  * @brief Create the reservations catalog
  */

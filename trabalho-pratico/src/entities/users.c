@@ -45,7 +45,7 @@ USER create_user() {
 }
 
 void set_user_id(USER user, char *id) {
-  int id_int = string_to_int(id);
+  int id_int = atoi(id);
   gpointer id_pointer = GINT_TO_POINTER(id_int);
   user->id = id_pointer;
 }
@@ -102,62 +102,62 @@ void free_user(USER user) {
   g_free(user->account_status);
 }
 
-int get_user_id(USER user) {
+int get_user_id_from_user(USER user) {
   int id = GPOINTER_TO_INT(user->id);
-  return id
+  return id;
 }
 
 char *get_user_name(USER user) {
-  char *name = strdup(user->name);
+  char *name = g_strdup(user->name);
   return name;
 }
 
 char *get_user_email(USER user) {
-  char *email = strdup(user->email);
+  char *email = g_strdup(user->email);
   return email;
 }
 
 char *get_user_phone_number(USER user) {
-  char *phone_number = strdup(user->phone_number);
+  char *phone_number = g_strdup(user->phone_number);
   return phone_number;
 }
 
 char *get_user_birth_date(USER user) {
-  char *birth_date = strdup(user->birth_date);
+  char *birth_date = g_strdup(user->birth_date);
   return birth_date;
 }
 
 char *get_user_sex(USER user) {
-  char *sex = strdup(user->sex);
+  char *sex = g_strdup(user->sex);
   return sex;
 }
 
 char *get_user_passport(USER user) {
-  char *passport = strdup(user->passport);
+  char *passport = g_strdup(user->passport);
   return passport;
 }
 
 char *get_user_country_code(USER user) {
-  char *country_code = strdup(user->country_code);
+  char *country_code = g_strdup(user->country_code);
   return country_code;
 }
 
 char *get_user_address(USER user) {
-  char *address = strdup(user->address);
+  char *address = g_strdup(user->address);
   return address;
 }
 
 char *get_user_account_creation(USER user) {
-  char *account_creation = strdup(user->account_creation);
+  char *account_creation = g_strdup(user->account_creation);
   return account_creation;
 }
 
 char *get_user_pay_method(USER user) {
-  char *pay_method = strdup(user->pay_method);
+  char *pay_method = g_strdup(user->pay_method);
   return pay_method;
 }
 
 char *get_user_account_status(USER user) {
-  char *account_status = strdup(user->account_status);
+  char *account_status = g_strdup(user->account_status);
   return account_status;
 }

@@ -130,7 +130,7 @@ void free_user(USER user);
  * @param user - The user of type 'USER'
  * @return id - The id integer of type 'int'
  */
-int get_user_id(USER user);
+int get_user_id_from_user(USER user);
 
 /**
  * @brief Get the user name

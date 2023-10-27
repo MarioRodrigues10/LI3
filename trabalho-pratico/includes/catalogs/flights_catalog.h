@@ -5,8 +5,6 @@
 
 typedef struct flights_catalog *FlIGHTS_CATALOG;
 
-typedef struct flight *FLIGHT;
-
 /**
  * @brief Create the flights catalog
  */

@@ -54,13 +54,13 @@ void set_reservation_id(RESERVATION reservation, char *id) {
 }
 
 void set_reservation_user_id(RESERVATION reservation, char *id) {
-  int id_int = string_to_int(id);
+  int id_int = atoi(id);
   gpointer id_pointer = GINT_TO_POINTER(id_int);
   reservation->user_id = id_pointer;
 }
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
-  l int id_int = string_to_int(id);
+  int id_int = atoi(id);
   gpointer id_pointer = GINT_TO_POINTER(id_int);
   reservation->hotel_id = id_pointer;
 }
@@ -121,23 +121,23 @@ void free_reservation(RESERVATION reservation) {
   g_free(reservation->comment);
 }
 
-int get_user_id(RESERVATION reservation) {
+int get_user_id_from_reservation(RESERVATION reservation){
   int id = GPOINTER_TO_INT(reservation->user_id);
-  return id
+  return id;
 }
 
 int get_hotel_id(RESERVATION reservation) {
   int id = GPOINTER_TO_INT(reservation->hotel_id);
-  return id
+  return id;
 }
 
 int get_reservation_id(RESERVATION reservation) {
   int id = GPOINTER_TO_INT(reservation->id);
-  return id
+  return id;
 }
 
 char *get_reservation_hotel_name(RESERVATION reservation) {
-  char *hotel_name = strdup(reservation->hotel_name);
+  char *hotel_name = g_strdup(reservation->hotel_name);
   return hotel_name;
 }
 
@@ -152,17 +152,17 @@ double get_reservation_city_tax(RESERVATION reservation) {
 }
 
 char *get_reservation_address(RESERVATION reservation) {
-  char *address = strdup(reservation->address);
+  char *address = g_strdup(reservation->address);
   return address;
 }
 
 char *get_reservation_begin_date(RESERVATION reservation) {
-  char *begin_date = strdup(reservation->begin_date);
+  char *begin_date = g_strdup(reservation->begin_date);
   return begin_date;
 }
 
 char *get_reservation_end_date(RESERVATION reservation) {
-  char *end_date = strdup(reservation->end_date);
+  char *end_date = g_strdup(reservation->end_date);
   return end_date;
 }
 
@@ -172,12 +172,12 @@ int get_reservation_price_per_night(RESERVATION reservation) {
 }
 
 char *get_reservation_include_breakfast(RESERVATION reservation) {
-  char *include_breakfast = strdup(reservation->include_breakfast);
+  char *include_breakfast = g_strdup(reservation->include_breakfast);
   return include_breakfast;
 }
 
 char *get_reservation_room_detail(RESERVATION reservation) {
-  char *room_detail = strdup(reservation->room_detail);
+  char *room_detail = g_strdup(reservation->room_detail);
   return room_detail;
 }
 
@@ -187,6 +187,6 @@ int get_reservation_rating(RESERVATION reservation) {
 }
 
 char *get_reservation_comment(RESERVATION reservation) {
-  char *comment = strdup(reservation->comment);
+  char *comment = g_strdup(reservation->comment);
   return comment;
 }

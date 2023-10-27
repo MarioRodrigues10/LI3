@@ -162,7 +162,7 @@ int get_reservation_id(RESERVATION reservation);
  * @param Resevation - The Resevation of type 'RESERVATION'
  * @return id - The id integer of type 'int'
  */
-int get_user_id(RESERVATION reservation);
+int get_user_id_from_reservation(RESERVATION reservation);
 
 /**
  * @brief Get the hotel id
