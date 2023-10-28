@@ -69,8 +69,8 @@ void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name) {
   reservation->hotel_name = g_strdup(hotel_name);
 }
 
-void set_reservation_hotel_starts(RESERVATION reservation, int starts) {
-  reservation->hotel_start = starts;
+void set_reservation_hotel_start(RESERVATION reservation, int start) {
+  reservation->hotel_start = start;
 }
 
 void set_reservation_city_tax(RESERVATION reservation, int tax) {
@@ -121,7 +121,7 @@ void free_reservation(RESERVATION reservation) {
   g_free(reservation->comment);
 }
 
-int get_user_id_from_reservation(RESERVATION reservation){
+int get_user_id_from_reservation(RESERVATION reservation) {
   int id = GPOINTER_TO_INT(reservation->user_id);
   return id;
 }

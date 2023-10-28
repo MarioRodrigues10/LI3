@@ -10,8 +10,10 @@
 
 /**
  * @brief Parses a line
+ *
  * @param line The line to be parsed
  * @param num_tokens The number of tokens
+ *
  * @return an array of strings
  */
 char** parse_line(char* line, int num_tokens);

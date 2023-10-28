@@ -6,14 +6,17 @@
 typedef struct flights_catalog *FlIGHTS_CATALOG;
 
 /**
- * @brief Create the flights catalog
+ * @brief Function that creates the flights catalog
+ *
+ * @return The flights catalog created
  */
 FlIGHTS_CATALOG create_flights_catalog();
 
 /**
- * @brief Free the memory alocated to the flights catalog
+ * @brief Function that frees the memory alocated to the flights catalog
  *
- * @param flights_catalog  - The flights catalog to be freed
+ * @param flights_catalog - The flights catalog to be freed of type
+ * 'FlIGHTS_CATALOG'
  */
 void free_flights_catalog(FlIGHTS_CATALOG flights_catalog);
 
