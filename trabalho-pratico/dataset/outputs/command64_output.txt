@@ -1,0 +1,9 @@
+--- 1 ---
+hotel_id: HTL403
+hotel_name: Red Light District Inn
+hotel_stars: 2
+begin_date: 2021/11/13
+end_date: 2021/11/16
+includes_breakfast: False
+nights: 3
+total_price: 367.200

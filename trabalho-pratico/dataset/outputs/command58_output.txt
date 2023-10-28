@@ -1,0 +1,9 @@
+--- 1 ---
+airline: TAP Air Portugal
+plane_model: Airbus A320
+origin: LIS
+destination: MAD
+schedule_departure_date: 2022/10/11 15:18:59
+schedule_arrival_date: 2022/10/11 16:28:59
+passengers: 71
+delay: 900

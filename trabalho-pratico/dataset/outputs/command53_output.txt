@@ -1,0 +1,9 @@
+--- 1 ---
+name: Lia Garcia
+sex: F
+age: 27
+country_code: PT
+passport: RQ468696
+number_of_flights: 11
+number_of_reservations: 6
+total_spent: 3034.800

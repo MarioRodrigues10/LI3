@@ -1,0 +1,3551 @@
+--- 1 ---
+id: Book0000030177
+begin_date: 2023/07/21
+end_date: 2023/07/25
+user_id: LoureTeixeira-Garcia
+rating: 1
+total_price: 489.600
+
+--- 2 ---
+id: Book0000030179
+begin_date: 2023/07/21
+end_date: 2023/07/24
+user_id: ÂngelCastro199
+rating: 1
+total_price: 367.200
+
+--- 3 ---
+id: Book0000030185
+begin_date: 2023/07/21
+end_date: 2023/07/22
+user_id: AndrRocha214
+rating: 3
+total_price: 122.400
+
+--- 4 ---
+id: Book0000030190
+begin_date: 2023/07/21
+end_date: 2023/07/24
+user_id: AlíciRodrigues1752
+rating: 4
+total_price: 367.200
+
+--- 5 ---
+id: Book0000030202
+begin_date: 2023/07/21
+end_date: 2023/07/22
+user_id: ÂngelSoares591
+rating: 4
+total_price: 122.400
+
+--- 6 ---
+id: Book0000030209
+begin_date: 2023/07/21
+end_date: 2023/07/23
+user_id: KyaraLoureiro
+rating: 4
+total_price: 244.800
+
+--- 7 ---
+id: Book0000030212
+begin_date: 2023/07/21
+end_date: 2023/07/25
+user_id: LetíciRamos
+rating: 3
+total_price: 489.600
+
+--- 8 ---
+id: Book0000030214
+begin_date: 2023/07/21
+end_date: 2023/07/22
+user_id: YasmMarques
+rating: 3
+total_price: 122.400
+
+--- 9 ---
+id: Book0000030215
+begin_date: 2023/07/21
+end_date: 2023/07/22
+user_id: GonçalMorais405
+rating: 2
+total_price: 122.400
+
+--- 10 ---
+id: Book0000030216
+begin_date: 2023/07/21
+end_date: 2023/07/24
+user_id: MatiBarros
+rating: 1
+total_price: 367.200
+
+--- 11 ---
+id: Book0000027511
+begin_date: 2023/07/18
+end_date: 2023/07/19
+user_id: EdMiranda-Santos
+rating: 3
+total_price: 122.400
+
+--- 12 ---
+id: Book0000027518
+begin_date: 2023/07/18
+end_date: 2023/07/19
+user_id: LucGomes-Alves
+rating: 3
+total_price: 122.400
+
+--- 13 ---
+id: Book0000027519
+begin_date: 2023/07/18
+end_date: 2023/07/20
+user_id: CarloCoelho1939
+rating: 4
+total_price: 244.800
+
+--- 14 ---
+id: Book0000027522
+begin_date: 2023/07/18
+end_date: 2023/07/19
+user_id: RafCarneiro1746
+rating: 3
+total_price: 122.400
+
+--- 15 ---
+id: Book0000027536
+begin_date: 2023/07/18
+end_date: 2023/07/21
+user_id: FernandBrito-Batista1184
+rating: 1
+total_price: 367.200
+
+--- 16 ---
+id: Book0000027547
+begin_date: 2023/07/18
+end_date: 2023/07/20
+user_id: EmFerreira1449
+rating: 1
+total_price: 244.800
+
+--- 17 ---
+id: Book0000027549
+begin_date: 2023/07/18
+end_date: 2023/07/21
+user_id: JoaquCastro
+rating: 4
+total_price: 367.200
+
+--- 18 ---
+id: Book0000027553
+begin_date: 2023/07/18
+end_date: 2023/07/20
+user_id: NoAmaral
+rating: 4
+total_price: 244.800
+
+--- 19 ---
+id: Book0000027561
+begin_date: 2023/07/18
+end_date: 2023/07/22
+user_id: ABaptista534
+rating: 2
+total_price: 489.600
+
+--- 20 ---
+id: Book0000027562
+begin_date: 2023/07/18
+end_date: 2023/07/20
+user_id: LuaNascimento
+rating: 4
+total_price: 244.800
+
+--- 21 ---
+id: Book0000027572
+begin_date: 2023/07/18
+end_date: 2023/07/21
+user_id: AVieira
+rating: 1
+total_price: 367.200
+
+--- 22 ---
+id: Book0000027577
+begin_date: 2023/07/18
+end_date: 2023/07/22
+user_id: HeleReis856
+rating: 2
+total_price: 489.600
+
+--- 23 ---
+id: Book0000029187
+begin_date: 2023/06/17
+end_date: 2023/06/18
+user_id: EduaRodrigues
+rating: 4
+total_price: 122.400
+
+--- 24 ---
+id: Book0000029193
+begin_date: 2023/06/17
+end_date: 2023/06/21
+user_id: JLeite
+rating: 4
+total_price: 489.600
+
+--- 25 ---
+id: Book0000029204
+begin_date: 2023/06/17
+end_date: 2023/06/19
+user_id: SalomLopes800
+rating: 1
+total_price: 244.800
+
+--- 26 ---
+id: Book0000029205
+begin_date: 2023/06/17
+end_date: 2023/06/19
+user_id: LuanTorres770
+rating: 4
+total_price: 244.800
+
+--- 27 ---
+id: Book0000029209
+begin_date: 2023/06/17
+end_date: 2023/06/20
+user_id: FraPaiva2012
+rating: 2
+total_price: 367.200
+
+--- 28 ---
+id: Book0000029210
+begin_date: 2023/06/17
+end_date: 2023/06/18
+user_id: WiRamos-Baptista609
+rating: 3
+total_price: 122.400
+
+--- 29 ---
+id: Book0000029212
+begin_date: 2023/06/17
+end_date: 2023/06/19
+user_id: KevVicente
+rating: 1
+total_price: 244.800
+
+--- 30 ---
+id: Book0000029214
+begin_date: 2023/06/17
+end_date: 2023/06/19
+user_id: CaeTeixeira1092
+rating: 1
+total_price: 244.800
+
+--- 31 ---
+id: Book0000029220
+begin_date: 2023/06/17
+end_date: 2023/06/20
+user_id: ClaCosta180
+rating: 2
+total_price: 367.200
+
+--- 32 ---
+id: Book0000029221
+begin_date: 2023/06/17
+end_date: 2023/06/18
+user_id: LucaLeite
+rating: 4
+total_price: 122.400
+
+--- 33 ---
+id: Book0000029225
+begin_date: 2023/06/17
+end_date: 2023/06/18
+user_id: LeanGonçalves864
+rating: 3
+total_price: 122.400
+
+--- 34 ---
+id: Book0000029236
+begin_date: 2023/06/17
+end_date: 2023/06/20
+user_id: JaimLoureiro
+rating: 3
+total_price: 367.200
+
+--- 35 ---
+id: Book0000029243
+begin_date: 2023/06/17
+end_date: 2023/06/18
+user_id: SorAndrade
+rating: 4
+total_price: 122.400
+
+--- 36 ---
+id: Book0000029248
+begin_date: 2023/06/17
+end_date: 2023/06/21
+user_id: EmanNeves1722
+rating: 3
+total_price: 489.600
+
+--- 37 ---
+id: Book0000018547
+begin_date: 2023/06/09
+end_date: 2023/06/11
+user_id: MaNeto
+rating: 2
+total_price: 244.800
+
+--- 38 ---
+id: Book0000018554
+begin_date: 2023/06/09
+end_date: 2023/06/10
+user_id: ÉAlmeida25
+rating: 1
+total_price: 122.400
+
+--- 39 ---
+id: Book0000018561
+begin_date: 2023/06/09
+end_date: 2023/06/12
+user_id: NicolPinto638
+rating: 1
+total_price: 367.200
+
+--- 40 ---
+id: Book0000018565
+begin_date: 2023/06/09
+end_date: 2023/06/11
+user_id: Alícia-VitóMartins1482
+rating: 2
+total_price: 244.800
+
+--- 41 ---
+id: Book0000018573
+begin_date: 2023/06/09
+end_date: 2023/06/11
+user_id: DiaMachado1467
+rating: 2
+total_price: 244.800
+
+--- 42 ---
+id: Book0000018584
+begin_date: 2023/06/09
+end_date: 2023/06/12
+user_id: VicenAlmeida
+rating: 2
+total_price: 367.200
+
+--- 43 ---
+id: Book0000018585
+begin_date: 2023/06/09
+end_date: 2023/06/12
+user_id: VictórMaia
+rating: 4
+total_price: 367.200
+
+--- 44 ---
+id: Book0000018586
+begin_date: 2023/06/09
+end_date: 2023/06/11
+user_id: GustaCruz1583
+rating: 1
+total_price: 244.800
+
+--- 45 ---
+id: Book0000018588
+begin_date: 2023/06/09
+end_date: 2023/06/12
+user_id: RenPires-Simões279
+rating: 3
+total_price: 367.200
+
+--- 46 ---
+id: Book0000000939
+begin_date: 2023/05/10
+end_date: 2023/05/14
+user_id: ELeite
+rating: 1
+total_price: 489.600
+
+--- 47 ---
+id: Book0000000952
+begin_date: 2023/05/10
+end_date: 2023/05/12
+user_id: HeleGomes1652
+rating: 3
+total_price: 244.800
+
+--- 48 ---
+id: Book0000000964
+begin_date: 2023/05/10
+end_date: 2023/05/12
+user_id: MAlmeida1906
+rating: 3
+total_price: 244.800
+
+--- 49 ---
+id: Book0000000965
+begin_date: 2023/05/10
+end_date: 2023/05/14
+user_id: DiPacheco
+rating: 3
+total_price: 489.600
+
+--- 50 ---
+id: Book0000000966
+begin_date: 2023/05/10
+end_date: 2023/05/12
+user_id: PatríCruz
+rating: 2
+total_price: 244.800
+
+--- 51 ---
+id: Book0000000967
+begin_date: 2023/05/10
+end_date: 2023/05/12
+user_id: GustavPinto-Lopes
+rating: 4
+total_price: 244.800
+
+--- 52 ---
+id: Book0000000982
+begin_date: 2023/05/10
+end_date: 2023/05/14
+user_id: CaeMelo
+rating: 3
+total_price: 489.600
+
+--- 53 ---
+id: Book0000000990
+begin_date: 2023/05/10
+end_date: 2023/05/12
+user_id: GabrielLopes321
+rating: 2
+total_price: 244.800
+
+--- 54 ---
+id: Book0000022162
+begin_date: 2023/05/02
+end_date: 2023/05/06
+user_id: MelisMiranda
+rating: 3
+total_price: 489.600
+
+--- 55 ---
+id: Book0000022167
+begin_date: 2023/05/02
+end_date: 2023/05/06
+user_id: DiMaia1631
+rating: 2
+total_price: 489.600
+
+--- 56 ---
+id: Book0000022168
+begin_date: 2023/05/02
+end_date: 2023/05/04
+user_id: VLima
+rating: 1
+total_price: 244.800
+
+--- 57 ---
+id: Book0000022179
+begin_date: 2023/05/02
+end_date: 2023/05/03
+user_id: MaPaiva
+rating: 1
+total_price: 122.400
+
+--- 58 ---
+id: Book0000022181
+begin_date: 2023/05/02
+end_date: 2023/05/04
+user_id: PetTeixeira-Cruz
+rating: 3
+total_price: 244.800
+
+--- 59 ---
+id: Book0000022197
+begin_date: 2023/05/02
+end_date: 2023/05/03
+user_id: ÉrVieira536
+rating: 4
+total_price: 122.400
+
+--- 60 ---
+id: Book0000022201
+begin_date: 2023/05/02
+end_date: 2023/05/03
+user_id: EPinheiro1303
+rating: 1
+total_price: 122.400
+
+--- 61 ---
+id: Book0000022203
+begin_date: 2023/05/02
+end_date: 2023/05/04
+user_id: RenatCastro
+rating: 2
+total_price: 244.800
+
+--- 62 ---
+id: Book0000022210
+begin_date: 2023/05/02
+end_date: 2023/05/03
+user_id: PeNascimento
+rating: 4
+total_price: 122.400
+
+--- 63 ---
+id: Book0000022212
+begin_date: 2023/05/02
+end_date: 2023/05/06
+user_id: ViolSousa
+rating: 3
+total_price: 489.600
+
+--- 64 ---
+id: Book0000005853
+begin_date: 2023/04/11
+end_date: 2023/04/14
+user_id: JulianRocha1294
+rating: 2
+total_price: 367.200
+
+--- 65 ---
+id: Book0000005854
+begin_date: 2023/04/11
+end_date: 2023/04/15
+user_id: SaMartins1474
+rating: 1
+total_price: 489.600
+
+--- 66 ---
+id: Book0000005861
+begin_date: 2023/04/11
+end_date: 2023/04/14
+user_id: HLima131
+rating: 3
+total_price: 367.200
+
+--- 67 ---
+id: Book0000005868
+begin_date: 2023/04/11
+end_date: 2023/04/12
+user_id: BryGaspar
+rating: 1
+total_price: 122.400
+
+--- 68 ---
+id: Book0000005876
+begin_date: 2023/04/11
+end_date: 2023/04/14
+user_id: JoaMoreira
+rating: 3
+total_price: 367.200
+
+--- 69 ---
+id: Book0000005891
+begin_date: 2023/04/11
+end_date: 2023/04/13
+user_id: DiMota-Batista713
+rating: 3
+total_price: 244.800
+
+--- 70 ---
+id: Book0000005897
+begin_date: 2023/04/11
+end_date: 2023/04/12
+user_id: SimCorreia-Castro669
+rating: 4
+total_price: 122.400
+
+--- 71 ---
+id: Book0000027312
+begin_date: 2023/03/12
+end_date: 2023/03/16
+user_id: ViceBrito-Rocha1355
+rating: 3
+total_price: 489.600
+
+--- 72 ---
+id: Book0000027318
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: RafaCruz
+rating: 1
+total_price: 367.200
+
+--- 73 ---
+id: Book0000027320
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: IMiranda
+rating: 3
+total_price: 367.200
+
+--- 74 ---
+id: Book0000027329
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: YarAlves1378
+rating: 1
+total_price: 367.200
+
+--- 75 ---
+id: Book0000027332
+begin_date: 2023/03/12
+end_date: 2023/03/14
+user_id: FreCarvalho1256
+rating: 1
+total_price: 244.800
+
+--- 76 ---
+id: Book0000027333
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: IgAlmeida
+rating: 3
+total_price: 367.200
+
+--- 77 ---
+id: Book0000027338
+begin_date: 2023/03/12
+end_date: 2023/03/13
+user_id: BryCampos
+rating: 3
+total_price: 122.400
+
+--- 78 ---
+id: Book0000027339
+begin_date: 2023/03/12
+end_date: 2023/03/13
+user_id: FPaiva1527
+rating: 4
+total_price: 122.400
+
+--- 79 ---
+id: Book0000027342
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: MaMaia
+rating: 2
+total_price: 367.200
+
+--- 80 ---
+id: Book0000027348
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: MarMartins
+rating: 1
+total_price: 367.200
+
+--- 81 ---
+id: Book0000027349
+begin_date: 2023/03/12
+end_date: 2023/03/16
+user_id: BeatriGarcia-Santos
+rating: 3
+total_price: 489.600
+
+--- 82 ---
+id: Book0000027354
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: MárPinho802
+rating: 1
+total_price: 367.200
+
+--- 83 ---
+id: Book0000027359
+begin_date: 2023/03/12
+end_date: 2023/03/16
+user_id: ValentiEsteves483
+rating: 3
+total_price: 489.600
+
+--- 84 ---
+id: Book0000027365
+begin_date: 2023/03/12
+end_date: 2023/03/15
+user_id: SaSantos1184
+rating: 4
+total_price: 367.200
+
+--- 85 ---
+id: Book0000018988
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: FlCardoso58
+rating: 2
+total_price: 367.200
+
+--- 86 ---
+id: Book0000018992
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: JuCarvalho
+rating: 3
+total_price: 244.800
+
+--- 87 ---
+id: Book0000019011
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: JoAnjos
+rating: 4
+total_price: 244.800
+
+--- 88 ---
+id: Book0000019024
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: LucSilva
+rating: 1
+total_price: 244.800
+
+--- 89 ---
+id: Book0000019025
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: BernardLourenço
+rating: 4
+total_price: 244.800
+
+--- 90 ---
+id: Book0000019026
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: FilLeite
+rating: 1
+total_price: 244.800
+
+--- 91 ---
+id: Book0000019027
+begin_date: 2023/02/15
+end_date: 2023/02/16
+user_id: AlexanCarvalho112
+rating: 4
+total_price: 122.400
+
+--- 92 ---
+id: Book0000019030
+begin_date: 2023/02/15
+end_date: 2023/02/16
+user_id: EdgaLoureiro243
+rating: 3
+total_price: 122.400
+
+--- 93 ---
+id: Book0000019032
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: FrancisDomingues
+rating: 1
+total_price: 489.600
+
+--- 94 ---
+id: Book0000019037
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: MéPinho
+rating: 1
+total_price: 367.200
+
+--- 95 ---
+id: Book0000019038
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: Alice-Borges1270
+rating: 2
+total_price: 244.800
+
+--- 96 ---
+id: Book0000019041
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: EdMonteiro66
+rating: 1
+total_price: 244.800
+
+--- 97 ---
+id: Book0000019043
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: IAraújo53
+rating: 2
+total_price: 489.600
+
+--- 98 ---
+id: Book0000019044
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: IsabelBatista
+rating: 3
+total_price: 244.800
+
+--- 99 ---
+id: Book0000024108
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: AnBaptista
+rating: 2
+total_price: 489.600
+
+--- 100 ---
+id: Book0000024110
+begin_date: 2023/02/15
+end_date: 2023/02/16
+user_id: SLourenço
+rating: 4
+total_price: 122.400
+
+--- 101 ---
+id: Book0000024111
+begin_date: 2023/02/15
+end_date: 2023/02/17
+user_id: PaLopes467
+rating: 4
+total_price: 244.800
+
+--- 102 ---
+id: Book0000024112
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: LFernandes541
+rating: 2
+total_price: 367.200
+
+--- 103 ---
+id: Book0000024115
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: AnitFerreira
+rating: 3
+total_price: 489.600
+
+--- 104 ---
+id: Book0000024124
+begin_date: 2023/02/15
+end_date: 2023/02/16
+user_id: Yasmin-Amorim58
+rating: 3
+total_price: 122.400
+
+--- 105 ---
+id: Book0000024131
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: MaSimões-Cunha
+rating: 2
+total_price: 489.600
+
+--- 106 ---
+id: Book0000024135
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: ÂngePinho
+rating: 3
+total_price: 489.600
+
+--- 107 ---
+id: Book0000024142
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: MMatos
+rating: 4
+total_price: 489.600
+
+--- 108 ---
+id: Book0000024143
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: EriMatias
+rating: 3
+total_price: 367.200
+
+--- 109 ---
+id: Book0000024146
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: GTavares
+rating: 2
+total_price: 367.200
+
+--- 110 ---
+id: Book0000024147
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: DaviTeixeira
+rating: 1
+total_price: 489.600
+
+--- 111 ---
+id: Book0000024150
+begin_date: 2023/02/15
+end_date: 2023/02/18
+user_id: Luciana-CatarLeite
+rating: 2
+total_price: 367.200
+
+--- 112 ---
+id: Book0000024153
+begin_date: 2023/02/15
+end_date: 2023/02/19
+user_id: ALourenço395
+rating: 4
+total_price: 489.600
+
+--- 113 ---
+id: Book0000024157
+begin_date: 2023/02/15
+end_date: 2023/02/16
+user_id: AlCastro
+rating: 1
+total_price: 122.400
+
+--- 114 ---
+id: Book0000039666
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: VascLourenço
+rating: 4
+total_price: 244.800
+
+--- 115 ---
+id: Book0000039667
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: LiMoura1307
+rating: 1
+total_price: 244.800
+
+--- 116 ---
+id: Book0000039668
+begin_date: 2023/02/07
+end_date: 2023/02/08
+user_id: EmPinheiro
+rating: 3
+total_price: 122.400
+
+--- 117 ---
+id: Book0000039674
+begin_date: 2023/02/07
+end_date: 2023/02/08
+user_id: BernarCardoso1338
+rating: 4
+total_price: 122.400
+
+--- 118 ---
+id: Book0000039675
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: RicardMorais1869
+rating: 3
+total_price: 244.800
+
+--- 119 ---
+id: Book0000039679
+begin_date: 2023/02/07
+end_date: 2023/02/11
+user_id: ISilva1670
+rating: 2
+total_price: 489.600
+
+--- 120 ---
+id: Book0000039683
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: MatildMartins
+rating: 4
+total_price: 244.800
+
+--- 121 ---
+id: Book0000039685
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: KevLopes
+rating: 4
+total_price: 244.800
+
+--- 122 ---
+id: Book0000039688
+begin_date: 2023/02/07
+end_date: 2023/02/08
+user_id: ErTavares
+rating: 2
+total_price: 122.400
+
+--- 123 ---
+id: Book0000039694
+begin_date: 2023/02/07
+end_date: 2023/02/10
+user_id: ValentiDomingues-Guerreiro
+rating: 3
+total_price: 367.200
+
+--- 124 ---
+id: Book0000039695
+begin_date: 2023/02/07
+end_date: 2023/02/10
+user_id: LucNogueira467
+rating: 4
+total_price: 367.200
+
+--- 125 ---
+id: Book0000039702
+begin_date: 2023/02/07
+end_date: 2023/02/08
+user_id: SoMagalhães
+rating: 4
+total_price: 122.400
+
+--- 126 ---
+id: Book0000039709
+begin_date: 2023/02/07
+end_date: 2023/02/08
+user_id: YarMota
+rating: 4
+total_price: 122.400
+
+--- 127 ---
+id: Book0000039711
+begin_date: 2023/02/07
+end_date: 2023/02/09
+user_id: MélanPereira1855
+rating: 2
+total_price: 244.800
+
+--- 128 ---
+id: Book0000039717
+begin_date: 2023/02/07
+end_date: 2023/02/10
+user_id: ENogueira-Loureiro1970
+rating: 1
+total_price: 367.200
+
+--- 129 ---
+id: Book0000039724
+begin_date: 2023/02/07
+end_date: 2023/02/11
+user_id: RenaNunes
+rating: 1
+total_price: 489.600
+
+--- 130 ---
+id: Book0000018419
+begin_date: 2022/12/15
+end_date: 2022/12/18
+user_id: ViolCarvalho1229
+rating: 1
+total_price: 367.200
+
+--- 131 ---
+id: Book0000018421
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: BSimões1222
+rating: 1
+total_price: 244.800
+
+--- 132 ---
+id: Book0000018423
+begin_date: 2022/12/15
+end_date: 2022/12/16
+user_id: BAmorim1712
+rating: 2
+total_price: 122.400
+
+--- 133 ---
+id: Book0000018425
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: TRamos
+rating: 4
+total_price: 244.800
+
+--- 134 ---
+id: Book0000018426
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: EmílPaiva1938
+rating: 3
+total_price: 244.800
+
+--- 135 ---
+id: Book0000018427
+begin_date: 2022/12/15
+end_date: 2022/12/19
+user_id: JoHenriques
+rating: 1
+total_price: 489.600
+
+--- 136 ---
+id: Book0000018435
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: CFerreira1158
+rating: 4
+total_price: 244.800
+
+--- 137 ---
+id: Book0000018436
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: NúrCampos1050
+rating: 4
+total_price: 244.800
+
+--- 138 ---
+id: Book0000018438
+begin_date: 2022/12/15
+end_date: 2022/12/19
+user_id: LeAndrade
+rating: 1
+total_price: 489.600
+
+--- 139 ---
+id: Book0000018442
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: DinCardoso1596
+rating: 2
+total_price: 244.800
+
+--- 140 ---
+id: Book0000018443
+begin_date: 2022/12/15
+end_date: 2022/12/18
+user_id: JorgPires1430
+rating: 1
+total_price: 367.200
+
+--- 141 ---
+id: Book0000018444
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: WilFreitas
+rating: 2
+total_price: 244.800
+
+--- 142 ---
+id: Book0000018447
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: MaraMaia364
+rating: 1
+total_price: 244.800
+
+--- 143 ---
+id: Book0000018448
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: MarcBarros
+rating: 1
+total_price: 244.800
+
+--- 144 ---
+id: Book0000018449
+begin_date: 2022/12/15
+end_date: 2022/12/19
+user_id: VaLima
+rating: 3
+total_price: 489.600
+
+--- 145 ---
+id: Book0000018456
+begin_date: 2022/12/15
+end_date: 2022/12/16
+user_id: CristiaCorreia
+rating: 3
+total_price: 122.400
+
+--- 146 ---
+id: Book0000018465
+begin_date: 2022/12/15
+end_date: 2022/12/16
+user_id: DiMatos
+rating: 2
+total_price: 122.400
+
+--- 147 ---
+id: Book0000018467
+begin_date: 2022/12/15
+end_date: 2022/12/19
+user_id: LisMoura767
+rating: 2
+total_price: 489.600
+
+--- 148 ---
+id: Book0000018473
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: HenriqSousa
+rating: 4
+total_price: 244.800
+
+--- 149 ---
+id: Book0000018474
+begin_date: 2022/12/15
+end_date: 2022/12/17
+user_id: EriLopes-Lourenço405
+rating: 1
+total_price: 244.800
+
+--- 150 ---
+id: Book0000018476
+begin_date: 2022/12/15
+end_date: 2022/12/19
+user_id: ÉrMorais513
+rating: 3
+total_price: 489.600
+
+--- 151 ---
+id: Book0000021401
+begin_date: 2022/11/16
+end_date: 2022/11/18
+user_id: AnNeto
+rating: 3
+total_price: 244.800
+
+--- 152 ---
+id: Book0000021409
+begin_date: 2022/11/16
+end_date: 2022/11/20
+user_id: NúSilva
+rating: 1
+total_price: 489.600
+
+--- 153 ---
+id: Book0000021417
+begin_date: 2022/11/16
+end_date: 2022/11/18
+user_id: IAntunes902
+rating: 1
+total_price: 244.800
+
+--- 154 ---
+id: Book0000021420
+begin_date: 2022/11/16
+end_date: 2022/11/18
+user_id: CPinto-Oliveira496
+rating: 4
+total_price: 244.800
+
+--- 155 ---
+id: Book0000021426
+begin_date: 2022/11/16
+end_date: 2022/11/20
+user_id: SaCoelho1999
+rating: 4
+total_price: 489.600
+
+--- 156 ---
+id: Book0000021427
+begin_date: 2022/11/16
+end_date: 2022/11/20
+user_id: JorCorreia
+rating: 4
+total_price: 489.600
+
+--- 157 ---
+id: Book0000021430
+begin_date: 2022/11/16
+end_date: 2022/11/20
+user_id: BernaVicente890
+rating: 3
+total_price: 489.600
+
+--- 158 ---
+id: Book0000021432
+begin_date: 2022/11/16
+end_date: 2022/11/18
+user_id: DéborPinho
+rating: 1
+total_price: 244.800
+
+--- 159 ---
+id: Book0000021440
+begin_date: 2022/11/16
+end_date: 2022/11/17
+user_id: NaiaLoureiro
+rating: 1
+total_price: 122.400
+
+--- 160 ---
+id: Book0000021442
+begin_date: 2022/11/16
+end_date: 2022/11/20
+user_id: LSoares266
+rating: 3
+total_price: 489.600
+
+--- 161 ---
+id: Book0000017779
+begin_date: 2022/11/13
+end_date: 2022/11/16
+user_id: LCunha
+rating: 3
+total_price: 367.200
+
+--- 162 ---
+id: Book0000017781
+begin_date: 2022/11/13
+end_date: 2022/11/15
+user_id: BenjaRamos20
+rating: 3
+total_price: 244.800
+
+--- 163 ---
+id: Book0000017785
+begin_date: 2022/11/13
+end_date: 2022/11/17
+user_id: EmmLeite
+rating: 4
+total_price: 489.600
+
+--- 164 ---
+id: Book0000017800
+begin_date: 2022/11/13
+end_date: 2022/11/16
+user_id: VaCorreia1520
+rating: 4
+total_price: 367.200
+
+--- 165 ---
+id: Book0000017808
+begin_date: 2022/11/13
+end_date: 2022/11/17
+user_id: SamuValente1860
+rating: 1
+total_price: 489.600
+
+--- 166 ---
+id: Book0000017813
+begin_date: 2022/11/13
+end_date: 2022/11/17
+user_id: ÁlvAnjos1306
+rating: 3
+total_price: 489.600
+
+--- 167 ---
+id: Book0000017815
+begin_date: 2022/11/13
+end_date: 2022/11/14
+user_id: MatAndrade
+rating: 3
+total_price: 122.400
+
+--- 168 ---
+id: Book0000017821
+begin_date: 2022/11/13
+end_date: 2022/11/16
+user_id: AReis1527
+rating: 3
+total_price: 367.200
+
+--- 169 ---
+id: Book0000017822
+begin_date: 2022/11/13
+end_date: 2022/11/14
+user_id: NunRocha
+rating: 3
+total_price: 122.400
+
+--- 170 ---
+id: Book0000023111
+begin_date: 2022/10/07
+end_date: 2022/10/08
+user_id: JoanRodrigues
+rating: 3
+total_price: 122.400
+
+--- 171 ---
+id: Book0000023112
+begin_date: 2022/10/07
+end_date: 2022/10/10
+user_id: CVaz1795
+rating: 4
+total_price: 367.200
+
+--- 172 ---
+id: Book0000023113
+begin_date: 2022/10/07
+end_date: 2022/10/08
+user_id: EdSá
+rating: 1
+total_price: 122.400
+
+--- 173 ---
+id: Book0000023118
+begin_date: 2022/10/07
+end_date: 2022/10/11
+user_id: LeoRodrigues
+rating: 3
+total_price: 489.600
+
+--- 174 ---
+id: Book0000023129
+begin_date: 2022/10/07
+end_date: 2022/10/09
+user_id: WilliTorres-Nunes883
+rating: 2
+total_price: 244.800
+
+--- 175 ---
+id: Book0000023132
+begin_date: 2022/10/07
+end_date: 2022/10/11
+user_id: WCardoso
+rating: 1
+total_price: 489.600
+
+--- 176 ---
+id: Book0000023136
+begin_date: 2022/10/07
+end_date: 2022/10/10
+user_id: MartiGarcia660
+rating: 1
+total_price: 367.200
+
+--- 177 ---
+id: Book0000023141
+begin_date: 2022/10/07
+end_date: 2022/10/08
+user_id: KGuerreiro400
+rating: 4
+total_price: 122.400
+
+--- 178 ---
+id: Book0000023142
+begin_date: 2022/10/07
+end_date: 2022/10/11
+user_id: AnMoreira58
+rating: 3
+total_price: 489.600
+
+--- 179 ---
+id: Book0000023144
+begin_date: 2022/10/07
+end_date: 2022/10/09
+user_id: GonçalMagalhães-Guerreiro166
+rating: 2
+total_price: 244.800
+
+--- 180 ---
+id: Book0000023149
+begin_date: 2022/10/07
+end_date: 2022/10/08
+user_id: EAlmeida733
+rating: 4
+total_price: 122.400
+
+--- 181 ---
+id: Book0000023154
+begin_date: 2022/10/07
+end_date: 2022/10/10
+user_id: FAmorim1116
+rating: 2
+total_price: 367.200
+
+--- 182 ---
+id: Book0000023166
+begin_date: 2022/10/07
+end_date: 2022/10/11
+user_id: BárMarques
+rating: 2
+total_price: 489.600
+
+--- 183 ---
+id: Book0000039725
+begin_date: 2022/09/18
+end_date: 2022/09/19
+user_id: FiBarros196
+rating: 1
+total_price: 122.400
+
+--- 184 ---
+id: Book0000039729
+begin_date: 2022/09/18
+end_date: 2022/09/22
+user_id: MaFigueiredo650
+rating: 2
+total_price: 489.600
+
+--- 185 ---
+id: Book0000039730
+begin_date: 2022/09/18
+end_date: 2022/09/19
+user_id: BenjamiMota
+rating: 1
+total_price: 122.400
+
+--- 186 ---
+id: Book0000039739
+begin_date: 2022/09/18
+end_date: 2022/09/22
+user_id: BárbaLourenço-Matias
+rating: 2
+total_price: 489.600
+
+--- 187 ---
+id: Book0000039740
+begin_date: 2022/09/18
+end_date: 2022/09/21
+user_id: KyMendes
+rating: 2
+total_price: 367.200
+
+--- 188 ---
+id: Book0000039745
+begin_date: 2022/09/18
+end_date: 2022/09/19
+user_id: JuliaBatista
+rating: 2
+total_price: 122.400
+
+--- 189 ---
+id: Book0000039757
+begin_date: 2022/09/18
+end_date: 2022/09/22
+user_id: MMacedo
+rating: 3
+total_price: 489.600
+
+--- 190 ---
+id: Book0000039771
+begin_date: 2022/09/18
+end_date: 2022/09/22
+user_id: MadDomingues1230
+rating: 2
+total_price: 489.600
+
+--- 191 ---
+id: Book0000039780
+begin_date: 2022/09/18
+end_date: 2022/09/21
+user_id: FlCardoso58
+rating: 4
+total_price: 367.200
+
+--- 192 ---
+id: Book0000039781
+begin_date: 2022/09/18
+end_date: 2022/09/21
+user_id: EmRamos1732
+rating: 4
+total_price: 367.200
+
+--- 193 ---
+id: Book0000038199
+begin_date: 2022/09/17
+end_date: 2022/09/20
+user_id: IvBranco
+rating: 2
+total_price: 367.200
+
+--- 194 ---
+id: Book0000038204
+begin_date: 2022/09/17
+end_date: 2022/09/18
+user_id: LeoJesus1604
+rating: 2
+total_price: 122.400
+
+--- 195 ---
+id: Book0000038205
+begin_date: 2022/09/17
+end_date: 2022/09/21
+user_id: MeliCorreia-Martins
+rating: 4
+total_price: 489.600
+
+--- 196 ---
+id: Book0000038206
+begin_date: 2022/09/17
+end_date: 2022/09/21
+user_id: CarAmorim681
+rating: 3
+total_price: 489.600
+
+--- 197 ---
+id: Book0000038208
+begin_date: 2022/09/17
+end_date: 2022/09/18
+user_id: AlAmorim
+rating: 4
+total_price: 122.400
+
+--- 198 ---
+id: Book0000038209
+begin_date: 2022/09/17
+end_date: 2022/09/19
+user_id: KTorres1839
+rating: 1
+total_price: 244.800
+
+--- 199 ---
+id: Book0000038213
+begin_date: 2022/09/17
+end_date: 2022/09/21
+user_id: LisGarcia335
+rating: 4
+total_price: 489.600
+
+--- 200 ---
+id: Book0000038215
+begin_date: 2022/09/17
+end_date: 2022/09/18
+user_id: LuciaMartins
+rating: 1
+total_price: 122.400
+
+--- 201 ---
+id: Book0000038219
+begin_date: 2022/09/17
+end_date: 2022/09/19
+user_id: LuísVicente-Cardoso
+rating: 1
+total_price: 244.800
+
+--- 202 ---
+id: Book0000038222
+begin_date: 2022/09/17
+end_date: 2022/09/19
+user_id: LucAbreu1934
+rating: 3
+total_price: 244.800
+
+--- 203 ---
+id: Book0000038225
+begin_date: 2022/09/17
+end_date: 2022/09/20
+user_id: EnzBranco
+rating: 1
+total_price: 367.200
+
+--- 204 ---
+id: Book0000027619
+begin_date: 2022/07/16
+end_date: 2022/07/20
+user_id: JéssCampos501
+rating: 2
+total_price: 489.600
+
+--- 205 ---
+id: Book0000027627
+begin_date: 2022/07/16
+end_date: 2022/07/17
+user_id: LeaGomes1973
+rating: 3
+total_price: 122.400
+
+--- 206 ---
+id: Book0000027630
+begin_date: 2022/07/16
+end_date: 2022/07/19
+user_id: SérLeal1983
+rating: 2
+total_price: 367.200
+
+--- 207 ---
+id: Book0000027632
+begin_date: 2022/07/16
+end_date: 2022/07/18
+user_id: BáLeal
+rating: 4
+total_price: 244.800
+
+--- 208 ---
+id: Book0000027633
+begin_date: 2022/07/16
+end_date: 2022/07/20
+user_id: DiAmaral-Vaz1008
+rating: 2
+total_price: 489.600
+
+--- 209 ---
+id: Book0000027644
+begin_date: 2022/07/16
+end_date: 2022/07/17
+user_id: GonçaPereira184
+rating: 3
+total_price: 122.400
+
+--- 210 ---
+id: Book0000027653
+begin_date: 2022/07/16
+end_date: 2022/07/17
+user_id: DébCorreia1377
+rating: 3
+total_price: 122.400
+
+--- 211 ---
+id: Book0000027658
+begin_date: 2022/07/16
+end_date: 2022/07/18
+user_id: MaAmaral1550
+rating: 1
+total_price: 244.800
+
+--- 212 ---
+id: Book0000028725
+begin_date: 2022/07/04
+end_date: 2022/07/07
+user_id: DiSimões
+rating: 1
+total_price: 367.200
+
+--- 213 ---
+id: Book0000028726
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: INeves766
+rating: 1
+total_price: 122.400
+
+--- 214 ---
+id: Book0000028727
+begin_date: 2022/07/04
+end_date: 2022/07/08
+user_id: MaCarvalho1128
+rating: 1
+total_price: 489.600
+
+--- 215 ---
+id: Book0000028728
+begin_date: 2022/07/04
+end_date: 2022/07/07
+user_id: DaCoelho1325
+rating: 4
+total_price: 367.200
+
+--- 216 ---
+id: Book0000028729
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: MicDomingues2005
+rating: 1
+total_price: 122.400
+
+--- 217 ---
+id: Book0000028732
+begin_date: 2022/07/04
+end_date: 2022/07/08
+user_id: YMacedo
+rating: 2
+total_price: 489.600
+
+--- 218 ---
+id: Book0000028735
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: MafCoelho
+rating: 2
+total_price: 122.400
+
+--- 219 ---
+id: Book0000028745
+begin_date: 2022/07/04
+end_date: 2022/07/07
+user_id: BrMachado
+rating: 3
+total_price: 367.200
+
+--- 220 ---
+id: Book0000028751
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: SérLeal1983
+rating: 1
+total_price: 122.400
+
+--- 221 ---
+id: Book0000028752
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: ÂngePinho
+rating: 3
+total_price: 122.400
+
+--- 222 ---
+id: Book0000028765
+begin_date: 2022/07/04
+end_date: 2022/07/08
+user_id: LarTeixeira68
+rating: 3
+total_price: 489.600
+
+--- 223 ---
+id: Book0000028767
+begin_date: 2022/07/04
+end_date: 2022/07/07
+user_id: PCarneiro468
+rating: 3
+total_price: 367.200
+
+--- 224 ---
+id: Book0000028769
+begin_date: 2022/07/04
+end_date: 2022/07/07
+user_id: BernBatista977
+rating: 3
+total_price: 367.200
+
+--- 225 ---
+id: Book0000028774
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: EPinheiro-Fonseca
+rating: 3
+total_price: 122.400
+
+--- 226 ---
+id: Book0000028781
+begin_date: 2022/07/04
+end_date: 2022/07/05
+user_id: GonçMaia337
+rating: 3
+total_price: 122.400
+
+--- 227 ---
+id: Book0000005570
+begin_date: 2022/05/06
+end_date: 2022/05/08
+user_id: Erica-Marques1525
+rating: 3
+total_price: 244.800
+
+--- 228 ---
+id: Book0000005572
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: DenMota1001
+rating: 4
+total_price: 122.400
+
+--- 229 ---
+id: Book0000005574
+begin_date: 2022/05/06
+end_date: 2022/05/10
+user_id: WiNunes774
+rating: 4
+total_price: 489.600
+
+--- 230 ---
+id: Book0000005591
+begin_date: 2022/05/06
+end_date: 2022/05/08
+user_id: STeixeira-Coelho1749
+rating: 1
+total_price: 244.800
+
+--- 231 ---
+id: Book0000005596
+begin_date: 2022/05/06
+end_date: 2022/05/10
+user_id: EduarAmaral
+rating: 4
+total_price: 489.600
+
+--- 232 ---
+id: Book0000005599
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: BenBaptista1220
+rating: 2
+total_price: 122.400
+
+--- 233 ---
+id: Book0000005600
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: ViLourenço
+rating: 1
+total_price: 122.400
+
+--- 234 ---
+id: Book0000005601
+begin_date: 2022/05/06
+end_date: 2022/05/08
+user_id: RenJesus
+rating: 1
+total_price: 244.800
+
+--- 235 ---
+id: Book0000005606
+begin_date: 2022/05/06
+end_date: 2022/05/08
+user_id: LuciaPaiva657
+rating: 3
+total_price: 244.800
+
+--- 236 ---
+id: Book0000005607
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: SaMendes1396
+rating: 4
+total_price: 122.400
+
+--- 237 ---
+id: Book0000005609
+begin_date: 2022/05/06
+end_date: 2022/05/09
+user_id: JEsteves
+rating: 3
+total_price: 367.200
+
+--- 238 ---
+id: Book0000005613
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: JaimMacedo
+rating: 2
+total_price: 122.400
+
+--- 239 ---
+id: Book0000005615
+begin_date: 2022/05/06
+end_date: 2022/05/07
+user_id: CamiBarros
+rating: 2
+total_price: 122.400
+
+--- 240 ---
+id: Book0000006145
+begin_date: 2022/05/05
+end_date: 2022/05/09
+user_id: WCardoso
+rating: 1
+total_price: 489.600
+
+--- 241 ---
+id: Book0000006147
+begin_date: 2022/05/05
+end_date: 2022/05/08
+user_id: FrederiSantos327
+rating: 3
+total_price: 367.200
+
+--- 242 ---
+id: Book0000006150
+begin_date: 2022/05/05
+end_date: 2022/05/09
+user_id: FMoreira
+rating: 4
+total_price: 489.600
+
+--- 243 ---
+id: Book0000006156
+begin_date: 2022/05/05
+end_date: 2022/05/07
+user_id: GSilva146
+rating: 4
+total_price: 244.800
+
+--- 244 ---
+id: Book0000006163
+begin_date: 2022/05/05
+end_date: 2022/05/08
+user_id: PetMoreira
+rating: 3
+total_price: 367.200
+
+--- 245 ---
+id: Book0000006166
+begin_date: 2022/05/05
+end_date: 2022/05/08
+user_id: IsaMoreira775
+rating: 1
+total_price: 367.200
+
+--- 246 ---
+id: Book0000006167
+begin_date: 2022/05/05
+end_date: 2022/05/08
+user_id: MaEsteves
+rating: 1
+total_price: 367.200
+
+--- 247 ---
+id: Book0000006171
+begin_date: 2022/05/05
+end_date: 2022/05/06
+user_id: LiNeto
+rating: 2
+total_price: 122.400
+
+--- 248 ---
+id: Book0000006176
+begin_date: 2022/05/05
+end_date: 2022/05/08
+user_id: BárLoureiro
+rating: 1
+total_price: 367.200
+
+--- 249 ---
+id: Book0000006177
+begin_date: 2022/05/05
+end_date: 2022/05/09
+user_id: FaMiranda1758
+rating: 1
+total_price: 489.600
+
+--- 250 ---
+id: Book0000006180
+begin_date: 2022/05/05
+end_date: 2022/05/06
+user_id: SGaspar-Campos
+rating: 3
+total_price: 122.400
+
+--- 251 ---
+id: Book0000006181
+begin_date: 2022/05/05
+end_date: 2022/05/06
+user_id: LValente1087
+rating: 2
+total_price: 122.400
+
+--- 252 ---
+id: Book0000020724
+begin_date: 2022/04/17
+end_date: 2022/04/18
+user_id: LeoCoelho90
+rating: 2
+total_price: 122.400
+
+--- 253 ---
+id: Book0000020726
+begin_date: 2022/04/17
+end_date: 2022/04/18
+user_id: FredericFerreira-Nunes
+rating: 3
+total_price: 122.400
+
+--- 254 ---
+id: Book0000020736
+begin_date: 2022/04/17
+end_date: 2022/04/20
+user_id: JGaspar-Gomes
+rating: 1
+total_price: 367.200
+
+--- 255 ---
+id: Book0000020739
+begin_date: 2022/04/17
+end_date: 2022/04/20
+user_id: CaFaria1794
+rating: 2
+total_price: 367.200
+
+--- 256 ---
+id: Book0000020748
+begin_date: 2022/04/17
+end_date: 2022/04/19
+user_id: Pilar-LarBarros
+rating: 3
+total_price: 244.800
+
+--- 257 ---
+id: Book0000020756
+begin_date: 2022/04/17
+end_date: 2022/04/20
+user_id: ISilva1670
+rating: 4
+total_price: 367.200
+
+--- 258 ---
+id: Book0000020774
+begin_date: 2022/04/17
+end_date: 2022/04/18
+user_id: PiMiranda
+rating: 1
+total_price: 122.400
+
+--- 259 ---
+id: Book0000023217
+begin_date: 2022/04/04
+end_date: 2022/04/07
+user_id: SamuBrito728
+rating: 3
+total_price: 367.200
+
+--- 260 ---
+id: Book0000023219
+begin_date: 2022/04/04
+end_date: 2022/04/08
+user_id: MáMoreira1605
+rating: 3
+total_price: 489.600
+
+--- 261 ---
+id: Book0000023222
+begin_date: 2022/04/04
+end_date: 2022/04/06
+user_id: NaiGaspar1632
+rating: 4
+total_price: 244.800
+
+--- 262 ---
+id: Book0000023225
+begin_date: 2022/04/04
+end_date: 2022/04/06
+user_id: DeLoureiro949
+rating: 3
+total_price: 244.800
+
+--- 263 ---
+id: Book0000023230
+begin_date: 2022/04/04
+end_date: 2022/04/06
+user_id: MLima
+rating: 1
+total_price: 244.800
+
+--- 264 ---
+id: Book0000023233
+begin_date: 2022/04/04
+end_date: 2022/04/07
+user_id: IAlves-Brito
+rating: 3
+total_price: 367.200
+
+--- 265 ---
+id: Book0000023245
+begin_date: 2022/04/04
+end_date: 2022/04/05
+user_id: ÂngMelo2019
+rating: 2
+total_price: 122.400
+
+--- 266 ---
+id: Book0000023254
+begin_date: 2022/04/04
+end_date: 2022/04/05
+user_id: LCruz1541
+rating: 4
+total_price: 122.400
+
+--- 267 ---
+id: Book0000023257
+begin_date: 2022/04/04
+end_date: 2022/04/07
+user_id: JoDomingues536
+rating: 1
+total_price: 367.200
+
+--- 268 ---
+id: Book0000023274
+begin_date: 2022/04/04
+end_date: 2022/04/06
+user_id: FlTorres1925
+rating: 3
+total_price: 244.800
+
+--- 269 ---
+id: Book0000025289
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: GuilherSimões
+rating: 2
+total_price: 244.800
+
+--- 270 ---
+id: Book0000025291
+begin_date: 2022/03/16
+end_date: 2022/03/20
+user_id: KeAntunes
+rating: 1
+total_price: 489.600
+
+--- 271 ---
+id: Book0000025293
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: Constança-KyaRodrigues
+rating: 1
+total_price: 244.800
+
+--- 272 ---
+id: Book0000025298
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: MelReis
+rating: 1
+total_price: 244.800
+
+--- 273 ---
+id: Book0000025300
+begin_date: 2022/03/16
+end_date: 2022/03/17
+user_id: BriaOliveira
+rating: 2
+total_price: 122.400
+
+--- 274 ---
+id: Book0000025301
+begin_date: 2022/03/16
+end_date: 2022/03/17
+user_id: MaAbreu886
+rating: 1
+total_price: 122.400
+
+--- 275 ---
+id: Book0000025308
+begin_date: 2022/03/16
+end_date: 2022/03/20
+user_id: ManCorreia1423
+rating: 2
+total_price: 489.600
+
+--- 276 ---
+id: Book0000025309
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: LuaVicente1933
+rating: 3
+total_price: 244.800
+
+--- 277 ---
+id: Book0000025316
+begin_date: 2022/03/16
+end_date: 2022/03/17
+user_id: MBarros168
+rating: 1
+total_price: 122.400
+
+--- 278 ---
+id: Book0000025320
+begin_date: 2022/03/16
+end_date: 2022/03/19
+user_id: BenjaRamos20
+rating: 1
+total_price: 367.200
+
+--- 279 ---
+id: Book0000025322
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: YAraújo-Azevedo682
+rating: 4
+total_price: 244.800
+
+--- 280 ---
+id: Book0000025323
+begin_date: 2022/03/16
+end_date: 2022/03/20
+user_id: KMatias
+rating: 4
+total_price: 489.600
+
+--- 281 ---
+id: Book0000025326
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: VítoNascimento1015
+rating: 4
+total_price: 244.800
+
+--- 282 ---
+id: Book0000025327
+begin_date: 2022/03/16
+end_date: 2022/03/20
+user_id: ArSimões1562
+rating: 1
+total_price: 489.600
+
+--- 283 ---
+id: Book0000025334
+begin_date: 2022/03/16
+end_date: 2022/03/17
+user_id: CaDomingues1603
+rating: 3
+total_price: 122.400
+
+--- 284 ---
+id: Book0000025337
+begin_date: 2022/03/16
+end_date: 2022/03/18
+user_id: GustaVieira
+rating: 2
+total_price: 244.800
+
+--- 285 ---
+id: Book0000035336
+begin_date: 2022/01/17
+end_date: 2022/01/21
+user_id: KéCunha-Mota
+rating: 3
+total_price: 489.600
+
+--- 286 ---
+id: Book0000035340
+begin_date: 2022/01/17
+end_date: 2022/01/20
+user_id: LiPaiva
+rating: 3
+total_price: 367.200
+
+--- 287 ---
+id: Book0000035347
+begin_date: 2022/01/17
+end_date: 2022/01/21
+user_id: WFigueiredo-Borges1347
+rating: 4
+total_price: 489.600
+
+--- 288 ---
+id: Book0000035348
+begin_date: 2022/01/17
+end_date: 2022/01/18
+user_id: LucTeixeira
+rating: 2
+total_price: 122.400
+
+--- 289 ---
+id: Book0000035349
+begin_date: 2022/01/17
+end_date: 2022/01/20
+user_id: DavSilva273
+rating: 2
+total_price: 367.200
+
+--- 290 ---
+id: Book0000035352
+begin_date: 2022/01/17
+end_date: 2022/01/21
+user_id: RaMachado420
+rating: 2
+total_price: 489.600
+
+--- 291 ---
+id: Book0000035357
+begin_date: 2022/01/17
+end_date: 2022/01/20
+user_id: EriMoura131
+rating: 1
+total_price: 367.200
+
+--- 292 ---
+id: Book0000035370
+begin_date: 2022/01/17
+end_date: 2022/01/18
+user_id: SantiMota
+rating: 2
+total_price: 122.400
+
+--- 293 ---
+id: Book0000035391
+begin_date: 2022/01/17
+end_date: 2022/01/19
+user_id: CarlVaz1845
+rating: 2
+total_price: 244.800
+
+--- 294 ---
+id: Book0000035170
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: RitCorreia
+rating: 4
+total_price: 244.800
+
+--- 295 ---
+id: Book0000035183
+begin_date: 2022/01/09
+end_date: 2022/01/10
+user_id: JaiGonçalves
+rating: 3
+total_price: 122.400
+
+--- 296 ---
+id: Book0000035187
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: ClMartins
+rating: 1
+total_price: 244.800
+
+--- 297 ---
+id: Book0000035189
+begin_date: 2022/01/09
+end_date: 2022/01/10
+user_id: SérgLeite398
+rating: 2
+total_price: 122.400
+
+--- 298 ---
+id: Book0000035191
+begin_date: 2022/01/09
+end_date: 2022/01/12
+user_id: JéssFernandes2006
+rating: 2
+total_price: 367.200
+
+--- 299 ---
+id: Book0000035201
+begin_date: 2022/01/09
+end_date: 2022/01/13
+user_id: RiOliveira738
+rating: 3
+total_price: 489.600
+
+--- 300 ---
+id: Book0000035203
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: ReLeite1145
+rating: 3
+total_price: 244.800
+
+--- 301 ---
+id: Book0000035210
+begin_date: 2022/01/09
+end_date: 2022/01/13
+user_id: GuCoelho882
+rating: 2
+total_price: 489.600
+
+--- 302 ---
+id: Book0000035212
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: CésNeves
+rating: 3
+total_price: 244.800
+
+--- 303 ---
+id: Book0000035215
+begin_date: 2022/01/09
+end_date: 2022/01/12
+user_id: CaPacheco
+rating: 1
+total_price: 367.200
+
+--- 304 ---
+id: Book0000035219
+begin_date: 2022/01/09
+end_date: 2022/01/10
+user_id: LBorges1492
+rating: 1
+total_price: 122.400
+
+--- 305 ---
+id: Book0000035220
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: JSimões44
+rating: 1
+total_price: 244.800
+
+--- 306 ---
+id: Book0000035221
+begin_date: 2022/01/09
+end_date: 2022/01/10
+user_id: RafVieira
+rating: 2
+total_price: 122.400
+
+--- 307 ---
+id: Book0000035223
+begin_date: 2022/01/09
+end_date: 2022/01/11
+user_id: JuliaBatista
+rating: 3
+total_price: 244.800
+
+--- 308 ---
+id: Book0000029420
+begin_date: 2021/10/19
+end_date: 2021/10/20
+user_id: NaCruz1008
+rating: 1
+total_price: 122.400
+
+--- 309 ---
+id: Book0000029422
+begin_date: 2021/10/19
+end_date: 2021/10/22
+user_id: LucMendes
+rating: 1
+total_price: 367.200
+
+--- 310 ---
+id: Book0000029425
+begin_date: 2021/10/19
+end_date: 2021/10/23
+user_id: HenriGarcia1684
+rating: 1
+total_price: 489.600
+
+--- 311 ---
+id: Book0000029426
+begin_date: 2021/10/19
+end_date: 2021/10/21
+user_id: NoLeite-Henriques
+rating: 3
+total_price: 244.800
+
+--- 312 ---
+id: Book0000029430
+begin_date: 2021/10/19
+end_date: 2021/10/20
+user_id: SAnjos
+rating: 4
+total_price: 122.400
+
+--- 313 ---
+id: Book0000029435
+begin_date: 2021/10/19
+end_date: 2021/10/21
+user_id: ACoelho1567
+rating: 2
+total_price: 244.800
+
+--- 314 ---
+id: Book0000029436
+begin_date: 2021/10/19
+end_date: 2021/10/20
+user_id: KevJesus926
+rating: 4
+total_price: 122.400
+
+--- 315 ---
+id: Book0000029450
+begin_date: 2021/10/19
+end_date: 2021/10/22
+user_id: LMonteiro
+rating: 3
+total_price: 367.200
+
+--- 316 ---
+id: Book0000029459
+begin_date: 2021/10/19
+end_date: 2021/10/23
+user_id: BenAndrade1604
+rating: 4
+total_price: 489.600
+
+--- 317 ---
+id: Book0000025002
+begin_date: 2021/08/19
+end_date: 2021/08/23
+user_id: AlMatos1136
+rating: 1
+total_price: 489.600
+
+--- 318 ---
+id: Book0000025012
+begin_date: 2021/08/19
+end_date: 2021/08/22
+user_id: IrinBatista
+rating: 1
+total_price: 367.200
+
+--- 319 ---
+id: Book0000025018
+begin_date: 2021/08/19
+end_date: 2021/08/20
+user_id: PMorais
+rating: 1
+total_price: 122.400
+
+--- 320 ---
+id: Book0000025022
+begin_date: 2021/08/19
+end_date: 2021/08/22
+user_id: IBrito1606
+rating: 1
+total_price: 367.200
+
+--- 321 ---
+id: Book0000025028
+begin_date: 2021/08/19
+end_date: 2021/08/23
+user_id: ConstanPinto
+rating: 4
+total_price: 489.600
+
+--- 322 ---
+id: Book0000025029
+begin_date: 2021/08/19
+end_date: 2021/08/22
+user_id: INeves766
+rating: 4
+total_price: 367.200
+
+--- 323 ---
+id: Book0000025031
+begin_date: 2021/08/19
+end_date: 2021/08/21
+user_id: IsmaFonseca
+rating: 2
+total_price: 244.800
+
+--- 324 ---
+id: Book0000025033
+begin_date: 2021/08/19
+end_date: 2021/08/20
+user_id: JosMendes
+rating: 2
+total_price: 122.400
+
+--- 325 ---
+id: Book0000025034
+begin_date: 2021/08/19
+end_date: 2021/08/21
+user_id: BCarneiro1519
+rating: 2
+total_price: 244.800
+
+--- 326 ---
+id: Book0000025036
+begin_date: 2021/08/19
+end_date: 2021/08/20
+user_id: AnitAssunção1760
+rating: 2
+total_price: 122.400
+
+--- 327 ---
+id: Book0000025045
+begin_date: 2021/08/19
+end_date: 2021/08/22
+user_id: MaNeves1757
+rating: 4
+total_price: 367.200
+
+--- 328 ---
+id: Book0000025048
+begin_date: 2021/08/19
+end_date: 2021/08/21
+user_id: GustaMorais118
+rating: 1
+total_price: 244.800
+
+--- 329 ---
+id: Book0000025051
+begin_date: 2021/08/19
+end_date: 2021/08/22
+user_id: RuMoreira52
+rating: 1
+total_price: 367.200
+
+--- 330 ---
+id: Book0000025052
+begin_date: 2021/08/19
+end_date: 2021/08/21
+user_id: ViBorges841
+rating: 4
+total_price: 244.800
+
+--- 331 ---
+id: Book0000025059
+begin_date: 2021/08/19
+end_date: 2021/08/23
+user_id: MiAmorim-Almeida981
+rating: 1
+total_price: 489.600
+
+--- 332 ---
+id: Book0000038434
+begin_date: 2021/08/17
+end_date: 2021/08/21
+user_id: NunAraújo1539
+rating: 2
+total_price: 489.600
+
+--- 333 ---
+id: Book0000038447
+begin_date: 2021/08/17
+end_date: 2021/08/21
+user_id: FilRocha
+rating: 3
+total_price: 489.600
+
+--- 334 ---
+id: Book0000038480
+begin_date: 2021/08/17
+end_date: 2021/08/20
+user_id: EnFerreira
+rating: 3
+total_price: 367.200
+
+--- 335 ---
+id: Book0000038483
+begin_date: 2021/08/17
+end_date: 2021/08/19
+user_id: CaFernandes
+rating: 3
+total_price: 244.800
+
+--- 336 ---
+id: Book0000036500
+begin_date: 2021/07/20
+end_date: 2021/07/21
+user_id: NoMagalhães795
+rating: 2
+total_price: 122.400
+
+--- 337 ---
+id: Book0000036515
+begin_date: 2021/07/20
+end_date: 2021/07/23
+user_id: IsaOliveira562
+rating: 2
+total_price: 367.200
+
+--- 338 ---
+id: Book0000036516
+begin_date: 2021/07/20
+end_date: 2021/07/22
+user_id: DiaNunes469
+rating: 2
+total_price: 244.800
+
+--- 339 ---
+id: Book0000036517
+begin_date: 2021/07/20
+end_date: 2021/07/21
+user_id: ViAbreu
+rating: 3
+total_price: 122.400
+
+--- 340 ---
+id: Book0000036529
+begin_date: 2021/07/20
+end_date: 2021/07/21
+user_id: DioValente1185
+rating: 1
+total_price: 122.400
+
+--- 341 ---
+id: Book0000036543
+begin_date: 2021/07/20
+end_date: 2021/07/24
+user_id: PetrCruz1478
+rating: 2
+total_price: 489.600
+
+--- 342 ---
+id: Book0000036548
+begin_date: 2021/07/20
+end_date: 2021/07/21
+user_id: BruCoelho1369
+rating: 2
+total_price: 122.400
+
+--- 343 ---
+id: Book0000036559
+begin_date: 2021/07/20
+end_date: 2021/07/24
+user_id: IarAzevedo132
+rating: 2
+total_price: 489.600
+
+--- 344 ---
+id: Book0000036561
+begin_date: 2021/07/20
+end_date: 2021/07/24
+user_id: DuartLourenço
+rating: 4
+total_price: 489.600
+
+--- 345 ---
+id: Book0000013479
+begin_date: 2021/07/18
+end_date: 2021/07/22
+user_id: RJesus162
+rating: 3
+total_price: 489.600
+
+--- 346 ---
+id: Book0000013481
+begin_date: 2021/07/18
+end_date: 2021/07/20
+user_id: YaraAlmeida
+rating: 2
+total_price: 244.800
+
+--- 347 ---
+id: Book0000013482
+begin_date: 2021/07/18
+end_date: 2021/07/20
+user_id: Ariana-LRibeiro
+rating: 1
+total_price: 244.800
+
+--- 348 ---
+id: Book0000013485
+begin_date: 2021/07/18
+end_date: 2021/07/22
+user_id: SaSousa
+rating: 1
+total_price: 489.600
+
+--- 349 ---
+id: Book0000013490
+begin_date: 2021/07/18
+end_date: 2021/07/21
+user_id: ECruz
+rating: 1
+total_price: 367.200
+
+--- 350 ---
+id: Book0000013498
+begin_date: 2021/07/18
+end_date: 2021/07/20
+user_id: SoraCampos746
+rating: 4
+total_price: 244.800
+
+--- 351 ---
+id: Book0000013501
+begin_date: 2021/07/18
+end_date: 2021/07/20
+user_id: CéSantos
+rating: 3
+total_price: 244.800
+
+--- 352 ---
+id: Book0000013505
+begin_date: 2021/07/18
+end_date: 2021/07/21
+user_id: SalomNeves
+rating: 3
+total_price: 367.200
+
+--- 353 ---
+id: Book0000013508
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: DanVieira
+rating: 3
+total_price: 122.400
+
+--- 354 ---
+id: Book0000013515
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: LunMorais
+rating: 4
+total_price: 122.400
+
+--- 355 ---
+id: Book0000013516
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: SéSimões55
+rating: 3
+total_price: 122.400
+
+--- 356 ---
+id: Book0000013522
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: BrBatista
+rating: 2
+total_price: 122.400
+
+--- 357 ---
+id: Book0000013523
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: LoreCarvalho
+rating: 2
+total_price: 122.400
+
+--- 358 ---
+id: Book0000013530
+begin_date: 2021/07/18
+end_date: 2021/07/22
+user_id: DFaria357
+rating: 1
+total_price: 489.600
+
+--- 359 ---
+id: Book0000013535
+begin_date: 2021/07/18
+end_date: 2021/07/19
+user_id: MargariCorreia
+rating: 3
+total_price: 122.400
+
+--- 360 ---
+id: Book0000014846
+begin_date: 2021/07/01
+end_date: 2021/07/02
+user_id: NReis
+rating: 3
+total_price: 122.400
+
+--- 361 ---
+id: Book0000014847
+begin_date: 2021/07/01
+end_date: 2021/07/03
+user_id: ISoares1616
+rating: 2
+total_price: 244.800
+
+--- 362 ---
+id: Book0000014856
+begin_date: 2021/07/01
+end_date: 2021/07/03
+user_id: GuilTeixeira
+rating: 2
+total_price: 244.800
+
+--- 363 ---
+id: Book0000014861
+begin_date: 2021/07/01
+end_date: 2021/07/05
+user_id: ÍLeite-Nascimento
+rating: 3
+total_price: 489.600
+
+--- 364 ---
+id: Book0000014865
+begin_date: 2021/07/01
+end_date: 2021/07/02
+user_id: ClLourenço
+rating: 1
+total_price: 122.400
+
+--- 365 ---
+id: Book0000014870
+begin_date: 2021/07/01
+end_date: 2021/07/03
+user_id: NeLopes748
+rating: 3
+total_price: 244.800
+
+--- 366 ---
+id: Book0000014882
+begin_date: 2021/07/01
+end_date: 2021/07/05
+user_id: CarlSilva
+rating: 3
+total_price: 489.600
+
+--- 367 ---
+id: Book0000014883
+begin_date: 2021/07/01
+end_date: 2021/07/05
+user_id: AlTeixeira
+rating: 3
+total_price: 489.600
+
+--- 368 ---
+id: Book0000014886
+begin_date: 2021/07/01
+end_date: 2021/07/02
+user_id: RoPires
+rating: 1
+total_price: 122.400
+
+--- 369 ---
+id: Book0000014889
+begin_date: 2021/07/01
+end_date: 2021/07/02
+user_id: JoanMiranda
+rating: 3
+total_price: 122.400
+
+--- 370 ---
+id: Book0000014429
+begin_date: 2021/04/17
+end_date: 2021/04/20
+user_id: ErikNeto
+rating: 3
+total_price: 367.200
+
+--- 371 ---
+id: Book0000014430
+begin_date: 2021/04/17
+end_date: 2021/04/18
+user_id: MartSantos
+rating: 1
+total_price: 122.400
+
+--- 372 ---
+id: Book0000014433
+begin_date: 2021/04/17
+end_date: 2021/04/21
+user_id: FernPinheiro787
+rating: 4
+total_price: 489.600
+
+--- 373 ---
+id: Book0000014444
+begin_date: 2021/04/17
+end_date: 2021/04/20
+user_id: KeviPereira497
+rating: 4
+total_price: 367.200
+
+--- 374 ---
+id: Book0000014448
+begin_date: 2021/04/17
+end_date: 2021/04/20
+user_id: JulAnjos
+rating: 1
+total_price: 367.200
+
+--- 375 ---
+id: Book0000014458
+begin_date: 2021/04/17
+end_date: 2021/04/19
+user_id: JúOliveira1463
+rating: 4
+total_price: 244.800
+
+--- 376 ---
+id: Book0000014460
+begin_date: 2021/04/17
+end_date: 2021/04/19
+user_id: RúbFernandes
+rating: 2
+total_price: 244.800
+
+--- 377 ---
+id: Book0000014462
+begin_date: 2021/04/17
+end_date: 2021/04/21
+user_id: MReis
+rating: 2
+total_price: 489.600
+
+--- 378 ---
+id: Book0000014467
+begin_date: 2021/04/17
+end_date: 2021/04/19
+user_id: RenJesus
+rating: 2
+total_price: 244.800
+
+--- 379 ---
+id: Book0000014471
+begin_date: 2021/04/17
+end_date: 2021/04/18
+user_id: DanieGarcia224
+rating: 2
+total_price: 122.400
+
+--- 380 ---
+id: Book0000034878
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: AlexanSoares420
+rating: 1
+total_price: 244.800
+
+--- 381 ---
+id: Book0000034881
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: EdgFaria-Mota1014
+rating: 1
+total_price: 489.600
+
+--- 382 ---
+id: Book0000034884
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: RenaBarbosa
+rating: 2
+total_price: 489.600
+
+--- 383 ---
+id: Book0000034892
+begin_date: 2021/04/15
+end_date: 2021/04/18
+user_id: PGomes324
+rating: 4
+total_price: 367.200
+
+--- 384 ---
+id: Book0000034899
+begin_date: 2021/04/15
+end_date: 2021/04/18
+user_id: SFaria301
+rating: 1
+total_price: 367.200
+
+--- 385 ---
+id: Book0000034904
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: AlexanCunha1501
+rating: 4
+total_price: 489.600
+
+--- 386 ---
+id: Book0000034915
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: DieFonseca
+rating: 2
+total_price: 244.800
+
+--- 387 ---
+id: Book0000034917
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: LeonSilva599
+rating: 2
+total_price: 244.800
+
+--- 388 ---
+id: Book0000034923
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: DFernandes768
+rating: 2
+total_price: 489.600
+
+--- 389 ---
+id: Book0000034924
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: JMarques336
+rating: 2
+total_price: 489.600
+
+--- 390 ---
+id: Book0000034925
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: ValentiEsteves1813
+rating: 3
+total_price: 244.800
+
+--- 391 ---
+id: Book0000034927
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: AMatias-Nogueira469
+rating: 1
+total_price: 244.800
+
+--- 392 ---
+id: Book0000034928
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: FrancisPacheco1712
+rating: 1
+total_price: 244.800
+
+--- 393 ---
+id: Book0000034929
+begin_date: 2021/04/15
+end_date: 2021/04/17
+user_id: Violeta-CarlotMoreira
+rating: 4
+total_price: 244.800
+
+--- 394 ---
+id: Book0000034932
+begin_date: 2021/04/15
+end_date: 2021/04/19
+user_id: CaetaCardoso-Lopes
+rating: 2
+total_price: 489.600
+
+--- 395 ---
+id: Book0000034938
+begin_date: 2021/04/15
+end_date: 2021/04/16
+user_id: SaloSilva937
+rating: 1
+total_price: 122.400
+
+--- 396 ---
+id: Book0000034939
+begin_date: 2021/04/15
+end_date: 2021/04/16
+user_id: ACarneiro764
+rating: 2
+total_price: 122.400
+
+--- 397 ---
+id: Book0000010198
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: WilliaCunha
+rating: 2
+total_price: 367.200
+
+--- 398 ---
+id: Book0000010203
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: TomáNascimento972
+rating: 2
+total_price: 244.800
+
+--- 399 ---
+id: Book0000010207
+begin_date: 2021/04/08
+end_date: 2021/04/12
+user_id: BárbaAntunes
+rating: 4
+total_price: 489.600
+
+--- 400 ---
+id: Book0000010210
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: JuMartins845
+rating: 4
+total_price: 367.200
+
+--- 401 ---
+id: Book0000010212
+begin_date: 2021/04/08
+end_date: 2021/04/09
+user_id: CCampos-Santos1367
+rating: 3
+total_price: 122.400
+
+--- 402 ---
+id: Book0000010214
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: ÂngMoura62
+rating: 2
+total_price: 244.800
+
+--- 403 ---
+id: Book0000010222
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: PilaMatos1332
+rating: 2
+total_price: 367.200
+
+--- 404 ---
+id: Book0000010224
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: MatilPires1213
+rating: 2
+total_price: 367.200
+
+--- 405 ---
+id: Book0000010230
+begin_date: 2021/04/08
+end_date: 2021/04/12
+user_id: EmMoreira
+rating: 3
+total_price: 489.600
+
+--- 406 ---
+id: Book0000010242
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: WilsPacheco
+rating: 4
+total_price: 367.200
+
+--- 407 ---
+id: Book0000010251
+begin_date: 2021/04/08
+end_date: 2021/04/12
+user_id: GabrieCosta1359
+rating: 1
+total_price: 489.600
+
+--- 408 ---
+id: Book0000010252
+begin_date: 2021/04/08
+end_date: 2021/04/12
+user_id: MáNeto136
+rating: 2
+total_price: 489.600
+
+--- 409 ---
+id: Book0000010261
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: LeAndrade
+rating: 1
+total_price: 244.800
+
+--- 410 ---
+id: Book0000010262
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: CaFigueiredo461
+rating: 4
+total_price: 367.200
+
+--- 411 ---
+id: Book0000026849
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: DenAmaral767
+rating: 4
+total_price: 244.800
+
+--- 412 ---
+id: Book0000026856
+begin_date: 2021/04/08
+end_date: 2021/04/09
+user_id: IrinMachado1720
+rating: 3
+total_price: 122.400
+
+--- 413 ---
+id: Book0000026864
+begin_date: 2021/04/08
+end_date: 2021/04/11
+user_id: DiAmaral-Vaz1008
+rating: 4
+total_price: 367.200
+
+--- 414 ---
+id: Book0000026872
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: NáPereira
+rating: 1
+total_price: 244.800
+
+--- 415 ---
+id: Book0000026884
+begin_date: 2021/04/08
+end_date: 2021/04/09
+user_id: TiCampos
+rating: 3
+total_price: 122.400
+
+--- 416 ---
+id: Book0000026899
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: AniSá357
+rating: 4
+total_price: 244.800
+
+--- 417 ---
+id: Book0000026911
+begin_date: 2021/04/08
+end_date: 2021/04/10
+user_id: ToCardoso
+rating: 4
+total_price: 244.800
+
+--- 418 ---
+id: Book0000021878
+begin_date: 2021/01/15
+end_date: 2021/01/18
+user_id: DaniCarneiro1044
+rating: 3
+total_price: 367.200
+
+--- 419 ---
+id: Book0000021879
+begin_date: 2021/01/15
+end_date: 2021/01/16
+user_id: RenaCastro
+rating: 4
+total_price: 122.400
+
+--- 420 ---
+id: Book0000021881
+begin_date: 2021/01/15
+end_date: 2021/01/19
+user_id: CNeves1594
+rating: 3
+total_price: 489.600
+
+--- 421 ---
+id: Book0000021885
+begin_date: 2021/01/15
+end_date: 2021/01/16
+user_id: NunAraújo1539
+rating: 4
+total_price: 122.400
+
+--- 422 ---
+id: Book0000021892
+begin_date: 2021/01/15
+end_date: 2021/01/16
+user_id: APaiva790
+rating: 3
+total_price: 122.400
+
+--- 423 ---
+id: Book0000021893
+begin_date: 2021/01/15
+end_date: 2021/01/19
+user_id: MariGomes
+rating: 1
+total_price: 489.600
+
+--- 424 ---
+id: Book0000021900
+begin_date: 2021/01/15
+end_date: 2021/01/18
+user_id: LeonoMaia-Baptista
+rating: 1
+total_price: 367.200
+
+--- 425 ---
+id: Book0000021905
+begin_date: 2021/01/15
+end_date: 2021/01/18
+user_id: SaSousa
+rating: 1
+total_price: 367.200
+
+--- 426 ---
+id: Book0000021907
+begin_date: 2021/01/15
+end_date: 2021/01/16
+user_id: DNogueira552
+rating: 2
+total_price: 122.400
+
+--- 427 ---
+id: Book0000021917
+begin_date: 2021/01/15
+end_date: 2021/01/19
+user_id: DVieira
+rating: 4
+total_price: 489.600
+
+--- 428 ---
+id: Book0000021918
+begin_date: 2021/01/15
+end_date: 2021/01/19
+user_id: VioleAmaral462
+rating: 4
+total_price: 489.600
+
+--- 429 ---
+id: Book0000021923
+begin_date: 2021/01/15
+end_date: 2021/01/16
+user_id: TomBatista
+rating: 2
+total_price: 122.400
+
+--- 430 ---
+id: Book0000021933
+begin_date: 2021/01/15
+end_date: 2021/01/18
+user_id: AlíFigueiredo-Figueiredo1443
+rating: 4
+total_price: 367.200
+
+--- 431 ---
+id: Book0000024855
+begin_date: 2021/01/05
+end_date: 2021/01/08
+user_id: AlCampos-Sousa474
+rating: 3
+total_price: 367.200
+
+--- 432 ---
+id: Book0000024856
+begin_date: 2021/01/05
+end_date: 2021/01/06
+user_id: ValentinaTavares894
+rating: 1
+total_price: 122.400
+
+--- 433 ---
+id: Book0000024859
+begin_date: 2021/01/05
+end_date: 2021/01/08
+user_id: JoanaAbreu967
+rating: 3
+total_price: 367.200
+
+--- 434 ---
+id: Book0000024862
+begin_date: 2021/01/05
+end_date: 2021/01/08
+user_id: KevNeves-Fonseca
+rating: 1
+total_price: 367.200
+
+--- 435 ---
+id: Book0000024863
+begin_date: 2021/01/05
+end_date: 2021/01/09
+user_id: Larissa-MaRodrigues461
+rating: 1
+total_price: 489.600
+
+--- 436 ---
+id: Book0000024864
+begin_date: 2021/01/05
+end_date: 2021/01/09
+user_id: TMoura1413
+rating: 3
+total_price: 489.600
+
+--- 437 ---
+id: Book0000024867
+begin_date: 2021/01/05
+end_date: 2021/01/09
+user_id: MáTavares
+rating: 2
+total_price: 489.600
+
+--- 438 ---
+id: Book0000024869
+begin_date: 2021/01/05
+end_date: 2021/01/06
+user_id: DianMagalhães1161
+rating: 4
+total_price: 122.400
+
+--- 439 ---
+id: Book0000024875
+begin_date: 2021/01/05
+end_date: 2021/01/09
+user_id: IvTeixeira943
+rating: 2
+total_price: 489.600
+
+--- 440 ---
+id: Book0000024877
+begin_date: 2021/01/05
+end_date: 2021/01/08
+user_id: AdriJesus
+rating: 4
+total_price: 367.200
+
+--- 441 ---
+id: Book0000024880
+begin_date: 2021/01/05
+end_date: 2021/01/06
+user_id: CristianMiranda
+rating: 4
+total_price: 122.400
+
+--- 442 ---
+id: Book0000024885
+begin_date: 2021/01/05
+end_date: 2021/01/09
+user_id: LuTavares-Santos118
+rating: 2
+total_price: 489.600
+
+--- 443 ---
+id: Book0000024891
+begin_date: 2021/01/05
+end_date: 2021/01/07
+user_id: MicOliveira
+rating: 2
+total_price: 244.800
+
+--- 444 ---
+id: Book0000024895
+begin_date: 2021/01/05
+end_date: 2021/01/06
+user_id: MBorges851
+rating: 2
+total_price: 122.400

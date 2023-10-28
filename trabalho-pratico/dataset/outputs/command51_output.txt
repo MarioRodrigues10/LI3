@@ -1,0 +1,9 @@
+--- 1 ---
+name: Jéssica Tavares
+sex: F
+age: 63
+country_code: PT
+passport: ZE466021
+number_of_flights: 11
+number_of_reservations: 5
+total_spent: 2365.200

@@ -1,0 +1,111 @@
+--- 1 ---
+year: 2010
+users: 905
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 2 ---
+year: 2011
+users: 857
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 3 ---
+year: 2012
+users: 878
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 4 ---
+year: 2013
+users: 833
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 5 ---
+year: 2014
+users: 851
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 6 ---
+year: 2015
+users: 859
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 7 ---
+year: 2016
+users: 864
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 8 ---
+year: 2017
+users: 843
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 9 ---
+year: 2018
+users: 852
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 10 ---
+year: 2019
+users: 839
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 11 ---
+year: 2020
+users: 883
+flights: 0
+passengers: 0
+unique_passengers: 0
+reservations: 0
+
+--- 12 ---
+year: 2021
+users: 0
+flights: 350
+passengers: 26642
+unique_passengers: 8887
+reservations: 14720
+
+--- 13 ---
+year: 2022
+users: 0
+flights: 355
+passengers: 27510
+unique_passengers: 8957
+reservations: 15224
+
+--- 14 ---
+year: 2023
+users: 0
+flights: 245
+passengers: 19175
+unique_passengers: 8266
+reservations: 10396

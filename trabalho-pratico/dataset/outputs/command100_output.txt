@@ -1,0 +1,135 @@
+--- 1 ---
+day: 2
+users: 0
+flights: 1
+passengers: 43
+unique_passengers: 43
+reservations: 21
+
+--- 2 ---
+day: 3
+users: 0
+flights: 1
+passengers: 88
+unique_passengers: 88
+reservations: 47
+
+--- 3 ---
+day: 4
+users: 0
+flights: 1
+passengers: 60
+unique_passengers: 60
+reservations: 38
+
+--- 4 ---
+day: 6
+users: 0
+flights: 1
+passengers: 85
+unique_passengers: 85
+reservations: 50
+
+--- 5 ---
+day: 7
+users: 0
+flights: 3
+passengers: 170
+unique_passengers: 168
+reservations: 82
+
+--- 6 ---
+day: 8
+users: 0
+flights: 2
+passengers: 125
+unique_passengers: 125
+reservations: 66
+
+--- 7 ---
+day: 9
+users: 0
+flights: 1
+passengers: 68
+unique_passengers: 68
+reservations: 37
+
+--- 8 ---
+day: 10
+users: 0
+flights: 1
+passengers: 64
+unique_passengers: 64
+reservations: 35
+
+--- 9 ---
+day: 12
+users: 0
+flights: 1
+passengers: 114
+unique_passengers: 114
+reservations: 57
+
+--- 10 ---
+day: 13
+users: 0
+flights: 1
+passengers: 54
+unique_passengers: 54
+reservations: 32
+
+--- 11 ---
+day: 14
+users: 0
+flights: 2
+passengers: 228
+unique_passengers: 228
+reservations: 124
+
+--- 12 ---
+day: 15
+users: 0
+flights: 3
+passengers: 230
+unique_passengers: 225
+reservations: 118
+
+--- 13 ---
+day: 18
+users: 0
+flights: 2
+passengers: 182
+unique_passengers: 180
+reservations: 86
+
+--- 14 ---
+day: 19
+users: 0
+flights: 4
+passengers: 272
+unique_passengers: 270
+reservations: 136
+
+--- 15 ---
+day: 20
+users: 0
+flights: 2
+passengers: 147
+unique_passengers: 146
+reservations: 73
+
+--- 16 ---
+day: 21
+users: 0
+flights: 3
+passengers: 228
+unique_passengers: 228
+reservations: 120
+
+--- 17 ---
+day: 22
+users: 0
+flights: 1
+passengers: 89
+unique_passengers: 89
+reservations: 86

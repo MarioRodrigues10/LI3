@@ -1,0 +1,75 @@
+--- 1 ---
+name: IST
+median: 900
+
+--- 2 ---
+name: LIS
+median: 900
+
+--- 3 ---
+name: VIE
+median: 900
+
+--- 4 ---
+name: WAW
+median: 450
+
+--- 5 ---
+name: AMS
+median: 300
+
+--- 6 ---
+name: ARN
+median: 300
+
+--- 7 ---
+name: CDG
+median: 300
+
+--- 8 ---
+name: DUB
+median: 300
+
+--- 9 ---
+name: FCO
+median: 300
+
+--- 10 ---
+name: FRA
+median: 300
+
+--- 11 ---
+name: KBP
+median: 300
+
+--- 12 ---
+name: LHR
+median: 300
+
+--- 13 ---
+name: MAD
+median: 300
+
+--- 14 ---
+name: BCN
+median: 0
+
+--- 15 ---
+name: CPH
+median: 0
+
+--- 16 ---
+name: MAN
+median: 0
+
+--- 17 ---
+name: OSL
+median: 0
+
+--- 18 ---
+name: SVO
+median: 0
+
+--- 19 ---
+name: ZRH
+median: 0
