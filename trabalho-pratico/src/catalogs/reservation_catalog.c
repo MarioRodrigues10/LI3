@@ -16,6 +16,11 @@ RESERVATIONS_CATALOG create_reservations_catalog() {
   return new_catalog;
 }
 
+void add_reservation_to_catalog(RESERVATIONS_CATALOG reservations_catalog,
+                                RESERVATION reservation, gpointer key) {
+  g_hash_table_insert(reservations_catalog->reservations, key, reservation);
+}
+
 void free_reservations_catalog(RESERVATIONS_CATALOG reservations_catalog) {
   g_hash_table_destroy(reservations_catalog->reservations);
   free(reservations_catalog);
