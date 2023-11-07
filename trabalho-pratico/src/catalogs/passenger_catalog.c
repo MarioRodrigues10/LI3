@@ -15,9 +15,8 @@ PASSENGERS_CATALOG create_passengers_catalog() {
   return new_catalog;
 }
 
-
-void add_passenger_to_catalog(PASSENGERS_CATALOG passengers_catalog,
-                              PASSENGER passenger, gpointer key) {
+void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
+                               PASSENGER passenger, gpointer key) {
   g_hash_table_insert(passengers_catalog->passengers, key, passenger);
 }
 

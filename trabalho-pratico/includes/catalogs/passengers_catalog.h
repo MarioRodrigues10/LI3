@@ -14,11 +14,21 @@ typedef struct passenger *PASSENGER;
 PASSENGERS_CATALOG create_passengers_catalog();
 
 /**
- * @brief Function that frees the memory alocated to the passengers catalog
+ * @brief Function that adds a passenger to the passengers catalog
  *
- * @param passengers_catalog  - The passengers catalog to be freed of type
- * 'PASSENGERS_CATALOG'
+ * @param passengers_catalog - The passengers catalog to add the passenger to
+ * @param passenger - The passenger to be added to the passengers catalog
+ * @param key - The key of the passenger to be added to the passengers catalog
  */
-void free_passengers_catalog(PASSENGERS_CATALOG passengers_catalog);
+void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
+                               PASSENGER passenger, gpointer key);
+
+    /**
+     * @brief Function that frees the memory alocated to the passengers catalog
+     *
+     * @param passengers_catalog  - The passengers catalog to be freed of type
+     * 'PASSENGERS_CATALOG'
+     */
+    void free_passengers_catalog(PASSENGERS_CATALOG passengers_catalog);
 
 #endif

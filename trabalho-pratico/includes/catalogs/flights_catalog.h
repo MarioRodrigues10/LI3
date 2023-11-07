@@ -13,6 +13,15 @@ typedef struct flights_catalog *FlIGHTS_CATALOG;
 FlIGHTS_CATALOG create_flights_catalog();
 
 /**
+ * @brief Function that adds a flight to the flights catalog
+ *
+ * @param flights_catalog - The flights catalog to add the flight to
+ * @param flight - The flight to be added to the flights catalog
+ * @param key - The key of the flight to be added to the flights catalog
+ */
+void add_flight_to_catalog(FlIGHTS_CATALOG flights_catalog, FLIGHT flight,
+                           gpointer key);
+/**
  * @brief Function that frees the memory alocated to the flights catalog
  *
  * @param flights_catalog - The flights catalog to be freed of type

@@ -13,6 +13,15 @@ typedef struct users_catalog *USERS_CATALOG;
 USERS_CATALOG create_users_catalog();
 
 /**
+ * @brief Function that adds a user to the users catalog
+ *
+ * @param users_catalog - The users catalog to add the user to
+ * @param user - The user to be added to the users catalog
+ * @param key - The key of the user to be added to the users catalog
+ */
+void add_user_to_catalog(USERS_CATALOG users_catalog, USER user, gpointer key);
+
+/**
  * @brief Function that frees the memory alocated to the users catalog
  *
  * @param users_catalog - The users catalog to be freed of type
