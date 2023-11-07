@@ -23,12 +23,12 @@ PASSENGERS_CATALOG create_passengers_catalog();
 void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
                                PASSENGER passenger, gpointer key);
 
-    /**
-     * @brief Function that frees the memory alocated to the passengers catalog
-     *
-     * @param passengers_catalog  - The passengers catalog to be freed of type
-     * 'PASSENGERS_CATALOG'
-     */
-    void free_passengers_catalog(PASSENGERS_CATALOG passengers_catalog);
+/**
+ * @brief Function that frees the memory alocated to the passengers catalog
+ *
+ * @param passengers_catalog  - The passengers catalog to be freed of type
+ * 'PASSENGERS_CATALOG'
+ */
+void free_passengers_catalog(PASSENGERS_CATALOG passengers_catalog);
 
 #endif
