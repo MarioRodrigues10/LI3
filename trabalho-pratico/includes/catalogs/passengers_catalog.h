@@ -1,6 +1,8 @@
 #ifndef PASSENGERS_CATALOG_H
 #define PASSENGERS_CATALOG_H
 
+#include <glib.h>
+
 #include "entities/passengers.h"
 
 typedef struct passengers_catalog *PASSENGERS_CATALOG;

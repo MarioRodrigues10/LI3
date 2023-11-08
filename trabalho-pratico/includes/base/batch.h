@@ -1,6 +1,12 @@
 #ifndef BATCH_H
 #define BATCH_H
 
+#include "base/query_manager.h"
+#include "catalogs/flights_catalog.h"
+#include "catalogs/passengers_catalog.h"
+#include "catalogs/reservations_catalog.h"
+#include "catalogs/users_catalog.h"
+
 /**
  * @brief Function to execute batch mode
  *

@@ -1,7 +1,4 @@
-#include <glib.h>
-
 #include "catalogs/passengers_catalog.h"
-#include "entities/passengers.h"
 
 struct passengers_catalog {
   GHashTable *passengers;

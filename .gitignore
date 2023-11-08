@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Unignore all with extensions
 !*.*
 !Makefile
@@ -23,7 +22,6 @@ input*.txt
 
 *.csv
 
-=======
 programa-principal
 programa-testes
 *.csv
@@ -81,4 +79,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
->>>>>>> a524f71 (adding .gitignore)

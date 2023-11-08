@@ -1,10 +1,10 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "../includes/entities/flights.h"
-#include "../includes/entities/passengers.h"
-#include "../includes/entities/reservations.h"
-#include "../includes/entities/users.h"
+#include "entities/flights.h"
+#include "entities/passengers.h"
+#include "entities/reservations.h"
+#include "entities/users.h"
 
 #define SEPARATOR ";"
 

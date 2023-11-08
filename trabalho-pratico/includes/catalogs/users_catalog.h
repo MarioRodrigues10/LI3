@@ -1,8 +1,9 @@
 #ifndef USERS_CATOLOG_H
 #define USERS_CATALOG_H
 
-#include "entities/users.h"
+#include <glib.h>
 
+#include "entities/users.h"
 typedef struct users_catalog *USERS_CATALOG;
 
 /**

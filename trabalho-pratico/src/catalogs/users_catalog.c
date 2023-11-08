@@ -1,9 +1,5 @@
 #include "catalogs/users_catalog.h"
 
-#include <glib.h>
-
-#include "entities/users.h"
-
 struct users_catalog {
   GHashTable *users;
 };
