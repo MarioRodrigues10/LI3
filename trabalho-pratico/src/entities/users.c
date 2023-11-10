@@ -46,6 +46,7 @@ USER create_user() {
 
 void set_user_id(USER user, char *id) {
   gpointer id_pointer = g_strdup(id);
+  user->id = id_pointer;
 }
 
 void set_user_name(USER user, char *name) { user->name = g_strdup(name); }

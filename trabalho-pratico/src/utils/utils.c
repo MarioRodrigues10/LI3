@@ -1,11 +1,10 @@
-#ifndef UTILS_H
-#define UTILS_H
+#include "utils/utils.h"
 
+#include <ctype.h>
 #include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
 int string_to_int(char* c) {
   int result = 0;
@@ -17,7 +16,7 @@ int string_to_int(char* c) {
   return result;
 }
 
-int extract_number(char *input) {
+int extract_number(char* input) {
   while (*input && !isdigit(*input)) input++;
   return string_to_int(input);
 }
@@ -260,4 +259,3 @@ bool validate_rating(int rating) { return (rating >= 1 && rating <= 5); }
 bool validate_parameter_not_empty(char* parameter) {
   return (parameter != NULL && strlen(parameter) > 0);
 }
-

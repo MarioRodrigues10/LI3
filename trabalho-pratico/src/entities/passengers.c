@@ -43,8 +43,7 @@ int get_passenger_flight_id(PASSENGER passenger) {
   return id;
 }
 
-
 char *get_passenger_user_id(PASSENGER passenger) {
-   char *id = g_strdup(passenger->user_id);
+  char *id = g_strdup(passenger->user_id);
   return id;
 }

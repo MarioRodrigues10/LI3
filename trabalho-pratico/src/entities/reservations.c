@@ -1,5 +1,4 @@
 #include "entities/reservations.h"
-#include "utils/utils.h"
 
 #include <glib.h>
 #include <stdio.h>
@@ -63,6 +62,7 @@ void set_reservation_user_id(RESERVATION reservation, char *id) {
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
   gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
+  reservation->hotel_id = id_pointer;
 }
 
 void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name) {

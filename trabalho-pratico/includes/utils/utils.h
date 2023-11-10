@@ -11,6 +11,17 @@
 #include "entities/users.h"
 #include "io/parser.h"
 
+typedef enum errors {
+  ERR_OPENING_FLIGHTS_FILE = 1,
+  ERR_OPENING_PASSENGERS_FILE = 2,
+  ERR_OPENING_RESERVATIONS_FILE = 3,
+  ERR_OPENING_USERS_FILE = 4,
+  ERR_OPENING_QUERIES_FILE = 5,
+  ERR_CREATING_DIRECTORY = 6,
+  ERR_OPENING_OUTPUT_FILE = 7,
+  ERROR_WRITING_TO_ERRORS_FILE = 8,
+} ERRORS;
+
 /**
  * @brief Converts a string to an integer.
  *
@@ -30,17 +41,6 @@ int string_to_int(char* c);
  *
  */
 int extract_number(char* input);
-
-typedef enum errors {
-  ERR_OPENING_FLIGHTS_FILE = 1,
-  ERR_OPENING_PASSENGERS_FILE = 2,
-  ERR_OPENING_RESERVATIONS_FILE = 3,
-  ERR_OPENING_USERS_FILE = 4,
-  ERR_OPENING_QUERIES_FILE = 5,
-  ERR_CREATING_DIRECTORY = 6,
-  ERR_OPENING_OUTPUT_FILE = 7,
-  ERROR_WRITING_TO_ERRORS_FILE = 8,
-} ERRORS;
 
 /**
  * @brief Appends an array of strings to a file, separated by semicolons and

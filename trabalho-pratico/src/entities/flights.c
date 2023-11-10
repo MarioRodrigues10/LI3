@@ -1,10 +1,11 @@
 #include "entities/flights.h"
-#include "utils/utils.h"
 
 #include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "utils/utils.h"
 
 struct flight {
   gpointer id;
