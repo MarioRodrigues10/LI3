@@ -1,0 +1,39 @@
+--- 1 ---
+name: MAD
+passengers: 4572
+
+--- 2 ---
+name: LIS
+passengers: 3816
+
+--- 3 ---
+name: FCO
+passengers: 3233
+
+--- 4 ---
+name: AMS
+passengers: 3054
+
+--- 5 ---
+name: PRG
+passengers: 2980
+
+--- 6 ---
+name: CDG
+passengers: 2867
+
+--- 7 ---
+name: DUB
+passengers: 2763
+
+--- 8 ---
+name: LHR
+passengers: 2439
+
+--- 9 ---
+name: CPH
+passengers: 2423
+
+--- 10 ---
+name: OSL
+passengers: 2423

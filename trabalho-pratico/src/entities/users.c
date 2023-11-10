@@ -44,11 +44,7 @@ USER create_user() {
   return new_user;
 }
 
-void set_user_id(USER user, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
-  user->id = id_pointer;
-}
+void set_user_id(USER user, char *id) { gpointer id_pointer = id; }
 
 void set_user_name(USER user, char *name) { user->name = g_strdup(name); }
 

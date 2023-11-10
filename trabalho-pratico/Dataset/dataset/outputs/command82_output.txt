@@ -1,0 +1,27 @@
+--- 1 ---
+id: 0000000938
+schedule_departure_date: 2023/04/22 00:24:24
+destination: MAD
+airline: TAP Air Portugal
+plane_model: Airbus A320
+
+--- 2 ---
+id: 0000000070
+schedule_departure_date: 2023/03/18 02:24:30
+destination: MAD
+airline: TAP Air Portugal
+plane_model: Airbus A320
+
+--- 3 ---
+id: 0000000487
+schedule_departure_date: 2023/02/20 06:54:54
+destination: MAD
+airline: TAP Air Portugal
+plane_model: Airbus A320
+
+--- 4 ---
+id: 0000000398
+schedule_departure_date: 2023/01/15 11:00:17
+destination: MAD
+airline: TAP Air Portugal
+plane_model: Airbus A320

@@ -1,0 +1,9 @@
+--- 1 ---
+hotel_id: HTL1404
+hotel_name: Spree Riverfront Hotel
+hotel_stars: 4
+begin_date: 2021/07/20
+end_date: 2021/07/23
+includes_breakfast: True
+nights: 3
+total_price: 618.000

@@ -1,0 +1,39 @@
+--- 1 ---
+name: MAD
+passengers: 5333
+
+--- 2 ---
+name: LIS
+passengers: 4504
+
+--- 3 ---
+name: FCO
+passengers: 3569
+
+--- 4 ---
+name: VIE
+passengers: 3526
+
+--- 5 ---
+name: DUB
+passengers: 3303
+
+--- 6 ---
+name: TXL
+passengers: 3192
+
+--- 7 ---
+name: AMS
+passengers: 2934
+
+--- 8 ---
+name: BCN
+passengers: 2180
+
+--- 9 ---
+name: SVO
+passengers: 2153
+
+--- 10 ---
+name: FRA
+passengers: 2135

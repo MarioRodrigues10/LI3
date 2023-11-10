@@ -1,0 +1,9 @@
+--- 1 ---
+airline: Transavia
+plane_model: Airbus A320
+origin: AMS
+destination: NCE
+schedule_departure_date: 2023/05/06 17:15:55
+schedule_arrival_date: 2023/05/06 19:35:55
+passengers: 83
+delay: 0

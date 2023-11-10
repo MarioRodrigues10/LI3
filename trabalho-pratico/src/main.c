@@ -8,8 +8,9 @@
 #include "entities/reservations.h"
 #include "entities/users.h"
 #include "io/parser.h"
+#include "utils/utils.h"
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   // ./programa-principal Dataset/dataset/data_clean Dataset/dataset/input.txt
   if (argc == 3) {
     batch(argv);

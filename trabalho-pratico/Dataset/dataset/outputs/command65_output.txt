@@ -1,0 +1,9 @@
+--- 1 ---
+hotel_id: HTL904
+hotel_name: Chiado Plaza Hotel
+hotel_stars: 3
+begin_date: 2023/09/01
+end_date: 2023/09/03
+includes_breakfast: False
+nights: 2
+total_price: 306.000

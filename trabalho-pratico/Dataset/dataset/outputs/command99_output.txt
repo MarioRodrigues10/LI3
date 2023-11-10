@@ -1,0 +1,71 @@
+--- 1 ---
+month: 1
+users: 0
+flights: 37
+passengers: 2867
+unique_passengers: 2487
+reservations: 1590
+
+--- 2 ---
+month: 2
+users: 0
+flights: 25
+passengers: 1919
+unique_passengers: 1741
+reservations: 1123
+
+--- 3 ---
+month: 3
+users: 0
+flights: 30
+passengers: 2247
+unique_passengers: 2011
+reservations: 1208
+
+--- 4 ---
+month: 4
+users: 0
+flights: 29
+passengers: 2158
+unique_passengers: 1952
+reservations: 1085
+
+--- 5 ---
+month: 5
+users: 0
+flights: 32
+passengers: 2592
+unique_passengers: 2305
+reservations: 1434
+
+--- 6 ---
+month: 6
+users: 0
+flights: 39
+passengers: 3009
+unique_passengers: 2590
+reservations: 1575
+
+--- 7 ---
+month: 7
+users: 0
+flights: 25
+passengers: 2228
+unique_passengers: 1995
+reservations: 1255
+
+--- 8 ---
+month: 8
+users: 0
+flights: 27
+passengers: 2074
+unique_passengers: 1866
+reservations: 1088
+
+--- 9 ---
+month: 9
+users: 0
+flights: 1
+passengers: 81
+unique_passengers: 81
+reservations: 38
