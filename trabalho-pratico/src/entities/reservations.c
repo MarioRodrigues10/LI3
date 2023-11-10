@@ -54,11 +54,14 @@ void set_reservation_id(RESERVATION reservation, char *id) {
 }
 
 void set_reservation_user_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = g_strdup(id);
+  int id_int = atoi(id);
+  gpointer id_pointer = GINT_TO_POINTER(id_int);
+  reservation->user_id = id_pointer;
 }
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
+  int id_int = atoi(id);
+  gpointer id_pointer = GINT_TO_POINTER(id_int);
   reservation->hotel_id = id_pointer;
 }
 
