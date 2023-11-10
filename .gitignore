@@ -9,7 +9,7 @@ a.out
 *.o
 *.exe
 */datasets/
-
+*.txt
 
 */build
 input*.txt
@@ -21,6 +21,10 @@ input*.txt
 # Ignore CSV
 
 *.csv
+
+# Ignore output files
+
+Dataset/*
 
 programa-principal
 programa-testes
