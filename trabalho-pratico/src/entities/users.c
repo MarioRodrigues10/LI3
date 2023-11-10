@@ -45,9 +45,7 @@ USER create_user() {
 }
 
 void set_user_id(USER user, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
-  user->id = id_pointer;
+  gpointer id_pointer = g_strdup(id);
 }
 
 void set_user_name(USER user, char *name) { user->name = g_strdup(name); }
@@ -102,8 +100,8 @@ void free_user(USER user) {
   g_free(user->account_status);
 }
 
-int get_user_id_from_user(USER user) {
-  int id = GPOINTER_TO_INT(user->id);
+char *get_user_id_from_user(USER user) {
+  char *id = g_strdup(user->id);
   return id;
 }
 

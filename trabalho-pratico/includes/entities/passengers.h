@@ -64,6 +64,6 @@ int get_passenger_flight_id(PASSENGER passenger);
  *
  * @return id - The user id of type 'int'
  */
-int get_passenger_user_id(PASSENGER passenger);
+char *get_passenger_user_id(PASSENGER passenger);
 
 #endif

@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct passenger {
   gpointer flight_id;
   gpointer user_id;
@@ -25,14 +27,12 @@ PASSENGER create_passenger() {
 }
 
 void set_passenger_flight_id(PASSENGER passenger, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
+  gpointer id_pointer = GINT_TO_POINTER(string_to_int(id));
   passenger->flight_id = id_pointer;
 }
 
 void set_passenger_user_id(PASSENGER passenger, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
+  gpointer id_pointer = g_strdup(id);
   passenger->user_id = id_pointer;
 }
 
@@ -43,7 +43,8 @@ int get_passenger_flight_id(PASSENGER passenger) {
   return id;
 }
 
-int get_passenger_user_id(PASSENGER passenger) {
-  int id = GPOINTER_TO_INT(passenger->user_id);
+
+char *get_passenger_user_id(PASSENGER passenger) {
+   char *id = g_strdup(passenger->user_id);
   return id;
 }
