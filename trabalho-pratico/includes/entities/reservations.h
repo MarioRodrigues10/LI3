@@ -4,6 +4,8 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_RESERVATION 14
 
+#include "catalogs/reservations_catalog.h"
+
 typedef struct reservation *RESERVATION;
 
 /**
@@ -12,6 +14,15 @@ typedef struct reservation *RESERVATION;
  * @return new_driver - The new driver of type `Reservation`
  */
 RESERVATION create_reservation();
+
+/**
+ * @brief Function that builds the reservation
+ *
+ * @param reservation_params - The reservation parameters of type 'char*'
+ * @param catalog - The catalog of type 'void*'
+ *
+ */
+void build_reservation(char **reservation_params, void *catalog);
 
 /**
  * @brief Function that verifies if the parameters is valid to create a new
@@ -58,12 +69,12 @@ void set_reservation_hotel_id(RESERVATION reservation, char *id);
 void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name);
 
 /**
- * @brief Function that sets the reservation hotel start
+ * @brief Function that sets the reservation hotel stars
  *
  * @param reservation - The Reservation of type 'RESERVATION'
- * @param start - The starts integer of type 'int'
+ * @param stars - The stars integer of type 'int'
  */
-void set_reservation_hotel_start(RESERVATION reservation, int start);
+void set_reservation_hotel_stars(RESERVATION reservation, int stars);
 
 /**
  * @brief Function that sets the reservation city tax
@@ -121,7 +132,7 @@ void set_reservation_include_breakfast(RESERVATION reservation,
  * @param reservation - The Reservation of type 'RESERVATION'
  * @param room_details - The room details string of type 'char*'
  */
-void set_reservation_room_detail(RESERVATION reservation, char *room_detail);
+void set_reservation_room_details(RESERVATION reservation, char *room_detail);
 
 /**
  * @brief Function that sets the reservation rating

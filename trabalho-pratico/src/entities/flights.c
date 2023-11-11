@@ -47,6 +47,29 @@ FLIGHT create_flight() {
   return newflight;
 }
 
+void build_flight(char **flight_params, void *catalog) {
+  if (!verify_flight_input(flight_params)) return;
+
+  FLIGHT flight = create_flight();
+  FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog;
+
+  set_flight_id(flight, flight_params[0]);
+  set_flight_airline(flight, flight_params[1]);
+  set_flight_planel_model(flight, flight_params[2]);
+  set_flight_total_seats(flight, string_to_int(flight_params[3]));
+  set_flight_origin(flight, flight_params[4]);
+  set_flight_destination(flight, flight_params[5]);
+  set_flight_schedule_departure_date(flight, flight_params[5]);
+  set_flight_schedule_arrival_date(flight, flight_params[6]);
+  set_flight_real_departure_date(flight, flight_params[7]);
+  set_flight_real_arrival_date(flight, flight_params[8]);
+  set_flight_pilot(flight, flight_params[9]);
+  set_flight_copilot(flight, flight_params[10]);
+  set_flight_notes(flight, flight_params[11]);
+
+  add_flight_to_catalog(flights_catalog, flight, flight->id);
+}
+
 void set_flight_id(FLIGHT flight, char *flight_id) {
   gpointer id_pointer = GINT_TO_POINTER(string_to_int(flight_id));
   flight->id = id_pointer;
@@ -66,6 +89,10 @@ void set_flight_total_seats(FLIGHT flight, int totalseats) {
 
 void set_flight_origin(FLIGHT flight, char *origin) {
   flight->origin = g_strdup(origin);
+}
+
+void set_flight_destination(FLIGHT flight, char *destination) {
+  flight->destination = g_strdup(destination);
 }
 
 void set_flight_schedule_departure_date(FLIGHT flight,
@@ -94,7 +121,7 @@ void set_flight_copilot(FLIGHT flight, char *copilot) {
   flight->copilot = g_strdup(copilot);
 }
 
-void set_flight_note(FLIGHT flight, char *notes) {
+void set_flight_notes(FLIGHT flight, char *notes) {
   flight->notes = g_strdup(notes);
 }
 
@@ -135,6 +162,11 @@ int get_flight_total_seats(FLIGHT flight) {
 char *get_flight_origin(FLIGHT flight) {
   char *origin = g_strdup(flight->origin);
   return origin;
+}
+
+char *get_flight_destination(FLIGHT flight) {
+  char *destination = g_strdup(flight->destination);
+  return destination;
 }
 
 char *get_flight_schedule_departure_date(FLIGHT flight) {

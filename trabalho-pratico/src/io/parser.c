@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "io/parser.h"
 
 #include <stdio.h>
@@ -18,4 +19,22 @@ char** parse_line(char* line, int num_tokens) {
   }
   free(token);
   return tokens;
+}
+
+int parse_file(FILE* file, void* catalog, function_pointer build_function) {
+  char* line = NULL;
+  size_t len = 0;
+
+  // Skip first line
+  getline(&line, &len, file);
+
+  while (getline(&line, &len, file) != -1) {
+    line[strlen(line) - 1] = '\0';
+    char** tokens = parse_line(line, 5);
+    build_function(tokens, catalog);
+    free(tokens);
+  }
+  free(line);
+
+  return 0;
 }

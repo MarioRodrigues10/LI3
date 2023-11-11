@@ -12,12 +12,12 @@ struct reservation {
   gpointer user_id;
   gpointer hotel_id;
   char *hotel_name;
-  int hotel_start;
+  int hotel_stars;
   double city_tax;
   char *address;
   char *begin_date;
   char *end_date;
-  int price_per_ninght;
+  int price_per_night;
   char *include_breakfast;
   char *room_detail;
   int rating;
@@ -50,8 +50,37 @@ RESERVATION create_reservation() {
   return new_reservation;
 }
 
+void build_reservation(char **reservation_params, void *catalog) {
+  if (!verify_reservation_input(reservation_params)) return;
+
+  RESERVATION reservation = create_reservation();
+  RESERVATIONS_CATALOG reservations_catalog = (RESERVATIONS_CATALOG)catalog;
+
+  set_reservation_id(reservation, reservation_params[0]);
+  set_reservation_user_id(reservation, reservation_params[1]);
+  set_reservation_hotel_id(reservation, reservation_params[2]);
+  set_reservation_hotel_name(reservation, reservation_params[3]);
+  set_reservation_hotel_stars(reservation,
+                              string_to_int(reservation_params[4]));
+  set_reservation_city_tax(reservation, string_to_int(reservation_params[5]));
+  set_reservation_address(reservation, reservation_params[6]);
+  set_reservation_begin_date(reservation, reservation_params[7]);
+  set_reservation_end_date(reservation, reservation_params[8]);
+  set_reservation_price_per_night(reservation,
+                                  string_to_int(reservation_params[9]));
+  set_reservation_include_breakfast(reservation, reservation_params[10]);
+  set_reservation_room_details(reservation, reservation_params[11]);
+  set_reservation_rating(reservation, string_to_int(reservation_params[12]));
+
+  if (!reservation_params[13])
+    set_reservation_comment(reservation, reservation_params[13]);
+  add_reservation_to_catalog(reservations_catalog, reservation,
+                             reservation->id);
+}
+
 void set_reservation_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
+  char *id_without_book = id + 4;
+  gpointer id_pointer = id_without_book;
   reservation->id = id_pointer;
 }
 
@@ -69,8 +98,8 @@ void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name) {
   reservation->hotel_name = g_strdup(hotel_name);
 }
 
-void set_reservation_hotel_start(RESERVATION reservation, int start) {
-  reservation->hotel_start = start;
+void set_reservation_hotel_stars(RESERVATION reservation, int stars) {
+  reservation->hotel_stars = stars;
 }
 
 void set_reservation_city_tax(RESERVATION reservation, int tax) {
@@ -90,8 +119,8 @@ void set_reservation_end_date(RESERVATION reservation, char *end_date) {
 }
 
 void set_reservation_price_per_night(RESERVATION reservation,
-                                     int price_per_ninght) {
-  reservation->price_per_ninght = price_per_ninght;
+                                     int price_per_night) {
+  reservation->price_per_night = price_per_night;
 }
 
 void set_reservation_include_breakfast(RESERVATION reservation,
@@ -99,8 +128,8 @@ void set_reservation_include_breakfast(RESERVATION reservation,
   reservation->include_breakfast = g_strdup(include_breakfast);
 }
 
-void set_reservation_room_detail(RESERVATION reservation, char *room_detail) {
-  reservation->room_detail = g_strdup(room_detail);
+void set_reservation_room_details(RESERVATION reservation, char *room_details) {
+  reservation->room_detail = g_strdup(room_details);
 }
 
 void set_reservation_rating(RESERVATION reservation, int rating) {
@@ -146,9 +175,9 @@ char *get_reservation_hotel_name(RESERVATION reservation) {
   return hotel_name;
 }
 
-int get_reservation_hotel_starts(RESERVATION reservation) {
-  int starts = reservation->hotel_start;
-  return starts;
+int get_reservation_hotel_stars(RESERVATION reservation) {
+  int stars = reservation->hotel_stars;
+  return stars;
 }
 
 double get_reservation_city_tax(RESERVATION reservation) {
@@ -172,7 +201,7 @@ char *get_reservation_end_date(RESERVATION reservation) {
 }
 
 int get_reservation_price_per_night(RESERVATION reservation) {
-  int price_per_ninght = reservation->price_per_ninght;
+  int price_per_ninght = reservation->price_per_night;
   return price_per_ninght;
 }
 

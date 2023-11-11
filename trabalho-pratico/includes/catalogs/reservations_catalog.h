@@ -6,6 +6,7 @@
 #include "entities/reservations.h"
 
 typedef struct reservations_catalog *RESERVATIONS_CATALOG;
+typedef struct reservation *RESERVATION;
 
 /**
  * @brief Function that creates the reservations catalog

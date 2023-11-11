@@ -11,6 +11,11 @@ int batch(char **argv) {
   RESERVATIONS_CATALOG reservations_catalog = create_reservations_catalog();
   USERS_CATALOG users_catalog = create_users_catalog();
 
+  if (setup_catalogs(argv[1], flights_catalog, passengers_catalog,
+                     reservations_catalog, users_catalog) == -1) {
+    return -1;
+  }
+
   char *queries_filename = argv[2];
   FILE *queries_file = fopen(queries_filename, "r");
   if (queries_file == NULL) {

@@ -1,6 +1,8 @@
 #ifndef FLIGHTS_H
 #define FLIGHTS_H
 
+#include "catalogs/flights_catalog.h"
+
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_FLIGHT 13
 typedef struct flight *FLIGHT;
@@ -11,6 +13,15 @@ typedef struct flight *FLIGHT;
  * @return The flight created
  */
 FLIGHT create_flight();
+
+/**
+ * @brief Function that builds the flight
+ *
+ * @param flight_params - The flight parameters of type 'char*'
+ * @param catalog - The catalog of type 'void*'
+ *
+ */
+void build_flight(char **flight_params, void *catalog);
 
 /**
  * @brief Function that verifies if the paramenters are valid to create a new
@@ -63,6 +74,14 @@ void set_flight_total_seats(FLIGHT flight, int total_seats);
  * @param origin - The origin string of type 'char*'
  */
 void set_flight_origin(FLIGHT flight, char *origin);
+
+/**
+ * @brief Function that sets the flight destination
+ *
+ * @param flight - The flight of type 'FLIGHT'
+ * @param destination - The destination string of type 'char*'
+ */
+void set_flight_destination(FLIGHT flight, char *destination);
 
 /**
  * @brief Function that sets the flight schedule departure date
@@ -124,7 +143,7 @@ void set_flight_copilot(FLIGHT flight, char *copilot);
  * @param flight - The flight of type 'FLIGHT'
  * @param notes - The notes string of type 'char*'
  */
-void set_flight_note(FLIGHT flight, char *notes);
+void set_flight_notes(FLIGHT flight, char *notes);
 
 /**
  * @brief Function that frees the memory alocated to the flight

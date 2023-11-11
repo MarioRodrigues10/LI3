@@ -259,3 +259,40 @@ bool validate_rating(int rating) { return (rating >= 1 && rating <= 5); }
 bool validate_parameter_not_empty(char* parameter) {
   return (parameter != NULL && strlen(parameter) > 0);
 }
+
+int setup_catalogs(char* folder, FLIGHTS_CATALOG flights_catalog,
+                   PASSENGERS_CATALOG passengers_catalog,
+                   RESERVATIONS_CATALOG reservations_catalog,
+                   USERS_CATALOG users_catalog) {
+  char* flights_filename = create_filename(folder, "flights.csv");
+  char* passengers_filename = create_filename(folder, "passengers.csv");
+  char* reservations_filename = create_filename(folder, "reservations.csv");
+  char* users_filename = create_filename(folder, "users.csv");
+
+  if (flights_filename == NULL || passengers_filename == NULL ||
+      reservations_filename == NULL || users_filename == NULL) {
+    printf("Error creating filenames!\n");
+    return -1;
+  }
+
+  FILE* flights_file = fopen(flights_filename, "r");
+  FILE* passengers_file = fopen(passengers_filename, "r");
+  FILE* reservations_file = fopen(reservations_filename, "r");
+  FILE* users_file = fopen(users_filename, "r");
+
+  if (flights_file == NULL || passengers_file == NULL ||
+      reservations_file == NULL || users_file == NULL) {
+    return -1;
+  }
+
+  parse_file(flights_file, flights_catalog, build_flight);
+  parse_file(reservations_file, reservations_catalog, build_reservation);
+  parse_file(users_file, users_catalog, build_user);
+  parse_file(passengers_file, passengers_catalog, build_passenger);
+
+  free(flights_filename);
+  free(passengers_filename);
+  free(reservations_filename);
+  free(users_filename);
+  return 0;
+}

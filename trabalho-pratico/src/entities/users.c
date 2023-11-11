@@ -44,6 +44,28 @@ USER create_user() {
   return new_user;
 }
 
+void build_user(char **user_params, void *catalog) {
+  if (!verify_user_input(user_params)) return;
+
+  USER user = create_user();
+  USERS_CATALOG users_catalog = (USERS_CATALOG)catalog;
+
+  set_user_id(user, user_params[0]);
+  set_user_name(user, user_params[1]);
+  set_user_email(user, user_params[2]);
+  set_user_phone_number(user, user_params[3]);
+  set_user_birth_date(user, user_params[4]);
+  set_user_sex(user, user_params[5]);
+  set_user_passport(user, user_params[6]);
+  set_user_country_code(user, user_params[7]);
+  set_user_address(user, user_params[8]);
+  set_user_account_creation(user, user_params[9]);
+  set_user_pay_method(user, user_params[10]);
+  set_user_account_status(user, user_params[11]);
+
+  add_user_to_catalog(users_catalog, user, user->id);
+}
+
 void set_user_id(USER user, char *id) {
   gpointer id_pointer = g_strdup(id);
   user->id = id_pointer;

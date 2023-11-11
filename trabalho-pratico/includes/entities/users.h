@@ -3,6 +3,9 @@
 
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_USER 12
+
+#include "catalogs/users_catalog.h"
+
 typedef struct user *USER;
 
 /**
@@ -20,6 +23,15 @@ int verify_flight_input(char **parameters);
  * @return new_user - The new user of type 'USER'
  */
 USER create_user();
+
+/**
+ * @brief Function that builds the user
+ *
+ * @param user_params - The user parameters of type 'char*'
+ * @param catalog - The catalog of type 'void*'
+ *
+ */
+void build_user(char **user_params, void *catalog);
 
 /**
  * @brief Function that sets the user id
@@ -129,7 +141,7 @@ void free_user(USER user);
  *
  * @param user - The user of type 'USER'
  *
- * @return id - The id integer of type 'int'
+ * @return id - The id integer of type 'char'
  */
 char *get_user_id_from_user(USER user);
 

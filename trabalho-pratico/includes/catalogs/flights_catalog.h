@@ -6,6 +6,7 @@
 #include "entities/flights.h"
 
 typedef struct flights_catalog *FLIGHTS_CATALOG;
+typedef struct flight *FLIGHT;
 
 /**
  * @brief Function that creates the flights catalog

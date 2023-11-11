@@ -299,4 +299,21 @@ bool validate_rating(int rating);
  */
 bool validate_parameter_not_empty(char* parameter);
 
+/**
+ * @brief Function that sets up the catalogs.
+ *
+ * @param folder The folder path of type 'char*'
+ * @param flights_catalog The flights catalog of type 'FLIGHTS_CATALOG'
+ * @param passengers_catalog The passengers catalog of type 'PASSENGERS_CATALOG'
+ * @param reservations_catalog The reservations catalog of type
+ * 'RESERVATIONS_CATALOG'
+ * @param users_catalog The users catalog of type 'USERS_CATALOG'
+ *
+ * @return 0 if the catalogs were created successfully, -1 otherwise
+ */
+int setup_catalogs(char* folder, FLIGHTS_CATALOG flights_catalog,
+                   PASSENGERS_CATALOG passengers_catalog,
+                   RESERVATIONS_CATALOG reservations_catalog,
+                   USERS_CATALOG users_catalog);
+
 #endif

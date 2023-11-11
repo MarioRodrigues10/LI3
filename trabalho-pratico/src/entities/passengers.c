@@ -1,6 +1,7 @@
 #include "entities/passengers.h"
 
 #include <glib.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -26,8 +27,22 @@ PASSENGER create_passenger() {
   return new_passenger;
 }
 
+void build_passenger(char **passenger_params, void *catalog) {
+  if (!verify_passenger_input(passenger_params)) return;
+
+  PASSENGER passenger = create_passenger();
+  PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;
+
+  set_passenger_flight_id(passenger, passenger_params[0]);
+  set_passenger_user_id(passenger, passenger_params[1]);
+
+  // What is the id for each passenger, user_id and flight_id can be repeated
+  add_to_passengers_catalog(passengers_catalog, passenger,
+                            passenger->flight_id);
+}
+
 void set_passenger_flight_id(PASSENGER passenger, char *id) {
-  gpointer id_pointer = GINT_TO_POINTER(string_to_int(id));
+  gpointer id_pointer = g_strdup(id);
   passenger->flight_id = id_pointer;
 }
 
@@ -38,8 +53,8 @@ void set_passenger_user_id(PASSENGER passenger, char *id) {
 
 void free_passenger(PASSENGER passenger) { g_free(passenger); }
 
-int get_passenger_flight_id(PASSENGER passenger) {
-  int id = GPOINTER_TO_INT(passenger->flight_id);
+char *get_passenger_flight_id(PASSENGER passenger) {
+  char *id = passenger->flight_id;
   return id;
 }
 

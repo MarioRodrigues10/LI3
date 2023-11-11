@@ -6,6 +6,8 @@
 #include "catalogs/passengers_catalog.h"
 #include "catalogs/reservations_catalog.h"
 #include "catalogs/users_catalog.h"
+#include "io/parser.h"
+#include "utils/utils.h"
 
 /**
  * @brief Function to execute batch mode

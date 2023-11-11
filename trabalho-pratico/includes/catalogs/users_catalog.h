@@ -5,6 +5,7 @@
 
 #include "entities/users.h"
 typedef struct users_catalog *USERS_CATALOG;
+typedef struct user *USER;
 
 /**
  * @brief Function that creates the users catalog
