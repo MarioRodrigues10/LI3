@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct reservation {
   gpointer id;
   gpointer user_id;
@@ -49,19 +51,17 @@ RESERVATION create_reservation() {
 }
 
 void set_reservation_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = id;
+  gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
   reservation->id = id_pointer;
 }
 
 void set_reservation_user_id(RESERVATION reservation, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
+  gpointer id_pointer = g_strdup(id);
   reservation->user_id = id_pointer;
 }
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
-  int id_int = atoi(id);
-  gpointer id_pointer = GINT_TO_POINTER(id_int);
+  gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
   reservation->hotel_id = id_pointer;
 }
 
@@ -121,8 +121,13 @@ void free_reservation(RESERVATION reservation) {
   g_free(reservation->comment);
 }
 
-int get_user_id_from_reservation(RESERVATION reservation) {
-  int id = GPOINTER_TO_INT(reservation->user_id);
+int get_id_reservation(RESERVATION reservation) {
+  int id = GPOINTER_TO_INT(reservation->id);
+  return id;
+}
+
+char *get_user_id(RESERVATION reservation) {
+  char *id = g_strdup(reservation->user_id);
   return id;
 }
 

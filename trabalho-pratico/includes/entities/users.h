@@ -131,7 +131,7 @@ void free_user(USER user);
  *
  * @return id - The id integer of type 'int'
  */
-int get_user_id_from_user(USER user);
+char *get_user_id_from_user(USER user);
 
 /**
  * @brief Function that gets the user name

@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct flight {
   gpointer id;
   char *airline;
@@ -46,7 +48,7 @@ FLIGHT create_flight() {
 }
 
 void set_flight_id(FLIGHT flight, char *flight_id) {
-  gpointer id_pointer = GINT_TO_POINTER(atoi(flight_id));
+  gpointer id_pointer = GINT_TO_POINTER(string_to_int(flight_id));
   flight->id = id_pointer;
 }
 
