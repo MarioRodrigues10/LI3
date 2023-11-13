@@ -1,10 +1,13 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "catalogs/flights_catalog.h"
+#include "catalogs/passengers_catalog.h"
+#include "catalogs/reservations_catalog.h"
+#include "catalogs/users_catalog.h"
 #include "entities/flights.h"
 #include "entities/passengers.h"
 #include "entities/reservations.h"
@@ -21,16 +24,6 @@ typedef enum errors {
   ERR_OPENING_OUTPUT_FILE = 7,
   ERROR_WRITING_TO_ERRORS_FILE = 8,
 } ERRORS;
-
-/**
- * @brief Converts a string to an integer.
- *
- * @param c The string to be converted.
- *
- * @return The integer value of the string.
- *
- */
-int string_to_int(char* c);
 
 /**
  * @brief Extracts a number from a string.

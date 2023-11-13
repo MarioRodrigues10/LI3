@@ -1,8 +1,6 @@
 #ifndef USERS_CATOLOG_H
 #define USERS_CATALOG_H
 
-#include <glib.h>
-
 #include "entities/users.h"
 typedef struct users_catalog *USERS_CATALOG;
 typedef struct user *USER;
@@ -21,7 +19,7 @@ USERS_CATALOG create_users_catalog();
  * @param user - The user to be added to the users catalog
  * @param key - The key of the user to be added to the users catalog
  */
-void add_user_to_catalog(USERS_CATALOG users_catalog, USER user, gpointer key);
+void add_user_to_catalog(USERS_CATALOG users_catalog, USER user, void *key);
 
 /**
  * @brief Function that frees the memory alocated to the users catalog

@@ -4,21 +4,12 @@
 #include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-
-int string_to_int(char* c) {
-  int result = 0;
-  int i = 0;
-  while (c[i] != '\0') {
-    result = result * 10 + c[i] - '0';
-    i++;
-  }
-  return result;
-}
 
 int extract_number(char* input) {
   while (*input && !isdigit(*input)) input++;
-  return string_to_int(input);
+  return strtol(input, NULL, 10);
 }
 
 char* get_error_as_string(ERRORS error) {

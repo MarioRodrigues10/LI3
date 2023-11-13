@@ -1,8 +1,6 @@
 #ifndef PASSENGERS_CATALOG_H
 #define PASSENGERS_CATALOG_H
 
-#include <glib.h>
-
 #include "entities/passengers.h"
 
 typedef struct passengers_catalog *PASSENGERS_CATALOG;
@@ -23,7 +21,7 @@ PASSENGERS_CATALOG create_passengers_catalog();
  * @param key - The key of the passenger to be added to the passengers catalog
  */
 void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
-                               PASSENGER passenger, gpointer key);
+                               PASSENGER passenger, void *key);
 
 /**
  * @brief Function that frees the memory alocated to the passengers catalog

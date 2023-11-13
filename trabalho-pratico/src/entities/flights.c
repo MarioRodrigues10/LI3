@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "utils/utils.h"
-
 struct flight {
   gpointer id;
   char *airline;
@@ -49,14 +47,13 @@ FLIGHT create_flight() {
 
 void build_flight(char **flight_params, void *catalog) {
   if (!verify_flight_input(flight_params)) return;
-
   FLIGHT flight = create_flight();
   FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog;
 
   set_flight_id(flight, flight_params[0]);
   set_flight_airline(flight, flight_params[1]);
   set_flight_planel_model(flight, flight_params[2]);
-  set_flight_total_seats(flight, string_to_int(flight_params[3]));
+  set_flight_total_seats(flight, strtol(flight_params[3], NULL, 10));
   set_flight_origin(flight, flight_params[4]);
   set_flight_destination(flight, flight_params[5]);
   set_flight_schedule_departure_date(flight, flight_params[5]);
@@ -71,7 +68,7 @@ void build_flight(char **flight_params, void *catalog) {
 }
 
 void set_flight_id(FLIGHT flight, char *flight_id) {
-  gpointer id_pointer = GINT_TO_POINTER(string_to_int(flight_id));
+  gpointer id_pointer = GINT_TO_POINTER(strtol(flight_id, NULL, 10));
   flight->id = id_pointer;
 }
 
@@ -126,20 +123,21 @@ void set_flight_notes(FLIGHT flight, char *notes) {
 }
 
 void free_flight(FLIGHT flight) {
-  g_free(flight->id);
-  g_free(flight->airline);
-  g_free(flight->plane_model);
-  g_free(flight->origin);
-  g_free(flight->schedule_departure_date);
-  g_free(flight->schedule_arrival_date);
-  g_free(flight->real_departure_date);
-  g_free(flight->real_arrival_date);
-  g_free(flight->pilot);
-  g_free(flight->copilot);
-  g_free(flight->notes);
+  // free(flight->airline);
+  free(flight->plane_model);
+  free(flight->origin);
+  free(flight->destination);
+  free(flight->schedule_departure_date);
+  free(flight->schedule_arrival_date);
+  free(flight->real_departure_date);
+  free(flight->real_arrival_date);
+  free(flight->pilot);
+  free(flight->copilot);
+  if (flight->notes != NULL) free(flight->notes);
+  free(flight);
 }
 
-int get_flight_Id(FLIGHT flight) {
+int get_flight_id(FLIGHT flight) {
   int id = GPOINTER_TO_INT(flight->id);
   return id;
 }

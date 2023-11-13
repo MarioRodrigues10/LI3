@@ -1,13 +1,15 @@
 #include "catalogs/users_catalog.h"
 
+#include <glib.h>
+
 struct users_catalog {
   GHashTable *users;
 };
 
 USERS_CATALOG create_users_catalog() {
   USERS_CATALOG new_catalog = malloc(sizeof(struct users_catalog));
-  new_catalog->users = g_hash_table_new_full(
-      NULL, g_direct_equal, NULL, (GDestroyNotify)free_users_catalog);
+  new_catalog->users = g_hash_table_new_full(NULL, g_direct_equal, NULL,
+                                             (GDestroyNotify)free_user);
 
   return new_catalog;
 }

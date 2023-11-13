@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "utils/utils.h"
-
 struct passenger {
   gpointer flight_id;
   gpointer user_id;
@@ -51,7 +49,7 @@ void set_passenger_user_id(PASSENGER passenger, char *id) {
   passenger->user_id = id_pointer;
 }
 
-void free_passenger(PASSENGER passenger) { g_free(passenger); }
+void free_passenger(PASSENGER passenger) { free(passenger); }
 
 char *get_passenger_flight_id(PASSENGER passenger) {
   char *id = passenger->flight_id;

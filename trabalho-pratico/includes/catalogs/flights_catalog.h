@@ -1,8 +1,6 @@
 #ifndef FLIGHTS_CATALOG_H
 #define FLIGHTS_CATALOG_H
 
-#include <glib.h>
-
 #include "entities/flights.h"
 
 typedef struct flights_catalog *FLIGHTS_CATALOG;
@@ -23,7 +21,7 @@ FLIGHTS_CATALOG create_flights_catalog();
  * @param key - The key of the flight to be added to the flights catalog
  */
 void add_flight_to_catalog(FLIGHTS_CATALOG flights_catalog, FLIGHT flight,
-                           gpointer key);
+                           void *key);
 /**
  * @brief Function that frees the memory alocated to the flights catalog
  *

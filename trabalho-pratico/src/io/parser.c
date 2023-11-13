@@ -7,7 +7,7 @@
 
 char** parse_line(char* line, int num_tokens) {
   char* token;
-  char** tokens = (char**)malloc(sizeof(char**) * num_tokens);
+  char** tokens = (char**)malloc(sizeof(char*) * num_tokens);
   token = strtok(line, SEPARATOR);
   int iterator = 0;
 
@@ -32,6 +32,7 @@ int parse_file(FILE* file, void* catalog, function_pointer build_function) {
     line[strlen(line) - 1] = '\0';
     char** tokens = parse_line(line, 5);
     build_function(tokens, catalog);
+
     free(tokens);
   }
   free(line);

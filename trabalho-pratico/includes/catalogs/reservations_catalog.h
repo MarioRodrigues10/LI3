@@ -1,8 +1,6 @@
 #ifndef RESERVATIONS_CATALOG_H
 #define RESERVATIONS_CATALOG_H
 
-#include <glib.h>
-
 #include "entities/reservations.h"
 
 typedef struct reservations_catalog *RESERVATIONS_CATALOG;
@@ -25,7 +23,7 @@ RESERVATIONS_CATALOG create_reservations_catalog();
  * catalog
  */
 void add_reservation_to_catalog(RESERVATIONS_CATALOG reservations_catalog,
-                                RESERVATION reservation, gpointer key);
+                                RESERVATION reservation, void *key);
 
 /**
  * @brief Function that frees the memory alocated to the reservations catalog

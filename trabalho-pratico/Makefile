@@ -1,7 +1,7 @@
 CC := gcc
 
 EXEC := programa-principal
-FLAGS := -std=c11 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors
+FLAGS := -std=c11 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -O0 -g
 
 LIBS := -lm `pkg-config --libs glib-2.0`
 PKG_CONFIG := `pkg-config --cflags glib-2.0`
@@ -37,7 +37,7 @@ build/%.o: tests/%.c
 
 .PHONY: clean
 clean:
-	rm -rf build/*.o
+	rm -rf build/*
 	rm -rf Resultados
 	rm -f programa-principal
 	rm -rf programa-testes

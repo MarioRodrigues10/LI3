@@ -61,16 +61,17 @@ void build_reservation(char **reservation_params, void *catalog) {
   set_reservation_hotel_id(reservation, reservation_params[2]);
   set_reservation_hotel_name(reservation, reservation_params[3]);
   set_reservation_hotel_stars(reservation,
-                              string_to_int(reservation_params[4]));
-  set_reservation_city_tax(reservation, string_to_int(reservation_params[5]));
+                              strtol(reservation_params[4], NULL, 10));
+  set_reservation_city_tax(reservation,
+                           strtol(reservation_params[5], NULL, 10));
   set_reservation_address(reservation, reservation_params[6]);
   set_reservation_begin_date(reservation, reservation_params[7]);
   set_reservation_end_date(reservation, reservation_params[8]);
   set_reservation_price_per_night(reservation,
-                                  string_to_int(reservation_params[9]));
+                                  strtol(reservation_params[9], NULL, 10));
   set_reservation_include_breakfast(reservation, reservation_params[10]);
   set_reservation_room_details(reservation, reservation_params[11]);
-  set_reservation_rating(reservation, string_to_int(reservation_params[12]));
+  set_reservation_rating(reservation, strtol(reservation_params[12], NULL, 10));
 
   if (!reservation_params[13])
     set_reservation_comment(reservation, reservation_params[13]);
@@ -141,13 +142,13 @@ void set_reservation_comment(RESERVATION reservation, char *comment) {
 }
 
 void free_reservation(RESERVATION reservation) {
-  g_free(reservation->hotel_name);
-  g_free(reservation->address);
-  g_free(reservation->begin_date);
-  g_free(reservation->end_date);
-  g_free(reservation->include_breakfast);
-  g_free(reservation->room_detail);
-  g_free(reservation->comment);
+  free(reservation->hotel_name);
+  free(reservation->address);
+  free(reservation->begin_date);
+  free(reservation->end_date);
+  free(reservation->include_breakfast);
+  free(reservation->room_detail);
+  free(reservation);
 }
 
 int get_id_reservation(RESERVATION reservation) {
