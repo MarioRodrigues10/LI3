@@ -2,11 +2,13 @@
 #define BATCH_H
 
 #include "base/query_manager.h"
+#include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 #include "catalogs/passengers_catalog.h"
 #include "catalogs/reservations_catalog.h"
 #include "catalogs/users_catalog.h"
 #include "io/parser.h"
+#include "io/query_result.h"
 #include "utils/utils.h"
 
 /**

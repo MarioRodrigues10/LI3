@@ -4,6 +4,7 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_PASSENGER 2
 
+#include "base/stats.h"
 #include "catalogs/passengers_catalog.h"
 
 typedef struct passenger *PASSENGER;
@@ -20,9 +21,10 @@ PASSENGER create_passenger();
  *
  * @param passenger_params - The passenger parameters of type 'char*'
  * @param catalog - The catalog of type 'void*'
+ * @param stats - The stats of type 'STATS'
  *
  */
-void build_passenger(char **passenger_params, void *catalog);
+void build_passenger(char **passenger_params, void *catalog, STATS stats);
 
 /**
  * @brief Function that verifies if the parameters are valid to create a new

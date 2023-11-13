@@ -26,6 +26,16 @@ void add_reservation_to_catalog(RESERVATIONS_CATALOG reservations_catalog,
                                 RESERVATION reservation, void *key);
 
 /**
+ * @brief Function that gets a reservation by id from the reservations catalog
+ *
+ * @param catalog - The reservations catalog to get the reservation from
+ * @param id - The id of the reservation to be retrieved
+ *
+ * @return The reservation retrieved
+ */
+RESERVATION get_reservation_by_id(RESERVATIONS_CATALOG catalog, char *id);
+
+/**
  * @brief Function that frees the memory alocated to the reservations catalog
  *
  * @param reservation_catalog  - The reservations catalog to be freed of type

@@ -7,6 +7,79 @@
 #include <stdlib.h>
 #include <string.h>
 
+int calculate_delay(char* scheduled_date, char* actual_date) {
+  static char result[20];
+
+  int scheduled_year, scheduled_month, scheduled_day, scheduled_hour,
+      scheduled_minute, scheduled_second;
+  int actual_year, actual_month, actual_day, actual_hour, actual_minute,
+      actual_second;
+
+  sscanf(scheduled_date, "%d/%d/%d %d:%d:%d", &scheduled_year, &scheduled_month,
+         &scheduled_day, &scheduled_hour, &scheduled_minute, &scheduled_second);
+  sscanf(actual_date, "%d/%d/%d %d:%d:%d", &actual_year, &actual_month,
+         &actual_day, &actual_hour, &actual_minute, &actual_second);
+
+  int time_difference_seconds =
+      ((actual_year - scheduled_year) * 365 * 24 * 60 * 60) +
+      ((actual_month - scheduled_month) * 30 * 24 * 60 * 60) +
+      ((actual_day - scheduled_day) * 24 * 60 * 60) +
+      ((actual_hour - scheduled_hour) * 60 * 60) +
+      ((actual_minute - scheduled_minute) * 60) +
+      (actual_second - scheduled_second);
+
+  return time_difference_seconds;
+}
+
+double calculate_total_price(int num_nights, int price_per_night,
+                             int city_tax) {
+  double total_price =
+      num_nights * price_per_night +
+      ((double)(num_nights * price_per_night) / 100) * city_tax;
+
+  return total_price;
+}
+
+int calculate_number_of_nights(const char* begin_date_str,
+                               const char* end_date_str) {
+  int begin_year, begin_month, begin_day;
+  int end_year, end_month, end_day;
+
+  sscanf(begin_date_str, "%d/%d/%d", &begin_year, &begin_month, &begin_day);
+  sscanf(end_date_str, "%d/%d/%d", &end_year, &end_month, &end_day);
+
+  int begin_date = begin_year * 10000 + begin_month * 100 + begin_day;
+  int end_date = end_year * 10000 + end_month * 100 + end_day;
+
+  int nights = end_date - begin_date;
+
+  return nights;
+}
+
+char* calculate_age(const char* birth_date_str) {
+  static char result[3];
+
+  int birth_date_year, birth_date_month, birth_date_day;
+  int master_date_year, master_date_month, master_date_day;
+
+  sscanf(birth_date_str, "%d/%d/%d", &birth_date_year, &birth_date_month,
+         &birth_date_day);
+  sscanf(MASTER_DATE, "%d/%d/%d", &master_date_year, &master_date_month,
+         &master_date_day);
+
+  int age = master_date_year - birth_date_year;
+
+  if (master_date_month < birth_date_month ||
+      (master_date_month == birth_date_month &&
+       master_date_day < birth_date_day)) {
+    age--;
+  }
+
+  sprintf(result, "%d", age);
+
+  return result;
+}
+
 int extract_number(char* input) {
   while (*input && !isdigit(*input)) input++;
   return strtol(input, NULL, 10);
@@ -92,29 +165,29 @@ FILE* create_output_file(int queries_counter) {
   return output_file;
 }
 
-char standardize_account_status(char* account_status) {
+char* standardize_account_status(char* account_status) {
   if (account_status != NULL) {
     for (int i = 0; account_status[i]; i++) {
       account_status[i] = tolower(account_status[i]);
     }
 
     if (strcmp(account_status, "active") == 0) {
-      return 'a';
+      return "ACTIVE";
     } else if (strcmp(account_status, "inactive") == 0) {
-      return 'i';
+      return "INACTIVE";
     }
   }
 
-  return 'x';
+  return "NO STATUS";
 }
 
-char stantdardize_includes_breakfast(char* includes_breakfast) {
+char* standardize_includes_breakfast(char* includes_breakfast) {
   if ((strcmp(includes_breakfast, "t") == 0) ||
       (strcmp(includes_breakfast, "true") == 0) ||
       (strcmp(includes_breakfast, "1") == 0))
-    return 't';
+    return "TRUE";
   else
-    return 'f';
+    return "FALSE";
 }
 
 char* standardize_airport_name(char* airport_name) {
@@ -251,10 +324,10 @@ bool validate_parameter_not_empty(char* parameter) {
   return (parameter != NULL && strlen(parameter) > 0);
 }
 
-int setup_catalogs(char* folder, FLIGHTS_CATALOG flights_catalog,
-                   PASSENGERS_CATALOG passengers_catalog,
-                   RESERVATIONS_CATALOG reservations_catalog,
-                   USERS_CATALOG users_catalog) {
+int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
+                             PASSENGERS_CATALOG passengers_catalog,
+                             RESERVATIONS_CATALOG reservations_catalog,
+                             USERS_CATALOG users_catalog, STATS stats) {
   char* flights_filename = create_filename(folder, "flights.csv");
   char* passengers_filename = create_filename(folder, "passengers.csv");
   char* reservations_filename = create_filename(folder, "reservations.csv");
@@ -276,10 +349,10 @@ int setup_catalogs(char* folder, FLIGHTS_CATALOG flights_catalog,
     return -1;
   }
 
-  parse_file(flights_file, flights_catalog, build_flight);
-  parse_file(reservations_file, reservations_catalog, build_reservation);
-  parse_file(users_file, users_catalog, build_user);
-  parse_file(passengers_file, passengers_catalog, build_passenger);
+  parse_file(flights_file, flights_catalog, build_flight, stats);
+  parse_file(reservations_file, reservations_catalog, build_reservation, stats);
+  parse_file(users_file, users_catalog, build_user, stats);
+  parse_file(passengers_file, passengers_catalog, build_passenger, stats);
 
   free(flights_filename);
   free(passengers_filename);

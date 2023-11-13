@@ -6,7 +6,7 @@
 #include <string.h>
 
 struct flight {
-  gpointer id;
+  char *id;
   char *airline;
   char *plane_model;
   int total_seats;
@@ -40,12 +40,12 @@ int verify_flight_input(char **parameters) {
 }
 
 FLIGHT create_flight() {
-  FLIGHT newflight = g_malloc(sizeof(struct flight));
+  FLIGHT newflight = malloc(sizeof(struct flight));
 
   return newflight;
 }
 
-void build_flight(char **flight_params, void *catalog) {
+void build_flight(char **flight_params, void *catalog, STATS stats) {
   if (!verify_flight_input(flight_params)) return;
   FLIGHT flight = create_flight();
   FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog;
@@ -56,20 +56,21 @@ void build_flight(char **flight_params, void *catalog) {
   set_flight_total_seats(flight, strtol(flight_params[3], NULL, 10));
   set_flight_origin(flight, flight_params[4]);
   set_flight_destination(flight, flight_params[5]);
-  set_flight_schedule_departure_date(flight, flight_params[5]);
-  set_flight_schedule_arrival_date(flight, flight_params[6]);
-  set_flight_real_departure_date(flight, flight_params[7]);
-  set_flight_real_arrival_date(flight, flight_params[8]);
-  set_flight_pilot(flight, flight_params[9]);
-  set_flight_copilot(flight, flight_params[10]);
-  set_flight_notes(flight, flight_params[11]);
+  set_flight_schedule_departure_date(flight, flight_params[6]);
+  set_flight_schedule_arrival_date(flight, flight_params[7]);
+  set_flight_real_departure_date(flight, flight_params[8]);
+  set_flight_real_arrival_date(flight, flight_params[9]);
+  set_flight_pilot(flight, flight_params[10]);
+  set_flight_copilot(flight, flight_params[11]);
+  set_flight_notes(flight, flight_params[12]);
 
   add_flight_to_catalog(flights_catalog, flight, flight->id);
 }
 
 void set_flight_id(FLIGHT flight, char *flight_id) {
-  gpointer id_pointer = GINT_TO_POINTER(strtol(flight_id, NULL, 10));
-  flight->id = id_pointer;
+  flight->id = g_strdup(flight_id);
+  // gpointer id_pointer = GINT_TO_POINTER(string_to_int(flight_id));
+  // flight->id = id_pointer;
 }
 
 void set_flight_airline(FLIGHT flight, char *airline) {
@@ -123,6 +124,7 @@ void set_flight_notes(FLIGHT flight, char *notes) {
 }
 
 void free_flight(FLIGHT flight) {
+  free(flight->id);
   // free(flight->airline);
   free(flight->plane_model);
   free(flight->origin);
@@ -137,9 +139,11 @@ void free_flight(FLIGHT flight) {
   free(flight);
 }
 
-int get_flight_id(FLIGHT flight) {
-  int id = GPOINTER_TO_INT(flight->id);
+char *get_flight_id(FLIGHT flight) {
+  char *id = flight->id;
   return id;
+  // int id = GPOINTER_TO_INT(flight->id);
+  // return id;
 }
 
 char *get_flight_airline(FLIGHT flight) {

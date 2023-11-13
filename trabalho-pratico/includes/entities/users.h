@@ -4,6 +4,7 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_USER 12
 
+#include "base/stats.h"
 #include "catalogs/users_catalog.h"
 
 typedef struct user *USER;
@@ -29,9 +30,10 @@ USER create_user();
  *
  * @param user_params - The user parameters of type 'char*'
  * @param catalog - The catalog of type 'void*'
+ * @param stats - The stats of type 'STATS'
  *
  */
-void build_user(char **user_params, void *catalog);
+void build_user(char **user_params, void *catalog, STATS stats);
 
 /**
  * @brief Function that sets the user id

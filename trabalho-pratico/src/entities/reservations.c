@@ -5,20 +5,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "base/stats.h"
 #include "utils/utils.h"
 
 struct reservation {
-  gpointer id;
-  gpointer user_id;
-  gpointer hotel_id;
+  char *id;
+  char *user_id;
+  char *hotel_id;
   char *hotel_name;
   int hotel_stars;
-  double city_tax;
+  int city_tax;
   char *address;
   char *begin_date;
   char *end_date;
   int price_per_night;
-  char *include_breakfast;
+  char *includes_breakfast;
   char *room_detail;
   int rating;
   char *comment;
@@ -50,7 +51,7 @@ RESERVATION create_reservation() {
   return new_reservation;
 }
 
-void build_reservation(char **reservation_params, void *catalog) {
+void build_reservation(char **reservation_params, void *catalog, STATS stats) {
   if (!verify_reservation_input(reservation_params)) return;
 
   RESERVATION reservation = create_reservation();
@@ -69,30 +70,47 @@ void build_reservation(char **reservation_params, void *catalog) {
   set_reservation_end_date(reservation, reservation_params[8]);
   set_reservation_price_per_night(reservation,
                                   strtol(reservation_params[9], NULL, 10));
-  set_reservation_include_breakfast(reservation, reservation_params[10]);
+  set_reservation_includes_breakfast(reservation, reservation_params[10]);
   set_reservation_room_details(reservation, reservation_params[11]);
   set_reservation_rating(reservation, strtol(reservation_params[12], NULL, 10));
 
   if (!reservation_params[13])
     set_reservation_comment(reservation, reservation_params[13]);
+
   add_reservation_to_catalog(reservations_catalog, reservation,
                              reservation->id);
+
+  update_hotel_stats(stats, reservation_params[2],
+                     strtol(reservation_params[12], NULL, 10));
+
+  update_user_stats_number_of_reservations(stats, reservation_params[1]);
+
+  update_user_stats_total_spent(
+      stats, reservation_params[1],
+      calculate_total_price(calculate_number_of_nights(reservation_params[7],
+                                                       reservation_params[8]),
+                            strtol(reservation_params[9], NULL, 10),
+                            strtol(reservation_params[5], NULL, 10)));
 }
 
 void set_reservation_id(RESERVATION reservation, char *id) {
   char *id_without_book = id + 4;
-  gpointer id_pointer = id_without_book;
-  reservation->id = id_pointer;
+  reservation->id = g_strdup(id_without_book);
+  // gpointer id_pointer = id_without_book;
+  // reservation->id = id_pointer;
 }
 
 void set_reservation_user_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = g_strdup(id);
-  reservation->user_id = id_pointer;
+  reservation->user_id = g_strdup(id);
+  // gpointer id_pointer = g_strdup(id);
+  // reservation->user_id = id_pointer;
 }
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
-  gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
-  reservation->hotel_id = id_pointer;
+  char *id_without_htl = id;
+  reservation->hotel_id = g_strdup(id_without_htl);
+  // gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
+  // reservation->hotel_id = id_pointer;
 }
 
 void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name) {
@@ -124,9 +142,9 @@ void set_reservation_price_per_night(RESERVATION reservation,
   reservation->price_per_night = price_per_night;
 }
 
-void set_reservation_include_breakfast(RESERVATION reservation,
-                                       char *include_breakfast) {
-  reservation->include_breakfast = g_strdup(include_breakfast);
+void set_reservation_includes_breakfast(RESERVATION reservation,
+                                        char *includes_breakfast) {
+  reservation->includes_breakfast = g_strdup(includes_breakfast);
 }
 
 void set_reservation_room_details(RESERVATION reservation, char *room_details) {
@@ -146,7 +164,7 @@ void free_reservation(RESERVATION reservation) {
   free(reservation->address);
   free(reservation->begin_date);
   free(reservation->end_date);
-  free(reservation->include_breakfast);
+  free(reservation->includes_breakfast);
   free(reservation->room_detail);
   free(reservation);
 }
@@ -156,14 +174,16 @@ int get_id_reservation(RESERVATION reservation) {
   return id;
 }
 
-char *get_user_id(RESERVATION reservation) {
+char *get_user_id_from_reservation(RESERVATION reservation) {
   char *id = g_strdup(reservation->user_id);
   return id;
 }
 
-int get_hotel_id(RESERVATION reservation) {
-  int id = GPOINTER_TO_INT(reservation->hotel_id);
+char *get_reservation_hotel_id(RESERVATION reservation) {
+  char *id = reservation->hotel_id;
   return id;
+  // int id = GPOINTER_TO_INT(reservation->hotel_id);
+  // return id;
 }
 
 int get_reservation_id(RESERVATION reservation) {
@@ -181,8 +201,8 @@ int get_reservation_hotel_stars(RESERVATION reservation) {
   return stars;
 }
 
-double get_reservation_city_tax(RESERVATION reservation) {
-  double tax = reservation->city_tax;
+int get_reservation_city_tax(RESERVATION reservation) {
+  int tax = reservation->city_tax;
   return tax;
 }
 
@@ -206,9 +226,9 @@ int get_reservation_price_per_night(RESERVATION reservation) {
   return price_per_ninght;
 }
 
-char *get_reservation_include_breakfast(RESERVATION reservation) {
-  char *include_breakfast = g_strdup(reservation->include_breakfast);
-  return include_breakfast;
+char *get_reservation_includes_breakfast(RESERVATION reservation) {
+  char *includes_breakfast = g_strdup(reservation->includes_breakfast);
+  return includes_breakfast;
 }
 
 char *get_reservation_room_detail(RESERVATION reservation) {

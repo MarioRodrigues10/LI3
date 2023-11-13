@@ -4,6 +4,7 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_RESERVATION 14
 
+#include "base/stats.h"
 #include "catalogs/reservations_catalog.h"
 
 typedef struct reservation *RESERVATION;
@@ -22,7 +23,7 @@ RESERVATION create_reservation();
  * @param catalog - The catalog of type 'void*'
  *
  */
-void build_reservation(char **reservation_params, void *catalog);
+void build_reservation(char **reservation_params, void *catalog, STATS stats);
 
 /**
  * @brief Function that verifies if the parameters is valid to create a new
@@ -121,10 +122,10 @@ void set_reservation_price_per_night(RESERVATION reservation,
  * @brief Function that sets the reservation include breakfast
  *
  * @param reservation - The Reservation of type 'RESERVATION'
- * @param include_breakfast - The include breakfast string of type 'char*'
+ * @param include_breakfast - The includes breakfast string of type 'char*'
  */
-void set_reservation_include_breakfast(RESERVATION reservation,
-                                       char *include_breakfast);
+void set_reservation_includes_breakfast(RESERVATION reservation,
+                                        char *includes_breakfast);
 
 /**
  * @brief Function that sets the reservation room details
@@ -171,18 +172,18 @@ int get_reservation_id(RESERVATION reservation);
  *
  * @param Reservation - The Reservation of type 'RESERVATION'
  *
- * @return id - The id integer of type 'int'
+ * @return id - The id string of type 'char*'
  */
-int get_user_id_from_reservation(RESERVATION reservation);
+char *get_user_id_from_reservation(RESERVATION reservation);
 
 /**
  * @brief Function that gets the reservation hotel id
  *
  * @param Reservation - The Reservation of type 'RESERVATION'
  *
- * @return id - The id integer of type 'int'
+ * @return id - The id of type 'char*'
  */
-int get_hotel_id(RESERVATION reservation);
+char *get_reservation_hotel_id(RESERVATION reservation);
 
 /**
  * @brief Function that gets the reservation hotel name
@@ -194,13 +195,13 @@ int get_hotel_id(RESERVATION reservation);
 char *get_reservation_hotel_name(RESERVATION reservation);
 
 /**
- * @brief Function that gets the reservation hotel starts
+ * @brief Function that gets the reservation hotel stars
  *
  * @param Reservation - The Reservation of type 'RESERVATION'
  *
- * @return starts - The starts integer of type 'int'
+ * @return stars - The starts integer of type 'int'
  */
-int get_reservation_hotel_starts(RESERVATION reservation);
+int get_reservation_hotel_stars(RESERVATION reservation);
 
 /**
  * @brief Function that gets the reservation city tax
@@ -209,7 +210,7 @@ int get_reservation_hotel_starts(RESERVATION reservation);
  *
  * @return tax - The tax integer of type 'int'
  */
-double get_reservation_city_tax(RESERVATION reservation);
+int get_reservation_city_tax(RESERVATION reservation);
 
 /**
  * @brief Function that gets the reservation address
@@ -252,9 +253,9 @@ int get_reservation_price_per_night(RESERVATION reservation);
  *
  * @param Reservation - The Reservation of type 'RESERVATION'
  *
- * @return include_breakfast - The include breakfast string of type 'char*'
+ * @return include_breakfast - The includes breakfast string of type 'char*'
  */
-char *get_reservation_include_breakfast(RESERVATION reservation);
+char *get_reservation_includes_breakfast(RESERVATION reservation);
 
 /**
  * @brief Function that gets the reservation room details

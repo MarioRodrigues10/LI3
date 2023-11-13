@@ -25,18 +25,21 @@ PASSENGER create_passenger() {
   return new_passenger;
 }
 
-void build_passenger(char **passenger_params, void *catalog) {
+void build_passenger(char **passenger_params, void *catalog, STATS stats) {
   if (!verify_passenger_input(passenger_params)) return;
 
-  PASSENGER passenger = create_passenger();
-  PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;
+  // PASSENGER passenger = create_passenger();
+  // PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;
 
-  set_passenger_flight_id(passenger, passenger_params[0]);
-  set_passenger_user_id(passenger, passenger_params[1]);
+  // set_passenger_flight_id(passenger, passenger_params[0]);
+  // set_passenger_user_id(passenger, passenger_params[1]);
 
-  // What is the id for each passenger, user_id and flight_id can be repeated
-  add_to_passengers_catalog(passengers_catalog, passenger,
-                            passenger->flight_id);
+  // // What is the id for each passenger, user_id and flight_id can be repeated
+  // add_to_passengers_catalog(passengers_catalog, passenger,
+  //                           passenger->flight_id);
+
+  update_flight_stats(stats, passenger_params[0]);
+  update_user_stats_number_of_flights(stats, passenger_params[1]);
 }
 
 void set_passenger_flight_id(PASSENGER passenger, char *id) {

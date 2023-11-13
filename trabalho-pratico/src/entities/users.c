@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct user {
-  gpointer id;
+  char *id;
   char *name;
   char *email;
   char *phone_number;
@@ -44,7 +46,7 @@ USER create_user() {
   return new_user;
 }
 
-void build_user(char **user_params, void *catalog) {
+void build_user(char **user_params, void *catalog, STATS stats) {
   if (!verify_user_input(user_params)) return;
 
   USER user = create_user();
@@ -61,14 +63,15 @@ void build_user(char **user_params, void *catalog) {
   set_user_address(user, user_params[8]);
   set_user_account_creation(user, user_params[9]);
   set_user_pay_method(user, user_params[10]);
-  set_user_account_status(user, user_params[11]);
+  set_user_account_status(user, standardize_account_status(user_params[11]));
 
   add_user_to_catalog(users_catalog, user, user->id);
 }
 
 void set_user_id(USER user, char *id) {
-  gpointer id_pointer = g_strdup(id);
-  user->id = id_pointer;
+  user->id = g_strdup(id);
+  // gpointer id_pointer = g_strdup(id);
+  // user->id = id_pointer;
 }
 
 void set_user_name(USER user, char *name) { user->name = g_strdup(name); }

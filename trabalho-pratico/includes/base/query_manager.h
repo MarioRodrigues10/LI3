@@ -16,7 +16,8 @@
 typedef void *(*query_function_pointer)(
     char **query_params, FLIGHTS_CATALOG flights_catalog,
     PASSENGERS_CATALOG passengers_catalog,
-    RESERVATIONS_CATALOG reservations_catalog, USERS_CATALOG users_catalog);
+    RESERVATIONS_CATALOG reservations_catalog, USERS_CATALOG users_catalog,
+    STATS stats);
 
 /**
  * @brief Function that executes the query manager
@@ -35,7 +36,13 @@ typedef void *(*query_function_pointer)(
 void *query_manager(char *line, FLIGHTS_CATALOG flights_catalog,
                     PASSENGERS_CATALOG passengers_catalog,
                     RESERVATIONS_CATALOG reservations_catalog,
-                    USERS_CATALOG users_catalog);
+                    USERS_CATALOG users_catalog, STATS stats);
+
+/**
+ * @struct query1_result - Struct that represents the result of query 1 to be
+ * used in other places of the program
+ */
+typedef struct query1_result *QUERY1_RESULT;
 
 /**
  * @brief Function that executes the query 1
@@ -48,13 +55,15 @@ void *query_manager(char *line, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 2
@@ -67,13 +76,21 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
+
+/**
+ * @struct query3_result - Struct that represents the result of query 3 to be
+ * used in other places of the program
+ */
+typedef struct query3_result *QUERY3_RESULT;
 
 /**
  * @brief Function that executes the query 3
@@ -86,13 +103,15 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 4
@@ -105,13 +124,15 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query4(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 5
@@ -124,13 +145,15 @@ void *query4(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query5(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 6
@@ -143,13 +166,15 @@ void *query5(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query6(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 7
@@ -162,13 +187,15 @@ void *query6(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query7(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 8
@@ -181,13 +208,15 @@ void *query7(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 9
@@ -200,13 +229,15 @@ void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query9(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
-             USERS_CATALOG users_catalog);
+             USERS_CATALOG users_catalog, STATS stats);
 
 /**
  * @brief Function that executes the query 10
@@ -219,11 +250,94 @@ void *query9(char **query_params, FLIGHTS_CATALOG flights_catalog,
  * 'RESERVATIONS_CATALOG'
  * @param users_catalog - The users catalog of type 'USERS_CATALOG'
  *
+ * @param stats - The stats of type 'STATS'
+ *
  * @return The result of the query
  *
  */
 void *query10(char **query_params, FLIGHTS_CATALOG flights_catalog,
               PASSENGERS_CATALOG passengers_catalog,
               RESERVATIONS_CATALOG reservations_catalog,
-              USERS_CATALOG users_catalog);
+              USERS_CATALOG users_catalog, STATS stats);
+
+/**
+ * @brief Wrapper function that frees the memory allocated for the specified
+ * query result
+ * @param result The result to be freed of `type void *`
+ * @param query_type The type of the query of type `char`
+ */
+void free_query_result(void *result, char query_type);
+
+typedef void (*free_query_result_function_pointer)(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 1
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query1_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 2
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query2_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 3
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query3_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 4
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query4_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 5
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query5_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 6
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query6_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 7
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query7_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 8
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query8_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 9
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query9_result(void *result);
+
+/**
+ * @brief Function that frees the memory allocated for the result of query 10
+ *
+ * @param result - The result of type `void *`
+ */
+void free_query10_result(void *result);
+
 #endif

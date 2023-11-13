@@ -21,7 +21,8 @@ char** parse_line(char* line, int num_tokens) {
   return tokens;
 }
 
-int parse_file(FILE* file, void* catalog, function_pointer build_function) {
+int parse_file(FILE* file, void* catalog, function_pointer build_function,
+               STATS stats) {
   char* line = NULL;
   size_t len = 0;
 
@@ -31,8 +32,7 @@ int parse_file(FILE* file, void* catalog, function_pointer build_function) {
   while (getline(&line, &len, file) != -1) {
     line[strlen(line) - 1] = '\0';
     char** tokens = parse_line(line, 5);
-    build_function(tokens, catalog);
-
+    build_function(tokens, catalog, stats);
     free(tokens);
   }
   free(line);

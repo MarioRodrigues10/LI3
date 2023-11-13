@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 #include "catalogs/passengers_catalog.h"
 #include "catalogs/reservations_catalog.h"
@@ -13,7 +14,7 @@
 
 #define SEPARATOR ";"
 
-typedef void (*function_pointer)(char**, void*);
+typedef void (*function_pointer)(char**, void*, STATS);
 
 /**
  * @brief Parses a line
@@ -34,6 +35,7 @@ char** parse_line(char* line, int num_tokens);
  *
  * @return 0 if successful, -1 otherwise
  */
-int parse_file(FILE* file, void* catalog, function_pointer function);
+int parse_file(FILE* file, void* catalog, function_pointer function,
+               STATS stats);
 
 #endif

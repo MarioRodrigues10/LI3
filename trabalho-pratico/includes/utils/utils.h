@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 #include "catalogs/passengers_catalog.h"
 #include "catalogs/reservations_catalog.h"
@@ -13,6 +14,8 @@
 #include "entities/reservations.h"
 #include "entities/users.h"
 #include "io/parser.h"
+
+#define MASTER_DATE "2023/10/01"
 
 typedef enum errors {
   ERR_OPENING_FLIGHTS_FILE = 1,
@@ -24,6 +27,54 @@ typedef enum errors {
   ERR_OPENING_OUTPUT_FILE = 7,
   ERROR_WRITING_TO_ERRORS_FILE = 8,
 } ERRORS;
+
+/**
+ * @brief Function that calculates the delay of a flight.
+ *
+ * @param scheduled_date The scheduled date of type 'char*'
+ *
+ * @param actual_date The actual date of type 'char*'
+ *
+ * @return The delay of the flight of type 'char*' in seconds
+ */
+int calculate_delay(char* scheduled_date, char* actual_date);
+
+/**
+ * @brief Function that calculates the total price of a reservation.
+ *
+ * @param num_nights The number of nights of type 'int'
+ *
+ * @param price_per_night The price per night of type 'int'
+ *
+ * @param city_tax The city tax of type 'int'
+ *
+ * @return The total price of the reservation of type 'double'
+ *
+ */
+double calculate_total_price(int num_nights, int price_per_night, int city_tax);
+
+/**
+ * @brief Function that calculates the number of nights between two dates.
+ *
+ * @param begin_date_str The begin date of type 'const char*'
+ *
+ * @param end_date_str The end date of type 'const char*'
+ *
+ * @return The number of nights of type 'int'
+ *
+ */
+int calculate_number_of_nights(const char* begin_date_str,
+                               const char* end_date_str);
+
+/**
+ * @brief Function that calculates the age of a passenger.
+ *
+ * @param birth_date_str The birth date of the passenger of type 'const char*'
+ *
+ * @return The age of the passenger of type 'int'
+ *
+ */
+char* calculate_age(const char* birth_date_str);
 
 /**
  * @brief Extracts a number from a string.
@@ -114,9 +165,10 @@ FILE* create_output_file(int queries_counter);
  *
  * @param account_status A string representing the account status to be
  * standardized.
- * @return 'a' for "active," 'i' for "inactive," or 'x' for an invalid status.
+ * @return "ACTIVE" for "active," "INACTIVE" for "inactive," or "NO STATUS" for
+ * an invalid status.
  */
-char standardize_account_status(char* account_status);
+char* standardize_account_status(char* account_status);
 
 /**
  * @brief Standardizes an "includes_breakfast" string to 't' or 'f'.
@@ -127,10 +179,10 @@ char standardize_account_status(char* account_status);
  *
  * @param includes_breakfast A string representing the "includes_breakfast"
  * value to be standardized.
- * @return 't' for true, 'f' for false, or an unspecified value for an invalid
+ * @return "TRUE" for true, "FALSE" or an unspecified value for false
  * representation.
  */
-char standardize_includes_breakfast(char* includes_breakfast);
+char* standardize_includes_breakfast(char* includes_breakfast);
 
 /**
  * @brief Standardize an airport name by converting it to lowercase.
@@ -304,9 +356,9 @@ bool validate_parameter_not_empty(char* parameter);
  *
  * @return 0 if the catalogs were created successfully, -1 otherwise
  */
-int setup_catalogs(char* folder, FLIGHTS_CATALOG flights_catalog,
-                   PASSENGERS_CATALOG passengers_catalog,
-                   RESERVATIONS_CATALOG reservations_catalog,
-                   USERS_CATALOG users_catalog);
+int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
+                             PASSENGERS_CATALOG passengers_catalog,
+                             RESERVATIONS_CATALOG reservations_catalog,
+                             USERS_CATALOG users_catalog, STATS stats);
 
 #endif

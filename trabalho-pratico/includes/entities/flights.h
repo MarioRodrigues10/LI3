@@ -1,6 +1,7 @@
 #ifndef FLIGHTS_H
 #define FLIGHTS_H
 
+#include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 
 #define MAX_FIELD_SIZE 256
@@ -19,9 +20,10 @@ FLIGHT create_flight();
  *
  * @param flight_params - The flight parameters of type 'char*'
  * @param catalog - The catalog of type 'void*'
+ * @param stats - The stats of type 'STATS'
  *
  */
-void build_flight(char **flight_params, void *catalog);
+void build_flight(char **flight_params, void *catalog, STATS stats);
 
 /**
  * @brief Function that verifies if the paramenters are valid to create a new
@@ -157,9 +159,9 @@ void free_flight(FLIGHT flight);
  *
  * @param flight - The flight of type 'FLIGHT'
  *
- * @return id - The flight id of type 'int'
+ * @return id - The flight id of type 'char'
  */
-int get_flight_id(FLIGHT flight);
+char *get_flight_id(FLIGHT flight);
 
 /**
  * @brief Function that gets the flight airline
@@ -196,6 +198,16 @@ int get_flight_total_seats(FLIGHT flight);
  * @return origin - The flight origin of type 'char*'
  */
 char *get_flight_origin(FLIGHT flight);
+
+/**
+ * @brief Function that gets the flight destination
+ *
+ * @param flight - The flight of type 'FLIGHT'
+ *
+ * @return destination - The flight destination of type 'char*'
+ *
+ */
+char *get_flight_destination(FLIGHT flight);
 
 /**
  * @brief Function that gets the flight schedule departure date
