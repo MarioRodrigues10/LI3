@@ -328,10 +328,10 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
                              PASSENGERS_CATALOG passengers_catalog,
                              RESERVATIONS_CATALOG reservations_catalog,
                              USERS_CATALOG users_catalog, STATS stats) {
-  char* flights_filename = create_filename(folder, "flights.csv");
-  char* passengers_filename = create_filename(folder, "passengers.csv");
-  char* reservations_filename = create_filename(folder, "reservations.csv");
-  char* users_filename = create_filename(folder, "users.csv");
+  char* flights_filename = create_filename(folder, "/flights.csv");
+  char* passengers_filename = create_filename(folder, "/passengers.csv");
+  char* reservations_filename = create_filename(folder, "/reservations.csv");
+  char* users_filename = create_filename(folder, "/users.csv");
 
   if (flights_filename == NULL || passengers_filename == NULL ||
       reservations_filename == NULL || users_filename == NULL) {
@@ -346,6 +346,7 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
 
   if (flights_file == NULL || passengers_file == NULL ||
       reservations_file == NULL || users_file == NULL) {
+    printf("Error opening files!\n");
     return -1;
   }
 
