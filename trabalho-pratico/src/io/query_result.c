@@ -71,7 +71,7 @@ void write_query1_result(FILE *output_file, void *result) {
       fprintf(output_file,
               "--- 1 ---\nhotel_id: %s\nhotel_name: %s\nhotel_stars: "
               "%d\nbegin_date: %s\nend_date: %s\nincludes_breakfast: "
-              "%s\nnumber_of_nights: %d\ntotal_price: %.3f\n",
+              "%s\nnights: %d\ntotal_price: %.3f\n",
               query_result->hotel_id, query_result->hotel_name,
               query_result->hotel_stars, query_result->begin_date,
               query_result->end_date, query_result->includes_breakfast,
