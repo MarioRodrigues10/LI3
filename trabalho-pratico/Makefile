@@ -5,7 +5,7 @@ FLAGS := -std=c11 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla 
 
 LIBS := -lm `pkg-config --libs glib-2.0`
 PKG_CONFIG := `pkg-config --cflags glib-2.0`
-INC := -I includes/
+INC := -I include/
 SRC := $(shell find src/ -name "*.c")
 OBJ := $(SRC:src/%.c=build/%.o)
 
@@ -16,7 +16,7 @@ SRC_TEST := $(shell find tests/ -name "*.c")
 OBJ_TEST := $(filter-out build/main.o, $(OBJ)) $(SRC_TEST:tests/%.c=build/%.o)
 
 BUILD_DIR := $(shell mkdir -p build/base build/io build/entities build/utils build/catalogs build/queries)
-INCLUDE_FILES := $(shell find includes/ -name "*.h")
+INCLUDE_FILES := $(shell find include/ -name "*.h")
 
 .PHONY: all
 all: build $(EXEC) $(EXEC_TEST)
@@ -44,4 +44,4 @@ clean:
 
 .PHONY: format
 format:
-	clang-format -i -style=file src/*.c includes/*.h tests/*.c
+	clang-format -i -style=file src/*.c include/*.h tests/*.c
