@@ -134,15 +134,16 @@ void write_query2_result(FILE *output_file, void *result) {
     j = i + 1;
     if (query_result->type[i] == NULL) {
       if (query_result->has_f) {
-        fprintf(output_file, "\n--- %d ---\nid: %s\ndate: %s\n", j,
+        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n\n", j,
                 query_result->id[i], query_result->date[i]);
+
       } else {
         fprintf(output_file, "%s;%s\n", query_result->id[i],
                 query_result->date[i]);
       }
     } else {
       if (query_result->has_f) {
-        fprintf(output_file, "\n--- %d ---\nid: %s\ndate: %s\ntype: %s\n", j,
+        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\ntype: %s\n\n", j,
                 query_result->id[i], query_result->date[i],
                 query_result->type[i]);
       } else {

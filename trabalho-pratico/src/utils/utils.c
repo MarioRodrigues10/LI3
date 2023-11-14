@@ -386,6 +386,18 @@ void sort_by_date(void* result, int N) {
         query_result->id[j] = temp2;
         query_result->type[i] = query_result->type[j];
         query_result->type[j] = temp3;
+      } else if (strcmp(query_result->date[i], query_result->date[j]) == 0) {
+        if (strcmp(query_result->id[i], query_result->id[j]) < 0) {
+          char* temp = query_result->date[i];
+          char* temp2 = query_result->id[i];
+          char* temp3 = query_result->type[i];
+          query_result->date[i] = query_result->date[j];
+          query_result->date[j] = temp;
+          query_result->id[i] = query_result->id[j];
+          query_result->id[j] = temp2;
+          query_result->type[i] = query_result->type[j];
+          query_result->type[j] = temp3;
+        }
       }
     }
   }

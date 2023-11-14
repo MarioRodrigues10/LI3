@@ -95,10 +95,8 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
     has_f = false;
     id = query_params[0];
   }
-
-  if (id[0] == 'B' && id[1] == 'o' && id[2] == 'o' && id[3] == 'k') {
-    RESERVATION reservation =
-        get_reservation_by_id(reservations_catalog, id + 4);
+  if (strncmp(id, "Book", 4) == 0) {
+    RESERVATION reservation = get_reservation_by_id(reservations_catalog, id);
 
     if (reservation == NULL) {
       return NULL;
