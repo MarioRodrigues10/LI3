@@ -218,7 +218,7 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
     has_f = false;
     id = query_params[0];
   }
-  printf("id: %s\n", id);
+
   HOTEL_STATS hotel_stats = get_hotel_stats_by_hotel_id(stats, id);
 
   if (hotel_stats == NULL) {
