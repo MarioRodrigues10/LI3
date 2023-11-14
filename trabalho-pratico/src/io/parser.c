@@ -8,21 +8,20 @@
 char** parse_line(char* line, int num_tokens) {
   char* token;
   char** tokens = (char**)malloc(sizeof(char*) * num_tokens);
-  token = strtok(line, SEPARATOR);
+  token = strsep(&line, SEPARATOR);
   int iterator = 0;
 
   while (token != NULL) {
     tokens[iterator] = (char*)malloc(sizeof(char) * (strlen(token) + 1));
     strcpy(tokens[iterator], token);
-    token = strtok(NULL, SEPARATOR);
+    token = strsep(&line, SEPARATOR);
     iterator++;
   }
-  free(token);
   return tokens;
 }
 
 int parse_file(FILE* file, void* catalog, function_pointer build_function,
-               STATS stats) {
+               STATS stats, int num_tokens) {
   char* line = NULL;
   size_t len = 0;
 
@@ -31,9 +30,8 @@ int parse_file(FILE* file, void* catalog, function_pointer build_function,
 
   while (getline(&line, &len, file) != -1) {
     line[strlen(line) - 1] = '\0';
-    char** tokens = parse_line(line, 5);
+    char** tokens = parse_line(line, num_tokens);
     build_function(tokens, catalog, stats);
-    free(tokens);
   }
   free(line);
 

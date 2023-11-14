@@ -36,6 +36,6 @@ char** parse_line(char* line, int num_tokens);
  * @return 0 if successful, -1 otherwise
  */
 int parse_file(FILE* file, void* catalog, function_pointer function,
-               STATS stats);
+               STATS stats, int num_tokens);
 
 #endif

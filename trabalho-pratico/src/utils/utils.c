@@ -158,7 +158,6 @@ int create_directory(char* folder) {
 FILE* create_output_file(int queries_counter) {
   char* filename = malloc(sizeof(char) * 256);
   sprintf(filename, "Resultados/command%d_output.txt", queries_counter);
-
   FILE* output_file = fopen(filename, "w");
   free(filename);
 
@@ -350,14 +349,59 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
     return -1;
   }
 
-  parse_file(flights_file, flights_catalog, build_flight, stats);
-  parse_file(reservations_file, reservations_catalog, build_reservation, stats);
-  parse_file(users_file, users_catalog, build_user, stats);
-  parse_file(passengers_file, passengers_catalog, build_passenger, stats);
+  parse_file(flights_file, flights_catalog, build_flight, stats,
+             MAX_TOKENS_FLIGHT);
+  parse_file(reservations_file, reservations_catalog, build_reservation, stats,
+             MAX_TOKENS_RESERVATION);
+  parse_file(users_file, users_catalog, build_user, stats, MAX_TOKENS_USER);
+  parse_file(passengers_file, passengers_catalog, build_passenger, stats,
+             MAX_TOKENS_PASSENGER);
 
   free(flights_filename);
   free(passengers_filename);
   free(reservations_filename);
   free(users_filename);
   return 0;
+}
+
+struct query2_result {
+  char** id;
+  char** date;
+  char** type;
+  int iterator;
+  bool has_f;
+};
+
+void sort_by_date(void* result, int N) {
+  QUERY2_RESULT query_result = (QUERY2_RESULT)result;
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      if (strcmp(query_result->date[i], query_result->date[j]) > 0) {
+        char* temp = query_result->date[i];
+        char* temp2 = query_result->id[i];
+        char* temp3 = query_result->type[i];
+        query_result->date[i] = query_result->date[j];
+        query_result->date[j] = temp;
+        query_result->id[i] = query_result->id[j];
+        query_result->id[j] = temp2;
+        query_result->type[i] = query_result->type[j];
+        query_result->type[j] = temp3;
+      }
+    }
+  }
+}
+
+char* format_date(int year, int month, int day) {
+  char* new_date = malloc(sizeof(char) * 11);
+  if (day < 10 && month < 10) {
+    sprintf(new_date, "%d/0%d/0%d", year, month, day);
+  } else if (day < 10) {
+    sprintf(new_date, "%d/%d/0%d", year, month, day);
+  } else if (month < 10) {
+    sprintf(new_date, "%d/0%d/%d", year, month, day);
+  } else {
+    sprintf(new_date, "%d/%d/%d", year, month, day);
+  }
+
+  return new_date;
 }

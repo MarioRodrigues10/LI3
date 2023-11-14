@@ -6,8 +6,8 @@
 #include <string.h>
 
 struct passenger {
-  gpointer flight_id;
-  gpointer user_id;
+  char *flight_id;
+  char *user_id;
 };
 
 int verify_passenger_input(char **parameters) {
@@ -18,9 +18,7 @@ int verify_passenger_input(char **parameters) {
 }
 
 PASSENGER create_passenger() {
-  PASSENGER new_passenger = g_malloc(sizeof(struct passenger));
-  new_passenger->flight_id = NULL;
-  new_passenger->user_id = NULL;
+  PASSENGER new_passenger = malloc(sizeof(struct passenger));
 
   return new_passenger;
 }
@@ -28,28 +26,26 @@ PASSENGER create_passenger() {
 void build_passenger(char **passenger_params, void *catalog, STATS stats) {
   if (!verify_passenger_input(passenger_params)) return;
 
-  // PASSENGER passenger = create_passenger();
-  // PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;
+  PASSENGER passenger = create_passenger();
+  PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;
 
-  // set_passenger_flight_id(passenger, passenger_params[0]);
-  // set_passenger_user_id(passenger, passenger_params[1]);
+  set_passenger_flight_id(passenger, passenger_params[0]);
+  set_passenger_user_id(passenger, passenger_params[1]);
 
-  // // What is the id for each passenger, user_id and flight_id can be repeated
-  // add_to_passengers_catalog(passengers_catalog, passenger,
-  //                           passenger->flight_id);
+  // What is the id for each passenger, user_id and flight_id can be repeated
+  add_to_passengers_catalog(passengers_catalog, passenger, passenger->user_id);
 
   update_flight_stats(stats, passenger_params[0]);
-  update_user_stats_number_of_flights(stats, passenger_params[1]);
+  update_user_stats_number_of_flights(stats, passenger_params[1],
+                                      passenger_params[0]);
 }
 
 void set_passenger_flight_id(PASSENGER passenger, char *id) {
-  gpointer id_pointer = g_strdup(id);
-  passenger->flight_id = id_pointer;
+  passenger->flight_id = g_strdup(id);
 }
 
 void set_passenger_user_id(PASSENGER passenger, char *id) {
-  gpointer id_pointer = g_strdup(id);
-  passenger->user_id = id_pointer;
+  passenger->user_id = g_strdup(id);
 }
 
 void free_passenger(PASSENGER passenger) { free(passenger); }
@@ -60,6 +56,6 @@ char *get_passenger_flight_id(PASSENGER passenger) {
 }
 
 char *get_passenger_user_id(PASSENGER passenger) {
-  char *id = g_strdup(passenger->user_id);
+  char *id = passenger->user_id;
   return id;
 }

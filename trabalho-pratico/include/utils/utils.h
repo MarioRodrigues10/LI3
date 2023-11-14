@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "base/query_manager.h"
 #include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 #include "catalogs/passengers_catalog.h"
@@ -360,5 +361,24 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
                              PASSENGERS_CATALOG passengers_catalog,
                              RESERVATIONS_CATALOG reservations_catalog,
                              USERS_CATALOG users_catalog, STATS stats);
+
+/**
+ * @brief Function that sorts query results by date.
+ *
+ * @param array The array to be sorted
+ * @param N The size of the array
+ */
+void sort_by_date(void* array, int N);
+
+/**
+ * @brief Function that format a date.
+ *
+ * @param year The year of type 'int'
+ * @param month The month of type 'int'
+ * @param day The day of type 'int'
+ *
+ * @return The date of type 'char*'
+ */
+char* format_date(int year, int month, int day);
 
 #endif

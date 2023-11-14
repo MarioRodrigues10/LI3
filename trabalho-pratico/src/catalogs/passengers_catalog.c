@@ -1,6 +1,7 @@
 #include "catalogs/passengers_catalog.h"
 
 #include <glib.h>
+#include <stdio.h>
 
 struct passengers_catalog {
   GHashTable *passengers;
@@ -9,13 +10,13 @@ struct passengers_catalog {
 PASSENGERS_CATALOG create_passengers_catalog() {
   PASSENGERS_CATALOG new_catalog = malloc(sizeof(struct passengers_catalog));
   new_catalog->passengers = g_hash_table_new_full(
-      NULL, g_direct_equal, NULL, (GDestroyNotify)free_passenger);
+      g_str_hash, g_str_equal, NULL, (GDestroyNotify)free_passenger);
 
   return new_catalog;
 }
 
 void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
-                               PASSENGER passenger, gpointer key) {
+                               PASSENGER passenger, char *key) {
   g_hash_table_insert(passengers_catalog->passengers, key, passenger);
 }
 

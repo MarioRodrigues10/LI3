@@ -129,37 +129,51 @@ struct user_stats {
   int number_of_flights;
   int number_of_reservations;
   double total_spent;
+
+  GArray *user_flights;
+  GArray *user_reservations;
 };
 
 USER_STATS create_user_stats(char *user_id, int number_of_flights,
-                             int number_of_reservations, double total_spent) {
+                             int number_of_reservations, double total_spent,
+                             char *flight_id, char *reservation_id) {
   USER_STATS new_user_stats = malloc(sizeof(struct user_stats));
   new_user_stats->user_id = user_id;
   new_user_stats->number_of_flights = number_of_flights;
   new_user_stats->number_of_reservations = number_of_reservations;
   new_user_stats->total_spent = total_spent;
-
+  new_user_stats->user_flights = g_array_new(FALSE, FALSE, sizeof(USER_STATS));
+  new_user_stats->user_reservations =
+      g_array_new(FALSE, FALSE, sizeof(USER_STATS));
+  if (flight_id != NULL)
+    g_array_append_val(new_user_stats->user_flights, flight_id);
+  if (reservation_id != NULL)
+    g_array_append_val(new_user_stats->user_reservations, reservation_id);
   return new_user_stats;
 }
 
-void update_user_stats_number_of_flights(STATS stats, char *user_id) {
+void update_user_stats_number_of_flights(STATS stats, char *user_id,
+                                         char *flight_id) {
   USER_STATS user_stats = g_hash_table_lookup(stats->user, user_id);
-
   if (user_stats != NULL) {
     user_stats->number_of_flights++;
+    g_array_append_val(user_stats->user_flights, flight_id);
   } else {
-    USER_STATS user_stats = create_user_stats(user_id, 1, 0, 0);
+    USER_STATS user_stats =
+        create_user_stats(user_id, 1, 0, 0, flight_id, NULL);
     g_hash_table_insert(stats->user, user_id, user_stats);
   }
 }
 
-void update_user_stats_number_of_reservations(STATS stats, char *user_id) {
+void update_user_stats_number_of_reservations(STATS stats, char *user_id,
+                                              char *reservation_id) {
   USER_STATS user_stats = g_hash_table_lookup(stats->user, user_id);
-
   if (user_stats != NULL) {
     user_stats->number_of_reservations++;
+    g_array_append_val(user_stats->user_reservations, reservation_id);
   } else {
-    USER_STATS user_stats = create_user_stats(user_id, 0, 1, 0);
+    USER_STATS user_stats =
+        create_user_stats(user_id, 0, 1, 0, NULL, reservation_id);
     g_hash_table_insert(stats->user, user_id, user_stats);
   }
 }
@@ -171,7 +185,8 @@ void update_user_stats_total_spent(STATS stats, char *user_id,
   if (user_stats != NULL) {
     user_stats->total_spent += total_spent;
   } else {
-    USER_STATS user_stats = create_user_stats(user_id, 0, 0, total_spent);
+    USER_STATS user_stats =
+        create_user_stats(user_id, 0, 0, total_spent, NULL, NULL);
     g_hash_table_insert(stats->user, user_id, user_stats);
   }
 }
@@ -195,7 +210,20 @@ double get_total_spent(STATS stats, char *user_id) {
   return user_stats->total_spent;
 }
 
+GArray *get_user_flights(STATS stats, char *user_id) {
+  USER_STATS user_stats = g_hash_table_lookup(stats->user, user_id);
+  if (user_stats == NULL) return NULL;
+  return user_stats->user_flights;
+}
+
+GArray *get_user_reservations(STATS stats, char *user_id) {
+  USER_STATS user_stats = g_hash_table_lookup(stats->user, user_id);
+  if (user_stats == NULL) return NULL;
+  return user_stats->user_reservations;
+}
+
 void free_user_stats(USER_STATS user_stats) {
   free(user_stats->user_id);
+  g_array_free(user_stats->user_flights, TRUE);
   free(user_stats);
 }

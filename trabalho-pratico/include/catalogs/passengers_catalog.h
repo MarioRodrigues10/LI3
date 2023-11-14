@@ -21,7 +21,7 @@ PASSENGERS_CATALOG create_passengers_catalog();
  * @param key - The key of the passenger to be added to the passengers catalog
  */
 void add_to_passengers_catalog(PASSENGERS_CATALOG passengers_catalog,
-                               PASSENGER passenger, void *key);
+                               PASSENGER passenger, char *key);
 
 /**
  * @brief Function that frees the memory alocated to the passengers catalog

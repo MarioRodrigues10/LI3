@@ -19,11 +19,11 @@ RESERVATIONS_CATALOG create_reservations_catalog();
  * @param reservations_catalog - The reservations catalog to add the reservation
  * to
  * @param reservation - The reservation to be added to the reservations catalog
- * @param key - The key of the reservation to be added to the reservations
- * catalog
+ * @param reservation_id - The reservation_id of the reservation to be added to
+ * the reservations catalog
  */
 void add_reservation_to_catalog(RESERVATIONS_CATALOG reservations_catalog,
-                                RESERVATION reservation, void *key);
+                                RESERVATION reservation, char *reservation_id);
 
 /**
  * @brief Function that gets a reservation by id from the reservations catalog

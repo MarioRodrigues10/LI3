@@ -1,6 +1,8 @@
+#define _GNU_SOURCE
 #include "base/query_manager.h"
 
 #include <ctype.h>
+#include <glib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,16 +23,17 @@ void *query_manager(char *line, FLIGHTS_CATALOG flights_catalog,
 
   int i = 0;
   if (line[1] == 'F' || line[2] == 'F') {
-    query_parameters[0] = "F";
-    i = 1;
+    query_parameters[i] = strdup("F");
+    i++;
   }
 
   token = strtok(NULL, " ");
   while (token != NULL) {
-    query_parameters[i] = token;
+    query_parameters[i] = strdup(token);
     token = strtok(NULL, " ");
     i++;
   }
+  query_parameters[i] = NULL;
   static query_function_pointer table[] = {query1, query2, query3, query4,
                                            query5, query6, query7, query8,
                                            query9, query10};
@@ -38,8 +41,10 @@ void *query_manager(char *line, FLIGHTS_CATALOG flights_catalog,
       table[query_type](query_parameters, flights_catalog, passengers_catalog,
                         reservations_catalog, users_catalog, stats);
 
+  for (int j = 0; j < i; j++) {
+    free(query_parameters[j]);
+  }
   free(query_parameters);
-
   return result;
 }
 
@@ -81,7 +86,6 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
   bool has_f = false;
-
   char *id = NULL;
 
   if (strcmp(query_params[0], "F") == 0) {
@@ -185,10 +189,199 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
   return NULL;
 }
 
+struct query2_result {
+  char **id;
+  char **date;
+  char **type;
+  int iterator;
+  bool has_f;
+};
+
 void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
+  bool has_f = false;
+
+  char *id = NULL;
+  char *type = "NULO";
+
+  if (strcmp(query_params[0], "F") == 0) {
+    has_f = true;
+    id = query_params[1];
+
+    if (query_params[2] != NULL) {
+      if ((strcmp(query_params[2], "reservations") == 0) ||
+          (strcmp(query_params[2], "flights") == 0)) {
+        type = query_params[2];
+      }
+    }
+  } else {
+    has_f = false;
+    id = query_params[0];
+    if (query_params[1] != NULL &&
+        ((strcmp(query_params[1], "reservations") == 0) ||
+         (strcmp(query_params[1], "flights") == 0))) {
+      type = query_params[1];
+    }
+  }
+
+  QUERY2_RESULT result = malloc(sizeof(struct query2_result));
+  if (strcmp(type, "flights") == 0) {
+    GArray *flights = get_user_flights(stats, id);
+
+    result->id = malloc(sizeof(char *) * flights->len);
+    result->date = malloc(sizeof(char *) * flights->len);
+    result->type = malloc(sizeof(char *) * flights->len);
+
+    int i = 0;
+    for (i = 0; i < flights->len; i++) {
+      char *id = g_array_index(flights, char *, i);
+      char *date = get_flight_schedule_departure_date(
+          get_flight_by_id(flights_catalog, id));
+
+      int year, month, day, hour, minute, second;
+      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+             &second);
+
+      result->id[i] = id;
+      result->date[i] = format_date(year, month, day);
+      ;
+      result->type[i] = NULL;
+    }
+    result->iterator = i;
+    result->has_f = has_f;
+
+    sort_by_date(result, result->iterator);
+    return (void *)result;
+
+  } else if (strcmp(type, "reservations") == 0) {
+    GArray *reservations = get_user_reservations(stats, id);
+
+    result->id = malloc(sizeof(char *) * reservations->len);
+    result->date = malloc(sizeof(char *) * reservations->len);
+    result->type = malloc(sizeof(char *) * reservations->len);
+
+    int i = 0;
+    for (i = 0; i < reservations->len; i++) {
+      char *id = g_array_index(reservations, char *, i);
+      RESERVATION reservation = get_reservation_by_id(reservations_catalog, id);
+
+      char *date = get_reservation_begin_date(reservation);
+      int year, month, day, hour, minute, second;
+      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+             &second);
+
+      result->id[i] = id;
+      result->date[i] = format_date(year, month, day);
+      ;
+      result->type[i] = NULL;
+    }
+    result->iterator = i;
+    result->has_f = has_f;
+
+    sort_by_date(result, result->iterator);
+    return (void *)result;
+  } else {
+    GArray *flights = get_user_flights(stats, id);
+    GArray *reservations = get_user_reservations(stats, id);
+
+    if (flights == NULL && reservations == NULL)
+      return NULL;
+    else if (flights == NULL) {
+      result->id = malloc(sizeof(char *) * reservations->len);
+      result->date = malloc(sizeof(char *) * reservations->len);
+      result->type = malloc(sizeof(char *) * reservations->len);
+      int i = 0;
+      for (i; i < reservations->len; i++) {
+        char *id = g_array_index(reservations, char *, i);
+        RESERVATION reservation =
+            get_reservation_by_id(reservations_catalog, id);
+        char *date = get_reservation_begin_date(reservation);
+        int year, month, day, hour, minute, second;
+        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+               &second);
+
+        result->id[i] = id;
+        result->date[i] = format_date(year, month, day);
+        ;
+        result->type[i] = NULL;
+      }
+      result->iterator = i;
+      result->has_f = has_f;
+
+      sort_by_date(result, result->iterator);
+      return (void *)result;
+    } else if (reservations == NULL) {
+      result->id = malloc(sizeof(char *) * flights->len);
+      result->date = malloc(sizeof(char *) * flights->len);
+      result->type = malloc(sizeof(char *) * flights->len);
+      int i = 0;
+      for (i; i < flights->len; i++) {
+        char *id = g_array_index(flights, char *, i);
+        FLIGHT flight = get_flight_by_id(flights_catalog, id);
+        char *date = get_flight_schedule_departure_date(flight);
+        int year, month, day, hour, minute, second;
+        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+               &second);
+
+        result->id[i] = id;
+        result->date[i] = format_date(year, month, day);
+        ;
+        result->type[i] = "flight";
+      }
+      result->iterator = i;
+      result->has_f = has_f;
+
+      sort_by_date(result, result->iterator);
+      return (void *)result;
+    } else {
+      int max = flights->len + reservations->len;
+
+      result->id = malloc(sizeof(char *) * max);
+      result->date = malloc(sizeof(char *) * max);
+      result->type = malloc(sizeof(char *) * max);
+
+      int i = 0;
+
+      while (i < flights->len) {
+        char *id = g_array_index(flights, char *, i);
+        FLIGHT flight = get_flight_by_id(flights_catalog, id);
+        char *date = get_flight_schedule_departure_date(flight);
+        int year, month, day, hour, minute, second;
+        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+               &second);
+
+        result->id[i] = id;
+        result->date[i] = format_date(year, month, day);
+        result->type[i] = "flight";
+        i++;
+      }
+      int j = i;
+      i = 0;
+      while (j < max) {
+        char *id = g_array_index(reservations, char *, i);
+        RESERVATION reservation =
+            get_reservation_by_id(reservations_catalog, id);
+        char *date = get_reservation_begin_date(reservation);
+
+        int year, month, day, hour, minute, second;
+        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+               &second);
+
+        result->id[j] = id;
+        result->date[j] = format_date(year, month, day);
+        result->type[j] = "reservation";
+        i++;
+        j++;
+      }
+      result->iterator = max;
+      result->has_f = has_f;
+
+      sort_by_date(result, result->iterator);
+      return (void *)result;
+    }
+  }
   return NULL;
 }
 

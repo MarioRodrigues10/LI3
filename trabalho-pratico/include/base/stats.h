@@ -153,7 +153,8 @@ void free_flight_stats(FLIGHT_STATS flight_stats);
  * @return The user stats created
  */
 USER_STATS create_user_stats(char *user_id, int number_of_flights,
-                             int number_of_reservations, double total_spent);
+                             int number_of_reservations, double total_spent,
+                             char *flight, char *reservation);
 
 /**
  * @brief Function that updates the number of fligths of the user
@@ -161,7 +162,8 @@ USER_STATS create_user_stats(char *user_id, int number_of_flights,
  * @param stats The stats of type 'STATS'
  * @param user_id The id of the user
  */
-void update_user_stats_number_of_flights(STATS stats, char *user_id);
+void update_user_stats_number_of_flights(STATS stats, char *user_id,
+                                         char *flight_id);
 
 /**
  * @brief Function that updates the number of reservations of the user
@@ -169,7 +171,8 @@ void update_user_stats_number_of_flights(STATS stats, char *user_id);
  * @param stats The stats of type 'STATS'
  * @param user_id The id of the user
  */
-void update_user_stats_number_of_reservations(STATS stats, char *user_id);
+void update_user_stats_number_of_reservations(STATS stats, char *user_id,
+                                              char *reservation_id);
 
 /**
  * @brief Function that updates the total spent of the user
@@ -227,5 +230,26 @@ double get_total_spent(STATS stats, char *user_id);
  * @param user_stats The user stats to be freed of type 'USER_STATS'
  */
 void free_user_stats(USER_STATS user_stats);
+
+/**
+ * @brief Function that gets all the flights from a user
+ *
+ * @param stats The stats of type 'STATS'
+ * @param user_id The user id of the user
+ *
+ * @return The flights of the user
+ */
+GArray *get_user_flights(STATS stats, char *user_id);
+
+/**
+ * @brief Function that gets all the reservations from a user
+ *
+ * @param stats The stats of type 'STATS'
+ * @param user_id The user id of the user
+ *
+ * @return The reservations of the user
+
+*/
+GArray *get_user_reservations(STATS stats, char *user_id);
 
 #endif

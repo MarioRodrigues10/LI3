@@ -39,7 +39,6 @@ int verify_reservation_input(char **parameters) {
   if (!parameters[11]) return 0;
   if (!parameters[12]) return 0;
   if (!parameters[13]) return 0;
-  if (!parameters[14]) return 0;
 
   return 1;
 }
@@ -83,7 +82,8 @@ void build_reservation(char **reservation_params, void *catalog, STATS stats) {
   update_hotel_stats(stats, reservation_params[2],
                      strtol(reservation_params[12], NULL, 10));
 
-  update_user_stats_number_of_reservations(stats, reservation_params[1]);
+  update_user_stats_number_of_reservations(stats, reservation_params[1],
+                                           reservation_params[0]);
 
   update_user_stats_total_spent(
       stats, reservation_params[1],
@@ -94,23 +94,16 @@ void build_reservation(char **reservation_params, void *catalog, STATS stats) {
 }
 
 void set_reservation_id(RESERVATION reservation, char *id) {
-  char *id_without_book = id + 4;
-  reservation->id = g_strdup(id_without_book);
-  // gpointer id_pointer = id_without_book;
-  // reservation->id = id_pointer;
+  reservation->id = g_strdup(id);
 }
 
 void set_reservation_user_id(RESERVATION reservation, char *id) {
   reservation->user_id = g_strdup(id);
-  // gpointer id_pointer = g_strdup(id);
-  // reservation->user_id = id_pointer;
 }
 
 void set_reservation_hotel_id(RESERVATION reservation, char *id) {
   char *id_without_htl = id;
   reservation->hotel_id = g_strdup(id_without_htl);
-  // gpointer id_pointer = GINT_TO_POINTER(extract_number(id));
-  // reservation->hotel_id = id_pointer;
 }
 
 void set_reservation_hotel_name(RESERVATION reservation, char *hotel_name) {

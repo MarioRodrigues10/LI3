@@ -119,7 +119,39 @@ void write_query1_result(FILE *output_file, void *result) {
   }
 }
 
-void write_query2_result(FILE *output_file, void *result) { return; }
+struct query2_result {
+  char **id;
+  char **date;
+  char **type;
+  int iterator;
+  bool has_f;
+};
+
+void write_query2_result(FILE *output_file, void *result) {
+  QUERY2_RESULT query_result = (QUERY2_RESULT)result;
+  int j;
+  for (int i = 0; i < query_result->iterator; i++) {
+    j = i + 1;
+    if (query_result->type[i] == NULL) {
+      if (query_result->has_f) {
+        fprintf(output_file, "\n--- %d ---\nid: %s\ndate: %s\n", j,
+                query_result->id[i], query_result->date[i]);
+      } else {
+        fprintf(output_file, "%s;%s\n", query_result->id[i],
+                query_result->date[i]);
+      }
+    } else {
+      if (query_result->has_f) {
+        fprintf(output_file, "\n--- %d ---\nid: %s\ndate: %s\ntype: %s\n", j,
+                query_result->id[i], query_result->date[i],
+                query_result->type[i]);
+      } else {
+        fprintf(output_file, "%s;%s;%s\n", query_result->id[i],
+                query_result->date[i], query_result->type[i]);
+      }
+    }
+  }
+}
 
 struct query3_result {
   double media_of_ratings;
