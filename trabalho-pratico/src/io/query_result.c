@@ -128,10 +128,11 @@ struct query3_result {
 
 void write_query3_result(FILE *output_file, void *result) {
   QUERY3_RESULT query_result = (QUERY3_RESULT)result;
-  
-  if(query_result->has_f){
-    fprintf(output_file, "--- 3 ---\nrating: %.3f\n", query_result->media_of_ratings);
-  }else{
+
+  if (query_result->has_f) {
+    fprintf(output_file, "--- 3 ---\nrating: %.3f\n",
+            query_result->media_of_ratings);
+  } else {
     fprintf(output_file, "%.3f\n", query_result->media_of_ratings);
   }
 }
