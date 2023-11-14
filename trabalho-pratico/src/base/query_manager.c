@@ -194,6 +194,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
 struct query3_result {
   double media_of_ratings;
+  bool has_f;
 };
 
 struct hotel_stats {
@@ -206,7 +207,19 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
-  HOTEL_STATS hotel_stats = get_hotel_stats_by_hotel_id(stats, query_params[0]);
+  bool has_f = false;
+
+  char *id = NULL;
+
+  if (strcmp(query_params[0], "F") == 0) {
+    has_f = true;
+    id = query_params[1];
+  } else {
+    has_f = false;
+    id = query_params[0];
+  }
+
+  HOTEL_STATS hotel_stats = get_hotel_stats_by_hotel_id(stats, id);
 
   if (hotel_stats == NULL) {
     return NULL;
@@ -214,7 +227,8 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
   QUERY3_RESULT result = malloc(sizeof(struct query3_result));
 
-  result->media_of_ratings = media_of_ratings(stats, query_params[0]);
+  result->media_of_ratings = media_of_ratings(stats, id);
+  result->has_f = has_f;
 
   return (void *)result;
 }
