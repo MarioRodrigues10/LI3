@@ -210,6 +210,12 @@ void *query7(char **query_params, FLIGHTS_CATALOG flights_catalog,
              USERS_CATALOG users_catalog, STATS stats);
 
 /**
+ * @struct query8_result - Struct that represents the result of query 4 to be
+ * used in other places of the program
+ */
+typedef struct query8_result *QUERY8_RESULT;
+
+/**
  * @brief Function that executes the query 8
  *
  * @param query_params - The query parameters

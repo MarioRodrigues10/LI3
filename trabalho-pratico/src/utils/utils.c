@@ -42,6 +42,7 @@ double calculate_total_price(int num_nights, int price_per_night,
 
 int calculate_number_of_nights(const char* begin_date_str,
                                const char* end_date_str) {
+  if (strcmp(begin_date_str, end_date_str) == 0) return 1;
   int begin_year, begin_month, begin_day;
   int end_year, end_month, end_day;
 
@@ -52,7 +53,6 @@ int calculate_number_of_nights(const char* begin_date_str,
   int end_date = end_year * 10000 + end_month * 100 + end_day;
 
   int nights = end_date - begin_date;
-
   return nights;
 }
 
@@ -486,3 +486,5 @@ void sort_by_date_and_value(void* result, int N) {
     }
   }
 }
+
+int compare_dates(char* date1, char* date2) {}

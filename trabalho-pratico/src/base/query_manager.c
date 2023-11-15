@@ -516,11 +516,54 @@ void *query7(char **query_params, FLIGHTS_CATALOG flights_catalog,
   return NULL;
 }
 
+struct query8_result {
+  double revenue;
+  bool has_f;
+};
+
 void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
-  return NULL;
+  bool has_f = false;
+  char *id = NULL;
+  char *begin_date = NULL;
+  char *end_date = NULL;
+
+  if (strcmp(query_params[0], "F") == 0) {
+    has_f = true;
+    id = query_params[1];
+    begin_date = query_params[2];
+    end_date = query_params[3];
+  } else {
+    has_f = false;
+    id = query_params[0];
+    begin_date = query_params[1];
+    end_date = query_params[2];
+  }
+
+  GArray *reservations = get_hotel_reservations(stats, id);
+  if (reservations == NULL) return NULL;
+  QUERY8_RESULT result = malloc(sizeof(struct query8_result));
+  double revenue = 0, total_price;
+  for (int i = 0; i < reservations->len; i++) {
+    char *reservation_id = g_array_index(reservations, char *, i);
+    RESERVATION reservation =
+        get_reservation_by_id(reservations_catalog, reservation_id);
+    char *begin_date_reservation = get_reservation_begin_date(reservation);
+    char *end_date_reservation = get_reservation_end_date(reservation);
+    int price_per_night = get_reservation_price_per_night(reservation);
+    if (strcmp(begin_date, begin_date_reservation) <= 0 &&
+        strcmp(end_date, end_date_reservation) >= 0) {
+      revenue += calculate_total_price(
+          calculate_number_of_nights(begin_date_reservation,
+                                     end_date_reservation),
+          price_per_night, 0);
+    }
+  }
+  result->revenue = revenue;
+  result->has_f = has_f;
+  return (void *)result;
 }
 
 void *query9(char **query_params, FLIGHTS_CATALOG flights_catalog,

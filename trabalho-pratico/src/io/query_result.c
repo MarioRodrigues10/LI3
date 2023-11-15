@@ -211,7 +211,20 @@ void write_query6_result(FILE *output_file, void *result) { return; }
 
 void write_query7_result(FILE *output_file, void *result) { return; }
 
-void write_query8_result(FILE *output_file, void *result) { return; }
+struct query8_result {
+  double revenue;
+  bool has_f;
+};
+
+void write_query8_result(FILE *output_file, void *result) {
+  QUERY8_RESULT query_result = (QUERY8_RESULT)result;
+  int revenue = (int)query_result->revenue;
+  if (query_result->has_f) {
+    fprintf(output_file, "--- 1 ---\nrevenue: %.f\n", revenue);
+  } else {
+    fprintf(output_file, "%d\n", revenue);
+  }
+}
 
 void write_query9_result(FILE *output_file, void *result) { return; }
 
