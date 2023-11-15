@@ -39,16 +39,18 @@ struct hotel_stats {
   char *hotel_id;
   int total_rating;
   int total_clients;
-
+  double total_price;
   GArray *hotel_reservations;
 };
 
 HOTEL_STATS create_hotel_stats(char *hotel_id, int hotel_stars,
-                               int total_clients, char *reservation_id) {
+                               double hotel_price, int total_clients,
+                               char *reservation_id) {
   HOTEL_STATS new_hotel_stats = malloc(sizeof(struct hotel_stats));
   new_hotel_stats->hotel_id = hotel_id;
   new_hotel_stats->total_rating = hotel_stars;
   new_hotel_stats->total_clients = total_clients;
+  new_hotel_stats->total_price = hotel_price;
   new_hotel_stats->hotel_reservations =
       g_array_new(FALSE, FALSE, sizeof(HOTEL_STATS));
   if (reservation_id != NULL)
@@ -58,17 +60,18 @@ HOTEL_STATS create_hotel_stats(char *hotel_id, int hotel_stars,
 }
 
 void update_hotel_stats(STATS stats, char *hotel_id, int hotel_rating,
-                        char *reservation_id) {
+                        double hotel_price, char *reservation_id) {
   HOTEL_STATS hotel_stats = g_hash_table_lookup(stats->hotel, hotel_id);
 
   if (hotel_stats != NULL) {
     if (reservation_id != NULL)
       g_array_append_val(hotel_stats->hotel_reservations, reservation_id);
     hotel_stats->total_rating += hotel_rating;
+    hotel_stats->total_price += hotel_price;
     hotel_stats->total_clients++;
   } else {
-    HOTEL_STATS hotel_stats =
-        create_hotel_stats(hotel_id, hotel_rating, 1, reservation_id);
+    HOTEL_STATS hotel_stats = create_hotel_stats(
+        hotel_id, hotel_rating, hotel_price, 1, reservation_id);
     g_hash_table_insert(stats->hotel, hotel_id, hotel_stats);
   }
 }

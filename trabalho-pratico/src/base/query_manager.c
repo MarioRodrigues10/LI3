@@ -555,10 +555,10 @@ void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
     int price_per_night = get_reservation_price_per_night(reservation);
     if (strcmp(begin_date, begin_date_reservation) <= 0 &&
         strcmp(end_date, end_date_reservation) >= 0) {
-      revenue += calculate_total_price(
-          calculate_number_of_nights(begin_date_reservation,
-                                     end_date_reservation),
-          price_per_night, 0);
+      revenue = revenue + calculate_total_price(
+                              calculate_number_of_nights(begin_date_reservation,
+                                                         end_date_reservation),
+                              price_per_night, 0);
     }
   }
   result->revenue = revenue;

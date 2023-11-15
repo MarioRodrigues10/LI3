@@ -79,8 +79,12 @@ void build_reservation(char **reservation_params, void *catalog, STATS stats) {
   add_reservation_to_catalog(reservations_catalog, reservation,
                              reservation->id);
 
-  update_hotel_stats(stats, reservation_params[2],
-                     strtol(reservation_params[12], NULL, 10), reservation->id);
+  update_hotel_stats(
+      stats, reservation_params[2], strtol(reservation_params[12], NULL, 10),
+      calculate_total_price(calculate_number_of_nights(reservation_params[7],
+                                                       reservation_params[8]),
+                            get_reservation_price_per_night(reservation), 0),
+      reservation->id);
 
   update_user_stats_number_of_reservations(stats, reservation_params[1],
                                            reservation_params[0]);

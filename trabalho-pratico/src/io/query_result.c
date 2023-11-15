@@ -218,11 +218,10 @@ struct query8_result {
 
 void write_query8_result(FILE *output_file, void *result) {
   QUERY8_RESULT query_result = (QUERY8_RESULT)result;
-  int revenue = (int)query_result->revenue;
   if (query_result->has_f) {
-    fprintf(output_file, "--- 1 ---\nrevenue: %.f\n", revenue);
+    fprintf(output_file, "--- 1 ---\nrevenue: %.f\n", query_result->revenue);
   } else {
-    fprintf(output_file, "%d\n", revenue);
+    fprintf(output_file, "%.f\n", query_result->revenue);
   }
 }
 
