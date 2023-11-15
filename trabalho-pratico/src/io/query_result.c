@@ -191,7 +191,7 @@ void write_query4_result(FILE *output_file, void *result) {
     if (query_result->has_f) {
       if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file,
-              "--- %d ---\nreservation_id: %s\nbegin_date: %s\nend_date: "
+              "--- %d ---\nid: %s\nbegin_date: %s\nend_date: "
               "%s\nuser_id: %s\nrating: %d\ntotal_price: %.3f\n",
               j, query_result->reservation_id[i], query_result->begin_date[i],
               query_result->end_date[i], query_result->user_id[i],

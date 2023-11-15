@@ -227,74 +227,50 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
   QUERY2_RESULT result = malloc(sizeof(struct query2_result));
   if (strcmp(type, "flights") == 0) {
     GArray *flights = get_user_flights(stats, id);
+    USER user = get_user_by_username(users_catalog, id);
+    char *account_status = get_user_account_status(user);
+    if (account_status != NULL && strcmp(account_status, "ACTIVE") == 0) {
+      result->id = malloc(sizeof(char *) * flights->len);
+      result->date = malloc(sizeof(char *) * flights->len);
+      result->type = malloc(sizeof(char *) * flights->len);
 
-    result->id = malloc(sizeof(char *) * flights->len);
-    result->date = malloc(sizeof(char *) * flights->len);
-    result->type = malloc(sizeof(char *) * flights->len);
+      int i = 0;
+      for (i = 0; i < flights->len; i++) {
+        char *id = g_array_index(flights, char *, i);
+        char *date = get_flight_schedule_departure_date(
+            get_flight_by_id(flights_catalog, id));
 
-    int i = 0;
-    for (i = 0; i < flights->len; i++) {
-      char *id = g_array_index(flights, char *, i);
-      char *date = get_flight_schedule_departure_date(
-          get_flight_by_id(flights_catalog, id));
+        int year, month, day, hour, minute, second;
+        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+               &second);
 
-      int year, month, day, hour, minute, second;
-      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-             &second);
+        result->id[i] = id;
+        result->date[i] = format_date(year, month, day);
+        ;
+        result->type[i] = NULL;
+      }
+      result->iterator = i;
+      result->has_f = has_f;
 
-      result->id[i] = id;
-      result->date[i] = format_date(year, month, day);
-      ;
-      result->type[i] = NULL;
+      sort_by_date(result, result->iterator);
     }
-    result->iterator = i;
-    result->has_f = has_f;
-
-    sort_by_date(result, result->iterator);
     return (void *)result;
 
   } else if (strcmp(type, "reservations") == 0) {
     GArray *reservations = get_user_reservations(stats, id);
-
-    result->id = malloc(sizeof(char *) * reservations->len);
-    result->date = malloc(sizeof(char *) * reservations->len);
-    result->type = malloc(sizeof(char *) * reservations->len);
-
-    int i = 0;
-    for (i = 0; i < reservations->len; i++) {
-      char *id = g_array_index(reservations, char *, i);
-      RESERVATION reservation = get_reservation_by_id(reservations_catalog, id);
-
-      char *date = get_reservation_begin_date(reservation);
-      int year, month, day, hour, minute, second;
-      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-             &second);
-
-      result->id[i] = id;
-      result->date[i] = format_date(year, month, day);
-      ;
-      result->type[i] = NULL;
-    }
-    result->iterator = i;
-    result->has_f = has_f;
-
-    sort_by_date(result, result->iterator);
-    return (void *)result;
-  } else {
-    GArray *flights = get_user_flights(stats, id);
-    GArray *reservations = get_user_reservations(stats, id);
-
-    if (flights == NULL && reservations == NULL)
-      return NULL;
-    else if (flights == NULL) {
+    USER user = get_user_by_username(users_catalog, id);
+    char *account_status = get_user_account_status(user);
+    if (account_status != NULL && strcmp(account_status, "ACTIVE") == 0) {
       result->id = malloc(sizeof(char *) * reservations->len);
       result->date = malloc(sizeof(char *) * reservations->len);
       result->type = malloc(sizeof(char *) * reservations->len);
+
       int i = 0;
-      for (i; i < reservations->len; i++) {
+      for (i = 0; i < reservations->len; i++) {
         char *id = g_array_index(reservations, char *, i);
         RESERVATION reservation =
             get_reservation_by_id(reservations_catalog, id);
+
         char *date = get_reservation_begin_date(reservation);
         int year, month, day, hour, minute, second;
         sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
@@ -309,75 +285,109 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
       result->has_f = has_f;
 
       sort_by_date(result, result->iterator);
-      return (void *)result;
-    } else if (reservations == NULL) {
-      result->id = malloc(sizeof(char *) * flights->len);
-      result->date = malloc(sizeof(char *) * flights->len);
-      result->type = malloc(sizeof(char *) * flights->len);
-      int i = 0;
-      for (i; i < flights->len; i++) {
-        char *id = g_array_index(flights, char *, i);
-        FLIGHT flight = get_flight_by_id(flights_catalog, id);
-        char *date = get_flight_schedule_departure_date(flight);
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
+    }
+    return (void *)result;
+  } else {
+    GArray *flights = get_user_flights(stats, id);
+    GArray *reservations = get_user_reservations(stats, id);
+    USER user = get_user_by_username(users_catalog, id);
+    char *account_status = get_user_account_status(user);
+    if (account_status != NULL && strcmp(account_status, "ACTIVE") == 0) {
+      if (flights == NULL && reservations == NULL)
+        return NULL;
+      else if (flights == NULL) {
+        result->id = malloc(sizeof(char *) * reservations->len);
+        result->date = malloc(sizeof(char *) * reservations->len);
+        result->type = malloc(sizeof(char *) * reservations->len);
+        int i = 0;
+        for (i; i < reservations->len; i++) {
+          char *id = g_array_index(reservations, char *, i);
+          RESERVATION reservation =
+              get_reservation_by_id(reservations_catalog, id);
+          char *date = get_reservation_begin_date(reservation);
+          int year, month, day, hour, minute, second;
+          sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+                 &second);
 
-        result->id[i] = id;
-        result->date[i] = format_date(year, month, day);
-        ;
-        result->type[i] = "flight";
+          result->id[i] = id;
+          result->date[i] = format_date(year, month, day);
+          ;
+          result->type[i] = NULL;
+        }
+        result->iterator = i;
+        result->has_f = has_f;
+
+        sort_by_date(result, result->iterator);
+        return (void *)result;
+      } else if (reservations == NULL) {
+        result->id = malloc(sizeof(char *) * flights->len);
+        result->date = malloc(sizeof(char *) * flights->len);
+        result->type = malloc(sizeof(char *) * flights->len);
+        int i = 0;
+        for (i; i < flights->len; i++) {
+          char *id = g_array_index(flights, char *, i);
+          FLIGHT flight = get_flight_by_id(flights_catalog, id);
+          char *date = get_flight_schedule_departure_date(flight);
+          int year, month, day, hour, minute, second;
+          sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+                 &second);
+
+          result->id[i] = id;
+          result->date[i] = format_date(year, month, day);
+          ;
+          result->type[i] = "flight";
+        }
+        result->iterator = i;
+        result->has_f = has_f;
+
+        sort_by_date(result, result->iterator);
+        return (void *)result;
+      } else {
+        int max = flights->len + reservations->len;
+
+        result->id = malloc(sizeof(char *) * max);
+        result->date = malloc(sizeof(char *) * max);
+        result->type = malloc(sizeof(char *) * max);
+
+        int i = 0;
+
+        while (i < flights->len) {
+          char *id = g_array_index(flights, char *, i);
+          FLIGHT flight = get_flight_by_id(flights_catalog, id);
+          char *date = get_flight_schedule_departure_date(flight);
+          int year, month, day, hour, minute, second;
+          sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+                 &second);
+
+          result->id[i] = id;
+          result->date[i] = format_date(year, month, day);
+          result->type[i] = "flight";
+          i++;
+        }
+        int j = i;
+        i = 0;
+        while (j < max) {
+          char *id = g_array_index(reservations, char *, i);
+          RESERVATION reservation =
+              get_reservation_by_id(reservations_catalog, id);
+          char *date = get_reservation_begin_date(reservation);
+
+          int year, month, day, hour, minute, second;
+          sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+                 &second);
+
+          result->id[j] = id;
+          result->date[j] = format_date(year, month, day);
+          result->type[j] = "reservation";
+          i++;
+          j++;
+        }
+        result->iterator = max;
+        result->has_f = has_f;
+
+        sort_by_date(result, result->iterator);
+        return (void *)result;
       }
-      result->iterator = i;
-      result->has_f = has_f;
-
-      sort_by_date(result, result->iterator);
-      return (void *)result;
-    } else {
-      int max = flights->len + reservations->len;
-
-      result->id = malloc(sizeof(char *) * max);
-      result->date = malloc(sizeof(char *) * max);
-      result->type = malloc(sizeof(char *) * max);
-
-      int i = 0;
-
-      while (i < flights->len) {
-        char *id = g_array_index(flights, char *, i);
-        FLIGHT flight = get_flight_by_id(flights_catalog, id);
-        char *date = get_flight_schedule_departure_date(flight);
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-
-        result->id[i] = id;
-        result->date[i] = format_date(year, month, day);
-        result->type[i] = "flight";
-        i++;
-      }
-      int j = i;
-      i = 0;
-      while (j < max) {
-        char *id = g_array_index(reservations, char *, i);
-        RESERVATION reservation =
-            get_reservation_by_id(reservations_catalog, id);
-        char *date = get_reservation_begin_date(reservation);
-
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-
-        result->id[j] = id;
-        result->date[j] = format_date(year, month, day);
-        result->type[j] = "reservation";
-        i++;
-        j++;
-      }
-      result->iterator = max;
-      result->has_f = has_f;
-
-      sort_by_date(result, result->iterator);
-      return (void *)result;
     }
   }
   return NULL;

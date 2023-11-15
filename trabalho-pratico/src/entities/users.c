@@ -182,6 +182,11 @@ char *get_user_pay_method(USER user) {
 }
 
 char *get_user_account_status(USER user) {
-  char *account_status = g_strdup(user->account_status);
-  return account_status;
+  if (user == NULL) {
+    return NULL;
+  } else {
+    char *account_status = g_strdup(user->account_status);
+
+    return standardize_account_status(account_status);
+  }
 }
