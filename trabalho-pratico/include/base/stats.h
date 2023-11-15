@@ -31,11 +31,12 @@ void free_stats(STATS stats);
  * @param id The id of the hotel
  * @param total_rating The total rating of the hotel
  * @param total_clients The total clients of the hotel
+ * @param reservation_id The id of the reservation
  *
  * @return The hotel stats created
  */
 HOTEL_STATS create_hotel_stats(char *hotel_id, int total_rating,
-                               int total_clients);
+                               int total_clients, char *reservation_id);
 
 /**
  * @brief Function that gets the total rating of the hotel
@@ -43,9 +44,22 @@ HOTEL_STATS create_hotel_stats(char *hotel_id, int total_rating,
  * @param stats The stats
  * @param id The id of the hotel
  * @param total_rating The total rating of the hotel
+ * @param reservation_id The id of the reservation
  *
  */
-void update_hotel_stats(STATS stats, char *hotel_id, int total_rating);
+void update_hotel_stats(STATS stats, char *hotel_id, int total_rating,
+                        char *reservation_id);
+
+/**
+ * @brief Function that gets the hotel reservations
+ *
+ * @param stats The stats
+ * @param id The id of the hotel
+ *
+ * @return The hotel reservations
+ */
+
+GArray *get_hotel_reservations(STATS stats, char *hotel_id);
 
 /**
  * @brief Function that gets the hotel stats by the hotel id

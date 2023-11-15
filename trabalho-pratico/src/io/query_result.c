@@ -130,20 +130,22 @@ struct query2_result {
 void write_query2_result(FILE *output_file, void *result) {
   QUERY2_RESULT query_result = (QUERY2_RESULT)result;
   int j;
+  int N = query_result->iterator - 1;
   for (int i = 0; i < query_result->iterator; i++) {
     j = i + 1;
     if (query_result->type[i] == NULL) {
       if (query_result->has_f) {
-        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n\n", j,
+        if (i != 0) fprintf(output_file, "\n");
+        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n", j,
                 query_result->id[i], query_result->date[i]);
-
       } else {
         fprintf(output_file, "%s;%s\n", query_result->id[i],
                 query_result->date[i]);
       }
     } else {
       if (query_result->has_f) {
-        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\ntype: %s\n\n", j,
+        if (i != 0) fprintf(output_file, "\n");
+        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\ntype: %s\n", j,
                 query_result->id[i], query_result->date[i],
                 query_result->type[i]);
       } else {
@@ -170,7 +172,38 @@ void write_query3_result(FILE *output_file, void *result) {
   }
 }
 
-void write_query4_result(FILE *output_file, void *result) { return; }
+struct query4_result {
+  char **reservation_id;
+  char **begin_date;
+  char **end_date;
+  char **user_id;
+  int *rating;
+  float *total_price;
+  int iterator;
+  bool has_f;
+};
+
+void write_query4_result(FILE *output_file, void *result) {
+  QUERY4_RESULT query_result = (QUERY4_RESULT)result;
+  int j;
+  for (int i = 0; i < query_result->iterator; i++) {
+    j = i + 1;
+    if (query_result->has_f) {
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file,
+              "--- %d ---\nreservation_id: %s\nbegin_date: %s\nend_date: "
+              "%s\nuser_id: %s\nrating: %d\ntotal_price: %.3f\n",
+              j, query_result->reservation_id[i], query_result->begin_date[i],
+              query_result->end_date[i], query_result->user_id[i],
+              query_result->rating[i], query_result->total_price[i]);
+    } else {
+      fprintf(output_file, "%s;%s;%s;%s;%d;%.3f\n",
+              query_result->reservation_id[i], query_result->begin_date[i],
+              query_result->end_date[i], query_result->user_id[i],
+              query_result->rating[i], query_result->total_price[i]);
+    }
+  }
+}
 
 void write_query5_result(FILE *output_file, void *result) { return; }
 

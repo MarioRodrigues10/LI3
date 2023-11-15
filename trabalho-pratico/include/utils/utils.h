@@ -381,4 +381,11 @@ void sort_by_date(void* array, int N);
  */
 char* format_date(int year, int month, int day);
 
+/**
+ * @brief Function that sorts query results by date and value.
+ *
+ * @param result The array to be sorted
+ * @param N The size of the array
+ */
+void sort_by_date_and_value(void* result, int N);
 #endif

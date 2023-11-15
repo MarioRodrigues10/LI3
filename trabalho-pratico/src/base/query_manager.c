@@ -417,18 +417,72 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
   }
 
   QUERY3_RESULT result = malloc(sizeof(struct query3_result));
-
   result->media_of_ratings = media_of_ratings(stats, id);
   result->has_f = has_f;
 
   return (void *)result;
 }
 
+struct query4_result {
+  char **reservation_id;
+  char **begin_date;
+  char **end_date;
+  char **user_id;
+  int *rating;
+  float *total_price;
+  int iterator;
+  bool has_f;
+};
+
 void *query4(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
-  return NULL;
+  bool has_f = false;
+  char *id = NULL;
+
+  if (strcmp(query_params[0], "F") == 0) {
+    has_f = true;
+    id = query_params[1];
+  } else {
+    has_f = false;
+    id = query_params[0];
+  }
+
+  GArray *reservations = get_hotel_reservations(stats, id);
+  if (reservations == NULL) return NULL;
+  QUERY4_RESULT result = malloc(sizeof(struct query4_result));
+  result->reservation_id = malloc(sizeof(char *) * reservations->len);
+  result->begin_date = malloc(sizeof(char *) * reservations->len);
+  result->end_date = malloc(sizeof(char *) * reservations->len);
+  result->user_id = malloc(sizeof(char *) * reservations->len);
+  result->rating = malloc(sizeof(int) * reservations->len);
+  result->total_price = malloc(sizeof(int) * reservations->len);
+
+  for (int i = 0; i < reservations->len; i++) {
+    char *reservation_id = g_array_index(reservations, char *, i);
+    RESERVATION reservation =
+        get_reservation_by_id(reservations_catalog, reservation_id);
+    char *begin_date = get_reservation_begin_date(reservation);
+    char *end_date = get_reservation_end_date(reservation);
+    char *user_id = get_user_id_from_reservation(reservation);
+    int rating = get_reservation_rating(reservation);
+    int price_per_night = get_reservation_price_per_night(reservation);
+    float total_price = calculate_total_price(
+        calculate_number_of_nights(begin_date, end_date), price_per_night,
+        get_reservation_city_tax(reservation));
+    result->reservation_id[i] = reservation_id;
+    result->begin_date[i] = begin_date;
+    result->end_date[i] = end_date;
+    result->user_id[i] = user_id;
+    result->rating[i] = rating;
+    result->total_price[i] = total_price;
+  }
+  result->iterator = reservations->len;
+  result->has_f = has_f;
+
+  sort_by_date_and_value(result, result->iterator);
+  return (void *)result;
 }
 
 void *query5(char **query_params, FLIGHTS_CATALOG flights_catalog,

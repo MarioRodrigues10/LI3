@@ -120,6 +120,12 @@ void *query3(char **query_params, FLIGHTS_CATALOG flights_catalog,
              USERS_CATALOG users_catalog, STATS stats);
 
 /**
+ * @struct query4_result - Struct that represents the result of query 4 to be
+ * used in other places of the program
+ */
+typedef struct query4_result *QUERY4_RESULT;
+
+/**
  * @brief Function that executes the query 4
  *
  * @param query_params - The query parameters

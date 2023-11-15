@@ -80,7 +80,7 @@ void build_reservation(char **reservation_params, void *catalog, STATS stats) {
                              reservation->id);
 
   update_hotel_stats(stats, reservation_params[2],
-                     strtol(reservation_params[12], NULL, 10));
+                     strtol(reservation_params[12], NULL, 10), reservation->id);
 
   update_user_stats_number_of_reservations(stats, reservation_params[1],
                                            reservation_params[0]);
