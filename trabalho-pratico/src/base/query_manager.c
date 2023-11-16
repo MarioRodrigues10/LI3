@@ -378,6 +378,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           result->date[j] = format_date(year, month, day);
           result->type[j] = "reservation";
           j++;
+          i++;
         }
         result->iterator = max;
         result->has_f = has_f;
