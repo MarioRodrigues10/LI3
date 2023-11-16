@@ -353,9 +353,10 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
 
   parse_file(flights_file, flights_catalog, build_flight, stats,
              MAX_TOKENS_FLIGHT);
-  parse_file(reservations_file, reservations_catalog, build_reservation, stats,
-             MAX_TOKENS_RESERVATION);
   parse_file(users_file, users_catalog, build_user, stats, MAX_TOKENS_USER);
+  parse_file_reservations(reservations_file, reservations_catalog,
+                          users_catalog, build_reservation, stats,
+                          MAX_TOKENS_RESERVATION);
   parse_file(passengers_file, passengers_catalog, build_passenger, stats,
              MAX_TOKENS_PASSENGER);
 

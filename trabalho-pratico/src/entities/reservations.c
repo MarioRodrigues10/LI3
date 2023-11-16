@@ -25,9 +25,12 @@ struct reservation {
   char *comment;
 };
 
-int verify_reservation_input(char **parameters) {
+int verify_reservation_input(char **parameters, void *catalog_users) {
+  USERS_CATALOG users_catalog = (USERS_CATALOG)catalog_users;
   if (!validate_parameter_not_empty(parameters[0])) return 0;
-  if (!validate_parameter_not_empty(parameters[1])) return 0;
+  if (!validate_parameter_not_empty(parameters[1]) ||
+      get_user_by_username(users_catalog, parameters[1]) == NULL)
+    return 0;
   if (!validate_parameter_not_empty(parameters[2])) return 0;
   if (!validate_parameter_not_empty(parameters[3])) return 0;
   if (!validate_parameter_not_empty(parameters[4]) ||
@@ -68,8 +71,9 @@ RESERVATION create_reservation() {
   return new_reservation;
 }
 
-void build_reservation(char **reservation_params, void *catalog, STATS stats) {
-  if (!verify_reservation_input(reservation_params)) return;
+void build_reservation(char **reservation_params, void *catalog,
+                       void *catalog_users, STATS stats) {
+  if (!verify_reservation_input(reservation_params, catalog_users)) return;
   RESERVATION reservation = create_reservation();
   RESERVATIONS_CATALOG reservations_catalog = (RESERVATIONS_CATALOG)catalog;
 

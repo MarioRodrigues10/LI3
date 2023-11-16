@@ -6,6 +6,7 @@
 
 #include "base/stats.h"
 #include "catalogs/reservations_catalog.h"
+#include "catalogs/users_catalog.h"
 
 typedef struct reservation *RESERVATION;
 
@@ -23,7 +24,8 @@ RESERVATION create_reservation();
  * @param catalog - The catalog of type 'void*'
  *
  */
-void build_reservation(char **reservation_params, void *catalog, STATS stats);
+void build_reservation(char **reservation_params, void *catalog,
+                       void *catalog_users, STATS stats);
 
 /**
  * @brief Function that verifies if the parameters is valid to create a new
@@ -35,7 +37,7 @@ void build_reservation(char **reservation_params, void *catalog, STATS stats);
  *
  * @return 0 if the input is invalid and 1 if the input is valid
  */
-int verify_reservation_input(char **parameters);
+int verify_reservation_input(char **parameters, void *catalog_users);
 
 /**
  * @brief Function that sets the reservation id

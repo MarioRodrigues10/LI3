@@ -37,3 +37,22 @@ int parse_file(FILE* file, void* catalog, function_pointer build_function,
 
   return 0;
 }
+
+int parse_file_reservations(FILE* file, void* catalog, void* catalog_users,
+                            function_pointer_reservations build_function,
+                            STATS stats, int num_tokens) {
+  char* line = NULL;
+  size_t len = 0;
+
+  // Skip first line
+  getline(&line, &len, file);
+
+  while (getline(&line, &len, file) != -1) {
+    line[strlen(line) - 1] = '\0';
+    char** tokens = parse_line(line, num_tokens);
+    build_function(tokens, catalog, catalog_users, stats);
+  }
+  free(line);
+
+  return 0;
+}
