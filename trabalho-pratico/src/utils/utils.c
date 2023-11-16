@@ -181,11 +181,19 @@ char* standardize_account_status(char* account_status) {
 }
 
 char* standardize_includes_breakfast(char* includes_breakfast) {
+  if (includes_breakfast == NULL) return "FALSE";
+
+  for (int i = 0; includes_breakfast[i]; i++) {
+    includes_breakfast[i] = tolower(includes_breakfast[i]);
+  }
+
   if ((strcmp(includes_breakfast, "t") == 0) ||
       (strcmp(includes_breakfast, "true") == 0) ||
       (strcmp(includes_breakfast, "1") == 0))
     return "TRUE";
-  else
+  else if (strcmp(includes_breakfast, "false") == 0 ||
+           strcmp(includes_breakfast, "f") == 0 ||
+           strcmp(includes_breakfast, "0") == 0)
     return "FALSE";
 }
 
@@ -312,11 +320,22 @@ bool validate_price_per_night(int price_per_night) {
 }
 
 bool validate_includes_breakfast(char* includes_breakfast) {
-  if (includes_breakfast == NULL) return 0;
+  if (strlen(includes_breakfast) == 0) return true;
 
-  return (strcmp(includes_breakfast, "FALSE") == 0 ||
-          strcmp(includes_breakfast, "TRUE") == 0 ||
-          strcmp(includes_breakfast, "") == 0);
+  for (int i = 0; includes_breakfast[i]; i++) {
+    includes_breakfast[i] = tolower(includes_breakfast[i]);
+  }
+
+  if ((strcmp(includes_breakfast, "t") == 0) ||
+      (strcmp(includes_breakfast, "true") == 0) ||
+      (strcmp(includes_breakfast, "1") == 0))
+    return true;
+  else if (strcmp(includes_breakfast, "false") == 0 ||
+           strcmp(includes_breakfast, "f") == 0 ||
+           strcmp(includes_breakfast, "0") == 0)
+    return true;
+
+  return false;
 }
 
 bool validate_rating(char* rating) {

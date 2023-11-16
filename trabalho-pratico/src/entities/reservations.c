@@ -57,13 +57,15 @@ int verify_reservation_input(char **parameters, void *catalog_users) {
       !validate_price_per_night(strtol(parameters[9], NULL, 10)))
     return 0;
 
-  if (!validate_parameter_not_empty(parameters[10])) return 0;
+  if (!validate_includes_breakfast(parameters[10])) return 0;
 
   if (!validate_parameter_not_empty(parameters[11])) return 0;
 
   if (!validate_parameter_not_empty(parameters[12]) ||
       !validate_rating(parameters[12]))
     return 0;
+
+  if (compare_dates(parameters[7], parameters[8]) == 1) return 0;
 
   return 1;
 }

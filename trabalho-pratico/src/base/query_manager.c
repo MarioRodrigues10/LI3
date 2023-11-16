@@ -466,8 +466,8 @@ void *query4(char **query_params, FLIGHTS_CATALOG flights_catalog,
   result->user_id = malloc(sizeof(char *) * reservations->len);
   result->rating = malloc(sizeof(int) * reservations->len);
   result->total_price = malloc(sizeof(int) * reservations->len);
-
-  for (int i = 0; i < reservations->len; i++) {
+  int i = 0;
+  for (i = 0; i < reservations->len; i++) {
     char *reservation_id = g_array_index(reservations, char *, i);
     RESERVATION reservation =
         get_reservation_by_id(reservations_catalog, reservation_id);
@@ -486,7 +486,7 @@ void *query4(char **query_params, FLIGHTS_CATALOG flights_catalog,
     result->rating[i] = rating;
     result->total_price[i] = total_price;
   }
-  result->iterator = reservations->len;
+  result->iterator = i;
   result->has_f = has_f;
 
   sort_by_date_and_value(result, result->iterator);
