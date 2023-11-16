@@ -332,7 +332,7 @@ bool validate_includes_breakfast(char* includes_breakfast);
  * @param rating An integer representing the rating value to be validated.
  * @return true if the rating is valid, false otherwise.
  */
-bool validate_rating(int rating);
+bool validate_rating(char* rating);
 
 /**
  * @brief Validates whether a string parameter is not empty and not NULL.

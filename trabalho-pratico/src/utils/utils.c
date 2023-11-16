@@ -319,7 +319,12 @@ bool validate_includes_breakfast(char* includes_breakfast) {
           strcmp(includes_breakfast, "") == 0);
 }
 
-bool validate_rating(int rating) { return (rating >= 1 && rating <= 5); }
+bool validate_rating(char* rating) {
+  char* endptr;
+  double rating_value = strtod(rating, &endptr);
+
+  return (*endptr == '\0' && rating_value >= 1 && rating_value <= 5);
+}
 
 bool validate_parameter_not_empty(char* parameter) {
   return (parameter != NULL && strlen(parameter) > 0);
@@ -357,8 +362,9 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
   parse_file_reservations(reservations_file, reservations_catalog,
                           users_catalog, build_reservation, stats,
                           MAX_TOKENS_RESERVATION);
-  parse_file(passengers_file, passengers_catalog, build_passenger, stats,
-             MAX_TOKENS_PASSENGER);
+  parse_file_passengers(passengers_file, passengers_catalog, users_catalog,
+                        flights_catalog, build_passenger, stats,
+                        MAX_TOKENS_PASSENGER);
 
   free(flights_filename);
   free(passengers_filename);

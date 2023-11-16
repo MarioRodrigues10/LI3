@@ -24,7 +24,8 @@ PASSENGER create_passenger();
  * @param stats - The stats of type 'STATS'
  *
  */
-void build_passenger(char **passenger_params, void *catalog, STATS stats);
+void build_passenger(char **passenger_params, void *catalog,
+                     void *catalog_users, void *catalog_flights, STATS stats);
 
 /**
  * @brief Function that verifies if the parameters are valid to create a new
@@ -34,7 +35,8 @@ void build_passenger(char **passenger_params, void *catalog, STATS stats);
  *
  * @return 0 if the parameters are valid, 1 otherwise
  */
-int verify_passenger_input(char **parameters);
+int verify_passenger_input(char **parameters, void *catalog_users,
+                           void *catalog_flights);
 
 /**
  * @brief Function that sets the passenger flight id

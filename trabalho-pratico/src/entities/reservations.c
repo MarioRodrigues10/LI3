@@ -32,13 +32,17 @@ int verify_reservation_input(char **parameters, void *catalog_users) {
       get_user_by_username(users_catalog, parameters[1]) == NULL)
     return 0;
   if (!validate_parameter_not_empty(parameters[2])) return 0;
+
   if (!validate_parameter_not_empty(parameters[3])) return 0;
+
   if (!validate_parameter_not_empty(parameters[4]) ||
       !validate_number_of_stars(strtol(parameters[4], NULL, 10)))
     return 0;
+
   if (!validate_parameter_not_empty(parameters[5]) ||
       !validate_city_tax(parameters[5]))
     return 0;
+
   if (!validate_parameter_not_empty(parameters[6])) return 0;
 
   if (!validate_parameter_not_empty(parameters[7]) ||
@@ -58,7 +62,7 @@ int verify_reservation_input(char **parameters, void *catalog_users) {
   if (!validate_parameter_not_empty(parameters[11])) return 0;
 
   if (!validate_parameter_not_empty(parameters[12]) ||
-      !validate_rating(strtol(parameters[12], NULL, 10)))
+      !validate_rating(parameters[12]))
     return 0;
 
   return 1;

@@ -12,9 +12,16 @@ struct passenger {
   char *user_id;
 };
 
-int verify_passenger_input(char **parameters) {
-  if (!validate_parameter_not_empty(parameters[0])) return 0;
-  if (!validate_parameter_not_empty(parameters[1])) return 0;
+int verify_passenger_input(char **parameters, void *catalog_users,
+                           void *catalog_flights) {
+  FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog_flights;
+  USERS_CATALOG users_catalog = (USERS_CATALOG)catalog_users;
+  if (!validate_parameter_not_empty(parameters[0]) ||
+      get_flight_by_id(flights_catalog, parameters[0]) == NULL)
+    return 0;
+  if (!validate_parameter_not_empty(parameters[1]) ||
+      get_user_by_username(users_catalog, parameters[1]) == NULL)
+    return 0;
 
   return 1;
 }
@@ -25,8 +32,10 @@ PASSENGER create_passenger() {
   return new_passenger;
 }
 
-void build_passenger(char **passenger_params, void *catalog, STATS stats) {
-  if (!verify_passenger_input(passenger_params)) return;
+void build_passenger(char **passenger_params, void *catalog,
+                     void *catalog_users, void *catalog_flights, STATS stats) {
+  if (!verify_passenger_input(passenger_params, catalog_users, catalog_flights))
+    return;
 
   PASSENGER passenger = create_passenger();
   PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;

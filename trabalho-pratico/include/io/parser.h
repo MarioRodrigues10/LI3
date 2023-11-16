@@ -16,7 +16,7 @@
 
 typedef void (*function_pointer)(char**, void*, STATS);
 typedef void (*function_pointer_reservations)(char**, void*, void*, STATS);
-
+typedef void (*function_pointer_passengers)(char**, void*, void*, void*, STATS);
 /**
  * @brief Parses a line
  *
@@ -42,4 +42,9 @@ int parse_file(FILE* file, void* catalog, function_pointer function,
 int parse_file_reservations(FILE* file, void* catalog, void* catalog_users,
                             function_pointer_reservations build_function,
                             STATS stats, int num_tokens);
+
+int parse_file_passengers(FILE* file, void* catalog, void* catalog_users,
+                          void* catalog_flights,
+                          function_pointer_passengers build_function,
+                          STATS stats, int num_tokens);
 #endif
