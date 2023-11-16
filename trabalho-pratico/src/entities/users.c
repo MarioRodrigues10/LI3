@@ -41,7 +41,9 @@ int verify_user_input(char **parameters) {
       !validate_country_code(parameters[7]))
     return 0;
   if (!validate_parameter_not_empty(parameters[8])) return 0;
-  if (!validate_parameter_not_empty(parameters[9])) return 0;
+  if (!validate_parameter_not_empty(parameters[9]) ||
+      !validate_date_format_with_time(parameters[9]))
+    return 0;
   if (!validate_parameter_not_empty(parameters[10])) return 0;
   if (!validate_parameter_not_empty(parameters[11]) ||
       !validate_account_status(parameters[11]))

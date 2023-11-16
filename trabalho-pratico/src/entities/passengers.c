@@ -16,6 +16,7 @@ int verify_passenger_input(char **parameters, void *catalog_users,
                            void *catalog_flights) {
   FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog_flights;
   USERS_CATALOG users_catalog = (USERS_CATALOG)catalog_users;
+
   if (!validate_parameter_not_empty(parameters[0]) ||
       get_flight_by_id(flights_catalog, parameters[0]) == NULL)
     return 0;

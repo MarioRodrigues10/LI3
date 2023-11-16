@@ -130,9 +130,7 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
   if (isdigit(id[0]) && isdigit(id[1])) {
     FLIGHT flight = get_flight_by_id(flights_catalog, id);
-    if (flight == NULL) {
-      return NULL;
-    }
+    if (flight == NULL) return NULL;
 
     QUERY1_RESULT result = malloc(sizeof(struct query1_result));
 
