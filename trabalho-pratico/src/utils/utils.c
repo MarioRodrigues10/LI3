@@ -300,7 +300,12 @@ bool validate_number_of_stars(int hotel_stars) {
   return (hotel_stars >= 1 && hotel_stars <= 5);
 }
 
-bool validate_city_tax(int city_tax) { return (city_tax >= 0); }
+bool validate_city_tax(char* city_tax) {
+  char* endptr;
+  long tax_value = strtol(city_tax, &endptr, 10);
+
+  return (*endptr == '\0' && tax_value >= 0);
+}
 
 bool validate_price_per_night(int price_per_night) {
   return (price_per_night > 0);

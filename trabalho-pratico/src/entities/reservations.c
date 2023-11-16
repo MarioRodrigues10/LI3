@@ -34,7 +34,7 @@ int verify_reservation_input(char **parameters) {
       !validate_number_of_stars(strtol(parameters[4], NULL, 10)))
     return 0;
   if (!validate_parameter_not_empty(parameters[5]) ||
-      !validate_city_tax(strtol(parameters[5], NULL, 10)))
+      !validate_city_tax(parameters[5]))
     return 0;
   if (!validate_parameter_not_empty(parameters[6])) return 0;
 

@@ -294,10 +294,10 @@ bool validate_number_of_stars(int hotel_stars);
  *
  * This function checks if the input integer is greater than or equal to 0.
  *
- * @param city_tax The city tax percentage.
+ * @param city_tax The city tax
  * @return true if the city tax percentage is valid, false otherwise.
  */
-bool validate_city_tax(int city_tax);
+bool validate_city_tax(char* city_tax);
 
 /**
  * @brief Validates the price per night in a reservation.
