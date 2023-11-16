@@ -5,14 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct passenger {
   char *flight_id;
   char *user_id;
 };
 
 int verify_passenger_input(char **parameters) {
-  if (!parameters[0]) return 0;
-  if (!parameters[1]) return 0;
+  if (!validate_parameter_not_empty(parameters[0])) return 0;
+  if (!validate_parameter_not_empty(parameters[1])) return 0;
 
   return 1;
 }

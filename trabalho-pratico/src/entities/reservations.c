@@ -26,34 +26,34 @@ struct reservation {
 };
 
 int verify_reservation_input(char **parameters) {
-  if (validate_parameter_not_empty(parameters[0])) return 0;
-  if (validate_parameter_not_empty(parameters[1])) return 0;
-  if (validate_parameter_not_empty(parameters[2])) return 0;
-  if (validate_parameter_not_empty(parameters[3])) return 0;
-  if (validate_parameter_not_empty(parameters[4]) &&
-      validate_number_of_stars(strtol(parameters[12], NULL, 10)))
+  if (!validate_parameter_not_empty(parameters[0])) return 0;
+  if (!validate_parameter_not_empty(parameters[1])) return 0;
+  if (!validate_parameter_not_empty(parameters[2])) return 0;
+  if (!validate_parameter_not_empty(parameters[3])) return 0;
+  if (!validate_parameter_not_empty(parameters[4]) ||
+      !validate_number_of_stars(strtol(parameters[12], NULL, 10)))
     return 0;
-  if (validate_parameter_not_empty(parameters[5]) &&
-      validate_city_tax(strtol(parameters[5], NULL, 10)))
+  if (!validate_parameter_not_empty(parameters[5]) ||
+      !validate_city_tax(strtol(parameters[5], NULL, 10)))
     return 0;
-  if (validate_parameter_not_empty(parameters[6])) return 0;
-  if (validate_parameter_not_empty(parameters[7]) &&
-      !validate_date_format_with_time(parameters[7]))
+  if (!validate_parameter_not_empty(parameters[6])) return 0;
+  if (!validate_parameter_not_empty(parameters[7]) ||
+      !validate_date_format_without_time(parameters[7]))
     return 0;
-  if (validate_parameter_not_empty(parameters[8]) &&
-      !validate_date_format_with_time(parameters[8]))
+  if (!validate_parameter_not_empty(parameters[8]) ||
+      !validate_date_format_without_time(parameters[8]))
     return 0;
-  if (validate_parameter_not_empty(parameters[9]) &&
-      validate_price_per_night(strtol(parameters[9], NULL, 10)))
+  if (!validate_parameter_not_empty(parameters[9]) ||
+      !validate_price_per_night(strtol(parameters[9], NULL, 10)))
     return 0;
-  if (validate_parameter_not_empty(parameters[10]) &&
-      validate_includes_breakfast(parameters[10]))
+  if (!validate_parameter_not_empty(parameters[10]) ||
+      !validate_includes_breakfast(
+          standardize_includes_breakfast(parameters[10])))
     return 0;
-  if (validate_parameter_not_empty(parameters[11])) return 0;
-  if (validate_parameter_not_empty(parameters[12]) &&
-      validate_rating(strtol(parameters[12], NULL, 10)))
+  if (!validate_parameter_not_empty(parameters[11])) return 0;
+  if (!validate_parameter_not_empty(parameters[12]) ||
+      !validate_rating(strtol(parameters[12], NULL, 10)))
     return 0;
-  if (validate_parameter_not_empty(parameters[13])) return 0;
 
   return 1;
 }
@@ -67,7 +67,6 @@ RESERVATION create_reservation() {
 
 void build_reservation(char **reservation_params, void *catalog, STATS stats) {
   if (!verify_reservation_input(reservation_params)) return;
-
   RESERVATION reservation = create_reservation();
   RESERVATIONS_CATALOG reservations_catalog = (RESERVATIONS_CATALOG)catalog;
 

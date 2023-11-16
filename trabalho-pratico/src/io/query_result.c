@@ -130,7 +130,6 @@ struct query2_result {
 void write_query2_result(FILE *output_file, void *result) {
   QUERY2_RESULT query_result = (QUERY2_RESULT)result;
   int j;
-  int N = query_result->iterator - 1;
   for (int i = 0; i < query_result->iterator; i++) {
     j = i + 1;
     if (query_result->type[i] == NULL) {

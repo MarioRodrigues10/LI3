@@ -23,23 +23,23 @@ struct user {
 };
 
 int verify_user_input(char **parameters) {
-  if (validate_parameter_not_empty(parameters[0])) return 0;
-  if (validate_parameter_not_empty(parameters[1])) return 0;
-  if (validate_parameter_not_empty(parameters[2]) &&
-      validate_email(parameters[2]))
+  if (!validate_parameter_not_empty(parameters[0])) return 0;
+  if (!validate_parameter_not_empty(parameters[1])) return 0;
+  if (!validate_parameter_not_empty(parameters[2]) ||
+      !validate_email(parameters[2]))
     return 0;
-  if (validate_parameter_not_empty(parameters[3])) return 0;
-  if (validate_parameter_not_empty(parameters[4])) return 0;
-  if (validate_parameter_not_empty(parameters[5])) return 0;
-  if (validate_parameter_not_empty(parameters[6])) return 0;
-  if (validate_parameter_not_empty(parameters[7]) &&
-      validate_country_code(parameters[7]))
+  if (!validate_parameter_not_empty(parameters[3])) return 0;
+  if (!validate_parameter_not_empty(parameters[4])) return 0;
+  if (!validate_parameter_not_empty(parameters[5])) return 0;
+  if (!validate_parameter_not_empty(parameters[6])) return 0;
+  if (!validate_parameter_not_empty(parameters[7]) ||
+      !validate_country_code(parameters[7]))
     return 0;
-  if (validate_parameter_not_empty(parameters[8])) return 0;
-  if (validate_parameter_not_empty(parameters[9])) return 0;
-  if (validate_parameter_not_empty(parameters[10])) return 0;
-  if (validate_parameter_not_empty(parameters[11]) &&
-      validate_account_status(parameters[11]))
+  if (!validate_parameter_not_empty(parameters[8])) return 0;
+  if (!validate_parameter_not_empty(parameters[9])) return 0;
+  if (!validate_parameter_not_empty(parameters[10])) return 0;
+  if (!validate_parameter_not_empty(parameters[11]) ||
+      !validate_account_status(parameters[11]))
     return 0;
 
   return 1;
@@ -54,7 +54,6 @@ USER create_user() {
 
 void build_user(char **user_params, void *catalog, STATS stats) {
   if (!verify_user_input(user_params)) return;
-
   USER user = create_user();
   USERS_CATALOG users_catalog = (USERS_CATALOG)catalog;
 

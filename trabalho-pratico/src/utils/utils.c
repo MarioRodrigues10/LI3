@@ -307,13 +307,10 @@ bool validate_price_per_night(int price_per_night) {
 }
 
 bool validate_includes_breakfast(char* includes_breakfast) {
-  for (int i = 0; includes_breakfast[i]; i++) {
-    includes_breakfast[i] = tolower(includes_breakfast[i]);
-  }
+  if (includes_breakfast == NULL) return 0;
 
-  return (strcmp(includes_breakfast, "f") == 0 ||
-          strcmp(includes_breakfast, "false") == 0 ||
-          strcmp(includes_breakfast, "0") == 0 ||
+  return (strcmp(includes_breakfast, "FALSE") == 0 ||
+          strcmp(includes_breakfast, "TRUE") == 0 ||
           strcmp(includes_breakfast, "") == 0);
 }
 

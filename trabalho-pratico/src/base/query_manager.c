@@ -247,7 +247,6 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
         result->id[i] = id;
         result->date[i] = format_date(year, month, day);
-        ;
         result->type[i] = NULL;
       }
       result->iterator = i;
@@ -284,7 +283,6 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
       }
       result->iterator = i;
       result->has_f = has_f;
-
       sort_by_date(result, result->iterator);
     }
     return (void *)result;
@@ -335,7 +333,6 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
           result->id[i] = id;
           result->date[i] = format_date(year, month, day);
-          ;
           result->type[i] = "flight";
         }
         result->iterator = i;
@@ -367,7 +364,6 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           i++;
         }
         int j = i;
-        i = 0;
         while (j < max) {
           char *id = g_array_index(reservations, char *, i);
           RESERVATION reservation =
@@ -381,12 +377,10 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           result->id[j] = id;
           result->date[j] = format_date(year, month, day);
           result->type[j] = "reservation";
-          i++;
           j++;
         }
         result->iterator = max;
         result->has_f = has_f;
-
         sort_by_date(result, result->iterator);
         return (void *)result;
       }
