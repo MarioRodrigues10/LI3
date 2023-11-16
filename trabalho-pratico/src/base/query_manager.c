@@ -289,9 +289,9 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
     USER user = get_user_by_username(users_catalog, id);
     char *account_status = get_user_account_status(user);
     if (account_status != NULL && strcmp(account_status, "ACTIVE") == 0) {
-      if (flights == NULL && reservations == NULL)
+      if (flights == NULL && reservations == NULL) {
         return NULL;
-      else if (flights == NULL) {
+      } else if (flights == NULL) {
         result->id = malloc(sizeof(char *) * reservations->len);
         result->date = malloc(sizeof(char *) * reservations->len);
         result->type = malloc(sizeof(char *) * reservations->len);
@@ -341,7 +341,6 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
         return (void *)result;
       } else {
         int max = flights->len + reservations->len;
-
         result->id = malloc(sizeof(char *) * max);
         result->date = malloc(sizeof(char *) * max);
         result->type = malloc(sizeof(char *) * max);
@@ -363,6 +362,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           i++;
         }
         int j = i;
+        i = 0;
         while (j < max) {
           char *id = g_array_index(reservations, char *, i);
           RESERVATION reservation =

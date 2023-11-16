@@ -48,6 +48,7 @@ int verify_user_input(char **parameters) {
   if (!validate_parameter_not_empty(parameters[11]) ||
       !validate_account_status(parameters[11]))
     return 0;
+
   return 1;
 }
 
