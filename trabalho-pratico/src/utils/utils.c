@@ -487,4 +487,59 @@ void sort_by_date_and_value(void* result, int N) {
   }
 }
 
-int compare_dates(char* date1, char* date2) {}
+int compare_dates(char* date1, char* date2) {
+  int year1, month1, day1, hour1, minute1, second1;
+  int year2, month2, day2, hour2, minute2, second2;
+
+  // Parse the first date
+  sscanf(date1, "%d/%d/%d %d:%d:%d", &year1, &month1, &day1, &hour1, &minute1,
+         &second1);
+
+  // Parse the second date
+  sscanf(date2, "%d/%d/%d %d:%d:%d", &year2, &month2, &day2, &hour2, &minute2,
+         &second2);
+
+  // Compare years
+  if (year1 < year2) {
+    return -1;
+  } else if (year1 > year2) {
+    return 1;
+  }
+
+  // Compare months
+  if (month1 < month2) {
+    return -1;
+  } else if (month1 > month2) {
+    return 1;
+  }
+
+  // Compare days
+  if (day1 < day2) {
+    return -1;
+  } else if (day1 > day2) {
+    return 1;
+  }
+
+  // Compare hours
+  if (hour1 < hour2) {
+    return -1;
+  } else if (hour1 > hour2) {
+    return 1;
+  }
+
+  // Compare minutes
+  if (minute1 < minute2) {
+    return -1;
+  } else if (minute1 > minute2) {
+    return 1;
+  }
+
+  // Compare seconds
+  if (second1 < second2) {
+    return -1;
+  } else if (second1 > second2) {
+    return 1;
+  }
+
+  return 0;
+}

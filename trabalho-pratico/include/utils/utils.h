@@ -388,4 +388,16 @@ char* format_date(int year, int month, int day);
  * @param N The size of the array
  */
 void sort_by_date_and_value(void* result, int N);
+
+/**
+ * @brief Function that compares two dates.
+ *
+ * @param date1 The first date of type 'char*'
+ * @param date2 The second date of type 'char*'
+ *
+ * @return 1 if date1 is greater than date2, -1 if date1 is less than date2, 0
+ * if date1 is equal to date2
+ */
+int compare_dates(char* date1, char* date2);
+
 #endif

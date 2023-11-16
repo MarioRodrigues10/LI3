@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 struct flight {
   char *id;
   char *airline;
@@ -22,19 +24,30 @@ struct flight {
 };
 
 int verify_flight_input(char **parameters) {
-  if (!parameters[0]) return 0;
-  if (!parameters[1]) return 0;
-  if (!parameters[2]) return 0;
-  if (!parameters[3]) return 0;
-  if (!parameters[4]) return 0;
-  if (!parameters[5]) return 0;
-  if (!parameters[6]) return 0;
-  if (!parameters[7]) return 0;
-  if (!parameters[8]) return 0;
-  if (!parameters[9]) return 0;
-  if (!parameters[10]) return 0;
-  if (!parameters[11]) return 0;
-  if (!parameters[12]) return 0;
+  if (validate_parameter_not_empty(parameters[0])) return 0;
+  if (validate_parameter_not_empty(parameters[1])) return 0;
+  if (validate_parameter_not_empty(parameters[2])) return 0;
+  if (validate_parameter_not_empty(parameters[3])) return 0;
+  if (validate_parameter_not_empty(parameters[4])) return 0;
+  if (validate_parameter_not_empty(parameters[5])) return 0;
+  if (validate_parameter_not_empty(parameters[6]) &&
+      !validate_date_format_with_time(parameters[6]))
+    return 0;
+  if (validate_parameter_not_empty(parameters[7]) &&
+      !validate_date_format_with_time(parameters[7]))
+    return 0;
+  if (validate_parameter_not_empty(parameters[8]) &&
+      !validate_date_format_with_time(parameters[8]))
+    return 0;
+  if (validate_parameter_not_empty(parameters[9]) &&
+      !validate_date_format_with_time(parameters[9]))
+    return 0;
+  if (validate_parameter_not_empty(parameters[10])) return 0;
+  if (validate_parameter_not_empty(parameters[11])) return 0;
+  if (validate_parameter_not_empty(parameters[12])) return 0;
+
+  if (compare_dates(parameters[6], parameters[7]) >= 0) return 0;
+  if (compare_dates(parameters[8], parameters[9]) >= 0) return 0;
 
   return 1;
 }
@@ -69,8 +82,6 @@ void build_flight(char **flight_params, void *catalog, STATS stats) {
 
 void set_flight_id(FLIGHT flight, char *flight_id) {
   flight->id = g_strdup(flight_id);
-  // gpointer id_pointer = GINT_TO_POINTER(string_to_int(flight_id));
-  // flight->id = id_pointer;
 }
 
 void set_flight_airline(FLIGHT flight, char *airline) {
@@ -142,8 +153,6 @@ void free_flight(FLIGHT flight) {
 char *get_flight_id(FLIGHT flight) {
   char *id = flight->id;
   return id;
-  // int id = GPOINTER_TO_INT(flight->id);
-  // return id;
 }
 
 char *get_flight_airline(FLIGHT flight) {
