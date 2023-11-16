@@ -130,7 +130,6 @@ void *query1(char **query_params, FLIGHTS_CATALOG flights_catalog,
 
   if (isdigit(id[0]) && isdigit(id[1])) {
     FLIGHT flight = get_flight_by_id(flights_catalog, id);
-
     if (flight == NULL) {
       return NULL;
     }
@@ -303,6 +302,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           char *id = g_array_index(reservations, char *, i);
           RESERVATION reservation =
               get_reservation_by_id(reservations_catalog, id);
+          if (reservation == NULL) return NULL;
           char *date = get_reservation_begin_date(reservation);
           int year, month, day, hour, minute, second;
           sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
@@ -326,6 +326,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
         for (i; i < flights->len; i++) {
           char *id = g_array_index(flights, char *, i);
           FLIGHT flight = get_flight_by_id(flights_catalog, id);
+          if (flight == NULL) return NULL;
           char *date = get_flight_schedule_departure_date(flight);
           int year, month, day, hour, minute, second;
           sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
@@ -368,6 +369,7 @@ void *query2(char **query_params, FLIGHTS_CATALOG flights_catalog,
           char *id = g_array_index(reservations, char *, i);
           RESERVATION reservation =
               get_reservation_by_id(reservations_catalog, id);
+          if (reservation == NULL) return NULL;
           char *date = get_reservation_begin_date(reservation);
 
           int year, month, day, hour, minute, second;

@@ -26,30 +26,39 @@ struct flight {
 int verify_flight_input(char **parameters) {
   if (!validate_parameter_not_empty(parameters[0])) return 0;
   if (!validate_parameter_not_empty(parameters[1])) return 0;
+
   if (!validate_parameter_not_empty(parameters[2])) return 0;
+
   if (!validate_parameter_not_empty(parameters[3])) return 0;
+
   if (!validate_parameter_not_empty(parameters[4])) return 0;
+
   if (!validate_parameter_not_empty(parameters[5])) return 0;
-  if (!validate_parameter_not_empty(parameters[6]) ||
-      !validate_date_format_with_time(parameters[6]))
-    return 0;
-  if (!validate_parameter_not_empty(parameters[7]) ||
-      !validate_date_format_with_time(parameters[7]))
-    return 0;
-  if (!validate_parameter_not_empty(parameters[8]) ||
-      !validate_date_format_with_time(parameters[8]))
-    return 0;
-  if (!validate_parameter_not_empty(parameters[9]) ||
-      !validate_date_format_with_time(parameters[9]))
-    return 0;
-  if (!validate_parameter_not_empty(parameters[10])) return 0;
-  if (!validate_parameter_not_empty(parameters[11])) return 0;
-  if (!validate_parameter_not_empty(parameters[12])) return 0;
+}
+if (!validate_parameter_not_empty(parameters[6]) ||
+    !validate_date_format_with_time(parameters[6]))
+  return 0;
 
-  if (compare_dates(parameters[6], parameters[7]) >= 0) return 0;
-  if (compare_dates(parameters[8], parameters[9]) >= 0) return 0;
+if (!validate_parameter_not_empty(parameters[7]) ||
+    !validate_date_format_with_time(parameters[7]))
+  return 0;
 
-  return 1;
+if (!validate_parameter_not_empty(parameters[8]) ||
+    !validate_date_format_with_time(parameters[8]))
+  return 0;
+
+if (!validate_parameter_not_empty(parameters[9]) ||
+    !validate_date_format_with_time(parameters[9]))
+  return 0;
+
+if (!validate_parameter_not_empty(parameters[10])) return 0;
+
+if (!validate_parameter_not_empty(parameters[11])) return 0;
+
+if (compare_dates(parameters[6], parameters[7]) >= 0) return 0;
+if (compare_dates(parameters[8], parameters[9]) >= 0) return 0;
+
+return 1;
 }
 
 FLIGHT create_flight() {
