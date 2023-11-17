@@ -6,7 +6,13 @@
 typedef struct stats *STATS;
 typedef struct hotel_stats *HOTEL_STATS;
 typedef struct flight_stats *FLIGHT_STATS;
+typedef struct user_info *USER_INFO;
 typedef struct user_stats *USER_STATS;
+
+typedef struct stats_user_information *STATS_USER_INFO;
+
+STATS_USER_INFO create_stats_user_information();
+STATS_USER_INFO get_stats_user_info(STATS stats);
 
 /**
  * @brief Function that creates the stats
@@ -171,6 +177,16 @@ void free_flight_stats(FLIGHT_STATS flight_stats);
 USER_STATS create_user_stats(char *user_id, int number_of_flights,
                              int number_of_reservations, double total_spent,
                              char *flight, char *reservation);
+
+/**
+ * @brief Function that updates the user stats
+ *
+ * @param stats The stats of type 'STATS'
+ * @param user_id The id of the user
+ * @param user_name The name of the user
+ *
+ */
+void update_user_stats_info(STATS stats, char *user_id, char *user_name);
 
 /**
  * @brief Function that updates the number of fligths of the user

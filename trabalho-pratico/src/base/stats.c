@@ -2,6 +2,7 @@
 #include "base/stats.h"
 
 #include <glib.h>
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,6 +12,8 @@ struct stats {
   GHashTable *flight;
 
   GHashTable *user;
+
+  STATS_USER_INFO user_information;
 };
 
 // OVERALL STATS
@@ -25,6 +28,9 @@ STATS create_stats() {
 
   new_stats->user = g_hash_table_new_full(g_str_hash, g_str_equal, NULL,
                                           (GDestroyNotify)free_user_stats);
+
+  new_stats->user_information = create_stats_user_information();
+
   return new_stats;
 }
 
@@ -143,6 +149,15 @@ void free_flight_stats(FLIGHT_STATS flight_stats) {
 
 // USER STATS
 
+struct user_info {
+  char *user_id;
+  char *user_name;
+};
+
+struct stats_user_information {
+  GArray *info;
+};
+
 struct user_stats {
   char *user_id;
   int number_of_flights;
@@ -161,6 +176,7 @@ USER_STATS create_user_stats(char *user_id, int number_of_flights,
   new_user_stats->number_of_flights = number_of_flights;
   new_user_stats->number_of_reservations = number_of_reservations;
   new_user_stats->total_spent = total_spent;
+
   new_user_stats->user_flights = g_array_new(FALSE, FALSE, sizeof(USER_STATS));
   new_user_stats->user_reservations =
       g_array_new(FALSE, FALSE, sizeof(USER_STATS));
@@ -170,6 +186,28 @@ USER_STATS create_user_stats(char *user_id, int number_of_flights,
     g_array_append_val(new_user_stats->user_reservations, reservation_id);
   return new_user_stats;
 }
+//--------------------------------Query_9----------------------------------------------------------------------------
+
+STATS_USER_INFO create_stats_user_information() {
+  STATS_USER_INFO new_user = malloc(sizeof(STATS_USER_INFO));
+
+  new_user->info = g_array_new(FALSE, FALSE, sizeof(USER_INFO));
+  return new_user;
+}
+
+void update_user_stats_info(STATS stats, char *user_id, char *user_name) {
+  USER_INFO new_info = malloc(sizeof(USER_INFO));
+  new_info->user_id = g_strdup(user_id);
+  new_info->user_name = g_strdup(user_name);
+
+  g_array_append_val(stats->user_information->info, new_info);
+}
+
+STATS_USER_INFO get_stats_user_info(STATS stats) {
+  return stats->user_information;
+}
+
+//--------------------------------Query_9----------------------------------------------------------------------------
 
 void update_user_stats_number_of_flights(STATS stats, char *user_id,
                                          char *flight_id) {

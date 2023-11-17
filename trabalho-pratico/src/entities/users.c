@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "base/stats.h"
 #include "utils/utils.h"
 
 struct user {
@@ -88,15 +89,13 @@ void build_user(char **user_params, void *catalog, STATS stats,
   set_user_account_creation(user, user_params[9]);
   set_user_pay_method(user, user_params[10]);
   set_user_account_status(user, standardize_account_status(user_params[11]));
-
+  if (strcmp(standardize_account_status(user_params[11]), "ACTIVE") == 0) {
+    update_user_stats_info(stats, user_params[0], user_params[1]);
+  }
   add_user_to_catalog(users_catalog, user, user->id);
 }
 
-void set_user_id(USER user, char *id) {
-  user->id = g_strdup(id);
-  // gpointer id_pointer = g_strdup(id);
-  // user->id = id_pointer;
-}
+void set_user_id(USER user, char *id) { user->id = g_strdup(id); }
 
 void set_user_name(USER user, char *name) { user->name = g_strdup(name); }
 

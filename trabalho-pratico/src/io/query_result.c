@@ -224,6 +224,32 @@ void write_query8_result(FILE *output_file, void *result) {
   }
 }
 
-void write_query9_result(FILE *output_file, void *result) { return; }
+struct query9_aux {
+  char *user_id;
+  char *user_name;
+};
+
+struct query9_result {
+  char **user_id;
+  char **user_name;
+  int size;
+  bool has_f;
+};
+void write_query9_result(FILE *output_file, void *result) {
+  QUERY9_RESULT query_result = (QUERY9_RESULT)result;
+  if (query_result->has_f) {
+    for (int i = 0; i < query_result->size; i++) {
+      fprintf(output_file, "--- %d ---\nid: %s\nname: %s\n", i + 1,
+              query_result->user_id[i], query_result->user_name[i]);
+    }
+  } else {
+    for (int i = 0; i < query_result->size; i++) {
+      fprintf(output_file, "%s;%s\n", query_result->user_id[i],
+              query_result->user_name[i]);
+    }
+  }
+
+  return;
+}
 
 void write_query10_result(FILE *output_file, void *result) { return; }

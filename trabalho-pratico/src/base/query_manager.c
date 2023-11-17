@@ -3,6 +3,7 @@
 
 #include <ctype.h>
 #include <glib.h>
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,12 +41,6 @@ void *query_manager(char *line, FLIGHTS_CATALOG flights_catalog,
   void *result =
       table[query_type](query_parameters, flights_catalog, passengers_catalog,
                         reservations_catalog, users_catalog, stats);
-
-  for (int j = 0; j < i; j++) {
-    free(query_parameters[j]);
-  }
-  free(query_parameters);
-  return result;
 }
 
 struct query1_result {
@@ -575,12 +570,128 @@ void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
   return (void *)result;
 }
 
+//-----------------------------------------Query_9-------------------------------------------------------------
+char *strcat_with_space(const char *str1, const char *str2) {
+  size_t len1 = strlen(str1);
+  size_t len2 = strlen(str2);
+  size_t total_len = len1 + len2 + 1;  // 1 for the space
+
+  char *result = (char *)malloc(total_len);
+  strcpy(result, str1);
+  result[len1] = ' ';
+
+  strcpy(result + len1 + 1, str2);
+
+  return result;
+}
+
+char *remove_quotation_marks(const char *str) {
+  size_t len = strlen(str);
+  size_t total_len = len - 2;
+
+  char *result = (char *)malloc(total_len);
+
+  if (result == NULL) {
+    fprintf(stderr, "Memory allocation failed\n");
+    exit(EXIT_FAILURE);
+  }
+  strcpy(result, str + 1);
+  result[len - 2] = '\0';
+  return result;
+}
+
+struct user_info {
+  char *user_id;
+  char *user_name;
+};
+
+// stats_user
+struct stats_user_information {
+  GArray *info;
+};
+
+struct query9_result {
+  char **user_id;
+  char **user_name;
+  int size;
+  bool has_f;
+};
+struct stats {
+  GHashTable *hotel;
+
+  GHashTable *flight;
+
+  GHashTable *user;
+
+  STATS_USER_INFO user_information;
+};
+//<ajuda> a g_array_sort faz a ordenação de acordo com o compare_user_info
+
+gint compare_user_info(gconstpointer a, gconstpointer b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
+  const USER_INFO userInfoA = *(const USER_INFO *)a;
+  const USER_INFO userInfoB = *(const USER_INFO *)b;
+
+  int compare_name = strcoll(userInfoA->user_name, userInfoB->user_name);
+
+  if (compare_name == 0) {
+    return strcoll(userInfoA->user_id, userInfoB->user_id);
+  }
+  return compare_name;
+}
+
 void *query9(char **query_params, FLIGHTS_CATALOG flights_catalog,
              PASSENGERS_CATALOG passengers_catalog,
              RESERVATIONS_CATALOG reservations_catalog,
              USERS_CATALOG users_catalog, STATS stats) {
-  return NULL;
+  bool has_f = false;
+  char *prefix = NULL;
+  if (strcmp(query_params[0], "F") == 0) {
+    has_f = true;
+    prefix = query_params[1];
+
+    for (int i = 2; query_params[i] != NULL; i++) {
+      prefix =
+          remove_quotation_marks(strcat_with_space(prefix, query_params[i]));
+    }
+
+  } else {
+    has_f = false;
+    prefix = query_params[0];
+    for (int i = 1; query_params[i] != NULL; i++) {
+      prefix =
+          remove_quotation_marks(strcat_with_space(prefix, query_params[i]));
+    }
+  }
+  STATS_USER_INFO stats_user = stats->user_information;
+  QUERY9_RESULT result = malloc(sizeof(struct query9_result));
+
+  result->user_id = malloc(sizeof(char *) * stats_user->info->len);
+  result->user_name = malloc(sizeof(char *) * stats_user->info->len);
+
+  g_array_sort(stats_user->info, (GCompareFunc)compare_user_info);
+
+  int j, i;
+  for (i = 0, j = 0; i < stats_user->info->len; i++) {
+    if (strncmp(g_array_index(stats->user_information->info, USER_INFO, i)
+                    ->user_name,
+                prefix, strlen(prefix)) == 0) {
+      result->user_id[j] = g_strdup(
+          g_array_index(stats->user_information->info, USER_INFO, i)->user_id);
+      result->user_name[j] =
+          g_strdup(g_array_index(stats->user_information->info, USER_INFO, i)
+                       ->user_name);
+
+      j++;
+    }
+  }
+
+  result->has_f = has_f;
+  result->size = j;
+  return (void *)result;
 }
+
+//-----------------------------------------The_End----------------------------------------------------------------
 
 void *query10(char **query_params, FLIGHTS_CATALOG flights_catalog,
               PASSENGERS_CATALOG passengers_catalog,
