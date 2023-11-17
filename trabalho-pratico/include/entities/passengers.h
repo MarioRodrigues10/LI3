@@ -4,6 +4,8 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_PASSENGER 2
 
+#include <stdio.h>
+
 #include "base/stats.h"
 #include "catalogs/passengers_catalog.h"
 
@@ -25,7 +27,8 @@ PASSENGER create_passenger();
  *
  */
 void build_passenger(char **passenger_params, void *catalog,
-                     void *catalog_users, void *catalog_flights, STATS stats);
+                     void *catalog_users, void *catalog_flights, STATS stats,
+                     FILE *errors_file);
 
 /**
  * @brief Function that verifies if the parameters are valid to create a new

@@ -4,6 +4,8 @@
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_RESERVATION 14
 
+#include <stdio.h>
+
 #include "base/stats.h"
 #include "catalogs/reservations_catalog.h"
 #include "catalogs/users_catalog.h"
@@ -25,7 +27,7 @@ RESERVATION create_reservation();
  *
  */
 void build_reservation(char **reservation_params, void *catalog,
-                       void *catalog_users, STATS stats);
+                       void *catalog_users, STATS stats, FILE *errors_file);
 
 /**
  * @brief Function that verifies if the parameters is valid to create a new

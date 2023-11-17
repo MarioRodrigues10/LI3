@@ -59,8 +59,20 @@ USER create_user() {
   return new_user;
 }
 
-void build_user(char **user_params, void *catalog, STATS stats) {
-  if (!verify_user_input(user_params)) return;
+void build_user(char **user_params, void *catalog, STATS stats,
+                FILE *errors_file) {
+  if (!verify_user_input(user_params)) {
+    int i;
+    for (i = 0; i < MAX_TOKENS_USER - 1; i++) {
+      if (user_params[i] == NULL) {
+        fprintf(errors_file, ";");
+      }
+      fprintf(errors_file, "%s;", user_params[i]);
+    }
+    if (user_params[i] != NULL) fprintf(errors_file, "%s", user_params[i]);
+    fprintf(errors_file, "\n");
+    return;
+  }
   USER user = create_user();
   USERS_CATALOG users_catalog = (USERS_CATALOG)catalog;
 

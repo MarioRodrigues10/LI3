@@ -283,8 +283,20 @@ bool validate_account_status(char* account_status) {
           strcmp(account_status, "inactive") == 0);
 }
 
-bool validate_total_seats(int total_seats, int number_of_passengers) {
-  return total_seats >= number_of_passengers;
+bool validate_total_seats(const char* total_seats) {
+  char* endptr;  // Pointer to the first invalid character in strtol
+
+  // Convert the string to an integer
+  long int value = strtol(total_seats, &endptr, 10);
+
+  // Check for conversion errors
+  if (*endptr != '\0' || total_seats == endptr) {
+    // Not a valid integer or empty string
+    return false;
+  }
+
+  // Check if the value is non-negative
+  return value >= 0;
 }
 
 bool validate_airports(char* airport1, char* airport2) {
@@ -358,6 +370,16 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
   char* reservations_filename = create_filename(folder, "/reservations.csv");
   char* users_filename = create_filename(folder, "/users.csv");
 
+  char* users_errors_filename = malloc(sizeof(char) * 256);
+  char* flights_errors_filename = malloc(sizeof(char) * 256);
+  char* reservations_errors_filename = malloc(sizeof(char) * 256);
+  char* passengers_errors_filename = malloc(sizeof(char) * 256);
+
+  sprintf(users_errors_filename, "Resultados/users_errors.csv");
+  sprintf(flights_errors_filename, "Resultados/flights_errors.csv");
+  sprintf(reservations_errors_filename, "Resultados/reservations_errors.csv");
+  sprintf(passengers_errors_filename, "Resultados/passengers_errors.csv");
+
   if (flights_filename == NULL || passengers_filename == NULL ||
       reservations_filename == NULL || users_filename == NULL) {
     printf("Error creating filenames!\n");
@@ -369,6 +391,24 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
   FILE* reservations_file = fopen(reservations_filename, "r");
   FILE* users_file = fopen(users_filename, "r");
 
+  FILE* users_errors_file = fopen(users_errors_filename, "w");
+  FILE* flights_errors_file = fopen(flights_errors_filename, "w");
+  FILE* reservations_errors_file = fopen(reservations_errors_filename, "w");
+  FILE* passengers_errors_file = fopen(passengers_errors_filename, "w");
+
+  fprintf(users_errors_file,
+          "id;name;email;phone_number;birth_date;sex;passport;country_code;"
+          "address;account_creation;pay_method;account_status\n");
+  fprintf(flights_errors_file,
+          "id;airline;plane_model;total_seats;origin;destination;schedule_"
+          "departure_date;schedule_arrival_date;real_departure_date;real_"
+          "arrival_date;pilot;copilot;notes\n");
+  fprintf(reservations_errors_file,
+          "id;user_id;hotel_id;hotel_name;hotel_stars;city_tax;address;begin_"
+          "date;end_date;price_per_night;includes_breakfast;room_details;"
+          "rating;comment\n");
+  fprintf(passengers_errors_file, "flight_id;user_id\n");
+
   if (flights_file == NULL || passengers_file == NULL ||
       reservations_file == NULL || users_file == NULL) {
     printf("Error opening files!\n");
@@ -376,19 +416,24 @@ int setup_catalogs_and_stats(char* folder, FLIGHTS_CATALOG flights_catalog,
   }
 
   parse_file(flights_file, flights_catalog, build_flight, stats,
-             MAX_TOKENS_FLIGHT);
-  parse_file(users_file, users_catalog, build_user, stats, MAX_TOKENS_USER);
+             flights_errors_file, MAX_TOKENS_FLIGHT);
+  parse_file(users_file, users_catalog, build_user, stats, users_errors_file,
+             MAX_TOKENS_USER);
   parse_file_reservations(reservations_file, reservations_catalog,
                           users_catalog, build_reservation, stats,
-                          MAX_TOKENS_RESERVATION);
+                          reservations_errors_file, MAX_TOKENS_RESERVATION);
   parse_file_passengers(passengers_file, passengers_catalog, users_catalog,
                         flights_catalog, build_passenger, stats,
-                        MAX_TOKENS_PASSENGER);
+                        passengers_errors_file, MAX_TOKENS_PASSENGER);
 
   free(flights_filename);
   free(passengers_filename);
   free(reservations_filename);
   free(users_filename);
+  free(users_errors_filename);
+  free(flights_errors_filename);
+  free(reservations_errors_filename);
+  free(passengers_errors_filename);
   return 0;
 }
 

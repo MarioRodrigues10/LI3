@@ -34,9 +34,22 @@ PASSENGER create_passenger() {
 }
 
 void build_passenger(char **passenger_params, void *catalog,
-                     void *catalog_users, void *catalog_flights, STATS stats) {
-  if (!verify_passenger_input(passenger_params, catalog_users, catalog_flights))
+                     void *catalog_users, void *catalog_flights, STATS stats,
+                     FILE *errors_file) {
+  if (!verify_passenger_input(passenger_params, catalog_users,
+                              catalog_flights)) {
+    int i;
+    for (i = 0; i < MAX_TOKENS_PASSENGER - 1; i++) {
+      if (passenger_params[i] == NULL) {
+        fprintf(errors_file, ";");
+      }
+      fprintf(errors_file, "%s;", passenger_params[i]);
+    }
+    if (passenger_params[i] != NULL)
+      fprintf(errors_file, "%s", passenger_params[i]);
+    fprintf(errors_file, "\n");
     return;
+  }
 
   PASSENGER passenger = create_passenger();
   PASSENGERS_CATALOG passengers_catalog = (PASSENGERS_CATALOG)catalog;

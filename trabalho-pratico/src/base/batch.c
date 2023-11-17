@@ -13,6 +13,11 @@ int batch(char **argv) {
 
   STATS stats = create_stats();
 
+  // Create results directory
+  if (create_directory("Resultados") != 0) {
+    return ERR_CREATING_DIRECTORY;
+  }
+
   if (setup_catalogs_and_stats(argv[1], flights_catalog, passengers_catalog,
                                reservations_catalog, users_catalog,
                                stats) == -1) {
@@ -24,11 +29,6 @@ int batch(char **argv) {
   FILE *queries_file = fopen(queries_filename, "r");
   if (queries_file == NULL) {
     return -1;
-  }
-
-  // Create results directory
-  if (create_directory("Resultados") != 0) {
-    return ERR_CREATING_DIRECTORY;
   }
 
   char *line = NULL;

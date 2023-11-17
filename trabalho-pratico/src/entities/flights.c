@@ -29,7 +29,9 @@ int verify_flight_input(char **parameters) {
 
   if (!validate_parameter_not_empty(parameters[2])) return 0;
 
-  if (!validate_parameter_not_empty(parameters[3])) return 0;
+  if (!validate_parameter_not_empty(parameters[3]) ||
+      !validate_total_seats(parameters[3]))
+    return 0;
 
   if (!validate_parameter_not_empty(parameters[4])) return 0;
 
@@ -57,6 +59,7 @@ int verify_flight_input(char **parameters) {
 
   if (compare_dates(parameters[6], parameters[7]) >= 0) return 0;
   if (compare_dates(parameters[8], parameters[9]) >= 0) return 0;
+  if (strcmp(parameters[4], parameters[5]) == 0) return 0;
 
   return 1;
 }
@@ -67,8 +70,20 @@ FLIGHT create_flight() {
   return newflight;
 }
 
-void build_flight(char **flight_params, void *catalog, STATS stats) {
-  if (!verify_flight_input(flight_params)) return;
+void build_flight(char **flight_params, void *catalog, STATS stats,
+                  FILE *errors_file) {
+  if (!verify_flight_input(flight_params)) {
+    int i;
+    for (i = 0; i < MAX_TOKENS_FLIGHT - 1; i++) {
+      if (flight_params[i] == NULL) {
+        fprintf(errors_file, ";");
+      }
+      fprintf(errors_file, "%s;", flight_params[i]);
+    }
+    if (flight_params[i] != NULL) fprintf(errors_file, "%s", flight_params[i]);
+    fprintf(errors_file, "\n");
+    return;
+  }
   FLIGHT flight = create_flight();
   FLIGHTS_CATALOG flights_catalog = (FLIGHTS_CATALOG)catalog;
 

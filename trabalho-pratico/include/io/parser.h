@@ -14,9 +14,11 @@
 
 #define SEPARATOR ";"
 
-typedef void (*function_pointer)(char**, void*, STATS);
-typedef void (*function_pointer_reservations)(char**, void*, void*, STATS);
-typedef void (*function_pointer_passengers)(char**, void*, void*, void*, STATS);
+typedef void (*function_pointer)(char**, void*, STATS, FILE*);
+typedef void (*function_pointer_reservations)(char**, void*, void*, STATS,
+                                              FILE*);
+typedef void (*function_pointer_passengers)(char**, void*, void*, void*, STATS,
+                                            FILE*);
 /**
  * @brief Parses a line
  *
@@ -37,14 +39,14 @@ char** parse_line(char* line, int num_tokens);
  * @return 0 if successful, -1 otherwise
  */
 int parse_file(FILE* file, void* catalog, function_pointer function,
-               STATS stats, int num_tokens);
+               STATS stats, FILE* errors_file, int num_tokens);
 
 int parse_file_reservations(FILE* file, void* catalog, void* catalog_users,
                             function_pointer_reservations build_function,
-                            STATS stats, int num_tokens);
+                            STATS stats, FILE* errors_file, int num_tokens);
 
 int parse_file_passengers(FILE* file, void* catalog, void* catalog_users,
                           void* catalog_flights,
                           function_pointer_passengers build_function,
-                          STATS stats, int num_tokens);
+                          STATS stats, FILE* errors_file, int num_tokens);
 #endif

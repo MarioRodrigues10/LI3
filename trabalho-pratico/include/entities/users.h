@@ -3,6 +3,7 @@
 
 #define MAX_FIELD_SIZE 256
 #define MAX_TOKENS_USER 12
+#include <stdio.h>
 
 #include "base/stats.h"
 #include "catalogs/users_catalog.h"
@@ -33,7 +34,8 @@ USER create_user();
  * @param stats - The stats of type 'STATS'
  *
  */
-void build_user(char **user_params, void *catalog, STATS stats);
+void build_user(char **user_params, void *catalog, STATS stats,
+                FILE *errors_file);
 
 /**
  * @brief Function that sets the user id

@@ -262,10 +262,9 @@ bool validate_account_status(char* account_status);
  * than the number of passengers.
  *
  * @param total_seats The total number of seats in the flight.
- * @param number_of_passengers The number of passengers.
  * @return true if the number of seats is valid, false otherwise.
  */
-bool validate_total_seats(int total_seats, int number_of_passengers);
+bool validate_total_seats(const char* total_seats);
 
 /**
  * @brief Validates whether two airports are equal (case-insensitive).

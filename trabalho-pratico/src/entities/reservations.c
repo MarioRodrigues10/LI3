@@ -78,8 +78,20 @@ RESERVATION create_reservation() {
 }
 
 void build_reservation(char **reservation_params, void *catalog,
-                       void *catalog_users, STATS stats) {
-  if (!verify_reservation_input(reservation_params, catalog_users)) return;
+                       void *catalog_users, STATS stats, FILE *errors_file) {
+  if (!verify_reservation_input(reservation_params, catalog_users)) {
+    int i;
+    for (i = 0; i < MAX_TOKENS_RESERVATION - 1; i++) {
+      if (reservation_params[i] == NULL) {
+        fprintf(errors_file, ";");
+      }
+      fprintf(errors_file, "%s;", reservation_params[i]);
+    }
+    if (reservation_params[i] != NULL)
+      fprintf(errors_file, "%s", reservation_params[i]);
+    fprintf(errors_file, "\n");
+    return;
+  }
   RESERVATION reservation = create_reservation();
   RESERVATIONS_CATALOG reservations_catalog = (RESERVATIONS_CATALOG)catalog;
 

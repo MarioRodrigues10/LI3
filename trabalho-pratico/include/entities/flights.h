@@ -1,6 +1,8 @@
 #ifndef FLIGHTS_H
 #define FLIGHTS_H
 
+#include <stdio.h>
+
 #include "base/stats.h"
 #include "catalogs/flights_catalog.h"
 
@@ -23,7 +25,8 @@ FLIGHT create_flight();
  * @param stats - The stats of type 'STATS'
  *
  */
-void build_flight(char **flight_params, void *catalog, STATS stats);
+void build_flight(char **flight_params, void *catalog, STATS stats,
+                  FILE *errors_file);
 
 /**
  * @brief Function that verifies if the paramenters are valid to create a new
