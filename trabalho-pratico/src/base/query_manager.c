@@ -550,12 +550,24 @@ void *query8(char **query_params, FLIGHTS_CATALOG flights_catalog,
     char *begin_date_reservation = get_reservation_begin_date(reservation);
     char *end_date_reservation = get_reservation_end_date(reservation);
     int price_per_night = get_reservation_price_per_night(reservation);
-    if (strcmp(begin_date, begin_date_reservation) <= 0 &&
-        strcmp(end_date, end_date_reservation) >= 0) {
-      revenue = revenue + calculate_total_price(
-                              calculate_number_of_nights(begin_date_reservation,
-                                                         end_date_reservation),
-                              price_per_night, 0);
+    if (strcmp(begin_date, end_date) == 0 &&
+        (strcmp(begin_date, begin_date_reservation) == 0 ||
+         strcmp(end_date, end_date_reservation) == 0)) {
+      revenue += 1 * price_per_night;
+    } else if (calculate_number_of_nights(begin_date, end_date) == 1 &&
+               (strcmp(begin_date, begin_date_reservation) == 0 ||
+                strcmp(begin_date, end_date_reservation) == 0 ||
+                strcmp(end_date, end_date_reservation) == 0 ||
+                strcmp(end_date, begin_date_reservation) == 0)) {
+      if (strcmp(begin_date_reservation, end_date_reservation) == 0)
+        revenue += 1 * price_per_night;
+      else
+        revenue += 2 * price_per_night;
+    } else if (strcmp(begin_date, begin_date_reservation) <= 0 &&
+               strcmp(end_date, end_date_reservation) >= 0) {
+      revenue += calculate_number_of_nights(begin_date_reservation,
+                                            end_date_reservation) *
+                 price_per_night;
     }
   }
   result->revenue = revenue;
@@ -592,11 +604,20 @@ void free_query1_result(void *result) {
   free(query1_result);
 }
 
-void free_query2_result(void *result) { return; }
+void free_query2_result(void *result) {
+  QUERY2_RESULT query2_result = (QUERY2_RESULT)result;
+  free(query2_result);
+}
 
-void free_query3_result(void *result) { return; }
+void free_query3_result(void *result) {
+  QUERY3_RESULT query3_result = (QUERY3_RESULT)result;
+  free(query3_result);
+}
 
-void free_query4_result(void *result) { return; }
+void free_query4_result(void *result) {
+  QUERY4_RESULT query4_result = (QUERY4_RESULT)result;
+  free(query4_result);
+}
 
 void free_query5_result(void *result) { return; }
 
@@ -604,7 +625,10 @@ void free_query6_result(void *result) { return; }
 
 void free_query7_result(void *result) { return; }
 
-void free_query8_result(void *result) { return; }
+void free_query8_result(void *result) {
+  QUERY8_RESULT query8_result = (QUERY8_RESULT)result;
+  free(query8_result);
+}
 
 void free_query9_result(void *result) { return; }
 

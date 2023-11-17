@@ -51,7 +51,6 @@ int calculate_number_of_nights(const char* begin_date_str,
 
   int begin_date = begin_year * 10000 + begin_month * 100 + begin_day;
   int end_date = end_year * 10000 + end_month * 100 + end_day;
-
   int nights = end_date - begin_date;
   return nights;
 }
