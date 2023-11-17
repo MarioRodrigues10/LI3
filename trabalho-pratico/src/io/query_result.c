@@ -239,11 +239,13 @@ void write_query9_result(FILE *output_file, void *result) {
   QUERY9_RESULT query_result = (QUERY9_RESULT)result;
   if (query_result->has_f) {
     for (int i = 0; i < query_result->size; i++) {
+      if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file, "--- %d ---\nid: %s\nname: %s\n", i + 1,
               query_result->user_id[i], query_result->user_name[i]);
     }
   } else {
     for (int i = 0; i < query_result->size; i++) {
+      if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file, "%s;%s\n", query_result->user_id[i],
               query_result->user_name[i]);
     }
