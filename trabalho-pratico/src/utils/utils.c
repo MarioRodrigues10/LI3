@@ -252,50 +252,74 @@ bool validate_date_format_with_time(char* date) {
 }
 
 bool validate_email(char* email) {
-  char* username = strtok(email, "@");
+  char* email_validate = malloc(sizeof(char) * (strlen(email) + 1));
+  strcpy(email_validate, email);
+  char* username = strtok(email_validate, "@");
   if (username == NULL || strlen(username) < 1) return false;
 
   char* domain = strtok(NULL, ".");
   char* tld = strtok(NULL, ".");
-  if (domain == NULL || strlen(domain) < 1 || tld == NULL || strlen(tld) < 2)
+  if (domain == NULL || strlen(domain) < 1 || tld == NULL || strlen(tld) < 2) {
+    free(email_validate);
     return false;
-
+  }
+  free(email_validate);
   return true;
 }
 
 bool validate_country_code(char* country_code) {
-  if (strlen(country_code) != 2) return false;
-
-  for (int i = 0; i < 2; i++) {
-    if (!isalpha(country_code[i])) return false;
+  char* country_code_validation =
+      malloc(sizeof(char) * (strlen(country_code) + 1));
+  strcpy(country_code_validation, country_code);
+  if (strlen(country_code_validation) != 2) {
+    free(country_code_validation);
+    return false;
   }
 
+  for (int i = 0; i < 2; i++) {
+    if (!isalpha(country_code[i])) {
+      free(country_code_validation);
+      return false;
+    }
+  }
+  free(country_code_validation);
   return true;
 }
 
 bool validate_account_status(char* account_status) {
+  char* account_status_validate =
+      malloc(sizeof(char) * (strlen(account_status) + 1));
+  strcpy(account_status_validate, account_status);
   for (int i = 0; account_status[i]; i++) {
-    account_status[i] = tolower(account_status[i]);
+    account_status_validate[i] = tolower(account_status[i]);
   }
 
-  return (strcmp(account_status, "active") == 0 ||
-          strcmp(account_status, "inactive") == 0);
+  if (strcmp(account_status_validate, "active") == 0 ||
+      strcmp(account_status_validate, "inactive") == 0) {
+    free(account_status_validate);
+    return true;
+  }
+  free(account_status_validate);
+  return false;
 }
 
 bool validate_total_seats(const char* total_seats) {
+  char* total_seats_validate = malloc(sizeof(char) * (strlen(total_seats) + 1));
+  strcpy(total_seats_validate, total_seats);
   char* endptr;  // Pointer to the first invalid character in strtol
 
   // Convert the string to an integer
   long int value = strtol(total_seats, &endptr, 10);
 
   // Check for conversion errors
-  if (*endptr != '\0' || total_seats == endptr) {
+  if (*endptr != '\0' || total_seats == endptr || value < 0) {
     // Not a valid integer or empty string
+    free(total_seats_validate);
     return false;
   }
 
-  // Check if the value is non-negative
-  return value >= 0;
+  free(total_seats_validate);
+  return true;
 }
 
 bool validate_airports(char* airport1, char* airport2) {
@@ -320,10 +344,17 @@ bool validate_number_of_stars(int hotel_stars) {
 }
 
 bool validate_city_tax(char* city_tax) {
+  char* city_tax_validate = malloc(sizeof(char) * (strlen(city_tax) + 1));
+  strcpy(city_tax_validate, city_tax);
   char* endptr;
-  long tax_value = strtol(city_tax, &endptr, 10);
+  long tax_value = strtol(city_tax_validate, &endptr, 10);
 
-  return (*endptr == '\0' && tax_value >= 0);
+  if (*endptr == '\0' && tax_value >= 0) {
+    free(city_tax_validate);
+    return true;
+  }
+  free(city_tax_validate);
+  return false;
 }
 
 bool validate_price_per_night(int price_per_night) {
@@ -331,29 +362,42 @@ bool validate_price_per_night(int price_per_night) {
 }
 
 bool validate_includes_breakfast(char* includes_breakfast) {
-  if (strlen(includes_breakfast) == 0) return true;
+  char* includes_breakfast_validate =
+      malloc(sizeof(char) * (strlen(includes_breakfast) + 1));
+  strcpy(includes_breakfast_validate, includes_breakfast);
+  if (strlen(includes_breakfast_validate) == 0) return true;
 
-  for (int i = 0; includes_breakfast[i]; i++) {
-    includes_breakfast[i] = tolower(includes_breakfast[i]);
+  for (int i = 0; includes_breakfast_validate[i]; i++) {
+    includes_breakfast_validate[i] = tolower(includes_breakfast_validate[i]);
   }
 
-  if ((strcmp(includes_breakfast, "t") == 0) ||
-      (strcmp(includes_breakfast, "true") == 0) ||
-      (strcmp(includes_breakfast, "1") == 0))
+  if ((strcmp(includes_breakfast_validate, "t") == 0) ||
+      (strcmp(includes_breakfast_validate, "true") == 0) ||
+      (strcmp(includes_breakfast_validate, "1") == 0)) {
+    free(includes_breakfast_validate);
     return true;
-  else if (strcmp(includes_breakfast, "false") == 0 ||
-           strcmp(includes_breakfast, "f") == 0 ||
-           strcmp(includes_breakfast, "0") == 0)
+  } else if (strcmp(includes_breakfast_validate, "false") == 0 ||
+             strcmp(includes_breakfast_validate, "f") == 0 ||
+             strcmp(includes_breakfast_validate, "0") == 0) {
+    free(includes_breakfast_validate);
     return true;
-
+  }
+  free(includes_breakfast_validate);
   return false;
 }
 
 bool validate_rating(char* rating) {
+  char* rating_validate = malloc(sizeof(char) * (strlen(rating) + 1));
+  strcpy(rating_validate, rating);
   char* endptr;
   double rating_value = strtod(rating, &endptr);
 
-  return (*endptr == '\0' && rating_value >= 1 && rating_value <= 5);
+  if (*endptr == '\0' && rating_value >= 1 && rating_value <= 5) {
+    free(rating_validate);
+    return true;
+  }
+  free(rating_validate);
+  return false;
 }
 
 bool validate_parameter_not_empty(char* parameter) {
