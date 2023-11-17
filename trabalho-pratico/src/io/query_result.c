@@ -245,7 +245,6 @@ void write_query9_result(FILE *output_file, void *result) {
     }
   } else {
     for (int i = 0; i < query_result->size; i++) {
-      if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file, "%s;%s\n", query_result->user_id[i],
               query_result->user_name[i]);
     }
