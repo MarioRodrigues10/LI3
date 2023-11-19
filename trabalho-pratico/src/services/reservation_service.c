@@ -14,7 +14,7 @@ int verify_reservation_input(char **parameters, UsersData *users_data) {
   if (!validate_parameter_not_empty(parameters[3])) return 0;
 
   if (!validate_parameter_not_empty(parameters[4]) ||
-      !validate_number_of_stars(strtol(parameters[4], NULL, 10)))
+      !validate_number_of_stars(parameters[4]))
     return 0;
 
   if (!validate_parameter_not_empty(parameters[5]) ||

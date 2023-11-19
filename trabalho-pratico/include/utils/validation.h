@@ -133,7 +133,7 @@ bool validate_airports(char* airport1, char* airport2);
  * @param hotel_stars The number of stars of the hotel.
  * @return true if the number of stars is valid, false otherwise.
  */
-bool validate_number_of_stars(int hotel_stars);
+bool validate_number_of_stars(char* hotel_stars);
 
 /**
  * @brief Validates the city tax percentage in a reservation.

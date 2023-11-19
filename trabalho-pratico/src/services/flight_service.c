@@ -14,9 +14,9 @@ int verify_flight_input(char **parameters) {
       !validate_total_seats(parameters[3]))
     return 0;
 
-  if (!validate_parameter_not_empty(parameters[4])) return 0;
+  if (!validate_parameter_not_empty(parameters[4]) && strlen(parameters[4]) == 3) return 0;
 
-  if (!validate_parameter_not_empty(parameters[5])) return 0;
+  if (!validate_parameter_not_empty(parameters[5]) && strlen(parameters[5]) == 3) return 0;
 
   if (!validate_parameter_not_empty(parameters[6]) ||
       !validate_date_format_with_time(parameters[6]))
