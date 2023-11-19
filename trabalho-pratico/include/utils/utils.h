@@ -112,10 +112,11 @@ char* strcat_with_space(const char* str1, const char* str2);
  * @brief Function that creates a prefix.
  *
  * @param parameters The parameters of the prefix of type 'char**'
+ * @param N The number of parameters of type 'int'
  *
  * @return The prefix of type 'char*'
  */
-char* create_prefix(char** parameters);
+char* create_prefix(char** parameters, int N);
 
 /**
  * @brief Function that sorts the users by name and id.
@@ -126,4 +127,5 @@ char* create_prefix(char** parameters);
  */
 void sort_by_name_and_id(char** user_ids, char** user_names, int N);
 
+int compare(const void* a, const void* b);
 #endif

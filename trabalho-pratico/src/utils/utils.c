@@ -223,10 +223,10 @@ char* strcat_with_space(const char* str1, const char* str2) {
   return result;
 }
 
-char* create_prefix(char** parameters) {
+char* create_prefix(char** parameters, int N) {
   char* prefix = malloc(sizeof(char) * 100);
   prefix = parameters[0];
-  for (int i = 1; parameters[i] != '\0'; i++) {
+  for (int i = 1; i < N; i++) {
     if (strcmp(parameters[i], prefix) == 0) break;
     strcat(prefix, " ");
     strcat(prefix, parameters[i]);
@@ -234,26 +234,38 @@ char* create_prefix(char** parameters) {
   return remove_quotation_marks(prefix);
 }
 
-void sort_by_name_and_id(char** user_ids, char** user_names, int N) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      if (strcmp(user_names[i], user_names[j]) < 0) {
-        char* temp = user_names[i];
-        char* temp2 = user_ids[i];
-        user_names[i] = user_names[j];
-        user_names[j] = temp;
-        user_ids[i] = user_ids[j];
-        user_ids[j] = temp2;
-      } else if (strcmp(user_names[i], user_names[j]) == 0) {
-        if (strcmp(user_ids[i], user_ids[j]) < 0) {
-          char* temp = user_names[i];
-          char* temp2 = user_ids[i];
-          user_names[i] = user_names[j];
-          user_names[j] = temp;
-          user_ids[i] = user_ids[j];
-          user_ids[j] = temp2;
-        }
-      }
-    }
+struct user_info {
+  char* user_id;
+  char* user_name;
+};
+
+int compare(const void* a, const void* b) {
+  const UserInfoStats* user_a = (const UserInfoStats*)a;
+  const UserInfoStats* user_b = (const UserInfoStats*)b;
+
+  int result = strcmp(user_a->user_name, user_b->user_name);
+
+  if (result != 0) {
+    return result;
+  } else {
+    return strcmp(user_a->user_id, user_b->user_id);
   }
+}
+
+void sort_by_name_and_id(char** user_ids, char** user_names, int N) {
+  UserInfoStats* users = malloc(N * sizeof(UserInfoStats));
+
+  for (int i = 0; i < N; i++) {
+    users[i].user_id = user_ids[i];
+    users[i].user_name = user_names[i];
+  }
+
+  qsort(users, N, sizeof(UserInfoStats), compare);
+
+  for (int i = 0; i < N; i++) {
+    user_ids[i] = users[i].user_id;
+    user_names[i] = users[i].user_name;
+  }
+
+  free(users);
 }

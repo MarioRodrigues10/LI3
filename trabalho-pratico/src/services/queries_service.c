@@ -409,9 +409,9 @@ struct user_info {
 void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            StatsUserInfo *users_stats, FILE *output_file) {
+            StatsUserInfo *users_stats, FILE *output_file, int num_parameters) {
   if (query_parameters[0] == NULL) return;
-  char *prefix = create_prefix(query_parameters);
+  char *prefix = create_prefix(query_parameters, num_parameters);
 
   if (prefix == NULL) return;
   GArray *stats_user = get_stats_user_info(users_stats);
@@ -499,7 +499,8 @@ void query_manager(char *line, FlightsData *flights_data,
       break;
     case 9:
       query9(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, output_file);
+             reservations_data, users_data, users_stats, output_file,
+             num_parameters);
       break;
     case 10:
       query10(has_f, query_parameters, num_parameters, flights_data,

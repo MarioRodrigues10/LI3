@@ -172,11 +172,12 @@ void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
+ * @param num_parameters The number of parameters.
  */
 void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            StatsUserInfo *users_stats, FILE *output_file);
+            StatsUserInfo *users_stats, FILE *output_file, int num_parameters);
 
 /**
  * @brief Queries the data structs.
