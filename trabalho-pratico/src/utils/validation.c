@@ -184,16 +184,13 @@ bool validate_airports(char* airport1, char* airport2) {
 }
 
 bool validate_number_of_stars(char* hotel_stars) {
-  char* hotel_stars_validate = malloc(sizeof(char) * (strlen(hotel_stars) + 1));
-  strcpy(hotel_stars_validate, hotel_stars);
   char* endptr;
-  double hotel_stars_value = strtod(hotel_stars, &endptr);
+  long hotel_stars_value = strtol(hotel_stars, &endptr, 10);
 
   if (*endptr == '\0' && hotel_stars_value >= 1 && hotel_stars_value <= 5) {
-    free(hotel_stars_validate);
     return true;
   }
-  free(hotel_stars_validate);
+
   return false;
 }
 
