@@ -240,13 +240,14 @@ struct user_info {
 };
 
 int compare(const void* a, const void* b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
   const UserInfoStats* user_a = (const UserInfoStats*)a;
   const UserInfoStats* user_b = (const UserInfoStats*)b;
 
-  int result = strcmp(user_a->user_name, user_b->user_name);
+  int nameComparison = strcoll(user_a->user_name, user_b->user_name);
 
-  if (result != 0) {
-    return result;
+  if (nameComparison != 0) {
+    return nameComparison;
   } else {
     return strcmp(user_a->user_id, user_b->user_id);
   }
