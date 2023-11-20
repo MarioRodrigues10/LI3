@@ -98,16 +98,6 @@ char* format_date(int year, int month, int day);
  */
 char* remove_quotation_marks(char* str);
 
-/*
- * @brief Function that concatenates two strings with a space between them.
- *
- * @param str1 The first string of type 'const char*'
- * @param str2 The second string of type 'const char*'
- *
- * @return The concatenated string of type 'char*'
- */
-char* strcat_with_space(const char* str1, const char* str2);
-
 /**
  * @brief Function that creates a prefix.
  *

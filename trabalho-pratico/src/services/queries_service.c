@@ -1,3 +1,4 @@
+#define _DEFAULT_SOURCE
 #include "services/queries_service.h"
 
 #include <ctype.h>
@@ -448,7 +449,7 @@ void query_manager(char *line, FlightsData *flights_data,
                    StatsUserInfo *users_stats, FILE *output_file) {
   int query_type;
   char modifier;
-  char parameters[1000];
+  char *parameters = malloc(sizeof(char) * 100);
   sscanf(line, "%d%c %[^\n]", &query_type, &modifier, parameters);
 
   bool has_f = (modifier == 'F');
@@ -456,15 +457,16 @@ void query_manager(char *line, FlightsData *flights_data,
   char **query_parameters = NULL;
   int num_parameters = 0;
 
-  char *token = strtok(parameters, " ");
+  char *token = strsep(&parameters, " ");
   while (token != NULL) {
     query_parameters =
         realloc(query_parameters, (num_parameters + 1) * sizeof(char *));
     query_parameters[num_parameters] = malloc(strlen(token) + 1);
     strcpy(query_parameters[num_parameters], token);
     num_parameters++;
-    token = strtok(NULL, " ");
+    token = strsep(&parameters, " ");
   }
+  free(parameters);
 
   switch (query_type) {
     case 1:

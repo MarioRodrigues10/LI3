@@ -209,29 +209,19 @@ char* remove_quotation_marks(char* str) {
   return lineWithoutQuotes;
 }
 
-char* strcat_with_space(const char* str1, const char* str2) {
-  size_t len1 = strlen(str1);
-  size_t len2 = strlen(str2);
-  size_t total_len = len1 + len2 + 1;  // 1 for the space
-
-  char* result = (char*)malloc(total_len);
-  strcpy(result, str1);
-  result[len1] = ' ';
-
-  strcpy(result + len1 + 1, str2);
-
-  return result;
-}
-
 char* create_prefix(char** parameters, int N) {
   char* prefix = malloc(sizeof(char) * 100);
   prefix = parameters[0];
+  if (N == 1) return prefix;
   for (int i = 1; i < N; i++) {
     if (strcmp(parameters[i], prefix) == 0) break;
     strcat(prefix, " ");
     strcat(prefix, parameters[i]);
   }
-  return remove_quotation_marks(prefix);
+  if (strchr(prefix, '"') != NULL)
+    return remove_quotation_marks(prefix);
+  else
+    return prefix;
 }
 
 struct user_info {
