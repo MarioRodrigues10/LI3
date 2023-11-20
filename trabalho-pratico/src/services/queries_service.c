@@ -426,13 +426,15 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
         strcmp(
             get_account_status(get_user_by_username(users_data, user->user_id)),
             "ACTIVE") == 0) {
-      user_ids[j] = g_strdup(user->user_id);
-      user_names[j] = g_strdup(user->user_name);
+      user_ids[j] = (user->user_id);
+      user_names[j] = (user->user_name);
       j++;
     }
   }
   sort_by_name_and_id(user_ids, user_names, j);
   write_query9(has_f, output_file, user_ids, user_names, j);
+  free(user_ids);
+  free(user_names);
 }
 
 void query10(bool has_f, char **query_parameters, int num_parameters,

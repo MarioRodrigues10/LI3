@@ -27,8 +27,8 @@ void add_user(UsersData *users_data, UserInfo *user) {
 }
 
 void users_data_free(UsersData *users_data) {
-  // g_hash_table_destroy(users_data->users);
-  //  g_hash_table_destroy(users_data->user_stats);
+  g_hash_table_destroy(users_data->users);
+  g_hash_table_destroy(users_data->user_stats);
   free(users_data);
 }
 

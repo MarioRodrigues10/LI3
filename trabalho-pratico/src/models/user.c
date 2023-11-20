@@ -97,7 +97,6 @@ char *get_account_status(UserInfo *user) {
 // DESTROYER
 
 void destroy_user(UserInfo *user) {
-  g_free(user->user_id);
   g_free(user->name);
   g_free(user->birth_date);
   g_free(user->sex);
