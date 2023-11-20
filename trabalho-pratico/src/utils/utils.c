@@ -249,7 +249,7 @@ int compare(const void* a, const void* b) {
   if (nameComparison != 0) {
     return nameComparison;
   } else {
-    return strcmp(user_a->user_id, user_b->user_id);
+    return strcoll(user_a->user_id, user_b->user_id);
   }
 }
 
