@@ -93,10 +93,10 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {
+            FILE *output_file, int N) {
   char *id = query_parameters[0];
   char *type = "NULO";
-  if (query_parameters[1] != NULL) {
+  if (N == 2) {
     type = query_parameters[1];
   }
 
@@ -473,7 +473,7 @@ void query_manager(char *line, FlightsData *flights_data,
       break;
     case 2:
       query2(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+             reservations_data, users_data, output_file, num_parameters);
       break;
     case 3:
       query3(has_f, query_parameters, flights_data, passengers_data,

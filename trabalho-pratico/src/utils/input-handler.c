@@ -78,6 +78,7 @@ int input_handler(char **argv) {
   passengers_data_free(passengers_data);
   reservations_data_free(reservations_data);
   users_data_free(users_data);
+  free_stats_user_information(users_stats);
 
   return 0;
 }

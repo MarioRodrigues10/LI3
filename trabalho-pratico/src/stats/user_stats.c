@@ -154,7 +154,7 @@ UserStats *update_user_reservations(UserStats *users_stats, char *user_id,
 void update_user_stats_info(StatsUserInfo *stats, char *user_id,
                             char *user_name) {
   if (stats == NULL || user_id == NULL || user_name == NULL) return;
-  UserInfoStats *new_user_info = malloc(sizeof(UserInfoStats *));
+  UserInfoStats *new_user_info = malloc(sizeof(UserInfoStats));
   set_user_id_from_user_info(new_user_info, user_id);
   set_user_name_from_user_info(new_user_info, user_name);
   g_array_append_val(stats->info, new_user_info);
@@ -189,4 +189,15 @@ void destroy_user_stats(UserStats *user_stats) {
   g_array_free(user_stats->user_flights, TRUE);
   g_array_free(user_stats->user_reservations, TRUE);
   free(user_stats);
+}
+
+void free_stats_user_information(StatsUserInfo *stats) {
+  for (int i = 0; i < stats->info->len; i++) {
+    UserInfoStats *user_info = g_array_index(stats->info, UserInfoStats *, i);
+    g_free(user_info->user_id);
+    g_free(user_info->user_name);
+    free(user_info);
+  }
+  g_array_free(stats->info, TRUE);
+  free(stats);
 }

@@ -53,12 +53,13 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
+ * @param N The number of parameters.
  *
  */
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file);
+            FILE *output_file, int N);
 
 /**
  * @brief Queries the data structs.

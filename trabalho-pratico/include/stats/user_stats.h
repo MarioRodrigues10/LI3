@@ -213,4 +213,10 @@ char *get_user_id_from_user_info(UserInfoStats *user_info);
  */
 void destroy_user_stats(UserStats *user_stats);
 
+/**
+ * @brief Destroys the stats user information.
+ * 
+ * @param stats The stats of type 'StatsUserInfo*'
+*/
+void free_stats_user_information (StatsUserInfo *stats);
 #endif
