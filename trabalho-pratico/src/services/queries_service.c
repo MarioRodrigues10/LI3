@@ -426,8 +426,8 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
         strcmp(
             get_account_status(get_user_by_username(users_data, user->user_id)),
             "ACTIVE") == 0) {
-      user_ids[j] = g_strdup(user->user_id);
-      user_names[j] = g_strdup(user->user_name);
+      user_ids[j] = (user->user_id);
+      user_names[j] = (user->user_name);
       j++;
     }
   }
