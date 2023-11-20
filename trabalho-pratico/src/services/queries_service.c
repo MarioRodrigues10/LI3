@@ -433,6 +433,8 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
   sort_by_name_and_id(user_ids, user_names, j);
   write_query9(has_f, output_file, user_ids, user_names, j);
+  free(user_names);
+  free(user_ids);
 }
 
 void query10(bool has_f, char **query_parameters, int num_parameters,

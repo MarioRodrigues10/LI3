@@ -91,7 +91,9 @@ UserStats *create_user_stats(char *user_id, int number_of_flights,
   new_user_stats->user_flights = g_array_new(FALSE, FALSE, sizeof(char *));
   new_user_stats->user_reservations = g_array_new(FALSE, FALSE, sizeof(char *));
   if (flight_id != NULL) {
-    g_array_append_val(new_user_stats->user_flights, flight_id);
+    char *new_flight_id = g_strdup(flight_id);
+    g_array_append_val(new_user_stats->user_flights, new_flight_id);
+    free(new_flight_id);
   }
   if (reservation_id != NULL) {
     g_array_append_val(new_user_stats->user_reservations, reservation_id);
@@ -123,8 +125,11 @@ UserStats *update_user_stats(UserStats *user_stats, char *id, int flight,
 UserStats *update_user_flights(UserStats *users_stats, char *user_id,
                                char *flight_id) {
   if (users_stats != NULL) {
-    if (flight_id != NULL)
-      g_array_append_val(users_stats->user_flights, flight_id);
+    if (flight_id != NULL) {
+      char *new_flight_id = g_strdup(flight_id);
+      g_array_append_val(users_stats->user_flights, new_flight_id);
+      // free(new_flight_id);
+    }
     return users_stats;
   } else {
     UserStats *new_user_stats =
