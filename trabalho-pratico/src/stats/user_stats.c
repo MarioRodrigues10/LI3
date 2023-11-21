@@ -186,6 +186,9 @@ char *get_user_id_from_user_info(UserInfoStats *user_info) {
 // DESTROYER
 
 void destroy_user_stats(UserStats *user_stats) {
+  for (guint i = 0; i < user_stats->user_flights->len; i++) {
+    g_free(g_array_index(user_stats->user_flights, char *, i));
+  }
   g_array_free(user_stats->user_flights, TRUE);
   g_array_free(user_stats->user_reservations, TRUE);
   free(user_stats);
