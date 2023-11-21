@@ -456,16 +456,18 @@ void query_manager(char *line, FlightsData *flights_data,
 
   char **query_parameters = NULL;
   int num_parameters = 0;
+  char *parameters_copy = parameters;
 
-  char *token = strsep(&parameters, " ");
+  char *token = strsep(&parameters_copy, " ");
   while (token != NULL) {
     query_parameters =
         realloc(query_parameters, (num_parameters + 1) * sizeof(char *));
     query_parameters[num_parameters] = malloc(strlen(token) + 1);
     strcpy(query_parameters[num_parameters], token);
     num_parameters++;
-    token = strsep(&parameters, " ");
+    token = strsep(&parameters_copy, " ");
   }
+  free(parameters_copy);
   free(parameters);
 
   switch (query_type) {
