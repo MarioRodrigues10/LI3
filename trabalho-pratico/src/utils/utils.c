@@ -178,22 +178,16 @@ void sort_by_date(char** flight_ids, char** flight_dates, char** flight_types,
 }
 
 char* format_date(int year, int month, int day) {
-  char* new_date = malloc(sizeof(char) * 11);
-  if (day < 10 && month < 10) {
-    sprintf(new_date, "%d/0%d/0%d", year, month, day);
-  } else if (day < 10) {
-    sprintf(new_date, "%d/%d/0%d", year, month, day);
-  } else if (month < 10) {
-    sprintf(new_date, "%d/0%d/%d", year, month, day);
-  } else {
-    sprintf(new_date, "%d/%d/%d", year, month, day);
-  }
+  static char formatted_date[11];
 
-  return new_date;
+  snprintf(formatted_date, sizeof(formatted_date), "%d/%02d/%02d", year, month,
+           day);
+
+  return formatted_date;
 }
 
 char* remove_quotation_marks(char* str) {
-  char* lineWithoutQuotes = malloc(strlen(str));
+  static char lineWithoutQuotes[100];
   int i, j;
   for (i = j = 0; i < strlen(str); i++) {
     if (str[i] == '"') {
@@ -210,8 +204,8 @@ char* remove_quotation_marks(char* str) {
 }
 
 char* create_prefix(char** parameters, int N) {
-  char* prefix = malloc(sizeof(char) * 100);
-  prefix = parameters[0];
+  static char prefix[100];
+  strcpy(prefix, parameters[0]);
   if (N == 1) return prefix;
   for (int i = 1; i < N; i++) {
     if (strcmp(parameters[i], prefix) == 0) break;
