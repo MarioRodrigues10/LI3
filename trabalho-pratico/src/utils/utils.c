@@ -178,12 +178,17 @@ void sort_by_date(char** flight_ids, char** flight_dates, char** flight_types,
 }
 
 char* format_date(int year, int month, int day) {
-  static char formatted_date[11];
-
-  snprintf(formatted_date, sizeof(formatted_date), "%d/%02d/%02d", year, month,
-           day);
-
-  return formatted_date;
+  char* new_date = malloc(sizeof(char) * 11);
+  if (day < 10 && month < 10) {
+    sprintf(new_date, "%d/0%d/0%d", year, month, day);
+  } else if (day < 10) {
+    sprintf(new_date, "%d/%d/0%d", year, month, day);
+  } else if (month < 10) {
+    sprintf(new_date, "%d/0%d/%d", year, month, day);
+  } else {
+    sprintf(new_date, "%d/%d/%d", year, month, day);
+  }
+  return new_date;
 }
 
 char* remove_quotation_marks(char* str) {
