@@ -146,8 +146,8 @@ UserStats *update_user_stats(UserStats *user_stats, char *id, int flight,
  * @param user_id User id of type 'char*'.
  * @param flight_id Flight id of type 'char*'.
  */
-UserStats *update_user_flights(UserStats *users_stats, char *user_id,
-                               char *flight_id);
+void update_user_flights(UserStats *users_stats, char *user_id,
+                         char *flight_id);
 
 /**
  * @brief Updates the user reservations.
@@ -215,8 +215,8 @@ void destroy_user_stats(UserStats *user_stats);
 
 /**
  * @brief Destroys the stats user information.
- * 
+ *
  * @param stats The stats of type 'StatsUserInfo*'
-*/
-void free_stats_user_information (StatsUserInfo *stats);
+ */
+void free_stats_user_information(StatsUserInfo *stats);
 #endif
