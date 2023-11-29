@@ -74,22 +74,22 @@ void set_rating(ReservationInfo *reservation, int rating) {
 // GETTERS
 
 char *get_reservation_id(ReservationInfo *reservation) {
-  char *reservation_id = reservation->reservation_id;
+  char *reservation_id = g_strdup(reservation->reservation_id);
   return reservation_id;
 }
 
 char *get_user_id_reservation(ReservationInfo *reservation) {
-  char *user_id = reservation->user_id;
+  char *user_id = g_strdup(reservation->user_id);
   return user_id;
 }
 
 char *get_hotel_id(ReservationInfo *reservation) {
-  char *hotel_id = reservation->hotel_id;
+  char *hotel_id = g_strdup(reservation->hotel_id);
   return hotel_id;
 }
 
 char *get_hotel_name(ReservationInfo *reservation) {
-  char *hotel_name = reservation->hotel_name;
+  char *hotel_name = g_strdup(reservation->hotel_name);
   return hotel_name;
 }
 
@@ -104,12 +104,12 @@ int get_city_tax(ReservationInfo *reservation) {
 }
 
 char *get_begin_date(ReservationInfo *reservation) {
-  char *begin_date = reservation->begin_date;
+  char *begin_date = g_strdup(reservation->begin_date);
   return begin_date;
 }
 
 char *get_end_date(ReservationInfo *reservation) {
-  char *end_date = reservation->end_date;
+  char *end_date = g_strdup(reservation->end_date);
   return end_date;
 }
 
@@ -119,7 +119,7 @@ int get_price_per_night(ReservationInfo *reservation) {
 }
 
 char *get_includes_breakfast(ReservationInfo *reservation) {
-  char *includes_breakfast = reservation->includes_breakfast;
+  char *includes_breakfast = g_strdup(reservation->includes_breakfast);
   return includes_breakfast;
 }
 
@@ -131,7 +131,7 @@ int get_rating(ReservationInfo *reservation) {
 // DESTROYER
 
 void destroy_reservation(ReservationInfo *reservation) {
-  // g_free(reservation->reservation_id);
+  g_free(reservation->reservation_id);
   g_free(reservation->user_id);
   g_free(reservation->hotel_id);
   g_free(reservation->hotel_name);

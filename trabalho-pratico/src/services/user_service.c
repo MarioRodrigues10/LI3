@@ -63,7 +63,11 @@ void construct_user(char **parameters, void *struct_data,
   set_account_creation(user_info, parameters[9]);
   set_account_status(user_info, standardize_account_status(parameters[11]));
 
-  update_user_stats_info(struct_users_stats, get_user_id(user_info),
-                         get_name(user_info));
+  char* user_id = get_user_id(user_info);
+  char* user_name = get_name(user_info);
+  update_user_stats_info(struct_users_stats, user_id,
+                         user_name);
   add_user(users_data, user_info);
+  free(user_id);
+  free(user_name);
 }

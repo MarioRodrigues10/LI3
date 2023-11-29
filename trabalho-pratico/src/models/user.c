@@ -54,32 +54,32 @@ void set_account_status(UserInfo *user, char *account_status) {
 // GETTERS
 
 char *get_user_id(UserInfo *user) {
-  char *user_id = user->user_id;
+  char *user_id = g_strdup(user->user_id);
   return user_id;
 }
 
 char *get_name(UserInfo *user) {
-  char *name = user->name;
+  char *name = g_strdup(user->name);
   return name;
 }
 
 char *get_birth_date(UserInfo *user) {
-  char *birth_date = user->birth_date;
+  char *birth_date = g_strdup(user->birth_date);
   return birth_date;
 }
 
 char *get_sex(UserInfo *user) {
-  char *sex = user->sex;
+  char *sex = g_strdup(user->sex);
   return sex;
 }
 
 char *get_passport(UserInfo *user) {
-  char *passport = user->passport;
+  char *passport = g_strdup(user->passport);
   return passport;
 }
 
 char *get_country_code(UserInfo *user) {
-  char *country_code = user->country_code;
+  char *country_code = g_strdup(user->country_code);
   return country_code;
 }
 
@@ -90,13 +90,14 @@ char *get_account_creation(UserInfo *user) {
 
 char *get_account_status(UserInfo *user) {
   if (user == NULL) return NULL;
-  char *account_status = user->account_status;
+  char *account_status = g_strdup(user->account_status);
   return account_status;
 }
 
 // DESTROYER
 
 void destroy_user(UserInfo *user) {
+  g_free(user->user_id);
   g_free(user->name);
   g_free(user->birth_date);
   g_free(user->sex);

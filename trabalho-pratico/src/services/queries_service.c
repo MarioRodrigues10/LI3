@@ -31,10 +31,9 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     int hotel_stars = get_hotel_stars(reservation_info);
     char *begin_date = get_begin_date(reservation_info);
     char *end_date = get_end_date(reservation_info);
+    char *breakfast = get_includes_breakfast(reservation_info);
     char *includes_breakfast =
-        (strcmp(get_includes_breakfast(reservation_info), "false") == 0)
-            ? "False"
-            : "True";
+        (strcmp(breakfast, "false") == 0) ? "False" : "True";
     int number_of_nights = calculate_number_of_nights(begin_date, end_date);
     double total_price =
         calculate_total_price(number_of_nights, price_per_night, city_tax);
@@ -42,6 +41,11 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     write_query1_for_reservation(
         has_f, output_file, hotel_id, hotel_name, hotel_stars, begin_date,
         end_date, includes_breakfast, number_of_nights, total_price);
+    free(begin_date);
+    free(end_date);
+    free(hotel_id);
+    free(hotel_name);
+    free(breakfast);
   }
 
   if (isdigit(id[0]) && isdigit(id[1])) {
@@ -64,6 +68,13 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     write_query1_for_flight(has_f, output_file, airline_company, plane_model,
                             origin, destination, schedule_departure_date,
                             schedule_arrival_date, passengers, delay);
+    free(schedule_departure_date);
+    free(schedule_arrival_date);
+    free(plane_model);
+    free(origin);
+    free(destination);
+    free(airline_company);
+    free(real_departure_date);
   }
 
   UserInfo *user_info = get_user_by_username(users_data, id);
@@ -75,7 +86,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
   if (strcmp(account_status, "ACTIVE") == 0) {
     char *name = get_name(user_info);
     char *sex = get_sex(user_info);
-    char *age = calculate_age(get_birth_date(user_info));
+    char *birth_date = get_birth_date(user_info);
+    char *age = calculate_age(birth_date);
     char *country_code = get_country_code(user_info);
     char *passport = get_passport(user_info);
     int number_of_flights = get_number_of_flights_from_user_stats(
@@ -88,7 +100,13 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     write_query1_for_user(has_f, output_file, name, sex, age, country_code,
                           passport, number_of_flights, number_of_reservations,
                           total_spent);
+    free(name);
+    free(sex);
+    free(country_code);
+    free(passport);
+    free(birth_date);
   }
+  free(account_status);
 }
 
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
@@ -104,10 +122,12 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
   UserInfo *user = get_user_by_username(users_data, id);
   char *account_status = get_account_status(user);
   if (account_status == NULL || strlen(account_status) <= 0 ||
-      strcmp(account_status, "ACTIVE") != 0)
+      strcmp(account_status, "ACTIVE") != 0) {
+    free(account_status);
     return;
+  }
+  free(account_status);
   UserStats *user_stats = get_user_stats_by_user_id(users_data, id);
-
   if (strcmp(type, "flights") == 0) {
     GArray *flights = get_user_flights_from_user_stats(user_stats);
     char **flight_ids = malloc(sizeof(char *) * flights->len);
@@ -124,10 +144,10 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
       int year, month, day, hour, minute, second;
       sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
              &second);
-
       flight_ids[i] = id;
       flight_dates[i] = format_date(year, month, day);
       flight_types[i] = NULL;
+      free(date);
     }
     sort_by_date(flight_ids, flight_dates, flight_types, i);
     write_query2(has_f, output_file, flight_ids, flight_dates, flight_types, i);
@@ -150,10 +170,10 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
       int year, month, day, hour, minute, second;
       sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
              &second);
-
       reservation_ids[i] = id;
       reservation_dates[i] = format_date(year, month, day);
       reservation_types[i] = NULL;
+      free(date);
     }
     sort_by_date(reservation_ids, reservation_dates, reservation_types, i);
     write_query2(has_f, output_file, reservation_ids, reservation_dates,
@@ -180,7 +200,6 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         int year, month, day, hour, minute, second;
         sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
                &second);
-
         reservation_ids[i] = id;
         reservation_dates[i] = format_date(year, month, day);
         reservation_types[i] = NULL;
@@ -192,7 +211,6 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
       free(reservation_ids);
       free(reservation_dates);
       free(reservation_types);
-
     } else if (reservations == NULL) {
       char **flight_ids = malloc(sizeof(char *) * flights->len);
       char **flight_dates = malloc(sizeof(char *) * flights->len);
@@ -210,6 +228,7 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         flight_ids[i] = id;
         flight_dates[i] = format_date(year, month, day);
         flight_types[i] = "flight";
+        free(date);
       }
 
       sort_by_date(flight_ids, flight_dates, flight_types, i);
@@ -236,6 +255,7 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         all_dates[i] = format_date(year, month, day);
         all_types[i] = "flight";
         i++;
+        free(date);
       }
       int j = i;
       i = 0;
@@ -255,6 +275,7 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         all_types[j] = "reservation";
         j++;
         i++;
+        free(date);
       }
       sort_by_date(all_ids, all_dates, all_types, max);
       write_query2(has_f, output_file, all_ids, all_dates, all_types, max);
@@ -311,30 +332,41 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   result->rating = malloc(sizeof(int) * reservations->len);
   result->total_price = malloc(sizeof(int) * reservations->len);
   int i = 0;
+  int j = 0;
+  char *begin_date, *end_date, *user_id;
   for (i = 0; i < reservations->len; i++) {
     char *reservation_id = g_array_index(reservations, char *, i);
-    if (strncmp(reservation_id, "Book", 4) != 0) break;
-    ReservationInfo *reservation =
-        get_reservation_by_reservation_id(reservations_data, reservation_id);
-    char *begin_date = get_begin_date(reservation);
-    char *end_date = get_end_date(reservation);
-    char *user_id = get_user_id_reservation(reservation);
-    int rating = get_rating(reservation);
-    int price_per_night = get_price_per_night(reservation);
-    float total_price =
-        calculate_total_price(calculate_number_of_nights(begin_date, end_date),
-                              price_per_night, get_city_tax(reservation));
-    result->reservation_id[i] = reservation_id;
-    result->begin_date[i] = begin_date;
-    result->end_date[i] = end_date;
-    result->user_id[i] = user_id;
-    result->rating[i] = rating;
-    result->total_price[i] = total_price;
+    if (strncmp(reservation_id, "Book", 4) == 0) {
+      ReservationInfo *reservation =
+          get_reservation_by_reservation_id(reservations_data, reservation_id);
+      begin_date = get_begin_date(reservation);
+      end_date = get_end_date(reservation);
+      user_id = get_user_id_reservation(reservation);
+      int rating = get_rating(reservation);
+      int price_per_night = get_price_per_night(reservation);
+      float total_price = calculate_total_price(
+          calculate_number_of_nights(begin_date, end_date), price_per_night,
+          get_city_tax(reservation));
+      result->reservation_id[j] = reservation_id;
+      result->begin_date[j] = strdup(begin_date);
+      result->end_date[j] = strdup(end_date);
+      result->user_id[j] = strdup(user_id);
+      result->rating[j] = rating;
+      result->total_price[j] = total_price;
+      j++;
+      free(begin_date);
+      free(end_date);
+      free(user_id);
+    }
   }
-  result->iterator = i--;
+  result->iterator = j--;
   sort_by_date_and_value(result, result->iterator);
   write_query4(has_f, output_file, result);
-
+  for (int i = 0; i < result->iterator; i++) {
+    free(result->begin_date[i]);
+    free(result->end_date[i]);
+    free(result->user_id[i]);
+  }
   free(result->reservation_id);
   free(result->begin_date);
   free(result->end_date);
@@ -398,6 +430,8 @@ void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
                                             end_date_reservation) *
                  price_per_night;
     }
+    free(begin_date_reservation);
+    free(end_date_reservation);
   }
   write_query8(has_f, output_file, revenue);
 }
@@ -423,14 +457,15 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
   for (i = 0, j = 0; i < stats_user->len; i++) {
     UserInfoStats *user =
         (UserInfoStats *)(g_array_index(stats_user, void *, i));
+    char *account_status =
+        get_account_status(get_user_by_username(users_data, user->user_id));
     if (strncmp(user->user_name, prefix, strlen(prefix)) == 0 &&
-        strcmp(
-            get_account_status(get_user_by_username(users_data, user->user_id)),
-            "ACTIVE") == 0) {
+        strcmp(account_status, "ACTIVE") == 0) {
       user_ids[j] = (user->user_id);
       user_names[j] = (user->user_name);
       j++;
     }
+    free(account_status);
   }
   sort_by_name_and_id(user_ids, user_names, j);
   write_query9(has_f, output_file, user_ids, user_names, j);

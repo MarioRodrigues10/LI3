@@ -75,12 +75,12 @@ char *get_flight_id(FlightInfo *flight) {
 }
 
 char *get_airline(FlightInfo *flight) {
-  char *airline = flight->airline;
+  char *airline = g_strdup(flight->airline);
   return airline;
 }
 
 char *get_plane_model(FlightInfo *flight) {
-  char *plane_model = flight->plane_model;
+  char *plane_model = g_strdup(flight->plane_model);
   return plane_model;
 }
 
@@ -90,27 +90,27 @@ int get_total_seats(FlightInfo *flight) {
 }
 
 char *get_origin(FlightInfo *flight) {
-  char *origin = flight->origin;
+  char *origin = g_strdup(flight->origin);
   return origin;
 }
 
 char *get_destination(FlightInfo *flight) {
-  char *destination = flight->destination;
+  char *destination = g_strdup(flight->destination);
   return destination;
 }
 
 char *get_schedule_departure_date(FlightInfo *flight) {
-  char *schedule_departure_date = flight->schedule_departure_date;
+  char *schedule_departure_date = g_strdup(flight->schedule_departure_date);
   return schedule_departure_date;
 }
 
 char *get_schedule_arrival_date(FlightInfo *flight) {
-  char *schedule_arrival_date = flight->schedule_arrival_date;
+  char *schedule_arrival_date = g_strdup(flight->schedule_arrival_date);
   return schedule_arrival_date;
 }
 
 char *get_real_departure_date(FlightInfo *flight) {
-  char *real_departure_date = flight->real_departure_date;
+  char *real_departure_date = g_strdup(flight->real_departure_date);
   return real_departure_date;
 }
 

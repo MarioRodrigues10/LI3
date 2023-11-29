@@ -84,12 +84,13 @@ void construct_reservation(char **parameters,
       calculate_total_price(
           calculate_number_of_nights(parameters[7], parameters[8]),
           strtol(parameters[9], NULL, 10), strtol(parameters[5], NULL, 10)));
+
   update_hotel_stats_controller(reservations_data, parameters[2],
                                 strtol(parameters[12], NULL, 10),
-                                get_reservation_id(reservation_info));
+                                parameters[0]);
   UserStats *user_stats = get_user_stats_by_user_id(
-      users_data, get_user_id_reservation(reservation_info));
+      users_data, parameters[1]);
   update_user_reservations(user_stats,
-                           get_user_id_reservation(reservation_info),
-                           get_reservation_id(reservation_info));
+                           parameters[1],
+                           parameters[0]);
 }

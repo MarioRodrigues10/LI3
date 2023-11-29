@@ -28,12 +28,12 @@ void set_user_id_passenger(PassengerInfo *passenger, char *user_id) {
 // GETTERS
 
 char *get_flight_id_passenger(PassengerInfo *passenger) {
-  char *flight_id = passenger->flight_id;
+  char *flight_id = g_strdup(passenger->flight_id);
   return flight_id;
 }
 
 char *get_user_id_passenger(PassengerInfo *passenger) {
-  char *user_id = passenger->user_id;
+  char *user_id = g_strdup(passenger->user_id);
   return user_id;
 }
 
