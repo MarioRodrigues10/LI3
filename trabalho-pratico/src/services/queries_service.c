@@ -114,7 +114,7 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file, int N) {
   char *id = query_parameters[0];
-  char *type = "NULO";
+  char *type = "NULL";
   if (N == 2) {
     type = query_parameters[1];
   }
@@ -152,6 +152,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
     sort_by_date(flight_ids, flight_dates, flight_types, i);
     write_query2(has_f, output_file, flight_ids, flight_dates, flight_types, i);
     free(flight_ids);
+    for (i = 0; i < flights->len; i++) {
+      free(flight_dates[i]);
+    }
     free(flight_dates);
     free(flight_types);
   } else if (strcmp(type, "reservations") == 0) {
@@ -179,6 +182,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
     write_query2(has_f, output_file, reservation_ids, reservation_dates,
                  reservation_types, i);
     free(reservation_ids);
+    for (i = 0; i < reservations->len; i++) {
+      free(reservation_dates[i]);
+    }
     free(reservation_dates);
     free(reservation_types);
   } else {
@@ -209,6 +215,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
       write_query2(has_f, output_file, reservation_ids, reservation_dates,
                    reservation_types, i);
       free(reservation_ids);
+      for (i = 0; i < reservations->len; i++) {
+        free(reservation_dates[i]);
+      }
       free(reservation_dates);
       free(reservation_types);
     } else if (reservations == NULL) {
@@ -257,6 +266,10 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         i++;
         free(date);
       }
+      for (int k = 0; k < flights->len; k++) {
+        free(all_dates[k]);
+      }
+
       int j = i;
       i = 0;
       while (j < max) {
@@ -280,6 +293,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
       sort_by_date(all_ids, all_dates, all_types, max);
       write_query2(has_f, output_file, all_ids, all_dates, all_types, max);
       free(all_ids);
+      for (i = 0; i < max; i++) {
+        free(all_dates[i]);
+      }
       free(all_dates);
       free(all_types);
     }
