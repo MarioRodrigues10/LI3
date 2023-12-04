@@ -68,8 +68,7 @@ HotelStats *create_hotel_stats(char *hotel_id, int total_rating,
 HotelStats *update_hotel_stats(HotelStats *hotel_stats, char *id, int rating,
                                char *reservation_id) {
   if (hotel_stats != NULL) {
-    if (reservation_id != NULL)
-      g_array_append_val(hotel_stats->hotel_reservations, reservation_id);
+    g_array_append_val(hotel_stats->hotel_reservations, reservation_id);
     hotel_stats->total_rating += rating;
     hotel_stats->number_of_clients++;
     return hotel_stats;

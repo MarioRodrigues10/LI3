@@ -266,9 +266,6 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         i++;
         free(date);
       }
-      for (int k = 0; k < flights->len; k++) {
-        free(all_dates[k]);
-      }
 
       int j = i;
       i = 0;
@@ -282,7 +279,6 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
         int year, month, day, hour, minute, second;
         sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
                &second);
-
         all_ids[j] = id;
         all_dates[j] = format_date(year, month, day);
         all_types[j] = "reservation";
@@ -349,31 +345,29 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   result->total_price = malloc(sizeof(int) * reservations->len);
   int i = 0;
   int j = 0;
-  char *begin_date, *end_date, *user_id;
   for (i = 0; i < reservations->len; i++) {
     char *reservation_id = g_array_index(reservations, char *, i);
-    if (strncmp(reservation_id, "Book", 4) == 0) {
-      ReservationInfo *reservation =
-          get_reservation_by_reservation_id(reservations_data, reservation_id);
-      begin_date = get_begin_date(reservation);
-      end_date = get_end_date(reservation);
-      user_id = get_user_id_reservation(reservation);
-      int rating = get_rating(reservation);
-      int price_per_night = get_price_per_night(reservation);
-      float total_price = calculate_total_price(
-          calculate_number_of_nights(begin_date, end_date), price_per_night,
-          get_city_tax(reservation));
-      result->reservation_id[j] = reservation_id;
-      result->begin_date[j] = strdup(begin_date);
-      result->end_date[j] = strdup(end_date);
-      result->user_id[j] = strdup(user_id);
-      result->rating[j] = rating;
-      result->total_price[j] = total_price;
-      j++;
-      free(begin_date);
-      free(end_date);
-      free(user_id);
-    }
+    ReservationInfo *reservation =
+        get_reservation_by_reservation_id(reservations_data, reservation_id);
+    char *begin_date = get_begin_date(reservation);
+    char *end_date = get_end_date(reservation);
+    int rating = get_rating(reservation);
+    int price_per_night = get_price_per_night(reservation);
+    float total_price =
+        calculate_total_price(calculate_number_of_nights(begin_date, end_date),
+                              price_per_night, get_city_tax(reservation));
+
+    char *user_id = get_user_id_reservation(reservation);
+    result->reservation_id[j] = reservation_id;
+    result->begin_date[j] = strdup(begin_date);
+    result->end_date[j] = strdup(end_date);
+    result->user_id[j] = strdup(user_id);
+    result->rating[j] = rating;
+    result->total_price[j] = total_price;
+    j++;
+    free(begin_date);
+    free(end_date);
+    free(user_id);
   }
   result->iterator = j--;
   sort_by_date_and_value(result, result->iterator);

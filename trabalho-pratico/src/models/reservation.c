@@ -1,7 +1,6 @@
 #include "models/reservation.h"
 
 #include <glib.h>
-
 struct reservation {
   char *reservation_id;
   char *user_id;

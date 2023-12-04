@@ -141,7 +141,6 @@ void update_user_flights(UserStats *users_stats, char *user_id,
 UserStats *update_user_reservations(UserStats *users_stats, char *user_id,
                                     char *reservation_id) {
   if (users_stats != NULL) {
-    if (strlen(reservation_id) > 0)
       g_array_append_val(users_stats->user_reservations, reservation_id);
     return users_stats;
   } else {
