@@ -78,22 +78,13 @@ void construct_reservation(char **parameters,
 
   add_reservation(reservations_data, reservation_info);
 
-  char *reservation_id = get_reservation_id(reservation_info);
-  char *user_id = get_user_id_reservation(reservation_info);
-  char *begin_date = get_begin_date(reservation_info);
-  char *end_date = get_end_date(reservation_info);
-  char *hotel_id = get_hotel_id(reservation_info);
-  int price_per_night = get_price_per_night(reservation_info);
-  int city_tax = get_city_tax(reservation_info);
-  int rating = get_rating(reservation_info);
-
-  update_user_stats_controller(users_data, user_id, 0, 1, 0.0);
+  update_user_stats_controller(users_data, parameters[1], 0, 1, 0.0);
   update_user_stats_controller(
-      users_data, user_id, 0, 0,
-      calculate_total_price(calculate_number_of_nights(begin_date, end_date),
-                            price_per_night, city_tax));
-  update_hotel_stats_controller(reservations_data, hotel_id, rating,
-                                reservation_id);
-  UserStats *user_stats = get_user_stats_by_user_id(users_data, user_id);
-  update_user_reservations(user_stats, user_id, reservation_id);
+      users_data, parameters[1], 0, 0,
+      calculate_total_price(calculate_number_of_nights(parameters[7], parameters[8]),
+                            strtol(parameters[9], NULL, 10), strtol(parameters[5], NULL, 10)));
+  update_hotel_stats_controller(reservations_data, parameters[2], strtol(parameters[12], NULL, 10),
+                                parameters[0]);
+  UserStats *user_stats = get_user_stats_by_user_id(users_data, parameters[1]);
+  update_user_reservations(user_stats, parameters[1], parameters[0]);
 }

@@ -121,182 +121,132 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
 
   UserInfo *user = get_user_by_username(users_data, id);
   char *account_status = get_account_status(user);
+
   if (account_status == NULL || strlen(account_status) <= 0 ||
       strcmp(account_status, "ACTIVE") != 0) {
     free(account_status);
     return;
   }
   free(account_status);
+
   UserStats *user_stats = get_user_stats_by_user_id(users_data, id);
+
   if (strcmp(type, "flights") == 0) {
-    GArray *flights = get_user_flights_from_user_stats(user_stats);
-    char **flight_ids = malloc(sizeof(char *) * flights->len);
-    char **flight_dates = malloc(sizeof(char *) * flights->len);
-    char **flight_types = malloc(sizeof(char *) * flights->len);
-
-    int i = 0;
-    for (i = 0; i < flights->len; i++) {
-      char *id = g_array_index(flights, char *, i);
-      FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
-      if (flight == NULL) return;
-      char *date = get_schedule_departure_date(flight);
-
-      int year, month, day, hour, minute, second;
-      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-             &second);
-      flight_ids[i] = id;
-      flight_dates[i] = format_date(year, month, day);
-      flight_types[i] = NULL;
-      free(date);
-    }
-    sort_by_date(flight_ids, flight_dates, flight_types, i);
-    write_query2(has_f, output_file, flight_ids, flight_dates, flight_types, i);
-    free(flight_ids);
-    for (i = 0; i < flights->len; i++) {
-      free(flight_dates[i]);
-    }
-    free(flight_dates);
-    free(flight_types);
+    query2_flights(has_f, user_stats, flights_data, output_file);
   } else if (strcmp(type, "reservations") == 0) {
-    GArray *reservations = get_user_reservations_from_user_stats(user_stats);
-    char **reservation_ids = malloc(sizeof(char *) * reservations->len);
-    char **reservation_dates = malloc(sizeof(char *) * reservations->len);
-    char **reservation_types = malloc(sizeof(char *) * reservations->len);
-    int i = 0;
-    for (i = 0; i < reservations->len; i++) {
-      char *id = g_array_index(reservations, char *, i);
-      ReservationInfo *reservation =
-          get_reservation_by_reservation_id(reservations_data, id);
-      if (reservation == NULL) return;
-      char *date = get_begin_date(reservation);
-
-      int year, month, day, hour, minute, second;
-      sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-             &second);
-      reservation_ids[i] = id;
-      reservation_dates[i] = format_date(year, month, day);
-      reservation_types[i] = NULL;
-      free(date);
-    }
-    sort_by_date(reservation_ids, reservation_dates, reservation_types, i);
-    write_query2(has_f, output_file, reservation_ids, reservation_dates,
-                 reservation_types, i);
-    free(reservation_ids);
-    for (i = 0; i < reservations->len; i++) {
-      free(reservation_dates[i]);
-    }
-    free(reservation_dates);
-    free(reservation_types);
+    query2_reservations(has_f, user_stats, reservations_data, output_file);
   } else {
-    GArray *flights = get_user_flights_from_user_stats(user_stats);
-    GArray *reservations = get_user_reservations_from_user_stats(user_stats);
-    if (flights == NULL && reservations == NULL) {
-      return;
-    } else if (flights == NULL) {
-      char **reservation_ids = malloc(sizeof(char *) * reservations->len);
-      char **reservation_dates = malloc(sizeof(char *) * reservations->len);
-      char **reservation_types = malloc(sizeof(char *) * reservations->len);
-      int i = 0;
-      for (i; i < reservations->len; i++) {
-        char *id = g_array_index(reservations, char *, i);
-        ReservationInfo *reservation =
-            get_reservation_by_reservation_id(reservations_data, id);
-        if (reservation == NULL) return;
-        char *date = get_begin_date(reservation);
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-        reservation_ids[i] = id;
-        reservation_dates[i] = format_date(year, month, day);
-        reservation_types[i] = NULL;
-      }
-
-      sort_by_date(reservation_ids, reservation_dates, reservation_types, i);
-      write_query2(has_f, output_file, reservation_ids, reservation_dates,
-                   reservation_types, i);
-      free(reservation_ids);
-      for (i = 0; i < reservations->len; i++) {
-        free(reservation_dates[i]);
-      }
-      free(reservation_dates);
-      free(reservation_types);
-    } else if (reservations == NULL) {
-      char **flight_ids = malloc(sizeof(char *) * flights->len);
-      char **flight_dates = malloc(sizeof(char *) * flights->len);
-      char **flight_types = malloc(sizeof(char *) * flights->len);
-      int i = 0;
-      for (i; i < flights->len; i++) {
-        char *id = g_array_index(flights, char *, i);
-        FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
-        if (flight == NULL) return;
-        char *date = get_schedule_departure_date(flight);
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-
-        flight_ids[i] = id;
-        flight_dates[i] = format_date(year, month, day);
-        flight_types[i] = "flight";
-        free(date);
-      }
-
-      sort_by_date(flight_ids, flight_dates, flight_types, i);
-      write_query2(has_f, output_file, flight_ids, flight_dates, flight_types,
-                   i);
-    } else {
-      int max = flights->len + reservations->len;
-      char **all_ids = malloc(sizeof(char *) * max);
-      char **all_dates = malloc(sizeof(char *) * max);
-      char **all_types = malloc(sizeof(char *) * max);
-
-      int i = 0;
-
-      while (i < flights->len) {
-        char *id = g_array_index(flights, char *, i);
-        FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
-        if (flight == NULL) return;
-        char *date = get_schedule_departure_date(flight);
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-
-        all_ids[i] = id;
-        all_dates[i] = format_date(year, month, day);
-        all_types[i] = "flight";
-        i++;
-        free(date);
-      }
-
-      int j = i;
-      i = 0;
-      while (j < max) {
-        char *id = g_array_index(reservations, char *, i);
-        ReservationInfo *reservation =
-            get_reservation_by_reservation_id(reservations_data, id);
-        if (reservation == NULL) return;
-        char *date = get_begin_date(reservation);
-
-        int year, month, day, hour, minute, second;
-        sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-               &second);
-        all_ids[j] = id;
-        all_dates[j] = format_date(year, month, day);
-        all_types[j] = "reservation";
-        j++;
-        i++;
-        free(date);
-      }
-      sort_by_date(all_ids, all_dates, all_types, max);
-      write_query2(has_f, output_file, all_ids, all_dates, all_types, max);
-      free(all_ids);
-      for (i = 0; i < max; i++) {
-        free(all_dates[i]);
-      }
-      free(all_dates);
-      free(all_types);
-    }
+    query2_both(has_f, user_stats, flights_data, reservations_data,
+                output_file);
   }
 }
+
+void query2_flights(bool has_f, UserStats *user_stats,
+                    FlightsData *flights_data, FILE *output_file) {
+  GArray *flights = get_user_flights_from_user_stats(user_stats);
+  if (flights == NULL) return;
+
+  int len = flights->len;
+  char **ids = malloc(sizeof(char *) * len);
+  char **dates = malloc(sizeof(char *) * len);
+  char **types = malloc(sizeof(char *) * len);
+
+  query2_seed_flights(flights_data, NULL, flights, 0, ids, dates, types, len);
+
+  write_query2(has_f, output_file, ids, dates, types, len);
+  free_query2(ids, dates, types, len);
+}
+
+void query2_reservations(bool has_f, UserStats *user_stats,
+                         ReservationsData *reservations_data,
+                         FILE *output_file) {
+  GArray *reservations = get_user_reservations_from_user_stats(user_stats);
+  if (reservations == NULL) return;
+
+  int len = reservations->len;
+  char **ids = malloc(sizeof(char *) * len);
+  char **dates = malloc(sizeof(char *) * len);
+  char **types = malloc(sizeof(char *) * len);
+
+  query2_seed_reservations(reservations_data, NULL, reservations, 0, 0, ids,
+                           dates, types, len);
+  sort_by_date(ids, dates, types, len);
+  write_query2(has_f, output_file, ids, dates, types, len);
+  free_query2(ids, dates, types, len);
+}
+
+void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
+                 ReservationsData *reservations_data, FILE *output_file) {
+  GArray *flights = get_user_flights_from_user_stats(user_stats);
+  GArray *reservations = get_user_reservations_from_user_stats(user_stats);
+
+  if (flights == NULL && reservations == NULL) return;
+
+  int max = flights->len + reservations->len;
+  char **ids = malloc(sizeof(char *) * max);
+  char **dates = malloc(sizeof(char *) * max);
+  char **types = malloc(sizeof(char *) * max);
+
+  query2_seed_flights(flights_data, "flight", flights, 0, ids, dates, types,
+                      flights->len);
+  query2_seed_reservations(reservations_data, "reservation", reservations, 0,
+                           flights->len, ids, dates, types, max);
+
+  sort_by_date(ids, dates, types, max);
+  write_query2(has_f, output_file, ids, dates, types, max);
+  free_query2(ids, dates, types, max);
+}
+
+void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
+                         int i, char **ids, char **dates, char **types,
+                         int len) {
+  while (i < len) {
+    char *id = g_array_index(array, char *, i);
+    FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
+    if (flight == NULL) return;
+    char *date = get_schedule_departure_date(flight);
+
+    int year, month, day, hour, minute, second;
+    sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+           &second);
+    ids[i] = id;
+    dates[i] = format_date(year, month, day);
+    types[i] = type;
+    free(date);
+    i++;
+  }
+}
+
+void query2_seed_reservations(ReservationsData *reservations_data, char *type,
+                              GArray *array, int i, int sum, char **ids,
+                              char **dates, char **types, int len) {
+  while ((i + sum) < len) {
+    char *id = g_array_index(array, char *, i);
+    ReservationInfo *reservation =
+        get_reservation_by_reservation_id(reservations_data, id);
+    if (reservation == NULL) return;
+    char *date = get_begin_date(reservation);
+
+    int year, month, day, hour, minute, second;
+    sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+           &second);
+    ids[i + sum] = id;
+    dates[i + sum] = format_date(year, month, day);
+    types[i + sum] = type;
+    free(date);
+    i++;
+  }
+}
+
+void free_query2(char **ids, char **dates, char **types, int len) {
+  free(ids);
+  for (int i = 0; i < len; i++) {
+    free(dates[i]);
+  }
+  free(dates);
+  free(types);
+}
+
 void query3(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,

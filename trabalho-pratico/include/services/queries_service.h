@@ -62,6 +62,83 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             FILE *output_file, int N);
 
 /**
+ * @brief Query2 helper function for reservations.
+ *
+ * @param reservations_data The reservations data struct.
+ * @param type The type of the reservation.
+ * @param array The array to fetch the data.
+ * @param i The index of the array.
+ * @param sum The position of the array to sum to the index.
+ * @param ids The ids of the reservations.
+ * @param dates The dates of the reservations.
+ * @param types The types of the reservations.
+ * @param len The length of the array.
+ */
+void query2_seed_reservations(ReservationsData *reservations_data, char *type,
+                              GArray *array, int i, int sum, char **ids,
+                              char **dates, char **types, int len);
+
+/**
+ * @brief Query2 helper function for flights.
+ *
+ * @param flights_data The flights data struct.
+ * @param type The type of the reservation.
+ * @param array The array to fetch the data.
+ * @param i The index of the array.
+ * @param ids The ids of the reservations.
+ * @param dates The dates of the reservations.
+ * @param types The types of the reservations.
+ * @param len The length of the array.
+ */
+void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
+                         int i, char **ids, char **dates, char **types,
+                         int len);
+/**
+ * @brief Query2 helper function to free the memory.
+ *
+ * @param ids The ids of the reservations.
+ * @param dates The dates of the reservations.
+ * @param types The types of the reservations.
+ * @param len The length of the array.
+ */
+void free_query2(char **ids, char **dates, char **types, int len);
+
+/**
+ * @brief Query flights helper function.
+ *
+ * @param has_f If the query has the modifier 'F'.
+ * @param user_stats The user stats struct.
+ * @param flights_data The flights data struct.
+ * @param output_file The pointer to the output file.
+ */
+void query2_flights(bool has_f, UserStats *user_stats,
+                    FlightsData *flights_data, FILE *output_file);
+
+/**
+ * @brief Query reservations helper function.
+ *
+ * @param has_f If the query has the modifier 'F'.
+ * @param user_stats The user stats struct.
+ * @param reservations_data The reservations data struct.
+ * @param output_file The pointer to the output file.
+ */
+void query2_reservations(bool has_f, UserStats *user_stats,
+                         ReservationsData *reservations_data,
+                         FILE *output_file);
+
+/**
+ * @brief Query both helper function.
+ *
+ * @param has_f If the query has the modifier 'F'.
+ * @param user_stats The user stats struct.
+ * @param flights_data The flights data struct.
+ * @param reservations_data The reservations data struct.
+ * @param output_file The pointer to the output file.
+ */
+void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
+                 ReservationsData *reservations_data, FILE *output_file);
+
+/**
  * @brief Queries the data structs.
  *
  * @param has_f If the query has the modifier 'F'.
