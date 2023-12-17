@@ -27,6 +27,12 @@
 typedef struct query4_result *QUERY4_RESULT;
 
 /**
+ * @struct query4_result_helper - Struct that represents the result of query 4
+ * to be used in other places of the program
+ */
+typedef struct query4_result_helper *QUERY4_RESULT_HELPER;
+
+/**
  * @brief Queries the data structs.
  *
  * @param has_f If the query has the modifier 'F'.

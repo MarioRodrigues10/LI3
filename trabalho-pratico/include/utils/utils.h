@@ -3,15 +3,10 @@
 
 #include <glib.h>
 
+#include "services/queries_service.h"
 #include "stats/user_stats.h"
 
 #define MASTER_DATE "2023/10/01"
-
-/**
- * @struct query4_result - Struct that represents the result of query 4 to be
- * used in other places of the program
- */
-typedef struct query4_result* QUERY4_RESULT;
 
 /**
  * @brief Function that calculates the age of a passenger.

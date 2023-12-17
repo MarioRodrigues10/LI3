@@ -1,5 +1,6 @@
 #include "utils/output-handler.h"
 
+#include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -93,32 +94,34 @@ void write_query3(bool has_f, FILE *output_file, double media_of_ratings) {
   }
 }
 
-struct query4_result {
-  char **reservation_id;
-  char **begin_date;
-  char **end_date;
-  char **user_id;
-  int *rating;
-  float *total_price;
-  int iterator;
+struct query4_result_helper {
+  char *reservation_id;
+  char *begin_date;
+  char *end_date;
+  char *user_id;
+  int rating;
+  float total_price;
 };
-void write_query4(bool has_f, FILE *output_file, QUERY4_RESULT query_result) {
+
+void write_query4(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < query_result->iterator; i++) {
+  for (int i = 0; i < query_result_array->len; i++) {
+    QUERY4_RESULT_HELPER query_result =
+        g_array_index(query_result_array, QUERY4_RESULT_HELPER, i);
     j = i + 1;
     if (has_f) {
       if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file,
               "--- %d ---\nid: %s\nbegin_date: %s\nend_date: "
               "%s\nuser_id: %s\nrating: %d\ntotal_price: %.3f\n",
-              j, query_result->reservation_id[i], query_result->begin_date[i],
-              query_result->end_date[i], query_result->user_id[i],
-              query_result->rating[i], query_result->total_price[i]);
+              j, query_result->reservation_id, query_result->begin_date,
+              query_result->end_date, query_result->user_id,
+              query_result->rating, query_result->total_price);
     } else {
       fprintf(output_file, "%s;%s;%s;%s;%d;%.3f\n",
-              query_result->reservation_id[i], query_result->begin_date[i],
-              query_result->end_date[i], query_result->user_id[i],
-              query_result->rating[i], query_result->total_price[i]);
+              query_result->reservation_id, query_result->begin_date,
+              query_result->end_date, query_result->user_id,
+              query_result->rating, query_result->total_price);
     }
   }
 }

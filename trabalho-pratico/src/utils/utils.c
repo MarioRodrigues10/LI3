@@ -78,74 +78,6 @@ int calculate_delay(char* scheduled_date, char* actual_date) {
   return time_difference_seconds;
 }
 
-struct query4_result {
-  char** reservation_id;
-  char** begin_date;
-  char** end_date;
-  char** user_id;
-  int* rating;
-  float* total_price;
-  int iterator;
-};
-
-void sort_by_date_and_value(void* result, int N) {
-  QUERY4_RESULT query_result = (QUERY4_RESULT)result;
-
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      if (strcmp(query_result->begin_date[i], query_result->begin_date[j]) >
-          0) {
-        char* temp = query_result->reservation_id[i];
-        char* temp1 = query_result->begin_date[i];
-        char* temp2 = query_result->end_date[i];
-        char* temp3 = query_result->user_id[i];
-        int temp4 = query_result->rating[i];
-        float temp5 = query_result->total_price[i];
-
-        query_result->reservation_id[i] = query_result->reservation_id[j];
-        query_result->begin_date[i] = query_result->begin_date[j];
-        query_result->end_date[i] = query_result->end_date[j];
-        query_result->user_id[i] = query_result->user_id[j];
-        query_result->rating[i] = query_result->rating[j];
-        query_result->total_price[i] = query_result->total_price[j];
-
-        query_result->reservation_id[j] = temp;
-        query_result->begin_date[j] = temp1;
-        query_result->end_date[j] = temp2;
-        query_result->user_id[j] = temp3;
-        query_result->rating[j] = temp4;
-        query_result->total_price[j] = temp5;
-
-      } else if (strcmp(query_result->begin_date[i],
-                        query_result->begin_date[j]) == 0) {
-        if (strcmp(query_result->reservation_id[i],
-                   query_result->reservation_id[j]) < 0) {
-          char* temp = query_result->reservation_id[i];
-          char* temp1 = query_result->begin_date[i];
-          char* temp2 = query_result->end_date[i];
-          char* temp3 = query_result->user_id[i];
-          int temp4 = query_result->rating[i];
-          float temp5 = query_result->total_price[i];
-
-          query_result->reservation_id[i] = query_result->reservation_id[j];
-          query_result->begin_date[i] = query_result->begin_date[j];
-          query_result->end_date[i] = query_result->end_date[j];
-          query_result->user_id[i] = query_result->user_id[j];
-          query_result->rating[i] = query_result->rating[j];
-          query_result->total_price[i] = query_result->total_price[j];
-
-          query_result->reservation_id[j] = temp;
-          query_result->begin_date[j] = temp1;
-          query_result->end_date[j] = temp2;
-          query_result->user_id[j] = temp3;
-          query_result->rating[j] = temp4;
-          query_result->total_price[j] = temp5;
-        }
-      }
-    }
-  }
-}
-
 void sort_by_date(char** flight_ids, char** flight_dates, char** flight_types,
                   int N) {
   for (int i = 0; i < N; i++) {
@@ -258,4 +190,39 @@ void sort_by_name_and_id(char** user_ids, char** user_names, int N) {
   }
 
   free(users);
+}
+
+struct query4_result_helper {
+  char* reservation_id;
+  char* begin_date;
+  char* end_date;
+  char* user_id;
+  int rating;
+  float total_price;
+};
+
+struct query4_result {
+  GArray* query4_result;
+};
+
+int compare_query4_result(const void* a, const void* b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
+  const QUERY4_RESULT_HELPER* query4_result_a = (const QUERY4_RESULT_HELPER*)a;
+  const QUERY4_RESULT_HELPER* query4_result_b = (const QUERY4_RESULT_HELPER*)b;
+  int dateComparison =
+      strcoll((*query4_result_b)->begin_date, (*query4_result_a)->begin_date);
+
+  if (dateComparison != 0) {
+    return dateComparison;
+  } else {
+    return strcoll((*query4_result_a)->reservation_id,
+                   (*query4_result_b)->reservation_id);
+  }
+}
+
+void sort_by_date_and_value(void* result, int N) {
+  QUERY4_RESULT* query_result = (QUERY4_RESULT*)result;
+
+  qsort((*query_result)->query4_result, N, sizeof(QUERY4_RESULT),
+        compare_query4_result);
 }

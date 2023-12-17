@@ -1,10 +1,11 @@
 #ifndef OUTPUT_HANDLER_CONTROLLER_H
 #define OUTPUT_HANDLER_CONTROLLER_H
 
+#include <glib.h>
 #include <stdbool.h>
 #include <stdio.h>
 
-typedef struct query4_result *QUERY4_RESULT;
+#include "services/queries_service.h"
 
 /**
  * @brief Writes the query1 output to the output file.
@@ -94,7 +95,7 @@ void write_query3(bool has_f, FILE *output_file, double media_of_ratings);
  * @param output_file The output file.
  * @param query_result The query result.
  */
-void write_query4(bool has_f, FILE *output_file, QUERY4_RESULT query_result);
+void write_query4(bool has_f, FILE *output_file, GArray *query_result);
 
 /**
  * @brief Writes the query8 output to the output file.

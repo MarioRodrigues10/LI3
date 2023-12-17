@@ -268,14 +268,17 @@ void query3(bool has_f, char **query_parameters, FlightsData *flights_data,
   write_query3(has_f, output_file, media_of_ratings);
 }
 
+struct query4_result_helper {
+  char *reservation_id;
+  char *begin_date;
+  char *end_date;
+  char *user_id;
+  int rating;
+  float total_price;
+};
+
 struct query4_result {
-  char **reservation_id;
-  char **begin_date;
-  char **end_date;
-  char **user_id;
-  int *rating;
-  float *total_price;
-  int iterator;
+  GArray *query4_result;
 };
 
 void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
@@ -286,54 +289,47 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
   GArray *reservations = get_hotel_reservations(hotel_stats);
   if (reservations == NULL) return;
+
   QUERY4_RESULT result = malloc(sizeof(struct query4_result));
-  result->reservation_id = malloc(sizeof(char *) * reservations->len);
-  result->begin_date = malloc(sizeof(char *) * reservations->len);
-  result->end_date = malloc(sizeof(char *) * reservations->len);
-  result->user_id = malloc(sizeof(char *) * reservations->len);
-  result->rating = malloc(sizeof(int) * reservations->len);
-  result->total_price = malloc(sizeof(int) * reservations->len);
-  int i = 0;
-  int j = 0;
+  result->query4_result =
+      g_array_new(FALSE, FALSE, sizeof(QUERY4_RESULT_HELPER));
+
+  int i = 0, j = 0;
   for (i = 0; i < reservations->len; i++) {
     char *reservation_id = g_array_index(reservations, char *, i);
-    ReservationInfo *reservation =
-        get_reservation_by_reservation_id(reservations_data, reservation_id);
-    char *begin_date = get_begin_date(reservation);
-    char *end_date = get_end_date(reservation);
-    int rating = get_rating(reservation);
-    int price_per_night = get_price_per_night(reservation);
-    float total_price =
-        calculate_total_price(calculate_number_of_nights(begin_date, end_date),
-                              price_per_night, get_city_tax(reservation));
+    if (reservation_id != NULL) {
+      QUERY4_RESULT_HELPER result_helper =
+          malloc(sizeof(struct query4_result_helper));
 
-    char *user_id = get_user_id_reservation(reservation);
-    result->reservation_id[j] = reservation_id;
-    result->begin_date[j] = strdup(begin_date);
-    result->end_date[j] = strdup(end_date);
-    result->user_id[j] = strdup(user_id);
-    result->rating[j] = rating;
-    result->total_price[j] = total_price;
-    j++;
-    free(begin_date);
-    free(end_date);
-    free(user_id);
+      ReservationInfo *reservation =
+          get_reservation_by_reservation_id(reservations_data, reservation_id);
+      char *begin_date = get_begin_date(reservation);
+      char *end_date = get_end_date(reservation);
+      int rating = get_rating(reservation);
+      int price_per_night = get_price_per_night(reservation);
+      float total_price = calculate_total_price(
+          calculate_number_of_nights(begin_date, end_date), price_per_night,
+          get_city_tax(reservation));
+      char *user_id = get_user_id_reservation(reservation);
+
+      result_helper->reservation_id = strdup(reservation_id);
+      result_helper->begin_date = strdup(begin_date);
+      result_helper->end_date = strdup(end_date);
+      result_helper->user_id = strdup(user_id);
+      result_helper->rating = rating;
+      result_helper->total_price = total_price;
+      g_array_append_val(result->query4_result, result_helper);
+      j++;
+      free(begin_date);
+      free(end_date);
+      free(user_id);
+    }
   }
-  result->iterator = j--;
-  sort_by_date_and_value(result, result->iterator);
-  write_query4(has_f, output_file, result);
-  for (int i = 0; i < result->iterator; i++) {
-    free(result->begin_date[i]);
-    free(result->end_date[i]);
-    free(result->user_id[i]);
-  }
-  free(result->reservation_id);
-  free(result->begin_date);
-  free(result->end_date);
-  free(result->user_id);
-  free(result->rating);
-  free(result->total_price);
-  free(result);
+  int N = j--;
+  sort_by_date_and_value(result, N);
+  write_query4(has_f, output_file, result->query4_result);
+
+  g_array_free(result->query4_result, TRUE);
 }
 
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
