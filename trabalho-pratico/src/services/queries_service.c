@@ -424,8 +424,7 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
     free(account_status);
   }
   sort_by_name_and_id(user_ids, user_names, j);
-  write_query9(has_f, output_file, user_ids, user_names, j);
-  free(user_names);
+  write_query9(has_f, output_file, user_ids, user_names, j);  free(user_names);
   free(user_ids);
 }
 
