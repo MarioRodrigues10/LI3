@@ -152,7 +152,7 @@ void query2_flights(bool has_f, UserStats *user_stats,
   char **types = malloc(sizeof(char *) * len);
 
   query2_seed_flights(flights_data, NULL, flights, 0, ids, dates, types, len);
-
+  sort_by_date(ids, dates, types, len);
   write_query2(has_f, output_file, ids, dates, types, len);
   free_query2(ids, dates, types, len);
 }
@@ -424,7 +424,8 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
     free(account_status);
   }
   sort_by_name_and_id(user_ids, user_names, j);
-  write_query9(has_f, output_file, user_ids, user_names, j);  free(user_names);
+  write_query9(has_f, output_file, user_ids, user_names, j);
+  free(user_names);
   free(user_ids);
 }
 
