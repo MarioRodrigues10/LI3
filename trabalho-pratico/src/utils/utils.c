@@ -140,19 +140,17 @@ char* remove_quotation_marks(char* str) {
   return lineWithoutQuotes;
 }
 
-char* create_prefix(char** parameters, int N) {
-  static char prefix[100];
-  strcpy(prefix, parameters[0]);
-  if (N == 1) return prefix;
-  for (int i = 1; i < N; i++) {
-    if (strcmp(parameters[i], prefix) == 0) break;
-    strcat(prefix, " ");
-    strcat(prefix, parameters[i]);
-  }
-  if (strchr(prefix, '"') != NULL)
+char* create_prefix(char** paramenters, int N) {
+  if (paramenters[1] != NULL) {
+    char prefix[100] = {0};
+    for (int i = 0; i < N; i++) {
+      strcat(prefix, paramenters[i]);
+      strcat(prefix, " ");
+    }
     return remove_quotation_marks(prefix);
-  else
-    return prefix;
+  } else {
+    return remove_quotation_marks(paramenters[0]);
+  }
 }
 
 struct query4_result_helper {
