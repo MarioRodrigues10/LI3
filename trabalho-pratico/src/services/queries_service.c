@@ -408,23 +408,62 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
   GArray *stats_user = get_stats_user_info(users_stats);
   char **user_ids = malloc(sizeof(char *) * stats_user->len);
   char **user_names = malloc(sizeof(char *) * stats_user->len);
+  GArray *respond = g_array_new(FALSE, FALSE, sizeof(UserInfoStats *));
 
-  int j, i;
-  for (i = 0, j = 0; i < stats_user->len; i++) {
-    UserInfoStats *user =
-        (UserInfoStats *)(g_array_index(stats_user, void *, i));
-    char *account_status =
-        get_account_status(get_user_by_username(users_data, user->user_id));
-    if (strncmp(user->user_name, prefix, strlen(prefix)) == 0 &&
-        strcmp(account_status, "ACTIVE") == 0) {
-      user_ids[j] = (user->user_id);
-      user_names[j] = (user->user_name);
-      j++;
+  g_array_sort(stats_user, (GCompareFunc)compare);
+
+  guint matched_index;
+  gboolean aux = g_array_binary_search(
+      stats_user, prefix, (GCompareFunc)check_prefix, &matched_index);
+
+  if (aux) {
+    UserInfoStats *matched_user =
+        g_array_index(stats_user, UserInfoStats *, matched_index);
+
+    for (int i = matched_index; i >= 0 && strncmp(matched_user->user_name,
+                                                  prefix, strlen(prefix)) == 0;
+         i--) {
+      char *account_status = get_account_status(
+          get_user_by_username(users_data, matched_user->user_id));
+
+      if (strcmp(account_status, "ACTIVE") == 0) {
+        g_array_prepend_val(respond,
+                            g_array_index(stats_user, UserInfoStats *, i));
+      }
+      matched_user = g_array_index(stats_user, UserInfoStats *, i - 1);
+
+      free(account_status);
     }
-    free(account_status);
+
+    matched_user =
+        g_array_index(stats_user, UserInfoStats *, matched_index + 1);
+
+    for (int j = matched_index + 1;
+         j < stats_user->len &&
+         strncmp(matched_user->user_name, prefix, strlen(prefix)) == 0;
+         j++) {
+      char *account_status = get_account_status(
+          get_user_by_username(users_data, matched_user->user_id));
+      if (strcmp(account_status, "ACTIVE") == 0) {
+        g_array_append_val(respond,
+                           g_array_index(stats_user, UserInfoStats *, j));
+      }
+      matched_user = g_array_index(stats_user, UserInfoStats *, j + 1);
+      free(account_status);
+    }
+
+    g_array_sort(respond, (GCompareFunc)compare_respond);
+
+    for (int k = 0; k < (int)respond->len; k++) {
+      UserInfoStats *user =
+          (UserInfoStats *)(g_array_index(respond, void *, k));
+
+      user_ids[k] = (user->user_id);
+      user_names[k] = (user->user_name);
+    }
   }
-  sort_by_name_and_id(user_ids, user_names, j);
-  write_query9(has_f, output_file, user_ids, user_names, j);
+  write_query9(has_f, output_file, user_ids, user_names, respond->len);
+  g_array_free(respond, TRUE);
   free(user_names);
   free(user_ids);
 }

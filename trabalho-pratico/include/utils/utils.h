@@ -104,13 +104,34 @@ char* remove_quotation_marks(char* str);
 char* create_prefix(char** parameters, int N);
 
 /**
- * @brief Function that sorts the users by name and id.
+ * @brief Function that orders the user info by name and if they have the same
+ * name, by id.
  *
- * @param user_ids The user ids of type 'char**'
- * @param user_names The user names of type 'char**'
- * @param N The number of users of type 'int'
+ * @param a The first string of type 'const void*'
+ * @param b The second string of type 'const void*'
+ *
+ * @return The result of the check of type 'int'
  */
-void sort_by_name_and_id(char** user_ids, char** user_names, int N);
-
 int compare(const void* a, const void* b);
+
+/**
+ *  @brief Function that orders the responsed by name and if they have the same
+ * name, by id, for obtaining the requested order
+ *
+ * @param a The first string of type 'const void*'
+ * @param b The second string of type 'const void*'
+ *
+ * @return The result of the check of type 'int'
+ */
+int compare_respond(const void* a, const void* b);
+
+/**
+ * @brief Function to find prefix in user_name.
+ *
+ * @param a The first string of type 'const void*'
+ * @param b The second string of type 'const void*'
+ *
+ * @return The result of the check of type 'int'
+ */
+int check_prefix(const void* a, const void* b);
 #endif

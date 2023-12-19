@@ -155,43 +155,6 @@ char* create_prefix(char** parameters, int N) {
     return prefix;
 }
 
-struct user_info {
-  char* user_id;
-  char* user_name;
-};
-
-int compare(const void* a, const void* b) {
-  setlocale(LC_COLLATE, "en_US.UTF-8");
-  const UserInfoStats* user_a = (const UserInfoStats*)a;
-  const UserInfoStats* user_b = (const UserInfoStats*)b;
-
-  int nameComparison = strcoll(user_a->user_name, user_b->user_name);
-
-  if (nameComparison != 0) {
-    return nameComparison;
-  } else {
-    return strcoll(user_a->user_id, user_b->user_id);
-  }
-}
-
-void sort_by_name_and_id(char** user_ids, char** user_names, int N) {
-  UserInfoStats* users = malloc(N * sizeof(UserInfoStats));
-
-  for (int i = 0; i < N; i++) {
-    users[i].user_id = user_ids[i];
-    users[i].user_name = user_names[i];
-  }
-
-  qsort(users, N, sizeof(UserInfoStats), compare);
-
-  for (int i = 0; i < N; i++) {
-    user_ids[i] = users[i].user_id;
-    user_names[i] = users[i].user_name;
-  }
-
-  free(users);
-}
-
 struct query4_result_helper {
   char* reservation_id;
   char* begin_date;
@@ -225,4 +188,53 @@ void sort_by_date_and_value(void* result, int N) {
 
   qsort((*query_result)->query4_result, N, sizeof(QUERY4_RESULT),
         compare_query4_result);
+}
+
+struct user_info {
+  char* user_id;
+  char* user_name;
+};
+
+int compare(const void* a, const void* b) {
+  const UserInfoStats* user_a = *(const UserInfoStats**)a;
+  const UserInfoStats* user_b = *(const UserInfoStats**)b;
+
+  // Ensure null termination
+  g_assert(user_a->user_name[strlen(user_a->user_name)] == '\0');
+  g_assert(user_b->user_name[strlen(user_b->user_name)] == '\0');
+  g_assert(user_a->user_id[strlen(user_a->user_id)] == '\0');
+  g_assert(user_b->user_id[strlen(user_b->user_id)] == '\0');
+
+  int nameComparison = strcmp(user_a->user_name, user_b->user_name);
+  if (nameComparison != 0) {
+    return nameComparison;
+  } else {
+    return strcmp(user_a->user_id, user_b->user_id);
+  }
+}
+
+int check_prefix(const void* a, const void* b) {
+  const UserInfoStats* user = *(const UserInfoStats**)a;
+  const char* prefix = b;
+
+  return strncmp(user->user_name, prefix, strlen(prefix));
+}
+
+int compare_respond(const void* a, const void* b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
+  const UserInfoStats* user_a = *(const UserInfoStats**)a;
+  const UserInfoStats* user_b = *(const UserInfoStats**)b;
+
+  // Ensure null termination
+  g_assert(user_a->user_name[strlen(user_a->user_name)] == '\0');
+  g_assert(user_b->user_name[strlen(user_b->user_name)] == '\0');
+  g_assert(user_a->user_id[strlen(user_a->user_id)] == '\0');
+  g_assert(user_b->user_id[strlen(user_b->user_id)] == '\0');
+
+  int nameComparison = strcoll(user_a->user_name, user_b->user_name);
+  if (nameComparison != 0) {
+    return nameComparison;
+  } else {
+    return strcoll(user_a->user_id, user_b->user_id);
+  }
 }
