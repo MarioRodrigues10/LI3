@@ -94,7 +94,7 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
         break;
     }
 
-    free_tokens(tokens, num_tokens);
+    // free_tokens(tokens, num_tokens);
   }
 
   return 0;

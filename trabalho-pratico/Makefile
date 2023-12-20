@@ -44,4 +44,4 @@ clean:
 
 .PHONY: format
 format:
-	clang-format -i -style=file src/*.c include/*.h tests/*.c
+	clang-format -i -style=file $(shell find src/ -name '*.c' -o -name '*.h') $(shell find include/ -name '*.h') $(shell find tests/ -name '*.c')

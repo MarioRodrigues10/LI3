@@ -188,6 +188,24 @@ void sort_by_date_and_value(void* result, int N) {
         compare_query4_result);
 }
 
+char* concatenate_and_modify_strings(char* str1, char* str2) {
+  size_t size = strlen(str1) + strlen(str2) + 2;
+
+  char* result = (char*)malloc(size * sizeof(char));
+  if (result == NULL) {
+    printf("Erro ao alocar memória.\n");
+    return NULL;
+  }
+
+  strcpy(result, str1);
+  strcat(result, " ");
+  strcat(result, str2);
+
+  result[strlen(result) - 1] = '\0';
+  memmove(result, result + 1, strlen(result));
+
+  return result;
+}
 struct user_info {
   char* user_id;
   char* user_name;

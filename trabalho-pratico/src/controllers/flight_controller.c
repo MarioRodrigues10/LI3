@@ -1,11 +1,14 @@
 #include "controllers/flight_controller.h"
 
 #include <glib.h>
+#include <stdio.h>
 
 struct flights_data {
   GHashTable *flights;
 
   GHashTable *flight_stats;
+
+  GHashTable *airport_stats;
 };
 
 // SET UP
@@ -16,6 +19,8 @@ FlightsData *flights_data_new() {
                                                 (GDestroyNotify)destroy_flight);
   flights_data->flight_stats = g_hash_table_new_full(
       g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_flight_stats);
+  flights_data->airport_stats = g_hash_table_new_full(
+      g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_airport_stats);
   return flights_data;
 }
 
@@ -29,6 +34,7 @@ void add_flight(FlightsData *flights_data, FlightInfo *flight) {
 void flights_data_free(FlightsData *flights_data) {
   g_hash_table_destroy(flights_data->flights);
   g_hash_table_destroy(flights_data->flight_stats);
+  g_hash_table_destroy(flights_data->airport_stats);
   free(flights_data);
 }
 
@@ -64,4 +70,40 @@ FlightInfo *get_flight_by_flight_id(FlightsData *flights_data,
 FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
                                            char *flight_id) {
   return g_hash_table_lookup(flights_data->flight_stats, flight_id);
+}
+
+// AIRPORT STATS
+struct airport_stats {
+  char *airport_name;
+  GArray *airport_flights;
+};
+
+// Estrutura temporária
+void add_airport_stats_controller(FlightsData *flights_data,
+                                  AirportStats *airport_stats) {
+  // char *airport_name = get_airport_name_from_airport_stats(airport_stats);
+  // g_hash_table_insert(flights_data->airport_stats, airport_name,
+  // airport_stats);
+  g_hash_table_insert(flights_data->airport_stats, airport_stats->airport_name,
+                      airport_stats);
+}
+
+void update_airport_stats_controller(FlightsData *flights_data,
+                                     char *airport_name,
+                                     AirportInfo *airport_info) {
+  AirportStats *airport_stats =
+      g_hash_table_lookup(flights_data->airport_stats, airport_name);
+  if (airport_stats == NULL) {
+    AirportStats *airport_stats =
+        create_airport_stats(airport_name, airport_info);
+    add_airport_stats_controller(flights_data, airport_stats);
+    return;
+  }
+  airport_stats =
+      update_airport_stats(airport_stats, airport_name, airport_info);
+}
+
+AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,
+                                                char *airport_name) {
+  return g_hash_table_lookup(flights_data->airport_stats, airport_name);
 }

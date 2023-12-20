@@ -2,6 +2,7 @@
 #define FLIGHT_CONTROLLER_H
 
 #include "models/flight.h"
+#include "stats/airport_stats.h"
 #include "stats/flight_stats.h"
 
 typedef struct flights_data FlightsData;
@@ -66,5 +67,35 @@ FlightInfo *get_flight_by_flight_id(FlightsData *flights_data, char *flight_id);
  */
 FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
                                            char *flight_id);
+
+/**
+ * @brief Adds an airport stats to the hastable.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param airport_stats Pointer to the AirportStats struct.
+ */
+void add_airport_stats_controller(FlightsData *flights_data,
+                                  AirportStats *airport_stats);
+
+/**
+ * @brief Updates the airport stats.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param airport_name Pointer to the airport name.
+ * @param airport_info Pointer to the AirportInfo struct.
+ */
+void update_airport_stats_controller(FlightsData *flights_data,
+                                     char *airport_name,
+                                     AirportInfo *airport_info);
+
+/**
+ * @brief Gets an airport stats from the hastable by its airport name.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param airport_name Pointer to the airport name.
+ * @return AirportStats pointer of type 'AirportStats*' to the airport stats.
+ */
+AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,
+                                                char *airport_name);
 
 #endif

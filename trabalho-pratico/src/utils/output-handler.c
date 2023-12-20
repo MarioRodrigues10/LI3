@@ -126,6 +126,34 @@ void write_query4(bool has_f, FILE *output_file, GArray *query_result_array) {
   }
 }
 
+struct query5_result {
+  char **flight_id;
+  char **departure_date;
+  char **destination;
+  char **airline;
+  char **plane_model;
+  int iterator;
+};
+void write_query5(bool has_f, FILE *output_file, QUERY5_RESULT query_result) {
+  int j;
+  for (int i = 0; i < query_result->iterator; i++) {
+    j = i + 1;
+    if (has_f) {
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file,
+              "--- %d ---\nid: %s\nschedule_departure_date: %s\ndestination: "
+              "%s\nairline: %s\nplane_model: %s\n",
+              j, query_result->flight_id[i], query_result->departure_date[i],
+              query_result->destination[i], query_result->airline[i],
+              query_result->plane_model[i]);
+    } else {
+      fprintf(output_file, "%s;%s;%s;%s;%s\n", query_result->flight_id[i],
+              query_result->departure_date[i], query_result->destination[i],
+              query_result->airline[i], query_result->plane_model[i]);
+    }
+  }
+}
+
 void write_query8(bool has_f, FILE *output_file, double revenue) {
   if (has_f) {
     fprintf(output_file, "--- 1 ---\nrevenue: %.f\n", revenue);

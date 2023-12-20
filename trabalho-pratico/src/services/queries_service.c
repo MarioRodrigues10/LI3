@@ -329,13 +329,100 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   sort_by_date_and_value(result, N);
   write_query4(has_f, output_file, result->query4_result);
 
+  for (int i = 0; i < N; i++) {
+    free(g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i)
+             ->reservation_id);
+    free(g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i)
+             ->begin_date);
+    free(g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i)
+             ->end_date);
+    free(
+        g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i)->user_id);
+    free(g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i));
+  }
+
   g_array_free(result->query4_result, TRUE);
 }
+
+struct airport_info {
+  char *flight_id;
+  char *departure_date;
+  char *destination;
+  char *airline;
+  char *plane_model;
+};
+
+struct query5_result {
+  char **flight_id;
+  char **departure_date;
+  char **destination;
+  char **airline;
+  char **plane_model;
+  int iterator;
+};
 
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {}
+            FILE *output_file) {
+  char *id = query_parameters[0];
+  char *begin_date =
+      concatenate_and_modify_strings(query_parameters[1], query_parameters[2]);
+  char *end_date =
+      concatenate_and_modify_strings(query_parameters[3], query_parameters[4]);
+
+  AirportStats *airport_stats =
+      get_airport_stats_by_airport_name(flights_data, id);
+
+  if (airport_stats == NULL) return;
+
+  GArray *flights = get_airport_flights_from_airport_stats(airport_stats);
+
+  if (flights == NULL) return;
+
+  sort_airport_info_by_departure_date(airport_stats);
+
+  QUERY5_RESULT result = malloc(sizeof(struct query5_result));
+  result->flight_id = malloc(flights->len * sizeof(char *));
+  result->departure_date = malloc(flights->len * sizeof(char *));
+  result->destination = malloc(flights->len * sizeof(char *));
+  result->airline = malloc(flights->len * sizeof(char *));
+  result->plane_model = malloc(flights->len * sizeof(char *));
+  result->iterator = 0;
+
+  for (guint i = 0; i < flights->len; ++i) {
+    AirportInfo *info = &g_array_index(flights, AirportInfo, i);
+
+    if (strcmp(info->departure_date, begin_date) >= 0 &&
+        strcmp(info->departure_date, end_date) <= 0) {
+      result->flight_id[result->iterator] = strdup(info->flight_id);
+      result->departure_date[result->iterator] = strdup(info->departure_date);
+      result->destination[result->iterator] = strdup(info->destination);
+      result->airline[result->iterator] = strdup(info->airline);
+      result->plane_model[result->iterator] = strdup(info->plane_model);
+      result->iterator++;
+    }
+  }
+
+  write_query5(has_f, output_file, result);
+
+  free(begin_date);
+  free(end_date);
+
+  for (int i = 0; i < result->iterator; i++) {
+    free(result->flight_id[i]);
+    free(result->departure_date[i]);
+    free(result->destination[i]);
+    free(result->airline[i]);
+    free(result->plane_model[i]);
+  }
+  free(result->flight_id);
+  free(result->departure_date);
+  free(result->destination);
+  free(result->airline);
+  free(result->plane_model);
+  free(result);
+}
 
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,

@@ -115,6 +115,17 @@ char* create_prefix(char** parameters, int N);
 int compare(const void* a, const void* b);
 
 /**
+ * @brief Function that create an valid data for query 5 parameters
+ *
+ * @param str1 The first parameter of the date of query 5 of type 'char*'
+ * @param str2 The second parameter of the date of query 5 of type 'char*'
+ *
+ * @return The valid date of query 5 of type 'char*'
+ *
+ */
+char* concatenate_and_modify_strings(char* str1, char* str2);
+
+/**
  *  @brief Function that orders the responsed by name and if they have the same
  * name, by id, for obtaining the requested order
  *
