@@ -13,10 +13,9 @@
  *
  * @param account_status A string representing the account status to be
  * standardized.
- * @return "ACTIVE" for "active," "INACTIVE" for "inactive," or "NO STATUS" for
- * an invalid status.
+ * @return true if the account status is active, false otherwise.
  */
-char* standardize_account_status(char* account_status);
+bool standardize_account_status(char* account_status);
 
 /**
  * @brief Standardizes an "includes_breakfast" string to 't' or 'f'.

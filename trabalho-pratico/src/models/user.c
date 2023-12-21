@@ -11,7 +11,7 @@ struct user {
   char *passport;
   char *country_code;
   char *account_creation;
-  char *account_status;
+  bool account_status;
 };
 
 // CREATE
@@ -48,8 +48,8 @@ void set_account_creation(UserInfo *user, char *account_creation) {
   user->account_creation = g_strdup(account_creation);
 }
 
-void set_account_status(UserInfo *user, char *account_status) {
-  user->account_status = g_strdup(account_status);
+void set_account_status(UserInfo *user, bool account_status) {
+  user->account_status = account_status;
 }
 
 // GETTERS
@@ -83,10 +83,9 @@ char *get_account_creation(UserInfo *user) {
   return account_creation;
 }
 
-char *get_account_status(UserInfo *user) {
-  if (user == NULL) return NULL;
-  char *account_status = g_strdup(user->account_status);
-  return account_status;
+bool get_account_status(UserInfo *user) {
+  if (user == NULL) return false;
+  return user->account_status;
 }
 
 // DESTROYER
@@ -97,6 +96,5 @@ void destroy_user(UserInfo *user) {
   g_free(user->passport);
   g_free(user->country_code);
   g_free(user->account_creation);
-  g_free(user->account_status);
   g_free(user);
 }

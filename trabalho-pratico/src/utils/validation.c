@@ -6,20 +6,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* standardize_account_status(char* account_status) {
+bool standardize_account_status(char* account_status) {
   if (account_status != NULL) {
     for (int i = 0; account_status[i]; i++) {
       account_status[i] = tolower(account_status[i]);
     }
 
     if (strcmp(account_status, "active") == 0) {
-      return "ACTIVE";
+      return true;
     } else if (strcmp(account_status, "inactive") == 0) {
-      return "INACTIVE";
+      return false;
     }
   }
 
-  return "NO STATUS";
+  return false;
 }
 
 char* standardize_includes_breakfast(char* includes_breakfast) {

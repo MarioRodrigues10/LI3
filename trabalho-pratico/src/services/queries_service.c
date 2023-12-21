@@ -80,9 +80,9 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
 
   if (user_info == NULL) return;
 
-  char *account_status = get_account_status(user_info);
+  bool account_status = get_account_status(user_info);
 
-  if (strcmp(account_status, "ACTIVE") == 0) {
+  if (account_status) {
     char *name = get_name(user_info);
     char *sex = get_sex(user_info) ? "M" : "F";
     int age = calculate_age(get_birth_date(user_info));
@@ -102,7 +102,6 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     free(country_code);
     free(passport);
   }
-  free(account_status);
 }
 
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
@@ -116,14 +115,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   UserInfo *user = get_user_by_username(users_data, id);
-  char *account_status = get_account_status(user);
+  bool account_status = get_account_status(user);
 
-  if (account_status == NULL || strlen(account_status) <= 0 ||
-      strcmp(account_status, "ACTIVE") != 0) {
-    free(account_status);
-    return;
-  }
-  free(account_status);
+  if (!account_status) return;
 
   UserStats *user_stats = get_user_stats_by_user_id(users_data, id);
 
@@ -505,16 +499,14 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
     for (int i = matched_index; i >= 0 && strncmp(matched_user->user_name,
                                                   prefix, strlen(prefix)) == 0;
          i--) {
-      char *account_status = get_account_status(
+      bool account_status = get_account_status(
           get_user_by_username(users_data, matched_user->user_id));
 
-      if (strcmp(account_status, "ACTIVE") == 0) {
+      if (account_status) {
         g_array_prepend_val(respond,
                             g_array_index(stats_user, UserInfoStats *, i));
       }
       matched_user = g_array_index(stats_user, UserInfoStats *, i - 1);
-
-      free(account_status);
     }
 
     matched_user =
@@ -524,14 +516,13 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
          j < stats_user->len &&
          strncmp(matched_user->user_name, prefix, strlen(prefix)) == 0;
          j++) {
-      char *account_status = get_account_status(
+      bool account_status = get_account_status(
           get_user_by_username(users_data, matched_user->user_id));
-      if (strcmp(account_status, "ACTIVE") == 0) {
+      if (account_status) {
         g_array_append_val(respond,
                            g_array_index(stats_user, UserInfoStats *, j));
       }
       matched_user = g_array_index(stats_user, UserInfoStats *, j + 1);
-      free(account_status);
     }
 
     g_array_sort(respond, (GCompareFunc)compare_respond);

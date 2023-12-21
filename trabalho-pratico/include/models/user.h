@@ -74,9 +74,9 @@ void set_account_creation(UserInfo *user, char *account_creation);
  * @brief Sets the account creation of a user.
  *
  * @param user UserInfo pointer of type 'UserInfo*'.
- * @param account_creation Account creation of type 'char*'.
+ * @param account_status Account status of type 'bool'.
  */
-void set_account_status(UserInfo *user, char *account_status);
+void set_account_status(UserInfo *user, bool account_status);
 
 /**
  * @brief Gets the user id of a user.
@@ -138,9 +138,9 @@ char *get_account_creation(UserInfo *user);
  * @brief Gets the account status of a user.
  *
  * @param user UserInfo pointer of type 'UserInfo*'.
- * @return account_status of type 'char*'.
+ * @return account_status of type 'bool'.
  */
-char *get_account_status(UserInfo *user);
+bool get_account_status(UserInfo *user);
 
 /**
  * @brief Frees the memory allocated to a user.
