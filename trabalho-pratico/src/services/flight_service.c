@@ -84,7 +84,6 @@ void construct_flight(char **parameters, void *flights_data,
   set_schedule_departure_date(flight_info, parameters[6]);
   set_schedule_arrival_date(flight_info, parameters[7]);
   set_real_departure_date(flight_info, parameters[8]);
-  set_real_arrival_date(flight_info, parameters[9]);
 
   add_flight(flight_data, flight_info);
 

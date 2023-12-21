@@ -1,17 +1,19 @@
 #include "models/reservation.h"
 
 #include <glib.h>
+#include <stdbool.h>
+
 struct reservation {
   char *reservation_id;
   char *user_id;
-  char *hotel_id;
+  int hotel_id;
   char *hotel_name;
   int hotel_stars;
   int city_tax;
-  char *begin_date;
-  char *end_date;
+  int begin_date;
+  int end_date;
   int price_per_night;
-  char *includes_breakfast;
+  bool includes_breakfast;
   int rating;
 };
 
@@ -33,8 +35,8 @@ void set_user_id_reservation(ReservationInfo *reservation, char *user_id) {
   reservation->user_id = g_strdup(user_id);
 }
 
-void set_hotel_id(ReservationInfo *reservation, char *hotel_id) {
-  reservation->hotel_id = g_strdup(hotel_id);
+void set_hotel_id(ReservationInfo *reservation, int hotel_id) {
+  reservation->hotel_id = hotel_id;
 }
 
 void set_hotel_name(ReservationInfo *reservation, char *hotel_name) {
@@ -49,12 +51,12 @@ void set_city_tax(ReservationInfo *reservation, int city_tax) {
   reservation->city_tax = city_tax;
 }
 
-void set_begin_date(ReservationInfo *reservation, char *begin_date) {
-  reservation->begin_date = g_strdup(begin_date);
+void set_begin_date(ReservationInfo *reservation, int begin_date) {
+  reservation->begin_date = begin_date;
 }
 
-void set_end_date(ReservationInfo *reservation, char *end_date) {
-  reservation->end_date = g_strdup(end_date);
+void set_end_date(ReservationInfo *reservation, int end_date) {
+  reservation->end_date = end_date;
 }
 
 void set_price_per_night(ReservationInfo *reservation, int price_per_night) {
@@ -62,8 +64,8 @@ void set_price_per_night(ReservationInfo *reservation, int price_per_night) {
 }
 
 void set_includes_breakfast(ReservationInfo *reservation,
-                            char *includes_breakfast) {
-  reservation->includes_breakfast = g_strdup(includes_breakfast);
+                            bool includes_breakfast) {
+  reservation->includes_breakfast = includes_breakfast;
 }
 
 void set_rating(ReservationInfo *reservation, int rating) {
@@ -82,10 +84,7 @@ char *get_user_id_reservation(ReservationInfo *reservation) {
   return user_id;
 }
 
-char *get_hotel_id(ReservationInfo *reservation) {
-  char *hotel_id = g_strdup(reservation->hotel_id);
-  return hotel_id;
-}
+int get_hotel_id(ReservationInfo *reservation) { return reservation->hotel_id; }
 
 char *get_hotel_name(ReservationInfo *reservation) {
   char *hotel_name = g_strdup(reservation->hotel_name);
@@ -102,24 +101,19 @@ int get_city_tax(ReservationInfo *reservation) {
   return city_tax;
 }
 
-char *get_begin_date(ReservationInfo *reservation) {
-  char *begin_date = g_strdup(reservation->begin_date);
-  return begin_date;
+int get_begin_date(ReservationInfo *reservation) {
+  return reservation->begin_date;
 }
 
-char *get_end_date(ReservationInfo *reservation) {
-  char *end_date = g_strdup(reservation->end_date);
-  return end_date;
-}
+int get_end_date(ReservationInfo *reservation) { return reservation->end_date; }
 
 int get_price_per_night(ReservationInfo *reservation) {
   int price_per_night = reservation->price_per_night;
   return price_per_night;
 }
 
-char *get_includes_breakfast(ReservationInfo *reservation) {
-  char *includes_breakfast = g_strdup(reservation->includes_breakfast);
-  return includes_breakfast;
+bool get_includes_breakfast(ReservationInfo *reservation) {
+  return reservation->includes_breakfast;
 }
 
 int get_rating(ReservationInfo *reservation) {
@@ -132,10 +126,6 @@ int get_rating(ReservationInfo *reservation) {
 void destroy_reservation(ReservationInfo *reservation) {
   g_free(reservation->reservation_id);
   g_free(reservation->user_id);
-  g_free(reservation->hotel_id);
   g_free(reservation->hotel_name);
-  g_free(reservation->begin_date);
-  g_free(reservation->end_date);
-  g_free(reservation->includes_breakfast);
   g_free(reservation);
 }

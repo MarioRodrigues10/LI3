@@ -5,7 +5,9 @@
 
 #include "controllers/user_controller.h"
 #include "models/user.h"
+#include "utils/utils.h"
 #include "utils/validation.h"
+
 /**
  * @brief Verifies if the input is valid.
  *

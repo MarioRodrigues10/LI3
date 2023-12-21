@@ -3,18 +3,19 @@
 
 #include <glib.h>
 #include <locale.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-char* calculate_age(char* birth_date_str) {
-  static char result[3];
-
+int calculate_age(int birth_date) {
   int birth_date_year, birth_date_month, birth_date_day;
   int master_date_year, master_date_month, master_date_day;
 
-  sscanf(birth_date_str, "%d/%d/%d", &birth_date_year, &birth_date_month,
-         &birth_date_day);
+  birth_date_year = birth_date / 10000;
+  birth_date_month = (birth_date % 10000) / 100;
+  birth_date_day = birth_date % 100;
+
   sscanf(MASTER_DATE, "%d/%d/%d", &master_date_year, &master_date_month,
          &master_date_day);
 
@@ -26,9 +27,7 @@ char* calculate_age(char* birth_date_str) {
     age--;
   }
 
-  sprintf(result, "%d", age);
-
-  return result;
+  return age;
 }
 
 double calculate_total_price(int num_nights, int price_per_night,
@@ -253,4 +252,34 @@ int compare_respond(const void* a, const void* b) {
   } else {
     return strcoll(user_a->user_id, user_b->user_id);
   }
+}
+
+bool normalize_includes_breakfast(char* includes_breakfast) {
+  if ((strcmp(includes_breakfast, "t") == 0) ||
+      (strcmp(includes_breakfast, "true") == 0) ||
+      (strcmp(includes_breakfast, "1") == 0)) {
+    return true;
+  }
+  return false;
+}
+
+int normalize_hotel_id(char* hotel_id) {
+  int hotel_id_int;
+  sscanf(hotel_id, "HTL%d", &hotel_id_int);
+  return hotel_id_int;
+}
+
+int normalize_date(char* date) {
+  int year, month, day;
+  sscanf(date, "%d/%d/%d", &year, &month, &day);
+  int new_date = year * 10000 + month * 100 + day;
+  return new_date;
+}
+
+char* date_to_string(int date) {
+  int year = date / 10000;
+  int month = (date % 10000) / 100;
+  int day = date % 100;
+  char* new_date = format_date(year, month, day);
+  return new_date;
 }

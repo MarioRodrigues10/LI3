@@ -1,5 +1,6 @@
 #include "services/user_service.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -54,10 +55,12 @@ void construct_user(char **parameters, void *struct_data,
 
   UsersData *users_data = (UsersData *)struct_data;
 
+  bool sex = strcmp(parameters[5], "M") ? false : true;
+
   set_user_id(user_info, parameters[0]);
   set_name(user_info, parameters[1]);
-  set_birth_date(user_info, parameters[4]);
-  set_sex(user_info, parameters[5]);
+  set_birth_date(user_info, normalize_date(parameters[4]));
+  set_sex(user_info, sex);
   set_passport(user_info, parameters[6]);
   set_country_code(user_info, parameters[7]);
   set_account_creation(user_info, parameters[9]);

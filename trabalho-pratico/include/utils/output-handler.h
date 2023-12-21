@@ -65,7 +65,7 @@ void write_query1_for_flight(bool has_f, FILE *output_file,
  * @param total_spent The total spent.
  */
 void write_query1_for_user(bool has_f, FILE *output_file, char *name, char *sex,
-                           char *age, char *country_code, char *passport,
+                           int age, char *country_code, char *passport,
                            int number_of_flights, int number_of_reservations,
                            double total_spent);
 

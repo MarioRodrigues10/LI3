@@ -26,26 +26,25 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     int price_per_night = get_price_per_night(reservation_info);
     int city_tax = get_city_tax(reservation_info);
 
-    char *hotel_id = get_hotel_id(reservation_info);
+    int hotel_id_int = get_hotel_id(reservation_info);
+    char *hotel_id;
+    asprintf(&hotel_id, "HTL%d", hotel_id_int);
     char *hotel_name = get_hotel_name(reservation_info);
     int hotel_stars = get_hotel_stars(reservation_info);
-    char *begin_date = get_begin_date(reservation_info);
-    char *end_date = get_end_date(reservation_info);
-    char *breakfast = get_includes_breakfast(reservation_info);
-    char *includes_breakfast =
-        (strcmp(breakfast, "false") == 0) ? "False" : "True";
+    char *begin_date = date_to_string(get_begin_date(reservation_info));
+    char *end_date = date_to_string(get_end_date(reservation_info));
+    char *breakfast =
+        get_includes_breakfast(reservation_info) ? "True" : "False";
     int number_of_nights = calculate_number_of_nights(begin_date, end_date);
     double total_price =
         calculate_total_price(number_of_nights, price_per_night, city_tax);
 
-    write_query1_for_reservation(
-        has_f, output_file, hotel_id, hotel_name, hotel_stars, begin_date,
-        end_date, includes_breakfast, number_of_nights, total_price);
+    write_query1_for_reservation(has_f, output_file, hotel_id, hotel_name,
+                                 hotel_stars, begin_date, end_date, breakfast,
+                                 number_of_nights, total_price);
     free(begin_date);
     free(end_date);
-    free(hotel_id);
     free(hotel_name);
-    free(breakfast);
   }
 
   if (isdigit(id[0]) && isdigit(id[1])) {
@@ -85,9 +84,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
 
   if (strcmp(account_status, "ACTIVE") == 0) {
     char *name = get_name(user_info);
-    char *sex = get_sex(user_info);
-    char *birth_date = get_birth_date(user_info);
-    char *age = calculate_age(birth_date);
+    char *sex = get_sex(user_info) ? "M" : "F";
+    int age = calculate_age(get_birth_date(user_info));
     char *country_code = get_country_code(user_info);
     char *passport = get_passport(user_info);
     int number_of_flights = get_number_of_flights_from_user_stats(
@@ -101,10 +99,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
                           passport, number_of_flights, number_of_reservations,
                           total_spent);
     free(name);
-    free(sex);
     free(country_code);
     free(passport);
-    free(birth_date);
   }
   free(account_status);
 }
@@ -225,7 +221,7 @@ void query2_seed_reservations(ReservationsData *reservations_data, char *type,
     ReservationInfo *reservation =
         get_reservation_by_reservation_id(reservations_data, id);
     if (reservation == NULL) return;
-    char *date = get_begin_date(reservation);
+    char *date = date_to_string(get_begin_date(reservation));
 
     int year, month, day, hour, minute, second;
     sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
@@ -303,8 +299,8 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
 
       ReservationInfo *reservation =
           get_reservation_by_reservation_id(reservations_data, reservation_id);
-      char *begin_date = get_begin_date(reservation);
-      char *end_date = get_end_date(reservation);
+      char *begin_date = date_to_string(get_begin_date(reservation));
+      char *end_date = date_to_string(get_end_date(reservation));
       int rating = get_rating(reservation);
       int price_per_night = get_price_per_night(reservation);
       float total_price = calculate_total_price(
@@ -451,8 +447,8 @@ void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
     ReservationInfo *reservation =
         get_reservation_by_reservation_id(reservations_data, reservation_id);
     if (strncmp(reservation_id, "Book", 4) != 0) break;
-    char *begin_date_reservation = get_begin_date(reservation);
-    char *end_date_reservation = get_end_date(reservation);
+    char *begin_date_reservation = date_to_string(get_begin_date(reservation));
+    char *end_date_reservation = date_to_string(get_end_date(reservation));
     int price_per_night = get_price_per_night(reservation);
     if (strcmp(begin_date, end_date) == 0 &&
         (strcmp(begin_date, begin_date_reservation) == 0 ||

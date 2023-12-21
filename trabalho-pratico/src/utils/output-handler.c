@@ -44,18 +44,18 @@ void write_query1_for_flight(bool has_f, FILE *output_file,
 }
 
 void write_query1_for_user(bool has_f, FILE *output_file, char *name, char *sex,
-                           char *age, char *country_code, char *passport,
+                           int age, char *country_code, char *passport,
                            int number_of_flights, int number_of_reservations,
                            double total_spent) {
   if (has_f) {
     fprintf(output_file,
-            "--- 1 ---\nname: %s\nsex: %s\nage: %s\ncountry_code: "
+            "--- 1 ---\nname: %s\nsex: %s\nage: %d\ncountry_code: "
             "%s\npassport: %s\nnumber_of_flights: "
             "%d\nnumber_of_reservations: %d\ntotal_spent: %.3f\n",
             name, sex, age, country_code, passport, number_of_flights,
             number_of_reservations, total_spent);
   } else {
-    fprintf(output_file, "%s;%s;%s;%s;%s;%d;%d;%.3f\n", name, sex, age,
+    fprintf(output_file, "%s;%s;%d;%s;%s;%d;%d;%.3f\n", name, sex, age,
             country_code, passport, number_of_flights, number_of_reservations,
             total_spent);
   }

@@ -12,7 +12,6 @@ struct flight {
   char *schedule_departure_date;
   char *schedule_arrival_date;
   char *real_departure_date;
-  char *real_arrival_date;
 };
 
 // CREATE
@@ -63,10 +62,6 @@ void set_real_departure_date(FlightInfo *flight, char *real_departure_date) {
   flight->real_departure_date = g_strdup(real_departure_date);
 }
 
-void set_real_arrival_date(FlightInfo *flight, char *real_arrival_date) {
-  flight->real_arrival_date = g_strdup(real_arrival_date);
-}
-
 // GETTERS
 
 char *get_flight_id(FlightInfo *flight) {
@@ -114,11 +109,6 @@ char *get_real_departure_date(FlightInfo *flight) {
   return real_departure_date;
 }
 
-char *get_real_arrival_date(FlightInfo *flight) {
-  char *real_arrival_date = g_strdup(flight->real_arrival_date);
-  return real_arrival_date;
-}
-
 // DESTROYER
 
 void destroy_flight(FlightInfo *flight) {
@@ -130,6 +120,5 @@ void destroy_flight(FlightInfo *flight) {
   g_free(flight->schedule_departure_date);
   g_free(flight->schedule_arrival_date);
   g_free(flight->real_departure_date);
-  g_free(flight->real_arrival_date);
   g_free(flight);
 }

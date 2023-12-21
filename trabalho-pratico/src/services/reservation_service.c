@@ -66,14 +66,15 @@ void construct_reservation(char **parameters,
   ReservationInfo *reservation_info = create_reservation();
   set_reservation_id(reservation_info, parameters[0]);
   set_user_id_reservation(reservation_info, parameters[1]);
-  set_hotel_id(reservation_info, parameters[2]);
+  set_hotel_id(reservation_info, normalize_hotel_id(parameters[2]));
   set_hotel_name(reservation_info, parameters[3]);
   set_hotel_stars(reservation_info, strtol(parameters[4], NULL, 10));
   set_city_tax(reservation_info, strtol(parameters[5], NULL, 10));
-  set_begin_date(reservation_info, parameters[7]);
-  set_end_date(reservation_info, parameters[8]);
+  set_begin_date(reservation_info, normalize_date(parameters[7]));
+  set_end_date(reservation_info, normalize_date(parameters[8]));
   set_price_per_night(reservation_info, strtol(parameters[9], NULL, 10));
-  set_includes_breakfast(reservation_info, parameters[10]);
+  set_includes_breakfast(reservation_info,
+                         normalize_includes_breakfast(parameters[10]));
   set_rating(reservation_info, strtol(parameters[12], NULL, 10));
 
   add_reservation(reservations_data, reservation_info);

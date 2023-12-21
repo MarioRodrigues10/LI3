@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <glib.h>
+#include <stdbool.h>
 
 #include "services/queries_service.h"
 #include "stats/user_stats.h"
@@ -16,7 +17,7 @@
  * @return The age of the passenger of type 'int'
  *
  */
-char* calculate_age(char* birth_date_str);
+int calculate_age(int birth_date);
 
 /**
  * @brief Function that calculates the total price of a reservation.
@@ -145,4 +146,41 @@ int compare_respond(const void* a, const void* b);
  * @return The result of the check of type 'int'
  */
 int check_prefix(const void* a, const void* b);
+
+/**
+ * @brief Function that normalizes includes breakfast
+ *
+ * @param includes_breakfast The string of type 'char*'
+ *
+ * @return True if it includes breakfast or False if it doesn't of type
+ * 'bool'.
+ */
+bool normalize_includes_breakfast(char* includes_breakfast);
+
+/**
+ * @brief Function that normalizes the hotel id
+ *
+ * @param hotel_id The hotel id of type 'char*'
+ *
+ * @return The normalized hotel id of type 'int'
+ */
+int normalize_hotel_id(char* hotel_id);
+
+/**
+ * @brief Function that normalizes the date
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date of type 'int'
+ */
+int normalize_date(char* date);
+
+/**
+ * @brief Function that converts a date in integer to a string
+ *
+ * @param date The date of type 'int'
+ *
+ * @return The date of type 'char*
+ */
+char* date_to_string(int date);
 #endif

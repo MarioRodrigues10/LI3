@@ -1,12 +1,13 @@
 #include "models/user.h"
 
 #include <glib.h>
+#include <stdbool.h>
 
 struct user {
   char *user_id;
   char *name;
-  char *birth_date;
-  char *sex;
+  int birth_date;
+  bool sex;
   char *passport;
   char *country_code;
   char *account_creation;
@@ -29,11 +30,11 @@ void set_user_id(UserInfo *user, char *user_id) {
 
 void set_name(UserInfo *user, char *name) { user->name = g_strdup(name); }
 
-void set_birth_date(UserInfo *user, char *birth_date) {
-  user->birth_date = g_strdup(birth_date);
+void set_birth_date(UserInfo *user, int birth_date) {
+  user->birth_date = birth_date;
 }
 
-void set_sex(UserInfo *user, char *sex) { user->sex = g_strdup(sex); }
+void set_sex(UserInfo *user, bool sex) { user->sex = sex; }
 
 void set_passport(UserInfo *user, char *passport) {
   user->passport = g_strdup(passport);
@@ -63,15 +64,9 @@ char *get_name(UserInfo *user) {
   return name;
 }
 
-char *get_birth_date(UserInfo *user) {
-  char *birth_date = g_strdup(user->birth_date);
-  return birth_date;
-}
+int get_birth_date(UserInfo *user) { return user->birth_date; }
 
-char *get_sex(UserInfo *user) {
-  char *sex = g_strdup(user->sex);
-  return sex;
-}
+bool get_sex(UserInfo *user) { return user->sex; }
 
 char *get_passport(UserInfo *user) {
   char *passport = g_strdup(user->passport);
@@ -99,8 +94,6 @@ char *get_account_status(UserInfo *user) {
 void destroy_user(UserInfo *user) {
   g_free(user->user_id);
   g_free(user->name);
-  g_free(user->birth_date);
-  g_free(user->sex);
   g_free(user->passport);
   g_free(user->country_code);
   g_free(user->account_creation);

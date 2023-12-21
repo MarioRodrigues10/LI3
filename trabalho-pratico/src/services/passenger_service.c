@@ -29,11 +29,6 @@ void construct_passenger(char **parameters, UsersData *users_data,
     return;
   }
 
-  // PassengerInfo *passenger_info = create_passenger();
-
-  // set_flight_id_passenger(passenger_info, parameters[0]);
-  // set_user_id_passenger(passenger_info, parameters[1]);
-
   UserStats *user_stats = get_user_stats_by_user_id(users_data, parameters[1]);
   update_user_stats_controller(users_data, parameters[1], 1, 0, 0.0);
   update_flight_stats_controller(flights_data, parameters[0], 1);

@@ -86,14 +86,6 @@ void set_schedule_arrival_date(FlightInfo *flight, char *schedule_arrival_date);
 void set_real_departure_date(FlightInfo *flight, char *real_departure_date);
 
 /**
- * @brief Sets the real arrival date of a flight.
- *
- * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param real_arrival_date Real arrival date of type 'char*'.
- */
-void set_real_arrival_date(FlightInfo *flight, char *real_arrival_date);
-
-/**
  * @brief Gets the flight id of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
@@ -164,14 +156,6 @@ char *get_schedule_arrival_date(FlightInfo *flight);
  * @return char* Real departure date of type 'char*'.
  */
 char *get_real_departure_date(FlightInfo *flight);
-
-/**
- * @brief Gets the real arrival date of a flight.
- *
- * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Real arrival date of type 'char*'.
- */
-char *get_real_arrival_date(FlightInfo *flight);
 
 /**
  * @brief Frees the memory allocated to a flight.

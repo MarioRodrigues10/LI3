@@ -1,5 +1,6 @@
 #ifndef RESERVATION_H
 #define RESERVATION_H
+#include <stdbool.h>
 
 #define MAX_TOKENS_RESERVATION 14
 
@@ -33,9 +34,9 @@ void set_user_id_reservation(ReservationInfo *reservation, char *user_id);
  * @brief Sets the hotel id of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param hotel_id Hotel id of type 'char*'.
+ * @param hotel_id Hotel id of type 'int'.
  */
-void set_hotel_id(ReservationInfo *reservation, char *hotel_id);
+void set_hotel_id(ReservationInfo *reservation, int hotel_id);
 
 /**
  * @brief Sets the hotel name of a reservation.
@@ -65,17 +66,17 @@ void set_city_tax(ReservationInfo *reservation, int city_tax);
  * @brief Sets the begin date of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param begin_date Begin date of type 'char*'.
+ * @param begin_date Begin date of type 'int'.
  */
-void set_begin_date(ReservationInfo *reservation, char *begin_date);
+void set_begin_date(ReservationInfo *reservation, int begin_date);
 
 /**
  * @brief Sets the end date of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param end_date End date of type 'char*'.
+ * @param end_date End date of type 'int'.
  */
-void set_end_date(ReservationInfo *reservation, char *end_date);
+void set_end_date(ReservationInfo *reservation, int end_date);
 
 /**
  * @brief Sets the price per night of a reservation.
@@ -89,10 +90,10 @@ void set_price_per_night(ReservationInfo *reservation, int price_per_night);
  * @brief Sets the includes breakfast of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param includes_breakfast Includes breakfast of type 'char*'.
+ * @param includes_breakfast Includes breakfast of type 'bool'.
  */
 void set_includes_breakfast(ReservationInfo *reservation,
-                            char *includes_breakfast);
+                            bool includes_breakfast);
 
 /**
  * @brief Sets the rating of a reservation.
@@ -124,7 +125,7 @@ char *get_user_id_reservation(ReservationInfo *reservation);
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
  * @return char pointer of type 'char*'.
  */
-char *get_hotel_id(ReservationInfo *reservation);
+int get_hotel_id(ReservationInfo *reservation);
 
 /**
  * @brief Gets the hotel name of a reservation.
@@ -154,23 +155,23 @@ int get_city_tax(ReservationInfo *reservation);
  * @brief Gets the begin date of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return char pointer of type 'char*'.
+ * @return begin_date of type 'int'.
  */
-char *get_begin_date(ReservationInfo *reservation);
+int get_begin_date(ReservationInfo *reservation);
 
 /**
  * @brief Gets the end date of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return char pointer of type 'char*'.
+ * @return end_date of type 'int'.
  */
-char *get_end_date(ReservationInfo *reservation);
+int get_end_date(ReservationInfo *reservation);
 
 /**
  * @brief Gets the price per night of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return int of type 'int'.
+ * @return price of type 'int'.
  */
 int get_price_per_night(ReservationInfo *reservation);
 
@@ -178,9 +179,9 @@ int get_price_per_night(ReservationInfo *reservation);
  * @brief Gets the includes breakfast of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return char pointer of type 'char*'.
+ * @return True if it includes breakfast or False if it doesn't of type 'bool'.
  */
-char *get_includes_breakfast(ReservationInfo *reservation);
+bool get_includes_breakfast(ReservationInfo *reservation);
 
 /**
  * @brief Gets the rating of a reservation.
