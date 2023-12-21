@@ -141,12 +141,11 @@ char* remove_quotation_marks(char* str) {
 
 char* create_prefix(char** paramenters, int N) {
   if (paramenters[1] != NULL) {
-    char prefix[100] = {0};
-    for (int i = 0; i < N; i++) {
-      strcat(prefix, paramenters[i]);
-      strcat(prefix, " ");
+    for (int i = 1; i < N; i++) {
+      strcat(paramenters[0], " ");
+      strcat(paramenters[0], paramenters[i]);
     }
-    return remove_quotation_marks(prefix);
+    return remove_quotation_marks(paramenters[0]);
   } else {
     return remove_quotation_marks(paramenters[0]);
   }

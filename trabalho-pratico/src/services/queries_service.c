@@ -502,7 +502,6 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
   if (aux) {
     UserInfoStats *matched_user =
         g_array_index(stats_user, UserInfoStats *, matched_index);
-
     for (int i = matched_index; i >= 0 && strncmp(matched_user->user_name,
                                                   prefix, strlen(prefix)) == 0;
          i--) {
