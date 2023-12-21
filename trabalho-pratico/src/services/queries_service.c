@@ -27,8 +27,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     int city_tax = get_city_tax(reservation_info);
 
     int hotel_id_int = get_hotel_id(reservation_info);
-    char *hotel_id;
-    asprintf(&hotel_id, "HTL%d", hotel_id_int);
+    char *hotel_id = malloc(sizeof(char) * 10);
+    sprintf(hotel_id, "HTL%d", hotel_id_int);
     char *hotel_name = get_hotel_name(reservation_info);
     int hotel_stars = get_hotel_stars(reservation_info);
     char *begin_date = date_to_string(get_begin_date(reservation_info));
@@ -44,6 +44,7 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
                                  number_of_nights, total_price);
     free(begin_date);
     free(end_date);
+    free(hotel_id);
     free(hotel_name);
   }
 
