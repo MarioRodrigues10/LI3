@@ -106,7 +106,7 @@ void write_query4(bool has_f, FILE *output_file, GArray *query_result);
  * @param output_file The output file.
  * @param query_result The query result.
  */
-void write_query5(bool has_f, FILE *output_file, QUERY5_RESULT query_result);
+void write_query5(bool has_f, FILE *output_file, GArray *query_result_array);
 
 /**
  * @brief Writes the query8 output to the output file.

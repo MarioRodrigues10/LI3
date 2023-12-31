@@ -183,4 +183,23 @@ int normalize_date(char* date);
  * @return The date of type 'char*
  */
 char* date_to_string(int date);
+
+/**
+ * @brief Function that sorts the reservations by date.
+ *
+ * @param result The result of the query of type 'void*'
+ * @param N The number of reservations of type 'int'
+ */
+void sort_by_departure_date(void* result, int N);
+
+/**
+ * @brief Function that sorts the reservations by date.
+ *
+ * @param a The first string of type 'const void*'
+ * @param b The second string of type 'const void*'
+ *
+ * @return The result of the check of type 'int'
+ */
+int compare_query5_result(const void* a, const void* b);
+
 #endif

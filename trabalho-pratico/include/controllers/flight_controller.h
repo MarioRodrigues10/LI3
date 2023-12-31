@@ -85,8 +85,7 @@ void add_airport_stats_controller(FlightsData *flights_data,
  * @param airport_info Pointer to the AirportInfo struct.
  */
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name,
-                                     AirportInfo *airport_info);
+                                     char *airport_name, char *flight_id);
 
 /**
  * @brief Gets an airport stats from the hastable by its airport name.

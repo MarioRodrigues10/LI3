@@ -186,6 +186,40 @@ void sort_by_date_and_value(void* result, int N) {
         compare_query4_result);
 }
 
+struct query5_result_helper {
+  char* flight_id;
+  char* departure_date;
+  char* destination;
+  char* airline;
+  char* plane_model;
+};
+
+struct query5_result {
+  GArray* query5_result;
+};
+
+int compare_query5_result(const void* a, const void* b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
+  const QUERY5_RESULT_HELPER* query5_result_a = (const QUERY5_RESULT_HELPER*)a;
+  const QUERY5_RESULT_HELPER* query5_result_b = (const QUERY5_RESULT_HELPER*)b;
+  int dateComparison = strcoll((*query5_result_b)->departure_date,
+                               (*query5_result_a)->departure_date);
+
+  if (dateComparison != 0) {
+    return dateComparison;
+  } else {
+    return strcoll((*query5_result_a)->flight_id,
+                   (*query5_result_b)->flight_id);
+  }
+}
+
+void sort_by_departure_date(void* result, int N) {
+  QUERY5_RESULT* query_result = (QUERY5_RESULT*)result;
+
+  qsort((*query_result)->query5_result, N, sizeof(QUERY5_RESULT),
+        compare_query5_result);
+}
+
 char* concatenate_and_modify_strings(char* str1, char* str2) {
   size_t size = strlen(str1) + strlen(str2) + 2;
 

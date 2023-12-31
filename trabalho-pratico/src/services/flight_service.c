@@ -49,13 +49,6 @@ int verify_flight_input(char **parameters) {
   return 1;
 }
 
-struct airport_info {
-  char *flight_id;
-  char *departure_date;
-  char *destination;
-  char *plane_model;
-};
-
 void construct_flight(char **parameters, void *flights_data,
                       FILE *errors_file) {
   if (!verify_flight_input(parameters)) {
@@ -86,17 +79,7 @@ void construct_flight(char **parameters, void *flights_data,
   set_real_departure_date(flight_info, parameters[8]);
 
   add_flight(flight_data, flight_info);
-
-  AirportInfo *airport_info =
-      create_airport_info(parameters[0], parameters[6], parameters[5],
-                          parameters[1], parameters[2]);
-
-  // set_flight_id_of_airport_info(airport_info, parameters[0]);
-  // set_departure_date_of_airport_info(airport_info, parameters[6]);
-  // set_destination_of_airport_info(airport_info, parameters[5]);
-  // set_plane_model_of_airport_info(airport_info, parameters[2]);
-
-  update_airport_stats_controller(flight_data, parameters[4], airport_info);
+  update_airport_stats_controller(flight_data, parameters[4], parameters[0]);
 
   // destroy_airport_info(airport_info);
 }

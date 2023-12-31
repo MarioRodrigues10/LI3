@@ -81,26 +81,20 @@ struct airport_stats {
 // Estrutura temporária
 void add_airport_stats_controller(FlightsData *flights_data,
                                   AirportStats *airport_stats) {
-  // char *airport_name = get_airport_name_from_airport_stats(airport_stats);
-  // g_hash_table_insert(flights_data->airport_stats, airport_name,
-  // airport_stats);
   g_hash_table_insert(flights_data->airport_stats, airport_stats->airport_name,
                       airport_stats);
 }
 
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name,
-                                     AirportInfo *airport_info) {
+                                     char *airport_name, char *flight_id) {
   AirportStats *airport_stats =
       g_hash_table_lookup(flights_data->airport_stats, airport_name);
   if (airport_stats == NULL) {
-    AirportStats *airport_stats =
-        create_airport_stats(airport_name, airport_info);
+    AirportStats *airport_stats = create_airport_stats(airport_name, flight_id);
     add_airport_stats_controller(flights_data, airport_stats);
     return;
   }
-  airport_stats =
-      update_airport_stats(airport_stats, airport_name, airport_info);
+  update_airport_stats(airport_stats, airport_name, flight_id);
 }
 
 AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,

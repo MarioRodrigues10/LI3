@@ -126,30 +126,31 @@ void write_query4(bool has_f, FILE *output_file, GArray *query_result_array) {
   }
 }
 
-struct query5_result {
-  char **flight_id;
-  char **departure_date;
-  char **destination;
-  char **airline;
-  char **plane_model;
-  int iterator;
+struct query5_result_helper {
+  char *flight_id;
+  char *departure_date;
+  char *destination;
+  char *airline;
+  char *plane_model;
 };
-void write_query5(bool has_f, FILE *output_file, QUERY5_RESULT query_result) {
+void write_query5(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < query_result->iterator; i++) {
+  for (int i = 0; i < query_result_array->len; i++) {
+    QUERY5_RESULT_HELPER query_result =
+        g_array_index(query_result_array, QUERY5_RESULT_HELPER, i);
     j = i + 1;
     if (has_f) {
       if (i != 0) fprintf(output_file, "\n");
       fprintf(output_file,
               "--- %d ---\nid: %s\nschedule_departure_date: %s\ndestination: "
               "%s\nairline: %s\nplane_model: %s\n",
-              j, query_result->flight_id[i], query_result->departure_date[i],
-              query_result->destination[i], query_result->airline[i],
-              query_result->plane_model[i]);
+              j, query_result->flight_id, query_result->departure_date,
+              query_result->destination, query_result->airline,
+              query_result->plane_model);
     } else {
-      fprintf(output_file, "%s;%s;%s;%s;%s\n", query_result->flight_id[i],
-              query_result->departure_date[i], query_result->destination[i],
-              query_result->airline[i], query_result->plane_model[i]);
+      fprintf(output_file, "%s;%s;%s;%s;%s\n", query_result->flight_id,
+              query_result->departure_date, query_result->destination,
+              query_result->airline, query_result->plane_model);
     }
   }
 }

@@ -335,7 +335,7 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   g_array_free(result->query4_result, TRUE);
 }
 
-struct airport_info {
+struct query5_result_helper {
   char *flight_id;
   char *departure_date;
   char *destination;
@@ -344,12 +344,7 @@ struct airport_info {
 };
 
 struct query5_result {
-  char **flight_id;
-  char **departure_date;
-  char **destination;
-  char **airline;
-  char **plane_model;
-  int iterator;
+  GArray *query5_result;
 };
 
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
@@ -371,48 +366,54 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
 
   if (flights == NULL) return;
 
-  sort_airport_info_by_departure_date(airport_stats);
-
   QUERY5_RESULT result = malloc(sizeof(struct query5_result));
-  result->flight_id = malloc(flights->len * sizeof(char *));
-  result->departure_date = malloc(flights->len * sizeof(char *));
-  result->destination = malloc(flights->len * sizeof(char *));
-  result->airline = malloc(flights->len * sizeof(char *));
-  result->plane_model = malloc(flights->len * sizeof(char *));
-  result->iterator = 0;
+  result->query5_result =
+      g_array_new(FALSE, FALSE, sizeof(QUERY5_RESULT_HELPER));
 
   for (guint i = 0; i < flights->len; ++i) {
-    AirportInfo *info = &g_array_index(flights, AirportInfo, i);
+    char *flight_id = g_array_index(flights, char *, i);
+    FlightInfo *flight = get_flight_by_flight_id(flights_data, flight_id);
+    char *departure_date = get_schedule_departure_date(flight);
+    char *destination = get_destination(flight);
+    char *airline = get_airline(flight);
+    char *plane_model = get_plane_model(flight);
 
-    if (strcmp(info->departure_date, begin_date) >= 0 &&
-        strcmp(info->departure_date, end_date) <= 0) {
-      result->flight_id[result->iterator] = strdup(info->flight_id);
-      result->departure_date[result->iterator] = strdup(info->departure_date);
-      result->destination[result->iterator] = strdup(info->destination);
-      result->airline[result->iterator] = strdup(info->airline);
-      result->plane_model[result->iterator] = strdup(info->plane_model);
-      result->iterator++;
+    if (strcmp(departure_date, begin_date) >= 0 &&
+        strcmp(departure_date, end_date) <= 0) {
+      QUERY5_RESULT_HELPER result_helper =
+          malloc(sizeof(struct query5_result_helper));
+      result_helper->flight_id = strdup(flight_id);
+      result_helper->departure_date = strdup(departure_date);
+      result_helper->destination = strdup(destination);
+      result_helper->airline = strdup(airline);
+      result_helper->plane_model = strdup(plane_model);
+      g_array_append_val(result->query5_result, result_helper);
     }
+    free(departure_date);
+    free(destination);
+    free(airline);
+    free(plane_model);
+  }
+  int N = result->query5_result->len;
+  sort_by_departure_date(result, N);
+
+  write_query5(has_f, output_file, result->query5_result);
+
+  for (int i = 0; i < N; i++) {
+    free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i)
+             ->flight_id);
+    free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i)
+             ->departure_date);
+    free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i)
+             ->destination);
+    free(
+        g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i)->airline);
+    free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i)
+             ->plane_model);
+    free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i));
   }
 
-  write_query5(has_f, output_file, result);
-
-  free(begin_date);
-  free(end_date);
-
-  for (int i = 0; i < result->iterator; i++) {
-    free(result->flight_id[i]);
-    free(result->departure_date[i]);
-    free(result->destination[i]);
-    free(result->airline[i]);
-    free(result->plane_model[i]);
-  }
-  free(result->flight_id);
-  free(result->departure_date);
-  free(result->destination);
-  free(result->airline);
-  free(result->plane_model);
-  free(result);
+  g_array_free(result->query5_result, TRUE);
 }
 
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
