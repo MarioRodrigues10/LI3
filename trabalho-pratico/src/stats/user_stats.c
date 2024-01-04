@@ -82,22 +82,21 @@ GArray *get_user_reservations_from_user_stats(UserStats *user_stats) {
 
 UserStats *create_user_stats(char *user_id, int number_of_flights,
                              int number_of_reservations, double total_spent,
-                             char *flight_id, char *reservation_id) {
+                             char *flight_id, int reservation_id) {
   UserStats *new_user_stats = malloc(sizeof(UserStats));
   new_user_stats->user_id = user_id;
   new_user_stats->number_of_flights = number_of_flights;
   new_user_stats->number_of_reservations = number_of_reservations;
   new_user_stats->total_spent = total_spent;
   new_user_stats->user_flights = g_array_new(FALSE, FALSE, sizeof(char *));
-  new_user_stats->user_reservations = g_array_new(FALSE, FALSE, sizeof(char *));
+  new_user_stats->user_reservations = g_array_new(FALSE, FALSE, sizeof(int));
   if (flight_id != NULL) {
     char *new_flight_id = g_strdup(flight_id);
     g_array_append_val(new_user_stats->user_flights, new_flight_id);
     free(new_flight_id);
   }
-  if (reservation_id != NULL) {
+  if (reservation_id != 0)
     g_array_append_val(new_user_stats->user_reservations, reservation_id);
-  }
   return new_user_stats;
 }
 
@@ -117,7 +116,7 @@ UserStats *update_user_stats(UserStats *user_stats, char *id, int flight,
     return user_stats;
   } else {
     UserStats *new_user_stats =
-        create_user_stats(id, flight, reservation, total_spent, NULL, NULL);
+        create_user_stats(id, flight, reservation, total_spent, NULL, 0);
     return new_user_stats;
   }
 }
@@ -131,7 +130,7 @@ void update_user_flights(UserStats *users_stats, char *user_id,
     }
   } else {
     UserStats *new_user_stats =
-        create_user_stats(user_id, 0, 0, 0.0, flight_id, NULL);
+        create_user_stats(user_id, 0, 0, 0.0, flight_id, 0);
     g_array_free(new_user_stats->user_flights, TRUE);
     g_array_free(new_user_stats->user_reservations, TRUE);
     free(new_user_stats);
@@ -139,7 +138,7 @@ void update_user_flights(UserStats *users_stats, char *user_id,
 }
 
 UserStats *update_user_reservations(UserStats *users_stats, char *user_id,
-                                    char *reservation_id) {
+                                    int reservation_id) {
   if (users_stats != NULL) {
     g_array_append_val(users_stats->user_reservations, reservation_id);
     return users_stats;

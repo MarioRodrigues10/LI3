@@ -168,6 +168,7 @@ int compare_query4_result(const void* a, const void* b) {
   setlocale(LC_COLLATE, "en_US.UTF-8");
   const QUERY4_RESULT_HELPER* query4_result_a = (const QUERY4_RESULT_HELPER*)a;
   const QUERY4_RESULT_HELPER* query4_result_b = (const QUERY4_RESULT_HELPER*)b;
+
   int dateComparison =
       strcoll((*query4_result_b)->begin_date, (*query4_result_a)->begin_date);
 
@@ -317,6 +318,58 @@ char* date_to_string(int date) {
   return new_date;
 }
 
+int normalize_reservation_id(char* reservation_id) {
+  int reservation_id_int = 0;
+  sscanf(reservation_id, "Book%d", &reservation_id_int);
+  return reservation_id_int;
+}
+
+char* int_to_reservation_id(int reservation_id, int N) {
+  char* reservation_id_str = malloc(sizeof(char) * 11);
+  switch (N) {
+    case 1:
+      sprintf(reservation_id_str, "Book000000000%d", reservation_id);
+      break;
+    case 2:
+      sprintf(reservation_id_str, "Book00000000%d", reservation_id);
+      break;
+    case 3:
+      sprintf(reservation_id_str, "Book0000000%d", reservation_id);
+      break;
+    case 4:
+      sprintf(reservation_id_str, "Book000000%d", reservation_id);
+      break;
+    case 5:
+      sprintf(reservation_id_str, "Book00000%d", reservation_id);
+      break;
+    case 6:
+      sprintf(reservation_id_str, "Book0000%d", reservation_id);
+      break;
+    case 7:
+      sprintf(reservation_id_str, "Book000%d", reservation_id);
+      break;
+    case 8:
+      sprintf(reservation_id_str, "Book00%d", reservation_id);
+      break;
+    case 9:
+      sprintf(reservation_id_str, "Book0%d", reservation_id);
+      break;
+    case 10:
+      sprintf(reservation_id_str, "Book%d", reservation_id);
+      break;
+  }
+
+  return reservation_id_str;
+}
+
+int count_digits(int n) {
+  int counter = 0;
+  while (n > 0) {
+    counter = counter + 1;
+    n = n / 10;
+  }
+  return counter;
+}
 struct airport_stats {
   char* airport_name;
   GArray* delays;

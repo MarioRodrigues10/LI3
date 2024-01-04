@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 struct reservation {
-  char *reservation_id;
+  int reservation_id;
   char *user_id;
   int hotel_id;
   char *hotel_name;
@@ -27,8 +27,8 @@ ReservationInfo *create_reservation() {
 
 // SETTERS
 
-void set_reservation_id(ReservationInfo *reservation, char *reservation_id) {
-  reservation->reservation_id = g_strdup(reservation_id);
+void set_reservation_id(ReservationInfo *reservation, int reservation_id) {
+  reservation->reservation_id = reservation_id;
 }
 
 void set_user_id_reservation(ReservationInfo *reservation, char *user_id) {
@@ -74,8 +74,8 @@ void set_rating(ReservationInfo *reservation, int rating) {
 
 // GETTERS
 
-char *get_reservation_id(ReservationInfo *reservation) {
-  char *reservation_id = g_strdup(reservation->reservation_id);
+int get_reservation_id(ReservationInfo *reservation) {
+  int reservation_id = reservation->reservation_id;
   return reservation_id;
 }
 
@@ -124,7 +124,6 @@ int get_rating(ReservationInfo *reservation) {
 // DESTROYER
 
 void destroy_reservation(ReservationInfo *reservation) {
-  g_free(reservation->reservation_id);
   g_free(reservation->user_id);
   g_free(reservation->hotel_name);
   g_free(reservation);

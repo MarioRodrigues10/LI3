@@ -18,9 +18,9 @@ ReservationInfo *create_reservation();
  * @brief Sets the reservation id of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param reservation_id Reservation id of type 'char*'.
+ * @param reservation_id Reservation id of type 'int'.
  */
-void set_reservation_id(ReservationInfo *reservation, char *reservation_id);
+void set_reservation_id(ReservationInfo *reservation, int reservation_id);
 
 /**
  * @brief Sets the user id of a reservation.
@@ -107,9 +107,9 @@ void set_rating(ReservationInfo *reservation, int rating);
  * @brief Gets the reservation id of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return char pointer of type 'char*'.
+ * @return reservation id of type 'int'.
  */
-char *get_reservation_id(ReservationInfo *reservation);
+int get_reservation_id(ReservationInfo *reservation);
 
 /**
  * @brief Gets the user id of a reservation.

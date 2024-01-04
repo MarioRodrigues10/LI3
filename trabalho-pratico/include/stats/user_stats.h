@@ -123,7 +123,7 @@ GArray *get_user_reservations_from_user_stats(UserStats *user_stats);
  */
 UserStats *create_user_stats(char *user_id, int number_of_flights,
                              int number_of_reservations, double total_spent,
-                             char *flight_id, char *reservation_id);
+                             char *flight_id, int reservation_id);
 
 /**
  * @brief Updates the user stats.
@@ -154,10 +154,10 @@ void update_user_flights(UserStats *users_stats, char *user_id,
  *
  * @param users_stats User stats of type 'UserStats*'.
  * @param user_id User id of type 'char*'.
- * @param reservation_id Reservation id of type 'char*'.
+ * @param reservation_id Reservation id of type 'int'.
  */
 UserStats *update_user_reservations(UserStats *users_stats, char *user_id,
-                                    char *reservation_id);
+                                    int reservation_id);
 
 /**
  * @brief Function that updates the user stats

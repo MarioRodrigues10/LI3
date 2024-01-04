@@ -13,7 +13,7 @@ struct reservations_data {
 ReservationsData *reservations_data_new() {
   ReservationsData *reservations_data = malloc(sizeof(ReservationsData));
   reservations_data->reservations = g_hash_table_new_full(
-      g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_reservation);
+      g_direct_hash, g_direct_equal, NULL, (GDestroyNotify)destroy_reservation);
   reservations_data->hotel_stats = g_hash_table_new_full(
       g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_hotel_stats);
   return reservations_data;
@@ -23,9 +23,9 @@ ReservationsData *reservations_data_new() {
 
 void add_reservation(ReservationsData *reservations_data,
                      ReservationInfo *reservation) {
-  char *reservation_id = get_reservation_id(reservation);
-  g_hash_table_insert(reservations_data->reservations, reservation_id,
-                      reservation);
+  int reservation_id = get_reservation_id(reservation);
+  g_hash_table_insert(reservations_data->reservations,
+                      GINT_TO_POINTER(reservation_id), reservation);
 }
 
 void reservations_data_free(ReservationsData *reservations_data) {
@@ -44,7 +44,7 @@ void add_hotel_stats_controller(ReservationsData *reservations_data,
 
 void update_hotel_stats_controller(ReservationsData *reservations_data,
                                    char *hotel_id, int rating,
-                                   char *reservation_id) {
+                                   int reservation_id) {
   HotelStats *hotel_stats =
       g_hash_table_lookup(reservations_data->hotel_stats, hotel_id);
   if (hotel_stats == NULL) {
@@ -60,8 +60,9 @@ void update_hotel_stats_controller(ReservationsData *reservations_data,
 // ACCESS
 
 ReservationInfo *get_reservation_by_reservation_id(
-    ReservationsData *reservations_data, char *reservation_id) {
-  return g_hash_table_lookup(reservations_data->reservations, reservation_id);
+    ReservationsData *reservations_data, int reservation_id) {
+  return g_hash_table_lookup(reservations_data->reservations,
+                             GINT_TO_POINTER(reservation_id));
 }
 
 HotelStats *get_hotel_stats_by_hotel_id(ReservationsData *reservations_data,

@@ -53,20 +53,18 @@ GArray *get_hotel_reservations(HotelStats *hotel_stats) {
 // SET UP
 
 HotelStats *create_hotel_stats(char *hotel_id, int total_rating,
-                               int number_of_clients, char *reservation_id) {
+                               int number_of_clients, int reservation_id) {
   HotelStats *new_hotel_stats = malloc(sizeof(HotelStats));
   new_hotel_stats->hotel_id = hotel_id;
   new_hotel_stats->total_rating = total_rating;
   new_hotel_stats->number_of_clients = number_of_clients;
-  new_hotel_stats->hotel_reservations =
-      g_array_new(FALSE, FALSE, sizeof(char *));
-  if (reservation_id != NULL)
-    g_array_append_val(new_hotel_stats->hotel_reservations, reservation_id);
+  new_hotel_stats->hotel_reservations = g_array_new(FALSE, FALSE, sizeof(int));
+  g_array_append_val(new_hotel_stats->hotel_reservations, reservation_id);
   return new_hotel_stats;
 }
 
 HotelStats *update_hotel_stats(HotelStats *hotel_stats, char *id, int rating,
-                               char *reservation_id) {
+                               int reservation_id) {
   if (hotel_stats != NULL) {
     g_array_append_val(hotel_stats->hotel_reservations, reservation_id);
     hotel_stats->total_rating += rating;

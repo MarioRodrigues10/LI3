@@ -47,7 +47,7 @@ void update_user_stats_controller(UsersData *users_data, char *user_id,
   if (user_stats == NULL) {
     UserStats *user_stats =
         create_user_stats(user_id, number_of_flights, number_of_reservations,
-                          total_spent, NULL, NULL);
+                          total_spent, NULL, 0);
     add_user_stats_controller(users_data, user_stats);
     return;
   }

@@ -73,13 +73,13 @@ GArray *get_hotel_reservations(HotelStats *hotel_stats);
  * @param hotel_id hotel id of type 'char*'.
  * @param total_rating Total rating of type 'int'.
  * @param number_of_clients Number of clients of type 'int'.
- * @param reservation_id Reservation id of type 'char*'.
+ * @param reservation_id Reservation id of type 'int'.
  *
  * @returns A new hotel stats of type 'HotelStats*'.
  *
  */
 HotelStats *create_hotel_stats(char *hotel_id, int total_rating,
-                               int number_of_clients, char *reservation_id);
+                               int number_of_clients, int reservation_id);
 
 /**
  * @brief Updates a hotel stats.
@@ -87,13 +87,13 @@ HotelStats *create_hotel_stats(char *hotel_id, int total_rating,
  * @param hotel_stats hotel stats of type 'HotelStats*'.
  * @param id Id of type 'char*'.
  * @param rating Rating of type 'int'.
- * @param reservation_id Reservation id of type 'char*'.
+ * @param reservation_id Reservation id of type 'int'.
  *
  * @returns An updated hotel stats of type 'HotelStats*'.
  *
  */
 HotelStats *update_hotel_stats(HotelStats *hotel_stats, char *id, int rating,
-                               char *reservation_id);
+                               int reservation_id);
 
 /**
  * @brief Destroys a hotel stats.

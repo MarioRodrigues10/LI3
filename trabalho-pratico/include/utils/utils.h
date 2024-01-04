@@ -242,4 +242,31 @@ void sort_by_departure_date(void* result, int N);
  */
 int compare_query5_result(const void* a, const void* b);
 
+/**
+ * @brief Function that normalizes the reservation id
+ *
+ * @param reservation_id The reservation id of type 'char*'
+ *
+ * @return The normalized reservation id of type 'int'
+ */
+int normalize_reservation_id(char* reservation_id);
+
+/**
+ * @brief Function that converts a reservation id in integer to a string
+ *
+ * @param reservation_id The reservation id of type 'int'
+ * @param N The number of digits of the reservation id of type 'int'
+ *
+ * @return The reservation id of type 'char*
+ */
+char* int_to_reservation_id(int reservation_id, int N);
+
+/**
+ * @brief Function that counts the number of digits of a number
+ *
+ * @param n The number of type 'int'
+ *
+ * @return The number of digits of type 'int'
+ */
+int count_digits(int n);
 #endif

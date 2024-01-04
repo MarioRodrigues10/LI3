@@ -64,7 +64,8 @@ void construct_reservation(char **parameters,
   }
 
   ReservationInfo *reservation_info = create_reservation();
-  set_reservation_id(reservation_info, parameters[0]);
+  int reservation_id = normalize_reservation_id(parameters[0]);
+  set_reservation_id(reservation_info, reservation_id);
   set_user_id_reservation(reservation_info, parameters[1]);
   set_hotel_id(reservation_info, normalize_hotel_id(parameters[2]));
   set_hotel_name(reservation_info, parameters[3]);
@@ -87,7 +88,7 @@ void construct_reservation(char **parameters,
           strtol(parameters[9], NULL, 10), strtol(parameters[5], NULL, 10)));
   update_hotel_stats_controller(reservations_data, parameters[2],
                                 strtol(parameters[12], NULL, 10),
-                                parameters[0]);
+                                reservation_id);
   UserStats *user_stats = get_user_stats_by_user_id(users_data, parameters[1]);
-  update_user_reservations(user_stats, parameters[1], parameters[0]);
+  update_user_reservations(user_stats, parameters[1], reservation_id);
 }

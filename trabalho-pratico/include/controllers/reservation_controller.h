@@ -50,7 +50,7 @@ void add_hotel_stats_controller(ReservationsData *reservations_data,
  */
 void update_hotel_stats_controller(ReservationsData *reservations_data,
                                    char *hotel_id, int rating,
-                                   char *reservation_id);
+                                   int reservation_id);
 
 /**
  * @brief Gets a reservation from the hastable by its reservation id.
@@ -61,7 +61,7 @@ void update_hotel_stats_controller(ReservationsData *reservations_data,
  * reservation.
  */
 ReservationInfo *get_reservation_by_reservation_id(
-    ReservationsData *reservations_data, char *reservation_id);
+    ReservationsData *reservations_data, int reservation_id);
 
 /**
  * @brief Gets a hotel stats from the hastable by its hotel id.
