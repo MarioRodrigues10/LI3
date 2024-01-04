@@ -421,10 +421,47 @@ void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {}
 
+struct query7_result {
+  char *airport;
+  int median_delay;
+};
+
 void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {}
+            FILE *output_file) {
+  int length = strtol(query_parameters[0], NULL, 10);
+  GArray *medians = g_array_new(FALSE, FALSE, sizeof(struct query7_result));
+
+  GHashTable *airport = get_airport_stats(flights_data);
+
+  g_hash_table_foreach(airport, (GHFunc)calculate_median_for_airport, medians);
+
+  g_array_sort(medians, (GCompareFunc)compare_median);
+
+  if (length > medians->len) length = medians->len;
+
+  char **airport_result = malloc(sizeof(char *) * length);
+  int *medians_result = malloc(sizeof(int) * length);
+
+  for (int i = 0; i < length && i < medians->len; i++) {
+    struct query7_result *result =
+        &g_array_index(medians, struct query7_result, i);
+
+    airport_result[i] = result->airport;
+    medians_result[i] = result->median_delay;
+  }
+
+  write_query7(has_f, output_file, airport_result, medians_result, length);
+  for (int i = 0; i < length; i++) {
+    g_free(airport_result[i]);
+  }
+  free(airport_result);
+  free(medians_result);
+
+  // Free the GArray
+  g_array_free(medians, TRUE);
+}
 
 void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,

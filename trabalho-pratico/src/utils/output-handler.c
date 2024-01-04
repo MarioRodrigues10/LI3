@@ -155,6 +155,22 @@ void write_query5(bool has_f, FILE *output_file, GArray *query_result_array) {
   }
 }
 
+void write_query7(bool has_f, FILE *output_file, char **airport, int *delays,
+                  int N) {
+  if (has_f) {
+    for (int i = 0; i < N; i++) {
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file, "--- %d ---\nname: %s\nmedian: %d\n", i + 1,
+              airport[i], delays[i]);
+    }
+
+  } else {
+    for (int i = 0; i < N; i++) {
+      fprintf(output_file, "%s;%d\n", airport[i], delays[i]);
+    }
+  }
+}
+
 void write_query8(bool has_f, FILE *output_file, double revenue) {
   if (has_f) {
     fprintf(output_file, "--- 1 ---\nrevenue: %.f\n", revenue);

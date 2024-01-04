@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils/utils.h"
+
 int verify_flight_input(char **parameters) {
   if (!validate_parameter_not_empty(parameters[0])) return 0;
   if (!validate_parameter_not_empty(parameters[1])) return 0;
@@ -79,7 +81,10 @@ void construct_flight(char **parameters, void *flights_data,
   set_real_departure_date(flight_info, parameters[8]);
 
   add_flight(flight_data, flight_info);
-  update_airport_stats_controller(flight_data, parameters[4], parameters[0]);
+
+  update_airport_stats_controller(
+      flight_data, parameters[4], parameters[0],
+      calculate_delay(parameters[6], parameters[8]));
 
   // destroy_airport_info(airport_info);
 }

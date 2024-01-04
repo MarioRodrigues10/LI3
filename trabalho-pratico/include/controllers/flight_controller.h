@@ -8,6 +8,15 @@
 typedef struct flights_data FlightsData;
 
 /**
+ * @brief Gets the flight stats hashtable.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ *
+ * @return GHashTable pointer of type 'GHashTable*' to the flight stats
+ */
+GHashTable *get_airport_stats(FlightsData *flights_data);
+
+/**
  * @brief Allocates the memory necessary to create a new FlightsData struct and
  * generates the hastable.
  *
@@ -85,7 +94,8 @@ void add_airport_stats_controller(FlightsData *flights_data,
  * @param airport_info Pointer to the AirportInfo struct.
  */
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name, char *flight_id);
+                                     char *airport_name, char *flight_id,
+                                     int delay);
 
 /**
  * @brief Gets an airport stats from the hastable by its airport name.

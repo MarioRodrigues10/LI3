@@ -185,6 +185,46 @@ int normalize_date(char* date);
 char* date_to_string(int date);
 
 /**
+ * @brief Function that calculate the median of delay in a airport
+ *
+ * @param key The key of the airport of type 'gpointer'
+ * @param value The value of the airport of type 'gpointer'
+ * @param user_data The user data of type 'gpointer'
+ *
+ */
+void calculate_median_for_airport(gpointer key, gpointer value,
+                                  gpointer user_data);
+
+/**
+ * @brief Auxiliar function that calculate the median of delay in a airport
+ *
+ * @param delays The delays of type 'GArray*'
+ *
+ * @return The median of delay of type 'double'
+ */
+double calculate_median(GArray* delays);
+
+/**
+ * @brief Function to sort the airports by median of delay,ascending order
+ *
+ * @param a The first airport of type 'gconstpointer'
+ * @param b The second airport of type 'gconstpointer'
+ *
+ * @return The result of the check of type 'gint'
+ */
+gint ascending_order(gconstpointer a, gconstpointer b);
+
+/**
+ * @brief Function to sort the airports by median of delay,descending order
+ *
+ * @param a The first airport of type 'gconstpointer'
+ * @param b The second airport of type 'gconstpointer'
+ *
+ * @return The result of the check of type 'gint'
+ */
+gint compare_median(gconstpointer a, gconstpointer b);
+
+/*
  * @brief Function that sorts the reservations by date.
  *
  * @param result The result of the query of type 'void*'

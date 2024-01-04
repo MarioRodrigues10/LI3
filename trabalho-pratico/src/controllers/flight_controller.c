@@ -24,6 +24,12 @@ FlightsData *flights_data_new() {
   return flights_data;
 }
 
+//
+
+GHashTable *get_airport_stats(FlightsData *flights_data) {
+  return flights_data->airport_stats;
+}
+
 // FLIGHT
 
 void add_flight(FlightsData *flights_data, FlightInfo *flight) {
@@ -75,6 +81,7 @@ FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
 // AIRPORT STATS
 struct airport_stats {
   char *airport_name;
+  GArray delays;
   GArray *airport_flights;
 };
 
@@ -86,15 +93,17 @@ void add_airport_stats_controller(FlightsData *flights_data,
 }
 
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name, char *flight_id) {
+                                     char *airport_name, char *flight_id,
+                                     int delay) {
   AirportStats *airport_stats =
       g_hash_table_lookup(flights_data->airport_stats, airport_name);
   if (airport_stats == NULL) {
-    AirportStats *airport_stats = create_airport_stats(airport_name, flight_id);
+    AirportStats *airport_stats =
+        create_airport_stats(airport_name, flight_id, delay);
     add_airport_stats_controller(flights_data, airport_stats);
     return;
   }
-  update_airport_stats(airport_stats, airport_name, flight_id);
+  update_airport_stats(airport_stats, airport_name, flight_id, delay);
 }
 
 AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,

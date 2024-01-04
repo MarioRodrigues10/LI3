@@ -32,6 +32,16 @@ char *get_airport_name_from_airport_stats(AirportStats *airport_stats);
 GArray *get_airport_flights_from_airport_stats(AirportStats *airport_stats);
 
 /**
+ * @brief Gets the delays from airport stats.
+ *
+ * @param airport_stats Airport stats of type 'AirportStats*'.
+ *
+ * @returns The delays of type 'GArray*'.
+ *
+ */
+GArray *get_delays(AirportStats *airport_stats);
+
+/**
  * @brief Creates a new airport stats.
  *
  * @param airport_name Airport name of type 'char*'.
@@ -40,7 +50,8 @@ GArray *get_airport_flights_from_airport_stats(AirportStats *airport_stats);
  * @returns A new airport stats of type 'AirportStats*'.
  *
  */
-AirportStats *create_airport_stats(char *airport_name, char *flight_id);
+AirportStats *create_airport_stats(char *airport_name, char *flight_id,
+                                   int delay);
 
 /**
  * @brief Updates an airport stats.
@@ -53,7 +64,25 @@ AirportStats *create_airport_stats(char *airport_name, char *flight_id);
  *
  */
 AirportStats *update_airport_stats(AirportStats *airport_stats,
-                                   char *airport_name, char *flight_id);
+                                   char *airport_name, char *flight_id,
+                                   int delay);
+
+/**
+ * @brief Adds an airport info to airport stats.
+ *
+ * @param airport_stats Airport stats of type 'AirportStats*'.
+ * @param airport_info Airport info of type 'AirportInfo*'.
+ *
+ */
+void add_airport_info(AirportStats *airport_stats);
+
+// /**
+//  * @brief Destroys an airport info.
+//  *
+//  * @param airport_info Airport info of type 'AirportInfo*'.
+//  *
+//  */
+// void destroy_airport_info(AirportInfo *airport_info);
 
 /**
  * @brief Destroys an airport stats.
