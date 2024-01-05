@@ -26,35 +26,18 @@ char* string_separator(char** line, const char* separator) {
   return start;
 }
 
-char** parse_line(char* line, int num_tokens) {
-  char** tokens = malloc(num_tokens * sizeof(char*));
-  if (!tokens) {
-    printf("Memory allocation error");
-  }
-
-  char* token;
+int parse_line(char* line, char* tokens[], int num_tokens) {
   int token_count = 0;
+  char* token = strtok(line, SEPARATOR);
 
-  while ((token = string_separator(&line, SEPARATOR)) != NULL &&
-         token_count < num_tokens) {
-    size_t len = strlen(token);
-    tokens[token_count] = malloc((len + 1) * sizeof(char));
-    if (!tokens[token_count]) {
-      printf("Memory allocation error");
-    }
-    strcpy(tokens[token_count], token);
+  while (token != NULL && token_count < num_tokens) {
+    tokens[token_count] = token;
     token_count++;
+
+    token = strtok(NULL, SEPARATOR);
   }
 
-  return tokens;
-}
-
-void free_tokens(char** tokens, int num_tokens) {
-  for (int i = 0; i < num_tokens; ++i) {
-    free(tokens[i]);
-  }
-
-  free(tokens);
+  return token_count;
 }
 
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
@@ -62,6 +45,7 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
                ReservationsData* reservations_data, UsersData* users_data,
                StatsUserInfo* users_stats, int type, int num_tokens) {
   char line[MAX_LINE_LENGTH];
+  char* tokens[MAX_TOKENS];
   char* result;
 
   // Skip headers of the file
@@ -72,7 +56,7 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
       result[strlen(result) - 1] = '\0';
     }
 
-    char** tokens = parse_line(line, num_tokens);
+    int num_tokens = parse_line(line, tokens, MAX_TOKENS);
 
     switch (type) {
       case 0:
@@ -93,8 +77,6 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
         printf("Invalid type");
         break;
     }
-
-    // free_tokens(tokens, num_tokens);
   }
 
   return 0;

@@ -40,9 +40,9 @@ void set_plane_model(FlightInfo *flight, char *plane_model);
  * @brief Sets the total seats of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param total_seats Total seats of type 'int'.
+ * @param total_seats Total seats of type 'short int'.
  */
-void set_total_seats(FlightInfo *flight, int total_seats);
+void set_total_seats(FlightInfo *flight, short int total_seats);
 
 /**
  * @brief Sets the origin of a flight.
@@ -113,9 +113,9 @@ char *get_plane_model(FlightInfo *flight);
  * @brief Gets the total seats of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return int Total seats of type 'int'.
+ * @return int Total seats of type 'short int'.
  */
-int get_total_seats(FlightInfo *flight);
+short int get_total_seats(FlightInfo *flight);
 
 /**
  * @brief Gets the origin of a flight.

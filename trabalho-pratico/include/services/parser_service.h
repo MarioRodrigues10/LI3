@@ -15,23 +15,18 @@
 #define SEPARATOR ";"
 #define MAX_LINE_LENGTH 16384  // 16KB which means 16 * 1024
 
+#define MAX_TOKENS 14
+
 /**
  * @brief Parse a line into tokens.
  *
  * @param line The line to be parsed.
+ * @param tokens The place where to place the tokens.
  * @param num_tokens The number of tokens to be parsed.
  *
- * @return The tokens.
+ * @return The number of tokens.
  */
-char** parse_line(char* line, int num_tokens);
-
-/**
- * @brief Free the tokens.
- *
- * @param tokens The tokens to be freed.
- * @param num_tokens The number of tokens to be freed.
- */
-void free_tokens(char** tokens, int num_tokens);
+int parse_line(char* line, char* tokens[], int num_tokens);
 
 /**
  * @brief Parses a file.

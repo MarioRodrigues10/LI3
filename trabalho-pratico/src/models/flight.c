@@ -3,15 +3,15 @@
 #include <glib.h>
 
 struct flight {
-  int flight_id;
   char *airline;
   char *plane_model;
-  int total_seats;
   char *origin;
   char *destination;
   char *schedule_departure_date;
   char *schedule_arrival_date;
   char *real_departure_date;
+  int flight_id;
+  short int total_seats;
 };
 
 // CREATE
@@ -36,7 +36,7 @@ void set_plane_model(FlightInfo *flight, char *plane_model) {
   flight->plane_model = g_strdup(plane_model);
 }
 
-void set_total_seats(FlightInfo *flight, int total_seats) {
+void set_total_seats(FlightInfo *flight, short int total_seats) {
   flight->total_seats = total_seats;
 }
 
@@ -79,8 +79,8 @@ char *get_plane_model(FlightInfo *flight) {
   return plane_model;
 }
 
-int get_total_seats(FlightInfo *flight) {
-  int total_seats = flight->total_seats;
+short int get_total_seats(FlightInfo *flight) {
+  short int total_seats = flight->total_seats;
   return total_seats;
 }
 

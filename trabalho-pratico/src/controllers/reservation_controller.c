@@ -43,7 +43,7 @@ void add_hotel_stats_controller(ReservationsData *reservations_data,
 }
 
 void update_hotel_stats_controller(ReservationsData *reservations_data,
-                                   char *hotel_id, int rating,
+                                   char *hotel_id, char rating,
                                    int reservation_id) {
   HotelStats *hotel_stats =
       g_hash_table_lookup(reservations_data->hotel_stats, hotel_id);

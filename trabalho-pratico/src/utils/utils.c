@@ -30,8 +30,8 @@ int calculate_age(int birth_date) {
   return age;
 }
 
-double calculate_total_price(int num_nights, int price_per_night,
-                             int city_tax) {
+double calculate_total_price(int num_nights, short int price_per_night,
+                             char city_tax) {
   double total_price =
       num_nights * price_per_night +
       ((double)(num_nights * price_per_night) / 100) * city_tax;
@@ -156,8 +156,8 @@ struct query4_result_helper {
   char* begin_date;
   char* end_date;
   char* user_id;
-  int rating;
   float total_price;
+  char rating;
 };
 
 struct query4_result {

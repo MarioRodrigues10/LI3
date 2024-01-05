@@ -6,11 +6,11 @@
 struct user {
   char *user_id;
   char *name;
-  int birth_date;
-  bool sex;
   char *passport;
   char *country_code;
   char *account_creation;
+  int birth_date;
+  bool sex;
   bool account_status;
 };
 

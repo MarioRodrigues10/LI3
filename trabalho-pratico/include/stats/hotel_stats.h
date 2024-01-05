@@ -86,13 +86,13 @@ HotelStats *create_hotel_stats(char *hotel_id, int total_rating,
  *
  * @param hotel_stats hotel stats of type 'HotelStats*'.
  * @param id Id of type 'char*'.
- * @param rating Rating of type 'int'.
+ * @param rating Rating of type 'char'.
  * @param reservation_id Reservation id of type 'int'.
  *
  * @returns An updated hotel stats of type 'HotelStats*'.
  *
  */
-HotelStats *update_hotel_stats(HotelStats *hotel_stats, char *id, int rating,
+HotelStats *update_hotel_stats(HotelStats *hotel_stats, char *id, char rating,
                                int reservation_id);
 
 /**

@@ -12,7 +12,7 @@
 /**
  * @brief Function that calculates the age of a passenger.
  *
- * @param birth_date_str The birth date of the passenger of type 'char*'
+ * @param birth_date The birth date of the passenger of type 'int'
  *
  * @return The age of the passenger of type 'int'
  *
@@ -24,14 +24,15 @@ int calculate_age(int birth_date);
  *
  * @param num_nights The number of nights of type 'int'
  *
- * @param price_per_night The price per night of type 'int'
+ * @param price_per_night The price per night of type 'short int'
  *
- * @param city_tax The city tax of type 'int'
+ * @param city_tax The city tax of type 'char'
  *
  * @return The total price of the reservation of type 'double'
  *
  */
-double calculate_total_price(int num_nights, int price_per_night, int city_tax);
+double calculate_total_price(int num_nights, short int price_per_night,
+                             char city_tax);
 
 /**
  * @brief Function that calculates the number of nights between two dates.

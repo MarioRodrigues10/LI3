@@ -49,7 +49,7 @@ void add_hotel_stats_controller(ReservationsData *reservations_data,
  * @param reservation_id Reservation id of the reservation.
  */
 void update_hotel_stats_controller(ReservationsData *reservations_data,
-                                   char *hotel_id, int rating,
+                                   char *hotel_id, char rating,
                                    int reservation_id);
 
 /**

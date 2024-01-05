@@ -24,7 +24,7 @@ typedef struct query5_result *QUERY5_RESULT;
  * @param total_price The total price.
  */
 void write_query1_for_reservation(bool has_f, FILE *output_file, char *hotel_id,
-                                  char *hotel_name, int hotel_stars,
+                                  char *hotel_name, char hotel_stars,
                                   char *begin_date, char *end_date,
                                   char *includes_breakfast,
                                   int number_of_nights, double total_price);

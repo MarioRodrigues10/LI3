@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 void write_query1_for_reservation(bool has_f, FILE *output_file, char *hotel_id,
-                                  char *hotel_name, int hotel_stars,
+                                  char *hotel_name, char hotel_stars,
                                   char *begin_date, char *end_date,
                                   char *includes_breakfast,
                                   int number_of_nights, double total_price) {
@@ -99,8 +99,8 @@ struct query4_result_helper {
   char *begin_date;
   char *end_date;
   char *user_id;
-  int rating;
   float total_price;
+  char rating;
 };
 
 void write_query4(bool has_f, FILE *output_file, GArray *query_result_array) {
