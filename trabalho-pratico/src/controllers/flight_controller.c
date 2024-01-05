@@ -15,10 +15,11 @@ struct flights_data {
 
 FlightsData *flights_data_new() {
   FlightsData *flights_data = malloc(sizeof(FlightsData));
-  flights_data->flights = g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
-                                                (GDestroyNotify)destroy_flight);
-  flights_data->flight_stats = g_hash_table_new_full(
-      g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_flight_stats);
+  flights_data->flights = g_hash_table_new_full(
+      g_direct_hash, g_direct_equal, NULL, (GDestroyNotify)destroy_flight);
+  flights_data->flight_stats =
+      g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL,
+                            (GDestroyNotify)destroy_flight_stats);
   flights_data->airport_stats = g_hash_table_new_full(
       g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_airport_stats);
   return flights_data;
@@ -33,8 +34,9 @@ GHashTable *get_airport_stats(FlightsData *flights_data) {
 // FLIGHT
 
 void add_flight(FlightsData *flights_data, FlightInfo *flight) {
-  char *flight_id = get_flight_id(flight);
-  g_hash_table_insert(flights_data->flights, flight_id, flight);
+  int flight_id = get_flight_id(flight);
+  g_hash_table_insert(flights_data->flights, GINT_TO_POINTER(flight_id),
+                      flight);
 }
 
 void flights_data_free(FlightsData *flights_data) {
@@ -48,14 +50,15 @@ void flights_data_free(FlightsData *flights_data) {
 
 void add_flight_stats_controller(FlightsData *flights_data,
                                  FlightStats *flight_stats) {
-  char *flight_id = get_flight_id_from_flight_stats(flight_stats);
-  g_hash_table_insert(flights_data->flight_stats, flight_id, flight_stats);
+  int flight_id = get_flight_id_from_flight_stats(flight_stats);
+  g_hash_table_insert(flights_data->flight_stats, GINT_TO_POINTER(flight_id),
+                      flight_stats);
 }
 
-void update_flight_stats_controller(FlightsData *flights_data, char *flight_id,
+void update_flight_stats_controller(FlightsData *flights_data, int flight_id,
                                     int number_of_passengers) {
-  FlightStats *flight_stats =
-      g_hash_table_lookup(flights_data->flight_stats, flight_id);
+  FlightStats *flight_stats = g_hash_table_lookup(flights_data->flight_stats,
+                                                  GINT_TO_POINTER(flight_id));
   if (flight_stats == NULL) {
     FlightStats *flight_stats =
         create_flight_stats(flight_id, number_of_passengers);
@@ -68,14 +71,14 @@ void update_flight_stats_controller(FlightsData *flights_data, char *flight_id,
 
 // ACCESS
 
-FlightInfo *get_flight_by_flight_id(FlightsData *flights_data,
-                                    char *flight_id) {
-  return g_hash_table_lookup(flights_data->flights, flight_id);
+FlightInfo *get_flight_by_flight_id(FlightsData *flights_data, int flight_id) {
+  return g_hash_table_lookup(flights_data->flights, GINT_TO_POINTER(flight_id));
 }
 
 FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
-                                           char *flight_id) {
-  return g_hash_table_lookup(flights_data->flight_stats, flight_id);
+                                           int flight_id) {
+  return g_hash_table_lookup(flights_data->flight_stats,
+                             GINT_TO_POINTER(flight_id));
 }
 
 // AIRPORT STATS
@@ -93,7 +96,7 @@ void add_airport_stats_controller(FlightsData *flights_data,
 }
 
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name, char *flight_id,
+                                     char *airport_name, int flight_id,
                                      int delay) {
   AirportStats *airport_stats =
       g_hash_table_lookup(flights_data->airport_stats, airport_name);

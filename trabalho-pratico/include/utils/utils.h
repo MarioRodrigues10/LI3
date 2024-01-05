@@ -269,4 +269,15 @@ char* int_to_reservation_id(int reservation_id, int N);
  * @return The number of digits of type 'int'
  */
 int count_digits(int n);
+
+/**
+ * @brief Function that normalizes the flight id
+ *
+ * @param flight_id The flight id of type 'int'
+ * @param N The number of digits of the flight id of type 'int'
+ *
+ * @return The normalized flight id of type 'int'
+ */
+char* int_to_flight_id(int flight_id, int N);
+
 #endif

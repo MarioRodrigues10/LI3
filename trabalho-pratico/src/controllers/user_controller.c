@@ -45,9 +45,8 @@ void update_user_stats_controller(UsersData *users_data, char *user_id,
                                   double total_spent) {
   UserStats *user_stats = g_hash_table_lookup(users_data->user_stats, user_id);
   if (user_stats == NULL) {
-    UserStats *user_stats =
-        create_user_stats(user_id, number_of_flights, number_of_reservations,
-                          total_spent, NULL, 0);
+    UserStats *user_stats = create_user_stats(
+        user_id, number_of_flights, number_of_reservations, total_spent, 0, 0);
     add_user_stats_controller(users_data, user_stats);
     return;
   }

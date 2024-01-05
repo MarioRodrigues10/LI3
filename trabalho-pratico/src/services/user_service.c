@@ -56,7 +56,6 @@ void construct_user(char **parameters, void *struct_data,
   UsersData *users_data = (UsersData *)struct_data;
 
   bool sex = strcmp(parameters[5], "M") ? false : true;
-
   set_user_id(user_info, parameters[0]);
   set_name(user_info, parameters[1]);
   set_birth_date(user_info, normalize_date(parameters[4]));

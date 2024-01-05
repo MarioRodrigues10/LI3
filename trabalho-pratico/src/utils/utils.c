@@ -434,3 +434,41 @@ gint compare_median(gconstpointer a, gconstpointer b) {
   // If medians are equal, compare airport names
   return g_strcmp0(result_a->airport, result_b->airport);
 }
+
+char* int_to_flight_id(int flight_id, int N) {
+  char* flight_id_str = malloc(sizeof(char) * 11);
+  switch (N) {
+    case 1:
+      sprintf(flight_id_str, "00000000000%d", flight_id);
+      break;
+    case 2:
+      sprintf(flight_id_str, "0000000000%d", flight_id);
+      break;
+    case 3:
+      sprintf(flight_id_str, "000000000%d", flight_id);
+      break;
+    case 4:
+      sprintf(flight_id_str, "00000000%d", flight_id);
+      break;
+    case 5:
+      sprintf(flight_id_str, "0000000%d", flight_id);
+      break;
+    case 6:
+      sprintf(flight_id_str, "000000%d", flight_id);
+      break;
+    case 7:
+      sprintf(flight_id_str, "00000%d", flight_id);
+      break;
+    case 8:
+      sprintf(flight_id_str, "0000%d", flight_id);
+      break;
+    case 9:
+      sprintf(flight_id_str, "000%d", flight_id);
+      break;
+    case 10:
+      sprintf(flight_id_str, "00%d", flight_id);
+      break;
+  }
+
+  return flight_id_str;
+}

@@ -49,7 +49,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   if (isdigit(id[0]) && isdigit(id[1])) {
-    FlightInfo *flight_info = get_flight_by_flight_id(flights_data, id);
+    int new_id = strtol(id, NULL, 10);
+    FlightInfo *flight_info = get_flight_by_flight_id(flights_data, new_id);
 
     if (flight_info == NULL) return;
 
@@ -62,7 +63,7 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     char *schedule_departure_date = get_schedule_departure_date(flight_info);
     char *schedule_arrival_date = get_schedule_arrival_date(flight_info);
     int passengers = get_number_of_passengers_from_flight_stats(
-        get_flight_stats_by_flight_id(flights_data, id));
+        get_flight_stats_by_flight_id(flights_data, new_id));
     int delay = calculate_delay(schedule_departure_date, real_departure_date);
 
     write_query1_for_flight(has_f, output_file, airline_company, plane_model,
@@ -192,7 +193,7 @@ void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
                          int i, char **ids, char **dates, char **types,
                          int len) {
   while (i < len) {
-    char *id = g_array_index(array, char *, i);
+    int id = g_array_index(array, int, i);
     FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
     if (flight == NULL) return;
     char *date = get_schedule_departure_date(flight);
@@ -200,7 +201,8 @@ void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
     int year, month, day, hour, minute, second;
     sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
            &second);
-    ids[i] = id;
+    char *flight_id_str = int_to_flight_id(id, count_digits(id));
+    ids[i] = flight_id_str;
     dates[i] = format_date(year, month, day);
     types[i] = type;
     free(date);
@@ -375,24 +377,26 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
       g_array_new(FALSE, FALSE, sizeof(QUERY5_RESULT_HELPER));
 
   for (guint i = 0; i < flights->len; ++i) {
-    char *flight_id = g_array_index(flights, char *, i);
+    int flight_id = g_array_index(flights, int, i);
     FlightInfo *flight = get_flight_by_flight_id(flights_data, flight_id);
     char *departure_date = get_schedule_departure_date(flight);
     char *destination = get_destination(flight);
     char *airline = get_airline(flight);
     char *plane_model = get_plane_model(flight);
 
+    char *flight_id_str = int_to_flight_id(flight_id, count_digits(flight_id));
     if (strcmp(departure_date, begin_date) >= 0 &&
         strcmp(departure_date, end_date) <= 0) {
       QUERY5_RESULT_HELPER result_helper =
           malloc(sizeof(struct query5_result_helper));
-      result_helper->flight_id = strdup(flight_id);
+      result_helper->flight_id = strdup(flight_id_str);
       result_helper->departure_date = strdup(departure_date);
       result_helper->destination = strdup(destination);
       result_helper->airline = strdup(airline);
       result_helper->plane_model = strdup(plane_model);
       g_array_append_val(result->query5_result, result_helper);
     }
+    free(flight_id_str);
     free(departure_date);
     free(destination);
     free(airline);

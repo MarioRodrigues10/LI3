@@ -50,7 +50,7 @@ GArray *get_delays(AirportStats *airport_stats);
  * @returns A new airport stats of type 'AirportStats*'.
  *
  */
-AirportStats *create_airport_stats(char *airport_name, char *flight_id,
+AirportStats *create_airport_stats(char *airport_name, int flight_id,
                                    int delay);
 
 /**
@@ -64,7 +64,7 @@ AirportStats *create_airport_stats(char *airport_name, char *flight_id,
  *
  */
 AirportStats *update_airport_stats(AirportStats *airport_stats,
-                                   char *airport_name, char *flight_id,
+                                   char *airport_name, int flight_id,
                                    int delay);
 
 /**

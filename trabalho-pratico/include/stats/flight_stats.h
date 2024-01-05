@@ -10,8 +10,7 @@ typedef struct flight_stats FlightStats;
  * @param flight_id Flight id of type 'char*'.
  *
  */
-void set_flight_id_from_flight_stats(FlightStats *flight_stats,
-                                     char *flight_id);
+void set_flight_id_from_flight_stats(FlightStats *flight_stats, int flight_id);
 
 /**
  * @brief Sets the number of passengers from flight stats.
@@ -29,7 +28,7 @@ void set_number_of_passengers_from_flight_stats(FlightStats *flight_stats,
  * @param flight_stats Flight stats of type 'FlightStats*'.
  *
  */
-char *get_flight_id_from_flight_stats(FlightStats *flight_stats);
+int get_flight_id_from_flight_stats(FlightStats *flight_stats);
 
 /**
  * @brief Gets the number of passengers from flight stats.
@@ -48,7 +47,7 @@ int get_number_of_passengers_from_flight_stats(FlightStats *flight_stats);
  * @returns A new flight stats of type 'FlightStats*'.
  *
  */
-FlightStats *create_flight_stats(char *flight_id, int number_of_passengers);
+FlightStats *create_flight_stats(int flight_id, int number_of_passengers);
 
 /**
  * @brief Updates a flight stats.
@@ -60,7 +59,7 @@ FlightStats *create_flight_stats(char *flight_id, int number_of_passengers);
  * @returns An updated flight stats of type 'FlightStats*'.
  *
  */
-FlightStats *update_flight_stats(FlightStats *flight_stats, char *id,
+FlightStats *update_flight_stats(FlightStats *flight_stats, int id,
                                  int passengers);
 
 /**

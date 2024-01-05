@@ -55,7 +55,7 @@ void add_flight_stats_controller(FlightsData *flights_data,
  * @param flight_id Pointer to the flight id.
  * @param number_of_passengers Number of passengers of type 'int'.
  */
-void update_flight_stats_controller(FlightsData *flights_data, char *flight_id,
+void update_flight_stats_controller(FlightsData *flights_data, int flight_id,
                                     int number_of_passengers);
 
 /**
@@ -65,7 +65,7 @@ void update_flight_stats_controller(FlightsData *flights_data, char *flight_id,
  * @param flight_id Pointer to the flight id.
  * @return FlightInfo pointer of type 'FlightInfo*' to the flight.
  */
-FlightInfo *get_flight_by_flight_id(FlightsData *flights_data, char *flight_id);
+FlightInfo *get_flight_by_flight_id(FlightsData *flights_data, int flight_id);
 
 /**
  * @brief Gets a flight stats from the hastable by its flight id.
@@ -75,7 +75,7 @@ FlightInfo *get_flight_by_flight_id(FlightsData *flights_data, char *flight_id);
  * @return FlightStats pointer of type 'FlightStats*' to the flight stats.
  */
 FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
-                                           char *flight_id);
+                                           int flight_id);
 
 /**
  * @brief Adds an airport stats to the hastable.
@@ -94,7 +94,7 @@ void add_airport_stats_controller(FlightsData *flights_data,
  * @param airport_info Pointer to the AirportInfo struct.
  */
 void update_airport_stats_controller(FlightsData *flights_data,
-                                     char *airport_name, char *flight_id,
+                                     char *airport_name, int flight_id,
                                      int delay);
 
 /**

@@ -70,7 +70,7 @@ void construct_flight(char **parameters, void *flights_data,
 
   FlightsData *flight_data = (FlightsData *)flights_data;
 
-  set_flight_id(flight_info, parameters[0]);
+  set_flight_id(flight_info, strtol(parameters[0], NULL, 10));
   set_airline(flight_info, parameters[1]);
   set_plane_model(flight_info, parameters[2]);
   set_total_seats(flight_info, strtol(parameters[3], NULL, 10));
@@ -83,7 +83,7 @@ void construct_flight(char **parameters, void *flights_data,
   add_flight(flight_data, flight_info);
 
   update_airport_stats_controller(
-      flight_data, parameters[4], parameters[0],
+      flight_data, parameters[4], strtol(parameters[0], NULL, 10),
       calculate_delay(parameters[6], parameters[8]));
 
   // destroy_airport_info(airport_info);

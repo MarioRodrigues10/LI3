@@ -18,7 +18,7 @@ FlightInfo *create_flight();
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
  * @param flight_id Flight id of type 'char*'.
  */
-void set_flight_id(FlightInfo *flight, char *flight_id);
+void set_flight_id(FlightInfo *flight, int flight_id);
 
 /**
  * @brief Sets the airline of a flight.
@@ -91,7 +91,7 @@ void set_real_departure_date(FlightInfo *flight, char *real_departure_date);
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
  * @return char* Flight id of type 'char*'.
  */
-char *get_flight_id(FlightInfo *flight);
+int get_flight_id(FlightInfo *flight);
 
 /**
  * @brief Gets the airline of a flight.
