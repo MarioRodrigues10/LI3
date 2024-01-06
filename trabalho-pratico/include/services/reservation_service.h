@@ -1,8 +1,7 @@
 #ifndef RESERVATION_SERVICE_H
 #define RESERVATION_SERVICE_H
 
-#include <stdio.h>
-
+#include "controllers/general_controller.h"
 #include "controllers/reservation_controller.h"
 #include "controllers/user_controller.h"
 #include "models/reservation.h"
@@ -32,6 +31,7 @@ int verify_reservation_input(char **parameters, UsersData *users_data);
  */
 void construct_reservation(char **parameters,
                            ReservationsData *reservations_data,
-                           UsersData *users_data, FILE *errors_file);
+                           UsersData *users_data, GeneralData *general_data,
+                           FILE *errors_file);
 
 #endif

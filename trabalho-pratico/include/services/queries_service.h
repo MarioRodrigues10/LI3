@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "controllers/passenger_controller.h"
 #include "controllers/reservation_controller.h"
 #include "controllers/user_controller.h"
@@ -285,13 +286,13 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param passengers_data The passengers data struct.
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
- * @param users_stats The users stats struct.
+ * @param general_data The general data struct.
  * @param output_file The pointer to the output file.
  */
 void query10(bool has_f, char **query_parameters, int num_parameters,
              FlightsData *flights_data, PassengersData *passengers_data,
              ReservationsData *reservations_data, UsersData *users_data,
-             FILE *output_file);
+             GeneralData *general_data, FILE *output_file);
 
 /**
  * @brief Manages the queries.
@@ -300,13 +301,15 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
  * @param flights_data The flights data struct.
  * @param passengers_data The passengers data struct.
  * @param reservations_data The reservations data struct.
+ * @param general_data The general data struct.
  * @param users_data The users data struct.
  * @param users_stats The users stats struct.
  * @param output_file The pointer to the output file.
  */
 void query_manager(char *line, FlightsData *flights_data,
                    PassengersData *passengers_data,
-                   ReservationsData *reservations_data, UsersData *users_data,
+                   ReservationsData *reservations_data,
+                   GeneralData *general_data, UsersData *users_data,
                    StatsUserInfo *users_stats, FILE *output_file);
 
 #endif

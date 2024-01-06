@@ -37,7 +37,8 @@ int verify_user_input(char **parameters) {
 }
 
 void construct_user(char **parameters, void *struct_data,
-                    void *struct_users_stats, FILE *errors_file) {
+                    void *struct_users_stats, void *struct_general_data,
+                    FILE *errors_file) {
   if (!verify_user_input(parameters)) {
     int i;
     for (i = 0; i < MAX_TOKENS_USER - 1; i++) {
@@ -54,7 +55,11 @@ void construct_user(char **parameters, void *struct_data,
   UserInfo *user_info = create_user();
 
   UsersData *users_data = (UsersData *)struct_data;
+  GeneralData *general_data = (GeneralData *)struct_general_data;
 
+  int account_creation_day = normalize_date_with_day(parameters[9]);
+  int account_creation_month = normalize_date_with_month(parameters[9]);
+  int account_creation_year = normalize_date_with_year(parameters[9]);
   bool sex = strcmp(parameters[5], "M") ? false : true;
   set_user_id(user_info, parameters[0]);
   set_name(user_info, parameters[1]);
@@ -68,6 +73,13 @@ void construct_user(char **parameters, void *struct_data,
   char *user_id = get_user_id(user_info);
   char *user_name = get_name(user_info);
   update_user_stats_info(struct_users_stats, user_id, user_name);
+  update_general_stats_controller(general_data, account_creation_day, 1, 0, 0,
+                                  0, 0);
+  update_general_stats_controller(general_data, account_creation_month, 1, 0, 0,
+                                  0, 0);
+  update_general_stats_controller(general_data, account_creation_year, 1, 0, 0,
+                                  0, 0);
+
   add_user(users_data, user_info);
   free(user_id);
   free(user_name);

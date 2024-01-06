@@ -146,7 +146,8 @@ UserStats *update_user_stats(UserStats *user_stats, char *id, int flight,
  * @param user_id User id of type 'char*'.
  * @param flight_id Flight id of type 'char*'.
  */
-void update_user_flights(UserStats *users_stats, char *user_id, int flight_id);
+UserStats *update_user_flights(UserStats *users_stats, char *user_id,
+                               int flight_id);
 
 /**
  * @brief Updates the user reservations.

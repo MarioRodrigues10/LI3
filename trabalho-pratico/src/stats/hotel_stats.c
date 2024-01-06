@@ -1,7 +1,6 @@
 #include "stats/hotel_stats.h"
 
 #include <glib.h>
-#include <stdio.h>
 
 struct hotel_stats {
   char *hotel_id;

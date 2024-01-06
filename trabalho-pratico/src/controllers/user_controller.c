@@ -39,19 +39,20 @@ void add_user_stats_controller(UsersData *users_data, UserStats *user_stats) {
   g_hash_table_insert(users_data->user_stats, user_id, user_stats);
 }
 
-void update_user_stats_controller(UsersData *users_data, char *user_id,
-                                  int number_of_flights,
-                                  int number_of_reservations,
-                                  double total_spent) {
+UserStats *update_user_stats_controller(UsersData *users_data, char *user_id,
+                                        int number_of_flights,
+                                        int number_of_reservations,
+                                        double total_spent) {
   UserStats *user_stats = g_hash_table_lookup(users_data->user_stats, user_id);
   if (user_stats == NULL) {
     UserStats *user_stats = create_user_stats(
         user_id, number_of_flights, number_of_reservations, total_spent, 0, 0);
     add_user_stats_controller(users_data, user_stats);
-    return;
+    return user_stats;
   }
   user_stats = update_user_stats(user_stats, user_id, number_of_flights,
                                  number_of_reservations, total_spent);
+  return user_stats;
 }
 
 // ACCESS
@@ -66,4 +67,8 @@ UserInfo *get_user_by_username(UsersData *users_data, char *username) {
 
 UserStats *get_user_stats_by_user_id(UsersData *users_data, char *user_id) {
   return g_hash_table_lookup(users_data->user_stats, user_id);
+}
+
+GHashTable *get_user_stats(UsersData *users_data) {
+  return users_data->user_stats;
 }

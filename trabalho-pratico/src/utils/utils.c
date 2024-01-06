@@ -310,6 +310,44 @@ int normalize_date(char* date) {
   return new_date;
 }
 
+int normalize_date_month(char* date) {
+  int year, month, day;
+  sscanf(date, "%d/%d/%d", &year, &month, &day);
+  int new_date = year * 10000 + month * 100;
+  return new_date;
+}
+
+int normalize_date_year(char* date) {
+  int year, month, day;
+  sscanf(date, "%d/%d/%d", &year, &month, &day);
+  int new_date = year * 10000;
+  return new_date;
+}
+
+int normalize_date_with_day(char* date) {
+  int year, month, day, hour, minute, second;
+  sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+         &second);
+  int new_date = year * 10000 + month * 100 + day;
+  return new_date;
+}
+
+int normalize_date_with_month(char* date) {
+  int year, month, day, hour, minute, second;
+  sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+         &second);
+  int new_date = year * 10000 + month * 100;
+  return new_date;
+}
+
+int normalize_date_with_year(char* date) {
+  int year, month, day, hour, minute, second;
+  sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+         &second);
+  int new_date = year * 10000;
+  return new_date;
+}
+
 char* date_to_string(int date) {
   int year = date / 10000;
   int month = (date % 10000) / 100;
@@ -440,4 +478,34 @@ char* int_to_flight_id(int flight_id, int num_digits) {
   sprintf(flight_id_str, "%0*d", 10, flight_id);
 
   return flight_id_str;
+}
+
+int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
+                                       FlightsData* flights_data, char* date,
+                                       int chars_to_compare) {
+  int number_of_unique_passengers = 0;
+  int flag = 0;
+  while (users_list != NULL) {
+    UserStats* user_stats =
+        get_user_stats_by_user_id(users_data, users_list->data);
+
+    GArray* flights = get_user_flights_from_user_stats(user_stats);
+    char* previous_flight;
+    if (flights != NULL) {
+      for (int i = 0; i < flights->len; i++) {
+        int flight = g_array_index(flights, int, i);
+        FlightInfo* flight_info = get_flight_by_flight_id(flights_data, flight);
+        char* schedule_departure_date =
+            get_schedule_departure_date(flight_info);
+        if (strncmp(date, schedule_departure_date, chars_to_compare) == 0) {
+          number_of_unique_passengers++;
+          free(schedule_departure_date);
+          break;
+        }
+        free(schedule_departure_date);
+      }
+    }
+    users_list = users_list->next;
+  }
+  return number_of_unique_passengers;
 }

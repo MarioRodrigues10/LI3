@@ -2,6 +2,7 @@
 #define FEEDER_SERVICE_H
 
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "controllers/passenger_controller.h"
 #include "controllers/reservation_controller.h"
 #include "controllers/user_controller.h"
@@ -74,6 +75,7 @@ void close_csv_files(FILE** files, int num_files);
  *
  * @param data_folder Data folder of type 'char*'.
  * @param flights_data Flights data of type 'FlightsData*'.
+ * @param general_data General data of type 'GeneralData*'.
  * @param passengers_data Passengers data of type 'PassengersData*'.
  * @param reservations_data Reservations data of type 'ReservationsData*'.
  * @param users_data Users data of type 'UsersData*'.
@@ -81,7 +83,7 @@ void close_csv_files(FILE** files, int num_files);
  *
  */
 void feeder(char* data_folder, FlightsData* flights_data,
-            PassengersData* passengers_data,
+            GeneralData* general_data, PassengersData* passengers_data,
             ReservationsData* reservations_data, UsersData* users_data,
             StatsUserInfo* users_stats);
 

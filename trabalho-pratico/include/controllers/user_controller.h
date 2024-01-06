@@ -28,10 +28,10 @@ void add_user(UsersData *users_data, UserInfo *user);
  * @param users_data Pointer to the UsersData struct.
  * @param user_stats Pointer to the UserStats struct.
  */
-void update_user_stats_controller(UsersData *users_data, char *user_id,
-                                  int number_of_flights,
-                                  int number_of_reservations,
-                                  double total_spent);
+UserStats *update_user_stats_controller(UsersData *users_data, char *user_id,
+                                        int number_of_flights,
+                                        int number_of_reservations,
+                                        double total_spent);
 
 /**
  * @brief Frees the memory allocated to the UsersData struct.
@@ -60,6 +60,7 @@ void users_stats_data_free_controller(UsersData *users_data);
  *
  * @param users_data Pointer to the UsersData struct.
  * @param username Pointer to the username.
+ *
  * @return UserInfo pointer of type 'UserInfo*' to the user.
  */
 UserInfo *get_user_by_username(UsersData *users_data, char *username);
@@ -69,8 +70,18 @@ UserInfo *get_user_by_username(UsersData *users_data, char *username);
  *
  * @param users_data Pointer to the UsersData struct.
  * @param user_id Pointer to the user id.
+ *
  * @return UserStats pointer of type 'UserStats*' to the user stats.
  */
 UserStats *get_user_stats_by_user_id(UsersData *users_data, char *user_id);
+
+/**
+ * @brief Gets a user stats from the hastable by its user id.
+ *
+ * @param users_data Pointer to the UsersData struct.
+ *
+ * @return GHashTable pointer of type 'GHashTable*' to the user stats.
+ */
+GHashTable *get_user_stats(UsersData *users_data);
 
 #endif

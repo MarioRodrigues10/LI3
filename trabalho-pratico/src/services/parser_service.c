@@ -41,7 +41,7 @@ int parse_line(char* line, char* tokens[], int num_tokens) {
 }
 
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
-               PassengersData* passengers_data,
+               GeneralData* general_data, PassengersData* passengers_data,
                ReservationsData* reservations_data, UsersData* users_data,
                StatsUserInfo* users_stats, int type, int num_tokens) {
   char line[MAX_LINE_LENGTH];
@@ -60,17 +60,19 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
 
     switch (type) {
       case 0:
-        construct_flight(tokens, flights_data, errors_file);
+        construct_flight(tokens, flights_data, general_data, errors_file);
         break;
       case 1:
-        construct_passenger(tokens, users_data, flights_data, errors_file);
+        construct_passenger(tokens, users_data, flights_data, general_data,
+                            errors_file);
         break;
       case 2:
         construct_reservation(tokens, reservations_data, users_data,
-                              errors_file);
+                              general_data, errors_file);
         break;
       case 3:
-        construct_user(tokens, users_data, users_stats, errors_file);
+        construct_user(tokens, users_data, users_stats, general_data,
+                       errors_file);
         break;
       default:
         // This is not supposed to happen

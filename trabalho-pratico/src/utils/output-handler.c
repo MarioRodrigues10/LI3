@@ -193,3 +193,26 @@ void write_query9(bool has_f, FILE *output_file, char **user_ids,
     }
   }
 }
+
+void write_query10(bool has_f, FILE *output_file, int *date, int *number_users,
+                   int *number_flights, int *number_passengers,
+                   int *number_unique_passengers, int *number_reservations,
+                   char *flag, int N) {
+  if (has_f) {
+    for (int i = 0; i < N; i++) {
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file,
+              "--- %d ---\n%s: %d\nusers: %d\nflights: %d\npassengers: "
+              "%d\nunique_passengers: %d\nreservations: %d\n",
+              i + 1, flag, date[i], number_users[i], number_flights[i],
+              number_passengers[i], number_unique_passengers[i],
+              number_reservations[i]);
+    }
+  } else {
+    for (int i = 0; i < N; i++) {
+      fprintf(output_file, "%d;%d;%d;%d;%d;%d\n", date[i], number_users[i],
+              number_flights[i], number_passengers[i],
+              number_unique_passengers[i], number_reservations[i]);
+    }
+  }
+}

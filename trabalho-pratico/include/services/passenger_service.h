@@ -4,11 +4,13 @@
 #include <stdio.h>
 
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "controllers/passenger_controller.h"
 #include "controllers/user_controller.h"
 #include "models/passenger.h"
 #include "stats/flight_stats.h"
 #include "stats/user_stats.h"
+#include "utils/utils.h"
 #include "utils/validation.h"
 
 /**
@@ -32,6 +34,7 @@ int verify_passenger_input(char **parameters, UsersData *users_data,
  * @param errors_file The file to put wrong lines.
  */
 void construct_passenger(char **parameters, UsersData *users_data,
-                         FlightsData *flights_data, FILE *errors_file);
+                         FlightsData *flights_data, GeneralData *general_data,
+                         FILE *errors_file);
 
 #endif

@@ -36,14 +36,15 @@ int input_handler(char **argv) {
   ReservationsData *reservations_data = reservations_data_new();
   UsersData *users_data = users_data_new();
   StatsUserInfo *users_stats = create_stats_user_information();
+  GeneralData *general_data = general_data_new();
 
   char *data_folder = argv[1];
   if (create_directory("Resultados") != 0) {
     return 1;
   }
 
-  feeder(data_folder, flights_data, passengers_data, reservations_data,
-         users_data, users_stats);
+  feeder(data_folder, flights_data, general_data, passengers_data,
+         reservations_data, users_data, users_stats);
 
   char *queries_filename = argv[2];
   FILE *queries_file = fopen(queries_filename, "r");
@@ -66,7 +67,7 @@ int input_handler(char **argv) {
     }
 
     query_manager(line, flights_data, passengers_data, reservations_data,
-                  users_data, users_stats, output_file);
+                  general_data, users_data, users_stats, output_file);
 
     fclose(output_file);
     number_of_queries++;
@@ -79,6 +80,7 @@ int input_handler(char **argv) {
   reservations_data_free(reservations_data);
   users_data_free(users_data);
   free_stats_user_information(users_stats);
+  general_data_free(general_data);
 
   return 0;
 }

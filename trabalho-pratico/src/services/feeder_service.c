@@ -83,7 +83,7 @@ void close_csv_files(FILE** files, int num_files) {
 // FEEDER
 
 void feeder(char* data_folder, FlightsData* flights_data,
-            PassengersData* passengers_data,
+            GeneralData* general_data, PassengersData* passengers_data,
             ReservationsData* reservations_data, UsersData* users_data,
             StatsUserInfo* users_stats) {
   // Create filenames
@@ -140,15 +140,17 @@ void feeder(char* data_folder, FlightsData* flights_data,
   fprintf(passengers_errors_file, "flight_id;user_id\n");
 
   // Parse files
-  parse_file(files[0], flights_errors_file, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, 0, MAX_TOKENS_FLIGHT);
-  parse_file(files[3], users_errors_file, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, 3, MAX_TOKENS_USER);
-  parse_file(files[2], reservations_errors_file, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, 2,
+  parse_file(files[0], flights_errors_file, flights_data, general_data,
+             passengers_data, reservations_data, users_data, users_stats, 0,
+             MAX_TOKENS_FLIGHT);
+  parse_file(files[3], users_errors_file, flights_data, general_data,
+             passengers_data, reservations_data, users_data, users_stats, 3,
+             MAX_TOKENS_USER);
+  parse_file(files[2], reservations_errors_file, flights_data, general_data,
+             passengers_data, reservations_data, users_data, users_stats, 2,
              MAX_TOKENS_RESERVATION);
-  parse_file(files[1], passengers_errors_file, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, 1,
+  parse_file(files[1], passengers_errors_file, flights_data, general_data,
+             passengers_data, reservations_data, users_data, users_stats, 1,
              MAX_TOKENS_PASSENGER);
 
   // Close files

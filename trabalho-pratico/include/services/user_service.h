@@ -28,6 +28,7 @@ int verify_user_input(char **parameters);
  *
  */
 void construct_user(char **parameters, void *struct_data,
-                    void *struct_users_stats, FILE *errors_file);
+                    void *struct_users_stats, void *general_data,
+                    FILE *errors_file);
 
 #endif

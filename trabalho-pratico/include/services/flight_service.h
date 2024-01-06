@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "models/flight.h"
 #include "utils/validation.h"
 
@@ -24,6 +25,7 @@ int verify_flight_input(char **parameters);
  * @param flights_data Struct data of type 'void*'.
  * @param errors_file The file to put the wrong lines.
  */
-void construct_flight(char **parameters, void *struct_data, FILE *errors_file);
+void construct_flight(char **parameters, void *struct_data, void *general_data,
+                      FILE *errors_file);
 
 #endif

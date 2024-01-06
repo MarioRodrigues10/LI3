@@ -1,9 +1,8 @@
 #ifndef PARSER_SERVICE_H
 #define PARSER_SERVICE_H
 
-#include <stdio.h>
-
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "controllers/passenger_controller.h"
 #include "controllers/reservation_controller.h"
 #include "controllers/user_controller.h"
@@ -44,7 +43,7 @@ int parse_line(char* line, char* tokens[], int num_tokens);
  * @return The number of lines parsed.
  */
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
-               PassengersData* passengers_data,
+               GeneralData* general_data, PassengersData* passengers_data,
                ReservationsData* reservations_data, UsersData* users_data,
                StatsUserInfo* stats_user_info, int type, int num_tokens);
 

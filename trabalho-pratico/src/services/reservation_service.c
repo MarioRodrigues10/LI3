@@ -49,7 +49,8 @@ int verify_reservation_input(char **parameters, UsersData *users_data) {
 
 void construct_reservation(char **parameters,
                            ReservationsData *reservations_data,
-                           UsersData *users_data, FILE *errors_file) {
+                           UsersData *users_data, GeneralData *general_data,
+                           FILE *errors_file) {
   if (!verify_reservation_input(parameters, users_data)) {
     int i;
     for (i = 0; i < MAX_TOKENS_RESERVATION - 1; i++) {
@@ -65,13 +66,16 @@ void construct_reservation(char **parameters,
 
   ReservationInfo *reservation_info = create_reservation();
   int reservation_id = normalize_reservation_id(parameters[0]);
+  int begin_date_day = normalize_date(parameters[7]);
+  int begin_date_month = normalize_date_month(parameters[7]);
+  int begin_date_year = normalize_date_year(parameters[7]);
   set_reservation_id(reservation_info, reservation_id);
   set_user_id_reservation(reservation_info, parameters[1]);
   set_hotel_id(reservation_info, normalize_hotel_id(parameters[2]));
   set_hotel_name(reservation_info, parameters[3]);
   set_hotel_stars(reservation_info, strtol(parameters[4], NULL, 10));
   set_city_tax(reservation_info, strtol(parameters[5], NULL, 10));
-  set_begin_date(reservation_info, normalize_date(parameters[7]));
+  set_begin_date(reservation_info, begin_date_day);
   set_end_date(reservation_info, normalize_date(parameters[8]));
   set_price_per_night(reservation_info, strtol(parameters[9], NULL, 10));
   set_includes_breakfast(reservation_info,
@@ -90,5 +94,10 @@ void construct_reservation(char **parameters,
                                 strtol(parameters[12], NULL, 10),
                                 reservation_id);
   UserStats *user_stats = get_user_stats_by_user_id(users_data, parameters[1]);
+
   update_user_reservations(user_stats, parameters[1], reservation_id);
+  update_general_stats_controller(general_data, begin_date_day, 0, 0, 0, 0, 1);
+  update_general_stats_controller(general_data, begin_date_month, 0, 0, 0, 0,
+                                  1);
+  update_general_stats_controller(general_data, begin_date_year, 0, 0, 0, 0, 1);
 }

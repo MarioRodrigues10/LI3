@@ -177,6 +177,51 @@ int normalize_hotel_id(char* hotel_id);
 int normalize_date(char* date);
 
 /**
+ * @brief Function that normalizes the date with only the month
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date of type 'int'
+ */
+int normalize_date_month(char* date);
+
+/**
+ * @brief Function that normalizes the date with only the year
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date of type 'int'
+ */
+int normalize_date_year(char* date);
+
+/**
+ * @brief Function that normalizes the date
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date with day of type 'int'
+ */
+int normalize_date_with_day(char* date);
+
+/**
+ * @brief Function that normalizes the date
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date with month of type 'int'
+ */
+int normalize_date_with_month(char* date);
+
+/**
+ * @brief Function that normalizes the date
+ *
+ * @param date The date of type 'char*'
+ *
+ * @return The normalized date with year of type 'int'
+ */
+int normalize_date_with_year(char* date);
+
+/**
  * @brief Function that converts a date in integer to a string
  *
  * @param date The date of type 'int'
@@ -281,4 +326,18 @@ int count_digits(int n);
  */
 char* int_to_flight_id(int flight_id, int N);
 
+/**
+ * @brief Function that calculates the number of unique passengers
+ *
+ * @param users_list The list of users of type 'GList*'
+ * @param users_data The users data of type 'UsersData*'
+ * @param flights_data The flights data of type 'FlightsData*'
+ * @param date The date of type 'char*'
+ * @param chars_to_compare The number of chars to compare of type 'int'
+ *
+ * @return The number of unique passengers of type 'int'
+ */
+int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
+                                       FlightsData* flights_data, char* date,
+                                       int chars_to_compare);
 #endif

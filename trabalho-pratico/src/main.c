@@ -13,6 +13,5 @@ int main(int argc, char **argv) {
   } else {
     input_handler(argv);
   }
-
   return 0;
 }

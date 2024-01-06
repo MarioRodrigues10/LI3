@@ -51,7 +51,7 @@ int verify_flight_input(char **parameters) {
   return 1;
 }
 
-void construct_flight(char **parameters, void *flights_data,
+void construct_flight(char **parameters, void *flights_data, void *general_data,
                       FILE *errors_file) {
   if (!verify_flight_input(parameters)) {
     int i;
@@ -69,6 +69,10 @@ void construct_flight(char **parameters, void *flights_data,
   FlightInfo *flight_info = create_flight();
 
   FlightsData *flight_data = (FlightsData *)flights_data;
+  GeneralData *general = (GeneralData *)general_data;
+  int departure_date_day = normalize_date_with_day(parameters[6]);
+  int departure_date_month = normalize_date_with_month(parameters[6]);
+  int departure_date_year = normalize_date_with_year(parameters[6]);
 
   set_flight_id(flight_info, strtol(parameters[0], NULL, 10));
   set_airline(flight_info, parameters[1]);
@@ -85,6 +89,9 @@ void construct_flight(char **parameters, void *flights_data,
   update_airport_stats_controller(
       flight_data, parameters[4], strtol(parameters[0], NULL, 10),
       calculate_delay(parameters[6], parameters[8]));
+  update_general_stats_controller(general, departure_date_day, 0, 1, 0, 0, 0);
+  update_general_stats_controller(general, departure_date_month, 0, 1, 0, 0, 0);
+  update_general_stats_controller(general, departure_date_year, 0, 1, 0, 0, 0);
 
   // destroy_airport_info(airport_info);
 }

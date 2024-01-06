@@ -1,9 +1,8 @@
 #ifndef INPUT_HANDLER_CONTROLLER_H
 #define INPUT_HANDLER_CONTROLLER_H
 
-#include <stdio.h>
-
 #include "controllers/flight_controller.h"
+#include "controllers/general_controller.h"
 #include "controllers/passenger_controller.h"
 #include "controllers/reservation_controller.h"
 #include "controllers/user_controller.h"
