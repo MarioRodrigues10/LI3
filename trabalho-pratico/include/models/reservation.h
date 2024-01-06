@@ -82,10 +82,9 @@ void set_end_date(ReservationInfo *reservation, int end_date);
  * @brief Sets the price per night of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param price_per_night Price per night of type 'short int'.
+ * @param price_per_night Price per night of type 'int'.
  */
-void set_price_per_night(ReservationInfo *reservation,
-                         short int price_per_night);
+void set_price_per_night(ReservationInfo *reservation, int price_per_night);
 
 /**
  * @brief Sets the includes breakfast of a reservation.
@@ -172,9 +171,9 @@ int get_end_date(ReservationInfo *reservation);
  * @brief Gets the price per night of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return price of type 'short int'.
+ * @return price of type 'int'.
  */
-short int get_price_per_night(ReservationInfo *reservation);
+int get_price_per_night(ReservationInfo *reservation);
 
 /**
  * @brief Gets the includes breakfast of a reservation.

@@ -152,7 +152,7 @@ bool validate_city_tax(char* city_tax);
  * @param price_per_night The price per night.
  * @return true if the price per night is valid, false otherwise.
  */
-bool validate_price_per_night(short int price_per_night);
+bool validate_price_per_night(int price_per_night);
 
 /**
  * @brief Validates the "includes_breafast" field in a reservation.

@@ -208,7 +208,7 @@ bool validate_city_tax(char* city_tax) {
   return false;
 }
 
-bool validate_price_per_night(short int price_per_night) {
+bool validate_price_per_night(int price_per_night) {
   return (price_per_night > 0);
 }
 

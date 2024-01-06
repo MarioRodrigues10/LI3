@@ -10,7 +10,7 @@ struct reservation {
   int hotel_id;
   int begin_date;
   int end_date;
-  short int price_per_night;
+  int price_per_night;
   char hotel_stars;
   char city_tax;
   char rating;
@@ -59,8 +59,7 @@ void set_end_date(ReservationInfo *reservation, int end_date) {
   reservation->end_date = end_date;
 }
 
-void set_price_per_night(ReservationInfo *reservation,
-                         short int price_per_night) {
+void set_price_per_night(ReservationInfo *reservation, int price_per_night) {
   reservation->price_per_night = price_per_night;
 }
 
@@ -108,8 +107,8 @@ int get_begin_date(ReservationInfo *reservation) {
 
 int get_end_date(ReservationInfo *reservation) { return reservation->end_date; }
 
-short int get_price_per_night(ReservationInfo *reservation) {
-  short int price_per_night = reservation->price_per_night;
+int get_price_per_night(ReservationInfo *reservation) {
+  int price_per_night = reservation->price_per_night;
   return price_per_night;
 }
 

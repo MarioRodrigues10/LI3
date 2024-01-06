@@ -24,14 +24,14 @@ int calculate_age(int birth_date);
  *
  * @param num_nights The number of nights of type 'int'
  *
- * @param price_per_night The price per night of type 'short int'
+ * @param price_per_night The price per night of type 'int'
  *
  * @param city_tax The city tax of type 'char'
  *
  * @return The total price of the reservation of type 'double'
  *
  */
-double calculate_total_price(int num_nights, short int price_per_night,
+double calculate_total_price(int num_nights, int price_per_night,
                              char city_tax);
 
 /**

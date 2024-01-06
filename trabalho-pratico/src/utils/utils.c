@@ -30,7 +30,7 @@ int calculate_age(int birth_date) {
   return age;
 }
 
-double calculate_total_price(int num_nights, short int price_per_night,
+double calculate_total_price(int num_nights, int price_per_night,
                              char city_tax) {
   double total_price =
       num_nights * price_per_night +
