@@ -74,11 +74,11 @@ void construct_user(char **parameters, void *struct_data,
   char *user_name = get_name(user_info);
   update_user_stats_info(struct_users_stats, user_id, user_name);
   update_general_stats_controller(general_data, account_creation_day, 1, 0, 0,
-                                  0, 0);
+                                  0, 0, NULL);
   update_general_stats_controller(general_data, account_creation_month, 1, 0, 0,
-                                  0, 0);
+                                  0, 0, NULL);
   update_general_stats_controller(general_data, account_creation_year, 1, 0, 0,
-                                  0, 0);
+                                  0, 0, NULL);
 
   add_user(users_data, user_info);
   free(user_id);

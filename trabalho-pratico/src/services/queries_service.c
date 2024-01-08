@@ -653,15 +653,8 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
         number_of_flights_array[pos] = number_of_flights;
         number_of_passengers_array[pos] = number_of_passengers;
         number_of_reservations_array[pos] = number_of_reservations;
-        char *date = date_to_string(date_temp);
-
-        GHashTable *users_stats = get_user_stats(users_data);
-        GList *users_list = g_hash_table_get_keys(users_stats);
-        number_of_unique_passengers = calculate_number_unique_passengers(
-            users_list, users_data, flights_data, date, 4);
-        free(date);
-        number_of_unique_passengers_array[pos] = number_of_unique_passengers;
-        g_list_free(users_list);
+        number_of_unique_passengers_array[pos] =
+            number_of_unique_passengers - 1;
       }
       pos++;
     }
@@ -688,6 +681,8 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
             get_number_of_flights_from_general_stats(general_stats);
         int number_of_passengers =
             get_number_of_passengers_from_general_stats(general_stats);
+        int number_of_unique_passengers =
+            get_unique_passengers_from_general_stats(general_stats);
         int number_of_reservations =
             get_reservations_from_general_stats(general_stats);
 
@@ -696,17 +691,9 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
         number_of_flights_array[pos] = number_of_flights;
         number_of_passengers_array[pos] = number_of_passengers;
         number_of_reservations_array[pos] = number_of_reservations;
-
-        char *date = date_to_string(date_temp);
-        GHashTable *users_stats = get_user_stats(users_data);
-        GList *users_list = g_hash_table_get_keys(users_stats);
-        int number_of_unique_passengers = calculate_number_unique_passengers(
-            users_list, users_data, flights_data, date, 7);
-
-        number_of_unique_passengers_array[pos] = number_of_unique_passengers;
+        number_of_unique_passengers_array[pos] =
+            number_of_unique_passengers - 1;
         pos++;
-        free(date);
-        g_list_free(users_list);
       } else
         break;
     }
@@ -736,21 +723,14 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
         int number_of_reservations =
             get_reservations_from_general_stats(general_stats);
 
-        char *date = date_to_string(date_temp);
         days_array[pos] = day;
         number_of_users_array[pos] = number_of_users;
         number_of_flights_array[pos] = number_of_flights;
         number_of_passengers_array[pos] = number_of_passengers;
         number_of_reservations_array[pos] = number_of_reservations;
-
-        GHashTable *users_stats = get_user_stats(users_data);
-        GList *users_list = g_hash_table_get_keys(users_stats);
-        number_of_unique_passengers = calculate_number_unique_passengers(
-            users_list, users_data, flights_data, date, 10);
-        number_of_unique_passengers_array[pos] = number_of_unique_passengers;
-        free(date);
+        number_of_unique_passengers_array[pos] =
+            number_of_unique_passengers - 1;
         pos++;
-        g_list_free(users_list);
       }
     }
     write_query10(has_f, output_file, days_array, number_of_users_array,

@@ -96,8 +96,10 @@ void construct_reservation(char **parameters,
   UserStats *user_stats = get_user_stats_by_user_id(users_data, parameters[1]);
 
   update_user_reservations(user_stats, parameters[1], reservation_id);
-  update_general_stats_controller(general_data, begin_date_day, 0, 0, 0, 0, 1);
-  update_general_stats_controller(general_data, begin_date_month, 0, 0, 0, 0,
-                                  1);
-  update_general_stats_controller(general_data, begin_date_year, 0, 0, 0, 0, 1);
+  update_general_stats_controller(general_data, begin_date_day, 0, 0, 0, 0, 1,
+                                  NULL);
+  update_general_stats_controller(general_data, begin_date_month, 0, 0, 0, 0, 1,
+                                  NULL);
+  update_general_stats_controller(general_data, begin_date_year, 0, 0, 0, 0, 1,
+                                  NULL);
 }

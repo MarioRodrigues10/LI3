@@ -478,3 +478,20 @@ int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
   }
   return number_of_unique_passengers;
 }
+
+int remove_duplicates(GArray* data) {
+  int count = 0;
+  for (guint i = 0; i < data->len; i++) {
+    char* current_str = g_array_index(data, char*, i);
+    gboolean found = FALSE;
+    for (guint j = i + 1; j < data->len; j++) {
+      char* existing_str = g_array_index(data, char*, j);
+      if (strcmp(current_str, existing_str) == 0) {
+        found = TRUE;
+        break;
+      }
+    }
+    if (!found) count++;
+  }
+  return count;
+}

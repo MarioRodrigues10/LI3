@@ -4,6 +4,7 @@
         "parser.h": "c",
         "string.h": "c",
         "reservations.h": "c",
-        "flights.h": "c"
+        "flights.h": "c",
+        "input-handler.h": "c"
     }
 }

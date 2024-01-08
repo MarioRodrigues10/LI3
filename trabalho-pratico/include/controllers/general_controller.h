@@ -46,10 +46,12 @@ void add_general_stats_controller(GeneralData *general_data,
  * @param number_of_passengers number of passengers
  * @param unique_passengers number of unique passengers
  * @param reservations number of reservations
+ * @param user_id user id
  */
 void update_general_stats_controller(GeneralData *general_data, int key,
                                      int number_of_users, int number_of_flights,
                                      int number_of_passengers,
-                                     int unique_passengers, int reservations);
+                                     int unique_passengers, int reservations,
+                                     char *user_id);
 
 #endif

@@ -347,4 +347,13 @@ char* int_to_flight_id(int flight_id, int N);
 int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
                                        FlightsData* flights_data, char* date,
                                        int chars_to_compare);
+
+/**
+ * @brief Function that calculates the number of unique passengers
+ *
+ * @param users_list The list of users of type 'GArray*'
+ *
+ * @return The number of unique passengers of type 'int'
+ */
+int remove_duplicates(GArray* data);
 #endif

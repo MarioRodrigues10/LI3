@@ -1,6 +1,8 @@
 #ifndef GENERAL_STATS_H
 #define GENERAL_STATS_H
 
+#include <glib.h>
+
 typedef struct general_stats GeneralStats;
 
 /**
@@ -95,6 +97,15 @@ int get_reservations_from_general_stats(GeneralStats *general_stats);
 int get_users_from_general_stats(GeneralStats *general_stats);
 
 /**
+ * @brief Get the users array from general stats object
+ *
+ * @param general_stats GeneralStats object
+ *
+ * @return GArray* Users array
+ */
+GArray *get_users_array_from_general_stats(GeneralStats *general_stats);
+
+/**
  * @brief Create a general stats object
  *
  * @param key HashTable key of type 'int'
@@ -103,26 +114,35 @@ int get_users_from_general_stats(GeneralStats *general_stats);
  * @param number_of_passengers Number of passengers of type 'int'
  * @param unique_passengers Number of unique passengers of type 'int'
  * @param reservations Number of reservations of type 'int'
+ * @param user_id User id of type 'char*'
  *
  * @return GeneralStats* GeneralStats object
  */
 GeneralStats *create_general_stats(int key, int number_of_users,
                                    int number_of_flights,
                                    int number_of_passengers,
-                                   int unique_passengers, int reservations);
+                                   int unique_passengers, int reservations,
+                                   char *user_id);
 
 /**
  * @brief Update general stats object
  *
  * @param general_stats GeneralStats object
  * @param key HashTable key of type 'int'
+ * @param number_of_users Number of users of type 'int'
+ * @param number_of_flights Number of flights of type 'int'
+ * @param number_of_passengers Number of passengers of type 'int'
+ * @param unique_passengers Number of unique passengers of type 'int'
+ * @param reservations Number of reservations of type 'int'
+ * @param user_id User id of type 'char*'
  *
  * @return GeneralStats* Updated general stats object
  */
 GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
                                    int number_of_users, int number_of_flights,
                                    int number_of_passengers,
-                                   int unique_passengers, int reservations);
+                                   int unique_passengers, int reservations,
+                                   char *user_id);
 
 /**
  * @brief Destroy general stats object
