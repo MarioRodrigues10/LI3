@@ -369,6 +369,7 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   g_array_free(result->query4_result, TRUE);
+  free(result);
 }
 
 struct query5_result_helper {
@@ -452,6 +453,9 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   g_array_free(result->query5_result, TRUE);
+  free(begin_date);
+  free(end_date);
+  free(result);
 }
 
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
@@ -497,7 +501,6 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
   free(airport_result);
   free(medians_result);
 
-  // Free the GArray
   g_array_free(medians, TRUE);
 }
 
