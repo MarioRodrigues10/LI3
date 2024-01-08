@@ -28,13 +28,13 @@ char* string_separator(char** line, const char* separator) {
 
 int parse_line(char* line, char* tokens[], int num_tokens) {
   int token_count = 0;
-  char* token = strtok(line, SEPARATOR);
+  char* token = string_separator(&line, SEPARATOR);
 
   while (token != NULL && token_count < num_tokens) {
     tokens[token_count] = token;
     token_count++;
 
-    token = strtok(NULL, SEPARATOR);
+    token = string_separator(&line, SEPARATOR);
   }
 
   return token_count;
@@ -55,7 +55,6 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
     if (result[strlen(result) - 1] == '\n') {
       result[strlen(result) - 1] = '\0';
     }
-
     int num_tokens = parse_line(line, tokens, MAX_TOKENS);
 
     switch (type) {
