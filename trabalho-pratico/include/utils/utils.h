@@ -67,15 +67,22 @@ int calculate_delay(char* scheduled_date, char* actual_date);
 void sort_by_date_and_value(void* query4_content, int N);
 
 /**
+ * @brief Function that compares two results.
+ *
+ * @param a The first string of type 'const void*'
+ * @param b The second string of type 'const void*'
+ *
+ * @return The result of the check of type 'int'
+ */
+int compare_query2_result(const void* a, const void* b);
+
+/**
  * @brief Function that sorts the flights by date.
  *
- * @param flight_ids The flight ids of type 'char**'
- * @param flight_dates The flight dates of type 'char**'
- * @param flight_types The flight types of type 'char**'
+ * @param result The result of the query of type 'void*'
  * @param N The number of flights of type 'int'
  */
-void sort_by_date(char** flight_ids, char** flight_dates, char** flight_types,
-                  int N);
+void sort_by_date(void* result, int N);
 
 /**
  * @brief Function that sorts the reservations by date.

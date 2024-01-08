@@ -77,39 +77,40 @@ int calculate_delay(char* scheduled_date, char* actual_date) {
   return time_difference_seconds;
 }
 
-void sort_by_date(char** flight_ids, char** flight_dates, char** flight_types,
-                  int N) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      if (strcmp(flight_dates[i], flight_dates[j]) > 0) {
-        char* temp = flight_dates[i];
-        char* temp2 = flight_ids[i];
-        char* temp3 = flight_types[i];
-        flight_dates[i] = flight_dates[j];
-        flight_dates[j] = temp;
-        flight_ids[i] = flight_ids[j];
-        flight_ids[j] = temp2;
-        flight_types[i] = flight_types[j];
-        flight_types[j] = temp3;
-      } else if (strcmp(flight_dates[i], flight_dates[j]) == 0) {
-        if (strcmp(flight_ids[i], flight_ids[j]) < 0) {
-          char* temp = flight_dates[i];
-          char* temp2 = flight_ids[i];
-          char* temp3 = flight_types[i];
-          flight_dates[i] = flight_dates[j];
-          flight_dates[j] = temp;
-          flight_ids[i] = flight_ids[j];
-          flight_ids[j] = temp2;
-          flight_types[i] = flight_types[j];
-          flight_types[j] = temp3;
-        }
-      }
-    }
+struct query2_result_helper {
+  char* id;
+  char* date;
+  char* type;
+};
+
+struct query2_result {
+  GArray* query2_result;
+};
+
+int compare_query2_result(const void* a, const void* b) {
+  setlocale(LC_COLLATE, "en_US.UTF-8");
+  const QUERY2_RESULT_HELPER* query2_result_a = (const QUERY2_RESULT_HELPER*)a;
+  const QUERY2_RESULT_HELPER* query2_result_b = (const QUERY2_RESULT_HELPER*)b;
+
+  int dateComparison =
+      strcoll((*query2_result_b)->date, (*query2_result_a)->date);
+
+  if (dateComparison != 0) {
+    return dateComparison;
+  } else {
+    return strcoll((*query2_result_a)->id, (*query2_result_b)->id);
   }
 }
 
+void sort_by_date(void* result, int N) {
+  QUERY2_RESULT* query_result = (QUERY2_RESULT*)result;
+
+  qsort((*query_result)->query2_result, N, sizeof(QUERY2_RESULT),
+        compare_query2_result);
+}
+
 char* format_date(int year, int month, int day) {
-  char* new_date = malloc(sizeof(char) * 11);
+  char* new_date = malloc(12 * sizeof(char));
   if (day < 10 && month < 10) {
     sprintf(new_date, "%d/0%d/0%d", year, month, day);
   } else if (day < 10) {
@@ -352,8 +353,7 @@ char* date_to_string(int date) {
   int year = date / 10000;
   int month = (date % 10000) / 100;
   int day = date % 100;
-  char* new_date = format_date(year, month, day);
-  return new_date;
+  return format_date(year, month, day);
 }
 
 int normalize_reservation_id(char* reservation_id) {
@@ -363,39 +363,8 @@ int normalize_reservation_id(char* reservation_id) {
 }
 
 char* int_to_reservation_id(int reservation_id, int N) {
-  char* reservation_id_str = malloc(sizeof(char) * 11);
-  switch (N) {
-    case 1:
-      sprintf(reservation_id_str, "Book000000000%d", reservation_id);
-      break;
-    case 2:
-      sprintf(reservation_id_str, "Book00000000%d", reservation_id);
-      break;
-    case 3:
-      sprintf(reservation_id_str, "Book0000000%d", reservation_id);
-      break;
-    case 4:
-      sprintf(reservation_id_str, "Book000000%d", reservation_id);
-      break;
-    case 5:
-      sprintf(reservation_id_str, "Book00000%d", reservation_id);
-      break;
-    case 6:
-      sprintf(reservation_id_str, "Book0000%d", reservation_id);
-      break;
-    case 7:
-      sprintf(reservation_id_str, "Book000%d", reservation_id);
-      break;
-    case 8:
-      sprintf(reservation_id_str, "Book00%d", reservation_id);
-      break;
-    case 9:
-      sprintf(reservation_id_str, "Book0%d", reservation_id);
-      break;
-    case 10:
-      sprintf(reservation_id_str, "Book%d", reservation_id);
-      break;
-  }
+  char* reservation_id_str = malloc(sizeof(char) * 16);
+  sprintf(reservation_id_str, "Book%0*d", 10, reservation_id);
 
   return reservation_id_str;
 }

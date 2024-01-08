@@ -106,6 +106,16 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 }
 
+struct query2_result_helper {
+  char *id;
+  char *date;
+  char *type;
+};
+
+struct query2_result {
+  GArray *query2_result;
+};
+
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
@@ -122,7 +132,6 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
   if (!account_status) return;
 
   UserStats *user_stats = get_user_stats_by_user_id(users_data, id);
-
   if (strcmp(type, "flights") == 0) {
     query2_flights(has_f, user_stats, flights_data, output_file);
   } else if (strcmp(type, "reservations") == 0) {
@@ -137,16 +146,24 @@ void query2_flights(bool has_f, UserStats *user_stats,
                     FlightsData *flights_data, FILE *output_file) {
   GArray *flights = get_user_flights_from_user_stats(user_stats);
   if (flights == NULL) return;
-
   int len = flights->len;
-  char **ids = malloc(sizeof(char *) * len);
-  char **dates = malloc(sizeof(char *) * len);
-  char **types = malloc(sizeof(char *) * len);
 
-  query2_seed_flights(flights_data, NULL, flights, 0, ids, dates, types, len);
-  sort_by_date(ids, dates, types, len);
-  write_query2(has_f, output_file, ids, dates, types, len);
-  free_query2(ids, dates, types, len);
+  QUERY2_RESULT result = malloc(sizeof(QUERY2_RESULT));
+  result->query2_result =
+      g_array_new(FALSE, FALSE, sizeof(QUERY2_RESULT_HELPER));
+
+  query2_seed_flights(flights_data, "nada", flights, result->query2_result,
+                      len);
+  sort_by_date(result, len);
+  write_query2(has_f, output_file, result->query2_result);
+  for (int i = 0; i < result->query2_result->len; i++) {
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i));
+  }
+  g_array_free(result->query2_result, TRUE);
+  free(result);
 }
 
 void query2_reservations(bool has_f, UserStats *user_stats,
@@ -156,15 +173,23 @@ void query2_reservations(bool has_f, UserStats *user_stats,
   if (reservations == NULL) return;
 
   int len = reservations->len;
-  char **ids = malloc(sizeof(char *) * len);
-  char **dates = malloc(sizeof(char *) * len);
-  char **types = malloc(sizeof(char *) * len);
+  QUERY2_RESULT result = malloc(sizeof(QUERY2_RESULT));
+  result->query2_result =
+      g_array_new(FALSE, FALSE, sizeof(QUERY2_RESULT_HELPER));
 
-  query2_seed_reservations(reservations_data, NULL, reservations, 0, 0, ids,
-                           dates, types, len);
-  sort_by_date(ids, dates, types, len);
-  write_query2(has_f, output_file, ids, dates, types, len);
-  free_query2(ids, dates, types, len);
+  query2_seed_reservations(reservations_data, "nada", reservations,
+                           result->query2_result, len);
+  sort_by_date(result, len);
+  write_query2(has_f, output_file, result->query2_result);
+
+  for (int i = 0; i < result->query2_result->len; i++) {
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i));
+  }
+  g_array_free(result->query2_result, TRUE);
+  free(result);
 }
 
 void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
@@ -175,71 +200,76 @@ void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
   if (flights == NULL && reservations == NULL) return;
 
   int max = flights->len + reservations->len;
-  char **ids = malloc(sizeof(char *) * max);
-  char **dates = malloc(sizeof(char *) * max);
-  char **types = malloc(sizeof(char *) * max);
 
-  query2_seed_flights(flights_data, "flight", flights, 0, ids, dates, types,
+  QUERY2_RESULT result = malloc(sizeof(QUERY2_RESULT));
+  result->query2_result =
+      g_array_new(FALSE, FALSE, sizeof(QUERY2_RESULT_HELPER));
+
+  query2_seed_flights(flights_data, "flight", flights, result->query2_result,
                       flights->len);
-  query2_seed_reservations(reservations_data, "reservation", reservations, 0,
-                           flights->len, ids, dates, types, max);
 
-  sort_by_date(ids, dates, types, max);
-  write_query2(has_f, output_file, ids, dates, types, max);
-  free_query2(ids, dates, types, max);
+  query2_seed_reservations(reservations_data, "reservation", reservations,
+                           result->query2_result, reservations->len);
+
+  sort_by_date(result, max);
+  write_query2(has_f, output_file, result->query2_result);
+
+  for (int i = 0; i < result->query2_result->len; i++) {
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
+    free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i));
+  }
+  g_array_free(result->query2_result, TRUE);
+  free(result);
 }
 
 void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
-                         int i, char **ids, char **dates, char **types,
-                         int len) {
-  while (i < len) {
+                         GArray *output_array, int len) {
+  for (int i = 0; i < len; i++) {
     int id = g_array_index(array, int, i);
     FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
     if (flight == NULL) return;
+    QUERY2_RESULT_HELPER result_helper = malloc(sizeof(QUERY2_RESULT_HELPER));
     char *date = get_schedule_departure_date(flight);
 
     int year, month, day, hour, minute, second;
     sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
            &second);
     char *flight_id_str = int_to_flight_id(id, count_digits(id));
-    ids[i] = flight_id_str;
-    dates[i] = format_date(year, month, day);
-    types[i] = type;
+    char *new_date = format_date(year, month, day);
+
+    result_helper->id = strdup(flight_id_str);
+    result_helper->date = strdup(new_date);
+    result_helper->type = strdup(type);
+
+    g_array_append_val(output_array, result_helper);
     free(date);
-    i++;
+    free(new_date);
+    free(flight_id_str);
   }
 }
 
 void query2_seed_reservations(ReservationsData *reservations_data, char *type,
-                              GArray *array, int i, int sum, char **ids,
-                              char **dates, char **types, int len) {
-  while ((i + sum) < len) {
+                              GArray *array, GArray *output_array, int len) {
+  for (int i = 0; i < len; i++) {
     int id = g_array_index(array, int, i);
     ReservationInfo *reservation =
         get_reservation_by_reservation_id(reservations_data, id);
     if (reservation == NULL) return;
-    char *date = date_to_string(get_begin_date(reservation));
-    int year, month, day, hour, minute, second;
-    sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-           &second);
+
+    QUERY2_RESULT_HELPER result_helper = malloc(sizeof(QUERY2_RESULT_HELPER));
     char *reservation_id = int_to_reservation_id(id, count_digits(id));
-    ids[i + sum] = reservation_id;
-    dates[i + sum] = format_date(year, month, day);
-    types[i + sum] = type;
+    char *date = date_to_string(get_begin_date(reservation));
 
-    // free(reservation_id);
+    result_helper->id = strdup(reservation_id);
+    result_helper->date = strdup(date);
+    result_helper->type = strdup(type);
+
+    g_array_append_val(output_array, result_helper);
+    free(reservation_id);
     free(date);
-    i++;
   }
-}
-
-void free_query2(char **ids, char **dates, char **types, int len) {
-  free(ids);
-  for (int i = 0; i < len; i++) {
-    free(dates[i]);
-  }
-  free(dates);
-  free(types);
 }
 
 void query3(bool has_f, char **query_parameters, FlightsData *flights_data,

@@ -61,26 +61,38 @@ void write_query1_for_user(bool has_f, FILE *output_file, char *name, char *sex,
   }
 }
 
-void write_query2(bool has_f, FILE *output_file, char **ids, char **dates,
-                  char **types, int N) {
+struct query2_result_helper {
+  char *id;
+  char *date;
+  char *type;
+};
+
+struct query2_result {
+  GArray *query2_result;
+};
+
+void write_query2(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < N; i++) {
+  for (int i = 0; i < query_result_array->len; i++) {
+    QUERY2_RESULT_HELPER query_result =
+        g_array_index(query_result_array, QUERY2_RESULT_HELPER, i);
     j = i + 1;
-    if (types[i] == NULL) {
+    if (strcmp(query_result->type, "nada") == 0) {
       if (has_f) {
         if (i != 0) fprintf(output_file, "\n");
-        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n", j, ids[i],
-                dates[i]);
+        fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n", j,
+                query_result->id, query_result->date);
       } else {
-        fprintf(output_file, "%s;%s\n", ids[i], dates[i]);
+        fprintf(output_file, "%s;%s\n", query_result->id, query_result->date);
       }
     } else {
       if (has_f) {
         if (i != 0) fprintf(output_file, "\n");
         fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\ntype: %s\n", j,
-                ids[i], dates[i], types[i]);
+                query_result->id, query_result->date, query_result->type);
       } else {
-        fprintf(output_file, "%s;%s;%s\n", ids[i], dates[i], types[i]);
+        fprintf(output_file, "%s;%s;%s\n", query_result->id, query_result->date,
+                query_result->type);
       }
     }
   }

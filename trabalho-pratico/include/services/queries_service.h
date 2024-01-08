@@ -22,6 +22,18 @@
 #include "utils/utils.h"
 
 /**
+ * @struct query2_result - Struct that represents the result of query 2 to be
+ * used in other places of the program
+ */
+typedef struct query2_result *QUERY2_RESULT;
+
+/**
+ * @struct query2_result_helper - Struct that represents the result of query 2
+ * to be used in other places of the program
+ */
+typedef struct query2_result_helper *QUERY2_RESULT_HELPER;
+
+/**
  * @struct query4_result - Struct that represents the result of query 4 to be
  * used in other places of the program
  */
@@ -86,16 +98,11 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param reservations_data The reservations data struct.
  * @param type The type of the reservation.
  * @param array The array to fetch the data.
- * @param i The index of the array.
- * @param sum The position of the array to sum to the index.
- * @param ids The ids of the reservations.
- * @param dates The dates of the reservations.
- * @param types The types of the reservations.
+ * @param output_array The array to output the data.
  * @param len The length of the array.
  */
-void query2_seed_reservations(ReservationsData *reservations_data, char *type,
-                              GArray *array, int i, int sum, char **ids,
-                              char **dates, char **types, int len);
+void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
+                         GArray *output_array, int len);
 
 /**
  * @brief Query2 helper function for flights.
@@ -103,24 +110,18 @@ void query2_seed_reservations(ReservationsData *reservations_data, char *type,
  * @param flights_data The flights data struct.
  * @param type The type of the reservation.
  * @param array The array to fetch the data.
- * @param i The index of the array.
- * @param ids The ids of the reservations.
- * @param dates The dates of the reservations.
- * @param types The types of the reservations.
+ * @param output_array The array to output the data.
  * @param len The length of the array.
  */
-void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
-                         int i, char **ids, char **dates, char **types,
-                         int len);
+void query2_seed_reservations(ReservationsData *reservations_data, char *type,
+                              GArray *array, GArray *output_array, int len);
 /**
  * @brief Query2 helper function to free the memory.
  *
- * @param ids The ids of the reservations.
- * @param dates The dates of the reservations.
- * @param types The types of the reservations.
+ * @param result The result of the query.
  * @param len The length of the array.
  */
-void free_query2(char **ids, char **dates, char **types, int len);
+void free_query2(void *result, int len);
 
 /**
  * @brief Query flights helper function.

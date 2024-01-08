@@ -74,13 +74,10 @@ void write_query1_for_user(bool has_f, FILE *output_file, char *name, char *sex,
  *
  * @param has_f Wheter the output should be formatted or not
  * @param output_file The output file
- * @param ids The ids
- * @param dates The dates
- * @param types The types
- * @param N The length of the array
+ * @param query_result_array The query result array
  */
-void write_query2(bool has_f, FILE *output_file, char **ids, char **dates,
-                  char **types, int N);
+void write_query2(bool has_f, FILE *output_file, GArray *query_result_array);
+
 /**
  * @brief Writes the query3 output to the output file.
  *

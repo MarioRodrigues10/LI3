@@ -64,6 +64,7 @@ AirportStats *update_airport_stats(AirportStats *airport_stats,
 void destroy_airport_stats(AirportStats *airport_stats) {
   if (airport_stats) {
     g_array_free(airport_stats->airport_flights, TRUE);
+    g_array_free(airport_stats->delays, TRUE);
     g_free(airport_stats);
   }
 }
