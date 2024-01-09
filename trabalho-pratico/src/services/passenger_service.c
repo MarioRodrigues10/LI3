@@ -51,4 +51,5 @@ void construct_passenger(char **parameters, UsersData *users_data,
                                   0, user);
   update_general_stats_controller(general_data, departure_date_year, 0, 0, 1, 0,
                                   user);
+  free(user);
 }

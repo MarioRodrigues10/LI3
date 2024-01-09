@@ -84,11 +84,14 @@ GeneralStats *create_general_stats(int key, int number_of_users,
   new_general_stats->number_of_passengers = number_of_passengers;
   new_general_stats->unique_passengers = 1;
   new_general_stats->reservations = reservations;
-  new_general_stats->users =
-      g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+  new_general_stats->users = g_hash_table_new_full(
+      g_str_hash, g_str_equal, NULL, (GDestroyNotify)destroy_users_key);
 
   if (user_id != NULL) {
-    g_hash_table_insert(new_general_stats->users, user_id, user_id);
+    char *user_copy_id = malloc(sizeof(char) * (strlen(user_id) + 1));
+    strcpy(user_copy_id, user_id);
+    g_hash_table_insert(new_general_stats->users, user_copy_id, user_copy_id);
+    free(user_copy_id);
   }
   return new_general_stats;
 }
@@ -105,7 +108,9 @@ GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
     if (user_id != NULL &&
         g_hash_table_lookup(general_stats->users, user_id) == NULL) {
       general_stats->unique_passengers += 1;
-      g_hash_table_insert(general_stats->users, user_id, user_id);
+      char *user_copy_id = malloc(sizeof(char) * (strlen(user_id) + 1));
+      strcpy(user_copy_id, user_id);
+      g_hash_table_insert(general_stats->users, user_copy_id, user_copy_id);
     }
     return general_stats;
   } else {
@@ -119,6 +124,11 @@ GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
 // DESTROYER
 
 void destroy_general_stats(GeneralStats *general_stats) {
-  free(general_stats->users);
-  free(general_stats);
+  if (general_stats == NULL) return;
+  if (general_stats->users != NULL) {
+    g_hash_table_destroy(general_stats->users);
+    free(general_stats);
+  }
 }
+
+void destroy_users_key(gpointer key) { g_free(key); }

@@ -15,7 +15,10 @@ GeneralData *general_data_new() {
 }
 
 void general_data_free(GeneralData *general_data) {
-  g_hash_table_destroy(general_data->general_stats);
+  if (general_data == NULL) return;
+  if (general_data->general_stats != NULL) {
+    g_hash_table_destroy(general_data->general_stats);
+  }
   free(general_data);
 }
 

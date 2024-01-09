@@ -147,4 +147,10 @@ GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
  */
 void destroy_general_stats(GeneralStats *general_stats);
 
+/**
+ * @brief Destroy users hashtable keys
+ *
+ * @param key Key
+ */
+void destroy_users_key(gpointer key);
 #endif
