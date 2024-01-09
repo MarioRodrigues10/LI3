@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "utils/utils.h"
 
+#include <ctype.h>
 #include <glib.h>
 #include <locale.h>
 #include <stdbool.h>
@@ -287,6 +288,14 @@ int compare_respond(const void* a, const void* b) {
     return nameComparison;
   } else {
     return strcoll(user_a->user_id, user_b->user_id);
+  }
+}
+
+void normalize_string_to_upper(char* string) {
+  int i = 0;
+  while (string[i]) {
+    string[i] = toupper(string[i]);
+    i++;
   }
 }
 

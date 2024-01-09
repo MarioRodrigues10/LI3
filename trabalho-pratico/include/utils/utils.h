@@ -296,6 +296,13 @@ void sort_by_departure_date(void* result, int N);
 int compare_query5_result(const void* a, const void* b);
 
 /**
+ * @brief Function that normalizes the string to upper
+ *
+ * @param string The string of type 'char*'
+ */
+void normalize_string_to_upper(char* string);
+
+/**
  * @brief Function that normalizes the reservation id
  *
  * @param reservation_id The reservation id of type 'char*'

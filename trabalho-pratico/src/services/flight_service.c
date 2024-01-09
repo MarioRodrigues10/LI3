@@ -74,6 +74,9 @@ void construct_flight(char **parameters, void *flights_data, void *general_data,
   int departure_date_month = normalize_date_with_month(parameters[6]);
   int departure_date_year = normalize_date_with_year(parameters[6]);
 
+  normalize_string_to_upper(parameters[4]);
+  normalize_string_to_upper(parameters[5]);
+
   set_flight_id(flight_info, strtol(parameters[0], NULL, 10));
   set_airline(flight_info, parameters[1]);
   set_plane_model(flight_info, parameters[2]);
