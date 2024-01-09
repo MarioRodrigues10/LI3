@@ -1,7 +1,7 @@
 CC := gcc
 
 EXEC := programa-principal
-FLAGS := -std=c11 -march=native -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -Ofast -g -ftree-vectorize -mavx -freorder-functions -freorder-blocks
+FLAGS := -std=c11 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -Ofast -g -ftree-vectorize -mavx -freorder-functions -freorder-blocks
 
 LIBS := -lm `pkg-config --libs glib-2.0`
 PKG_CONFIG := `pkg-config --cflags glib-2.0`

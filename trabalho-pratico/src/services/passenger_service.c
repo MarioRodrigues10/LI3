@@ -38,6 +38,10 @@ void construct_passenger(char **parameters, UsersData *users_data,
   update_flight_stats_controller(flights_data, id, 1);
   update_user_flights(user_stats, parameters[1], id);
   FlightInfo *flight_info = get_flight_by_flight_id(flights_data, id);
+
+  char *origin = get_origin(flight_info);
+  char *destination = get_destination(flight_info);
+
   char *schedule_departure_date = get_schedule_departure_date(flight_info);
   int departure_date_day = normalize_date_with_day(schedule_departure_date);
   int departure_date_month = normalize_date_with_month(schedule_departure_date);
@@ -45,6 +49,10 @@ void construct_passenger(char **parameters, UsersData *users_data,
 
   free(schedule_departure_date);
   char *user = g_strdup(parameters[1]);
+
+  update_airport_info_controller(flights_data, departure_date_year, origin,
+                                 destination, 1);
+
   update_general_stats_controller(general_data, departure_date_day, 0, 0, 1, 0,
                                   user);
   update_general_stats_controller(general_data, departure_date_month, 0, 0, 1,
@@ -52,4 +60,6 @@ void construct_passenger(char **parameters, UsersData *users_data,
   update_general_stats_controller(general_data, departure_date_year, 0, 0, 1, 0,
                                   user);
   free(user);
+  free(origin);
+  free(destination);
 }

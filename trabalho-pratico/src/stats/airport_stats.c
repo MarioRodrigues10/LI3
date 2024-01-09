@@ -68,3 +68,115 @@ void destroy_airport_stats(AirportStats *airport_stats) {
     g_free(airport_stats);
   }
 }
+
+// AIRPORT INFO
+
+struct airport_info {
+  int year;
+  GHashTable *airports_list;
+};
+
+struct airport_info_list {
+  char *airport;
+  int number_of_passengers;
+};
+// SETTERS
+
+void set_year_of_airport_info(AirportInfo *airport_info, int year) {
+  airport_info->year = year;
+}
+// GETTERS
+
+GHashTable *get_airports_list_from_airport_info(AirportInfo *airport_info) {
+  return airport_info->airports_list;
+}
+
+AirportInfo *create_airport_info(int year, char *origin, char *destination,
+                                 int number_of_passengers) {
+  AirportInfo *new_airport_info = malloc(sizeof(AirportInfo));
+  new_airport_info->year = year;
+  new_airport_info->airports_list =
+      g_hash_table_new_full(g_str_hash, g_str_equal, g_free,
+                            (GDestroyNotify)destroy_airport_info_list);
+
+  if (origin != NULL) {
+    AirportInfoList *new_airport_info_list = malloc(sizeof(AirportInfoList));
+    char *origin_copy = g_strdup(origin);
+    new_airport_info_list->airport = origin_copy;
+    new_airport_info_list->number_of_passengers = number_of_passengers;
+    g_hash_table_insert(new_airport_info->airports_list, origin_copy,
+                        new_airport_info_list);
+  }
+  if (destination != NULL) {
+    AirportInfoList *new_airport_info_list = malloc(sizeof(AirportInfoList));
+    char *destination_copy = g_strdup(destination);
+    new_airport_info_list->airport = destination_copy;
+    new_airport_info_list->number_of_passengers = number_of_passengers;
+    g_hash_table_insert(new_airport_info->airports_list, destination_copy,
+                        new_airport_info_list);
+  }
+  return new_airport_info;
+}
+
+AirportInfo *update_airport_info(AirportInfo *airport_info, char *origin,
+                                 char *destination, int number_of_passengers) {
+  // Check if the airport_info is not NULL
+  if (airport_info != NULL) {
+    // Check if the airport is not NULL
+    if (origin != NULL && destination != NULL) {
+      AirportInfoList *airport_info_list_o =
+          g_hash_table_lookup(airport_info->airports_list, origin);
+
+      if (airport_info_list_o != NULL) {
+        // Airport already exists, update the number_of_passengers
+        airport_info_list_o->number_of_passengers += number_of_passengers;
+      } else {
+        // Airport doesn't exist, create a new entry
+        char *origin_copy = g_strdup(origin);
+        AirportInfoList *new_airport_info_list =
+            g_malloc(sizeof(AirportInfoList));
+        new_airport_info_list->airport = origin_copy;
+        new_airport_info_list->number_of_passengers = number_of_passengers;
+
+        // Insert the new entry into the hash table
+        g_hash_table_insert(airport_info->airports_list,
+                            new_airport_info_list->airport,
+                            new_airport_info_list);
+      }
+
+      AirportInfoList *airport_info_list_d =
+          g_hash_table_lookup(airport_info->airports_list, destination);
+      if (airport_info_list_d != NULL) {
+        airport_info_list_d->number_of_passengers += number_of_passengers;
+      } else {
+        char *destination_copy = g_strdup(destination);
+        AirportInfoList *new_airport_info_list =
+            g_malloc(sizeof(AirportInfoList));
+        new_airport_info_list->airport = destination_copy;
+        new_airport_info_list->number_of_passengers = number_of_passengers;
+
+        // Insert the new entry into the hash table
+        g_hash_table_insert(airport_info->airports_list,
+                            new_airport_info_list->airport,
+                            new_airport_info_list);
+      }
+    }
+  }
+  return airport_info;
+}
+
+// DESTROYER
+
+void destroy_airport_info_list(AirportInfoList *airport_info_list) {
+  if (airport_info_list) {
+    // g_free(airport_info_list->airport);
+    g_free(airport_info_list);
+  }
+}
+
+void destroy_airport_info(AirportInfo *airport_info) {
+  if (airport_info != NULL) {
+    g_hash_table_destroy(airport_info->airports_list);
+    g_free(airport_info);
+  }
+}

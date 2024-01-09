@@ -107,4 +107,34 @@ void update_airport_stats_controller(FlightsData *flights_data,
 AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,
                                                 char *airport_name);
 
+/**
+ * @brief Gets the airport info hashtable.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param airport_info Pointer to the AirportInfo struct.
+ */
+void add_airport_info_controller(FlightsData *flights_data,
+                                 AirportInfo *airport_info);
+/**
+ * @brief Updates the airport info.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param year Year of type 'int'.
+ * @param origin Pointer to the origin airport name.
+ * @param destinantion Pointer to the destination airport name.
+ * @param number_of_passengers Number of passengers of type 'int'.
+ *
+ */
+void update_airport_info_controller(FlightsData *flights_data, int year,
+                                    char *origin, char *destinantion,
+                                    int number_of_passengers);
+/**
+ * @brief Gets the airport info hashtable.
+ *
+ * @param flights_data Pointer to the FlightsData struct.
+ * @param year Year of type 'int'.
+ *
+ * @return GHashTable pointer of type 'GHashTable*' to the airport info.
+ */
+GHashTable *get_airports_list(FlightsData *flights_data, int year);
 #endif

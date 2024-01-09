@@ -9,19 +9,29 @@ struct flights_data {
   GHashTable *flight_stats;
 
   GHashTable *airport_stats;
+
+  GHashTable *airport_info;
 };
 
 // SET UP
 
 FlightsData *flights_data_new() {
   FlightsData *flights_data = malloc(sizeof(FlightsData));
+
   flights_data->flights = g_hash_table_new_full(
       g_direct_hash, g_direct_equal, NULL, (GDestroyNotify)destroy_flight);
+
   flights_data->flight_stats =
       g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL,
                             (GDestroyNotify)destroy_flight_stats);
+
   flights_data->airport_stats = g_hash_table_new_full(
       g_str_hash, g_str_equal, g_free, (GDestroyNotify)destroy_airport_stats);
+
+  flights_data->airport_info =
+      g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL,
+                            (GDestroyNotify)destroy_airport_info);
+
   return flights_data;
 }
 
@@ -29,6 +39,10 @@ FlightsData *flights_data_new() {
 
 GHashTable *get_airport_stats(FlightsData *flights_data) {
   return flights_data->airport_stats;
+}
+
+GHashTable *get_airport_info(FlightsData *flights_data) {
+  return flights_data->airport_info;
 }
 
 // FLIGHT
@@ -43,6 +57,7 @@ void flights_data_free(FlightsData *flights_data) {
   g_hash_table_destroy(flights_data->flights);
   g_hash_table_destroy(flights_data->flight_stats);
   g_hash_table_destroy(flights_data->airport_stats);
+  g_hash_table_destroy(flights_data->airport_info);
   free(flights_data);
 }
 
@@ -109,7 +124,43 @@ void update_airport_stats_controller(FlightsData *flights_data,
   update_airport_stats(airport_stats, airport_name, flight_id, delay);
 }
 
+// get
+
 AirportStats *get_airport_stats_by_airport_name(FlightsData *flights_data,
                                                 char *airport_name) {
   return g_hash_table_lookup(flights_data->airport_stats, airport_name);
+}
+
+struct airport_info {
+  int year;
+  GHashTable *airports_list;
+};
+
+GHashTable *get_airports_list(FlightsData *flights_data, int year) {
+  AirportInfo *airport_info =
+      g_hash_table_lookup(flights_data->airport_info, GINT_TO_POINTER(year));
+
+  return airport_info->airports_list;
+}
+
+void add_airport_info_controller(FlightsData *flights_data,
+                                 AirportInfo *airport_info) {
+  g_hash_table_insert(flights_data->airport_info,
+                      GINT_TO_POINTER(airport_info->year), airport_info);
+}
+
+void update_airport_info_controller(FlightsData *flights_data, int year,
+                                    char *origin, char *destination,
+                                    int number_of_passengers) {
+  AirportInfo *airport_info =
+      g_hash_table_lookup(flights_data->airport_info, GINT_TO_POINTER(year));
+  if (airport_info == NULL) {
+    AirportInfo *airport_info =
+        create_airport_info(year, origin, destination, number_of_passengers);
+    add_airport_info_controller(flights_data, airport_info);
+    return;
+  } else {
+    airport_info = update_airport_info(airport_info, origin, destination,
+                                       number_of_passengers);
+  }
 }

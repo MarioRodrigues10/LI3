@@ -453,17 +453,49 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {}
-
-#pragma GCC diagnostic pop
-
 struct query7_result {
   char *airport;
   int median_delay;
 };
+struct airport_info {
+  int year;
+  GHashTable *airports_list;
+};
+void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
+            PassengersData *passengers_data,
+            ReservationsData *reservations_data, UsersData *users_data,
+            FILE *output_file) {
+  int year = strtol(query_parameters[0], NULL, 10);
+  int length = strtol(query_parameters[1], NULL, 10);
+
+  GArray *output = g_array_new(FALSE, FALSE, sizeof(struct query7_result));
+
+  GHashTable *airport = get_airports_list(flights_data, year * 10000);
+
+  g_hash_table_foreach(airport, (GHFunc)get_airport_info_list, output);
+
+  g_array_sort(output, (GCompareFunc)compare_median);
+
+  if (length > (int)output->len) length = output->len;
+
+  char **airport_output = malloc(sizeof(char *) * length);
+  int *number_of_passengers = malloc(sizeof(int) * length);
+
+  for (int i = 0; i < length && i < (int)output->len; i++) {
+    struct query7_result *result =
+        &g_array_index(output, struct query7_result, i);
+
+    airport_output[i] = result->airport;
+    number_of_passengers[i] = result->median_delay;
+  }
+
+  write_query6(has_f, output_file, airport_output, number_of_passengers,
+               length);
+
+  g_array_free(output, TRUE);
+  free(airport_output);
+  free(number_of_passengers);
+}
 
 void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
             FILE *output_file) {

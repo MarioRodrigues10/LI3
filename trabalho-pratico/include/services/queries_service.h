@@ -58,6 +58,12 @@ typedef struct query5_result *QUERY5_RESULT;
 typedef struct query5_result_helper *QUERY5_RESULT_HELPER;
 
 /**
+ * @struct query7_result - Struct that represents the result of query 7 to be
+ * used in other places of the program
+ */
+typedef struct query7_result *QUERY7_RESULT;
+
+/**
  * @brief Queries the data structs.
  *
  * @param has_f If the query has the modifier 'F'.

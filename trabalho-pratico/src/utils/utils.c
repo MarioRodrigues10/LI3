@@ -503,3 +503,18 @@ int remove_duplicates(GArray* data) {
   }
   return count;
 }
+
+struct airport_info_list {
+  char* airport;
+  int number_of_passengers;
+};
+
+void get_airport_info_list(gpointer key, gpointer value, gpointer user_data) {
+  AirportInfoList* airport_info_list = (AirportInfoList*)value;
+
+  struct airport_info_list result_entry;
+  result_entry.airport = key;
+  result_entry.number_of_passengers = airport_info_list->number_of_passengers;
+
+  g_array_append_val((GArray*)user_data, result_entry);
+}

@@ -362,4 +362,15 @@ int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
  * @return The number of unique passengers of type 'int'
  */
 int remove_duplicates(GArray* data);
+
+/**
+ * @brief Auxiliar function that  gets airport info from the hastable.
+ *
+ * @param key The key of the airport of type 'gpointer'
+ * @param value The value of the airport of type 'gpointer'
+ * @param user_data The user data of type 'gpointer'
+ *
+ * @return The number of unique passengers of type 'int'
+ */
+void get_airport_info_list(gpointer key, gpointer value, gpointer user_data);
 #endif

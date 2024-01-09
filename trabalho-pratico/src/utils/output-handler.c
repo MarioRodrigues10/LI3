@@ -167,6 +167,22 @@ void write_query5(bool has_f, FILE *output_file, GArray *query_result_array) {
   }
 }
 
+void write_query6(bool has_f, FILE *output_file, char **airport_info,
+                  int *number_of_passengers, int N) {
+  if (has_f) {
+    for (int i = 0; i < N; i++) {
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file, "--- %d ---\name: %s\npassengers: %d\n", i + 1,
+              airport_info[i], number_of_passengers[i]);
+    }
+
+  } else {
+    for (int i = 0; i < N; i++) {
+      fprintf(output_file, "%s;%d\n", airport_info[i], number_of_passengers[i]);
+    }
+  }
+}
+
 void write_query7(bool has_f, FILE *output_file, char **airport, int *delays,
                   int N) {
   if (has_f) {

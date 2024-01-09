@@ -92,6 +92,7 @@ void construct_flight(char **parameters, void *flights_data, void *general_data,
   update_airport_stats_controller(
       flight_data, parameters[4], strtol(parameters[0], NULL, 10),
       calculate_delay(parameters[6], parameters[8]));
+
   update_general_stats_controller(general, departure_date_day, 0, 1, 0, 0,
                                   NULL);
   update_general_stats_controller(general, departure_date_month, 0, 1, 0, 0,

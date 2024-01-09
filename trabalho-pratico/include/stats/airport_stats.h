@@ -5,6 +5,10 @@
 
 typedef struct airport_stats AirportStats;
 
+typedef struct airport_info AirportInfo;
+
+typedef struct airport_info_list AirportInfoList;
+
 /**
  * @brief Sets the airport name of airport stats.
  *
@@ -91,5 +95,42 @@ void add_airport_info(AirportStats *airport_stats);
  *
  */
 void destroy_airport_stats(AirportStats *airport_stats);
+
+/**
+ * @brief Creates a new airport info list.
+ *
+ * @param year Year of type 'int'.
+ * @param origin Origin of type 'char*'.
+ * @param destination Destination of type 'char*'.
+ * @param number_of_passengers Number of passengers of type 'int'.
+ *
+ * @returns A new airport info list of type 'AirportInfoList*'.
+ */
+AirportInfo *create_airport_info(int year, char *origin, char *destination,
+                                 int number_of_passengers);
+/**
+ * @brief Creates a new airport info list.
+ *
+ * @param origin Origin of type 'char*'.
+ * @param destination Destination of type 'char*'.
+ * @param number_of_passengers Number of passengers of type 'int'.
+ *
+ * @returns A new airport info list of type 'AirportInfoList*'.
+ */
+AirportInfo *update_airport_info(AirportInfo *airport_info, char *origin,
+                                 char *destination, int number_of_passengers);
+/**
+ * @brief destroy a airport info list.
+ *
+ * @param airport_info_list Airport info list of type 'AirportInfoList*'.
+ */
+void destroy_airport_info_list(AirportInfoList *airport_info_list);
+
+/**
+ * @brief destroy a airport info .
+ *
+ * @param airport_info Airport info of type 'AirportInfo*'.
+ */
+void destroy_airport_info(AirportInfo *airport_info);
 
 #endif

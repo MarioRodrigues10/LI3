@@ -106,14 +106,16 @@ void write_query4(bool has_f, FILE *output_file, GArray *query_result);
 void write_query5(bool has_f, FILE *output_file, GArray *query_result_array);
 
 /**
- * @brief Writes the query8 output to the output file.
+ * @brief Writes the query6 output to the output file.
  *
  * @param has_f Whether the output should be formatted or not.
  * @param output_file The output file.
- * @param revenue The revenue.
+ * @param airport_info The airport info.
+ * @param number_of_passengers The number of passengers.
+ * @param N The length of the array.
  */
-void write_query8(bool has_f, FILE *output_file, double revenue);
-
+void write_query6(bool has_f, FILE *output_file, char **airport_info,
+                  int *number_of_passengers, int N);
 /**
  * @brief Writes the query7 output to the output file.
  *
@@ -125,6 +127,16 @@ void write_query8(bool has_f, FILE *output_file, double revenue);
  */
 void write_query7(bool has_f, FILE *output_file, char **aiport, int *delays,
                   int N);
+
+/**
+ * @brief Writes the query8 output to the output file.
+ *
+ * @param has_f Whether the output should be formatted or not.
+ * @param output_file The output file.
+ * @param revenue The revenue.
+ */
+void write_query8(bool has_f, FILE *output_file, double revenue);
+
 /**
  * @brief Writes the query9 output to the output file.
  *
