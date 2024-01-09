@@ -12,7 +12,6 @@
 // structs, not all of them
 
 void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {
   char *id = query_parameters[0];
@@ -117,7 +116,6 @@ struct query2_result {
 };
 
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file, int N) {
   char *id = query_parameters[0];
@@ -156,7 +154,7 @@ void query2_flights(bool has_f, UserStats *user_stats,
                       len);
   sort_by_date(result, len);
   write_query2(has_f, output_file, result->query2_result);
-  for (int i = 0; i < result->query2_result->len; i++) {
+  for (guint i = 0; i < result->query2_result->len; i++) {
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
@@ -182,7 +180,7 @@ void query2_reservations(bool has_f, UserStats *user_stats,
   sort_by_date(result, len);
   write_query2(has_f, output_file, result->query2_result);
 
-  for (int i = 0; i < result->query2_result->len; i++) {
+  for (guint i = 0; i < result->query2_result->len; i++) {
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
@@ -214,7 +212,7 @@ void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
   sort_by_date(result, max);
   write_query2(has_f, output_file, result->query2_result);
 
-  for (int i = 0; i < result->query2_result->len; i++) {
+  for (guint i = 0; i < result->query2_result->len; i++) {
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->id);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->date);
     free(g_array_index(result->query2_result, QUERY2_RESULT_HELPER, i)->type);
@@ -259,7 +257,7 @@ void query2_seed_reservations(ReservationsData *reservations_data, char *type,
     if (reservation == NULL) return;
 
     QUERY2_RESULT_HELPER result_helper = malloc(sizeof(QUERY2_RESULT_HELPER));
-    char *reservation_id = int_to_reservation_id(id, count_digits(id));
+    char *reservation_id = int_to_reservation_id(id);
     char *date = date_to_string(get_begin_date(reservation));
 
     result_helper->id = strdup(reservation_id);
@@ -272,10 +270,8 @@ void query2_seed_reservations(ReservationsData *reservations_data, char *type,
   }
 }
 
-void query3(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {
+void query3(bool has_f, char **query_parameters,
+            ReservationsData *reservations_data, FILE *output_file) {
   char *id = query_parameters[0];
 
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
@@ -298,7 +294,7 @@ struct query4_result_helper {
   char *begin_date;
   char *end_date;
   char *user_id;
-  float total_price;
+  double total_price;
   char rating;
 };
 
@@ -306,10 +302,8 @@ struct query4_result {
   GArray *query4_result;
 };
 
-void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {
+void query4(bool has_f, char **query_parameters,
+            ReservationsData *reservations_data, FILE *output_file) {
   char *id = query_parameters[0];
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
   GArray *reservations = get_hotel_reservations(hotel_stats);
@@ -319,7 +313,8 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
   result->query4_result =
       g_array_new(FALSE, FALSE, sizeof(QUERY4_RESULT_HELPER));
 
-  int i = 0, j = 0;
+  guint i = 0;
+  int j = 0;
   for (i = 0; i < reservations->len; i++) {
     int reservation_id = g_array_index(reservations, int, i);
     if (reservation_id > 0) {
@@ -331,12 +326,11 @@ void query4(bool has_f, char **query_parameters, FlightsData *flights_data,
       char *end_date = date_to_string(get_end_date(reservation));
       char rating = get_rating(reservation);
       int price_per_night = get_price_per_night(reservation);
-      float total_price = calculate_total_price(
+      double total_price = calculate_total_price(
           calculate_number_of_nights(begin_date, end_date), price_per_night,
           get_city_tax(reservation));
       char *user_id = get_user_id_reservation(reservation);
-      char *id =
-          int_to_reservation_id(reservation_id, count_digits(reservation_id));
+      char *id = int_to_reservation_id(reservation_id);
       result_helper->reservation_id = strdup(id);
       result_helper->begin_date = strdup(begin_date);
       result_helper->end_date = strdup(end_date);
@@ -385,8 +379,6 @@ struct query5_result {
 };
 
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {
   char *id = query_parameters[0];
   char *begin_date =
@@ -458,10 +450,15 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
   free(result);
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
             PassengersData *passengers_data,
             ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {}
+
+#pragma GCC diagnostic pop
 
 struct query7_result {
   char *airport;
@@ -469,10 +466,8 @@ struct query7_result {
 };
 
 void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {
-  int length = strtol(query_parameters[0], NULL, 10);
+  guint length = strtol(query_parameters[0], NULL, 10);
   GArray *medians = g_array_new(FALSE, FALSE, sizeof(struct query7_result));
 
   GHashTable *airport = get_airport_stats(flights_data);
@@ -486,7 +481,7 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
   char **airport_result = malloc(sizeof(char *) * length);
   int *medians_result = malloc(sizeof(int) * length);
 
-  for (int i = 0; i < length && i < medians->len; i++) {
+  for (guint i = 0; i < length && i < medians->len; i++) {
     struct query7_result *result =
         &g_array_index(medians, struct query7_result, i);
 
@@ -495,7 +490,7 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   write_query7(has_f, output_file, airport_result, medians_result, length);
-  for (int i = 0; i < length; i++) {
+  for (guint i = 0; i < length; i++) {
     g_free(airport_result[i]);
   }
   free(airport_result);
@@ -504,10 +499,8 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
   g_array_free(medians, TRUE);
 }
 
-void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {
+void query8(bool has_f, char **query_parameters,
+            ReservationsData *reservations_data, FILE *output_file) {
   char *id = query_parameters[0];
   char *begin_date = query_parameters[1];
   char *end_date = query_parameters[2];
@@ -515,8 +508,8 @@ void query8(bool has_f, char **query_parameters, FlightsData *flights_data,
   GArray *reservations = get_hotel_reservations(hotel_stats);
   if (reservations == NULL) return;
 
-  double revenue = 0, total_price;
-  for (int i = 0; i < reservations->len; i++) {
+  double revenue = 0;
+  for (guint i = 0; i < reservations->len; i++) {
     int reservation_id = g_array_index(reservations, int, i);
     ReservationInfo *reservation =
         get_reservation_by_reservation_id(reservations_data, reservation_id);
@@ -553,9 +546,7 @@ struct user_info {
   char *user_name;
 };
 
-void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
+void query9(bool has_f, char **query_parameters, UsersData *users_data,
             StatsUserInfo *users_stats, FILE *output_file, int num_parameters) {
   if (query_parameters[0] == NULL) return;
   char *prefix = create_prefix(query_parameters, num_parameters);
@@ -591,7 +582,7 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
     matched_user =
         g_array_index(stats_user, UserInfoStats *, matched_index + 1);
 
-    for (int j = matched_index + 1;
+    for (guint j = matched_index + 1;
          j < stats_user->len &&
          strncmp(matched_user->user_name, prefix, strlen(prefix)) == 0;
          j++) {
@@ -621,8 +612,6 @@ void query9(bool has_f, char **query_parameters, FlightsData *flights_data,
 }
 
 void query10(bool has_f, char **query_parameters, int num_parameters,
-             FlightsData *flights_data, PassengersData *passengers_data,
-             ReservationsData *reservations_data, UsersData *users_data,
              GeneralData *general_data, FILE *output_file) {
   char *parameter = query_parameters[0];
   if (num_parameters == 1 && !isdigit(parameter[0])) {
@@ -770,45 +759,38 @@ void query_manager(char *line, FlightsData *flights_data,
 
   switch (query_type) {
     case 1:
-      query1(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query1(has_f, query_parameters, flights_data, reservations_data,
+             users_data, output_file);
       break;
     case 2:
-      query2(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file, num_parameters);
+      query2(has_f, query_parameters, flights_data, reservations_data,
+             users_data, output_file, num_parameters);
       break;
     case 3:
-      query3(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query3(has_f, query_parameters, reservations_data, output_file);
       break;
     case 4:
-      query4(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query4(has_f, query_parameters, reservations_data, output_file);
       break;
     case 5:
-      query5(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query5(has_f, query_parameters, flights_data, output_file);
       break;
     case 6:
       query6(has_f, query_parameters, flights_data, passengers_data,
              reservations_data, users_data, output_file);
       break;
     case 7:
-      query7(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query7(has_f, query_parameters, flights_data, output_file);
       break;
     case 8:
-      query8(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query8(has_f, query_parameters, reservations_data, output_file);
       break;
     case 9:
-      query9(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, users_stats, output_file,
+      query9(has_f, query_parameters, users_data, users_stats, output_file,
              num_parameters);
       break;
     case 10:
-      query10(has_f, query_parameters, num_parameters, flights_data,
-              passengers_data, reservations_data, users_data, general_data,
+      query10(has_f, query_parameters, num_parameters, general_data,
               output_file);
       break;
     default:

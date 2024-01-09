@@ -112,7 +112,6 @@ GArray *get_users_array_from_general_stats(GeneralStats *general_stats);
  * @param number_of_users Number of users of type 'int'
  * @param number_of_flights Number of flights of type 'int'
  * @param number_of_passengers Number of passengers of type 'int'
- * @param unique_passengers Number of unique passengers of type 'int'
  * @param reservations Number of reservations of type 'int'
  * @param user_id User id of type 'char*'
  *
@@ -120,8 +119,7 @@ GArray *get_users_array_from_general_stats(GeneralStats *general_stats);
  */
 GeneralStats *create_general_stats(int key, int number_of_users,
                                    int number_of_flights,
-                                   int number_of_passengers,
-                                   int unique_passengers, int reservations,
+                                   int number_of_passengers, int reservations,
                                    char *user_id);
 
 /**
@@ -132,7 +130,6 @@ GeneralStats *create_general_stats(int key, int number_of_users,
  * @param number_of_users Number of users of type 'int'
  * @param number_of_flights Number of flights of type 'int'
  * @param number_of_passengers Number of passengers of type 'int'
- * @param unique_passengers Number of unique passengers of type 'int'
  * @param reservations Number of reservations of type 'int'
  * @param user_id User id of type 'char*'
  *
@@ -140,8 +137,7 @@ GeneralStats *create_general_stats(int key, int number_of_users,
  */
 GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
                                    int number_of_users, int number_of_flights,
-                                   int number_of_passengers,
-                                   int unique_passengers, int reservations,
+                                   int number_of_passengers, int reservations,
                                    char *user_id);
 
 /**

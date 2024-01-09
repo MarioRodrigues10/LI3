@@ -46,9 +46,9 @@ void construct_passenger(char **parameters, UsersData *users_data,
   free(schedule_departure_date);
   char *user = g_strdup(parameters[1]);
   update_general_stats_controller(general_data, departure_date_day, 0, 0, 1, 0,
-                                  0, user);
+                                  user);
   update_general_stats_controller(general_data, departure_date_month, 0, 0, 1,
-                                  0, 0, user);
-  update_general_stats_controller(general_data, departure_date_year, 0, 0, 1, 0,
                                   0, user);
+  update_general_stats_controller(general_data, departure_date_year, 0, 0, 1, 0,
+                                  user);
 }

@@ -308,11 +308,10 @@ int normalize_reservation_id(char* reservation_id);
  * @brief Function that converts a reservation id in integer to a string
  *
  * @param reservation_id The reservation id of type 'int'
- * @param N The number of digits of the reservation id of type 'int'
  *
  * @return The reservation id of type 'char*
  */
-char* int_to_reservation_id(int reservation_id, int N);
+char* int_to_reservation_id(int reservation_id);
 
 /**
  * @brief Function that counts the number of digits of a number

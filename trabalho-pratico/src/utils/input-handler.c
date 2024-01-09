@@ -43,8 +43,8 @@ int input_handler(char **argv) {
     return 1;
   }
 
-  feeder(data_folder, flights_data, general_data, passengers_data,
-         reservations_data, users_data, users_stats);
+  feeder(data_folder, flights_data, general_data, reservations_data, users_data,
+         users_stats);
 
   char *queries_filename = argv[2];
   FILE *queries_file = fopen(queries_filename, "r");

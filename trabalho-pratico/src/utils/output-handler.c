@@ -73,7 +73,7 @@ struct query2_result {
 
 void write_query2(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < query_result_array->len; i++) {
+  for (guint i = 0; i < query_result_array->len; i++) {
     QUERY2_RESULT_HELPER query_result =
         g_array_index(query_result_array, QUERY2_RESULT_HELPER, i);
     j = i + 1;
@@ -111,13 +111,13 @@ struct query4_result_helper {
   char *begin_date;
   char *end_date;
   char *user_id;
-  float total_price;
+  double total_price;
   char rating;
 };
 
 void write_query4(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < query_result_array->len; i++) {
+  for (guint i = 0; i < query_result_array->len; i++) {
     QUERY4_RESULT_HELPER query_result =
         g_array_index(query_result_array, QUERY4_RESULT_HELPER, i);
     j = i + 1;
@@ -147,7 +147,7 @@ struct query5_result_helper {
 };
 void write_query5(bool has_f, FILE *output_file, GArray *query_result_array) {
   int j;
-  for (int i = 0; i < query_result_array->len; i++) {
+  for (guint i = 0; i < query_result_array->len; i++) {
     QUERY5_RESULT_HELPER query_result =
         g_array_index(query_result_array, QUERY5_RESULT_HELPER, i);
     j = i + 1;

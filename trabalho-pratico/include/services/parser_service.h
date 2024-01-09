@@ -33,18 +33,15 @@ int parse_line(char* line, char* tokens[], int num_tokens);
  * @param file The file to be parsed.
  * @param errors_file The file to put wrong lines.
  * @param flights_data The flights data.
- * @param passengers_data The passengers data.
  * @param reservations_data The reservations data.
  * @param users_data The users data.
  * @param stats_user_info The stats user info.
  * @param type The type of the struct.
- * @param num_tokens The number of tokens to be parsed.
  *
  * @return The number of lines parsed.
  */
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
-               GeneralData* general_data, PassengersData* passengers_data,
-               ReservationsData* reservations_data, UsersData* users_data,
-               StatsUserInfo* stats_user_info, int type, int num_tokens);
+               GeneralData* general_data, ReservationsData* reservations_data,
+               UsersData* users_data, StatsUserInfo* stats_user_info, int type);
 
 #endif

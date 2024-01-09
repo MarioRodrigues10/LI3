@@ -75,8 +75,7 @@ int get_users_from_general_stats(GeneralStats *general_stats) {
 
 GeneralStats *create_general_stats(int key, int number_of_users,
                                    int number_of_flights,
-                                   int number_of_passengers,
-                                   int unique_passengers, int reservations,
+                                   int number_of_passengers, int reservations,
                                    char *user_id) {
   GeneralStats *new_general_stats = malloc(sizeof(GeneralStats));
   new_general_stats->key = key;
@@ -96,8 +95,7 @@ GeneralStats *create_general_stats(int key, int number_of_users,
 
 GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
                                    int number_of_users, int number_of_flights,
-                                   int number_of_passengers,
-                                   int unique_passengers, int reservations,
+                                   int number_of_passengers, int reservations,
                                    char *user_id) {
   if (general_stats != NULL) {
     general_stats->number_of_users += number_of_users;
@@ -111,9 +109,9 @@ GeneralStats *update_general_stats(GeneralStats *general_stats, int key,
     }
     return general_stats;
   } else {
-    GeneralStats *new_general_stats = create_general_stats(
-        key, number_of_users, number_of_flights, number_of_passengers,
-        unique_passengers, reservations, user_id);
+    GeneralStats *new_general_stats =
+        create_general_stats(key, number_of_users, number_of_flights,
+                             number_of_passengers, reservations, user_id);
     return new_general_stats;
   }
 }

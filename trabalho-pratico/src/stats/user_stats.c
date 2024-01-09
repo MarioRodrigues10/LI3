@@ -95,7 +95,6 @@ UserStats *create_user_stats(char *user_id, int number_of_flights,
   if (reservation_id != 0)
     g_array_append_val(new_user_stats->user_reservations, reservation_id);
 
-  int x = get_number_of_flights_from_user_stats(new_user_stats);
   return new_user_stats;
 }
 
@@ -185,7 +184,7 @@ void destroy_user_stats(UserStats *user_stats) {
 }
 
 void free_stats_user_information(StatsUserInfo *stats) {
-  for (int i = 0; i < stats->info->len; i++) {
+  for (guint i = 0; i < stats->info->len; i++) {
     UserInfoStats *user_info = g_array_index(stats->info, UserInfoStats *, i);
     g_free(user_info->user_id);
     g_free(user_info->user_name);

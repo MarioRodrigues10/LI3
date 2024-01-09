@@ -41,9 +41,8 @@ int parse_line(char* line, char* tokens[], int num_tokens) {
 }
 
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
-               GeneralData* general_data, PassengersData* passengers_data,
-               ReservationsData* reservations_data, UsersData* users_data,
-               StatsUserInfo* users_stats, int type, int num_tokens) {
+               GeneralData* general_data, ReservationsData* reservations_data,
+               UsersData* users_data, StatsUserInfo* users_stats, int type) {
   char line[MAX_LINE_LENGTH];
   char* tokens[MAX_TOKENS];
   char* result;
@@ -55,7 +54,7 @@ int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
     if (result[strlen(result) - 1] == '\n') {
       result[strlen(result) - 1] = '\0';
     }
-    int num_tokens = parse_line(line, tokens, MAX_TOKENS);
+    parse_line(line, tokens, MAX_TOKENS);
 
     switch (type) {
       case 0:

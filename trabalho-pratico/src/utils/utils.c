@@ -110,7 +110,7 @@ void sort_by_date(void* result, int N) {
 }
 
 char* format_date(int year, int month, int day) {
-  char* new_date = malloc(12 * sizeof(char));
+  char* new_date = malloc(38 * sizeof(char));
   if (day < 10 && month < 10) {
     sprintf(new_date, "%d/0%d/0%d", year, month, day);
   } else if (day < 10) {
@@ -125,7 +125,8 @@ char* format_date(int year, int month, int day) {
 
 char* remove_quotation_marks(char* str) {
   static char lineWithoutQuotes[100];
-  int i, j;
+  int j;
+  size_t i;
   for (i = j = 0; i < strlen(str); i++) {
     if (str[i] == '"') {
       if (i == strlen(str) - 1)
@@ -362,7 +363,7 @@ int normalize_reservation_id(char* reservation_id) {
   return reservation_id_int;
 }
 
-char* int_to_reservation_id(int reservation_id, int N) {
+char* int_to_reservation_id(int reservation_id) {
   char* reservation_id_str = malloc(sizeof(char) * 16);
   sprintf(reservation_id_str, "Book%0*d", 10, reservation_id);
 
@@ -453,15 +454,13 @@ int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
                                        FlightsData* flights_data, char* date,
                                        int chars_to_compare) {
   int number_of_unique_passengers = 0;
-  int flag = 0;
   while (users_list != NULL) {
     UserStats* user_stats =
         get_user_stats_by_user_id(users_data, users_list->data);
 
     GArray* flights = get_user_flights_from_user_stats(user_stats);
-    char* previous_flight;
     if (flights != NULL) {
-      for (int i = 0; i < flights->len; i++) {
+      for (guint i = 0; i < flights->len; i++) {
         int flight = g_array_index(flights, int, i);
         FlightInfo* flight_info = get_flight_by_flight_id(flights_data, flight);
         char* schedule_departure_date =

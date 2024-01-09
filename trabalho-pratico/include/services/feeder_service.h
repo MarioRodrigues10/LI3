@@ -76,15 +76,13 @@ void close_csv_files(FILE** files, int num_files);
  * @param data_folder Data folder of type 'char*'.
  * @param flights_data Flights data of type 'FlightsData*'.
  * @param general_data General data of type 'GeneralData*'.
- * @param passengers_data Passengers data of type 'PassengersData*'.
  * @param reservations_data Reservations data of type 'ReservationsData*'.
  * @param users_data Users data of type 'UsersData*'.
  * @param users_stats Users stats of type 'StatsUserInfo*'.
  *
  */
 void feeder(char* data_folder, FlightsData* flights_data,
-            GeneralData* general_data, PassengersData* passengers_data,
-            ReservationsData* reservations_data, UsersData* users_data,
-            StatsUserInfo* users_stats);
+            GeneralData* general_data, ReservationsData* reservations_data,
+            UsersData* users_data, StatsUserInfo* users_stats);
 
 #endif
