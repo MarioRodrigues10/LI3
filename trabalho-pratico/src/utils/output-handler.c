@@ -172,7 +172,7 @@ void write_query6(bool has_f, FILE *output_file, char **airport_info,
   if (has_f) {
     for (int i = 0; i < N; i++) {
       if (i != 0) fprintf(output_file, "\n");
-      fprintf(output_file, "--- %d ---\name: %s\npassengers: %d\n", i + 1,
+      fprintf(output_file, "--- %d ---\nname: %s\npassengers: %d\n", i + 1,
               airport_info[i], number_of_passengers[i]);
     }
 
