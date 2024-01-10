@@ -300,6 +300,12 @@ void normalize_string_to_upper(char* string) {
 }
 
 bool normalize_includes_breakfast(char* includes_breakfast) {
+  for (int i = 0; includes_breakfast[i]; i++) {
+    if (isalpha(includes_breakfast[i])) {
+      includes_breakfast[i] = tolower(includes_breakfast[i]);
+    }
+  }
+
   if ((strcmp(includes_breakfast, "t") == 0) ||
       (strcmp(includes_breakfast, "true") == 0) ||
       (strcmp(includes_breakfast, "1") == 0)) {
