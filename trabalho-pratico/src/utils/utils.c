@@ -10,6 +10,38 @@
 #include <stdlib.h>
 #include <string.h>
 
+int check_input_file(const char* path) {
+  size_t len = strlen(path);
+
+  if (len < 9) {
+    return 0;
+  }
+
+  if (strcmp(path + len - 9, "input.txt") == 0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+char* concatenate_strings(const char* str1, const char* str2) {
+  size_t size_str1 = strlen(str1);
+  size_t size_str2 = strlen(str2);
+  size_t total_size = size_str1 + size_str2 + 1;
+
+  char* result = (char*)malloc(total_size);
+
+  if (result == NULL) {
+    printf("Memory allocation error!\n");
+    return NULL;
+  }
+
+  strcpy(result, str1);
+  strcat(result, str2);
+
+  return result;
+}
+
 int check_dataset_path(const char* path) {
   DIR* directory;
   struct dirent* file;
@@ -555,4 +587,29 @@ void get_airport_info_list(gpointer key, gpointer value, gpointer user_data) {
   result_entry.number_of_passengers = airport_info_list->number_of_passengers;
 
   g_array_append_val((GArray*)user_data, result_entry);
+}
+
+int compare_files(FILE* fp1, FILE* fp2) {
+  char line1[16384], line2[16384];
+  int lineNum = 0;
+
+  while (fgets(line1, sizeof(line1), fp1) != NULL &&
+         fgets(line2, sizeof(line2), fp2) != NULL) {
+    lineNum++;
+
+    // Remove a quebra de linha do final de cada linha
+    line1[strcspn(line1, "\n")] = '\0';
+    line2[strcspn(line2, "\n")] = '\0';
+    printf("%s\n", line1);
+    printf("%s\n", line2);
+
+    if (strcmp(line1, line2) != 0 || strlen(line1) != strlen(line2)) {
+      return lineNum;  // Arquivos são diferentes
+    }
+  }
+
+  if (strcmp(line1, line2) != 0) {
+    return lineNum;  // Arquivos são diferentes
+  }
+  return 0;  // Arquivos são iguais
 }

@@ -3,11 +3,31 @@
 
 #include <glib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "services/queries_service.h"
 #include "stats/user_stats.h"
 
 #define MASTER_DATE "2023/10/01"
+
+/**
+ * @brief Function that checks if the input file is valid.
+ *
+ * @param path The path of the input file of type 'const char*'
+ *
+ * @return True if the input file is valid or False if it isn't of type 'int'
+ */
+int check_input_file(const char* path);
+
+/**
+ * @brief Function that concatenates two strings.
+ *
+ * @param str1 The first string of type 'const char*'
+ * @param str2 The second string of type 'const char*'
+ *
+ * @return The concatenated string of type 'char*'
+ */
+char* concatenate_strings(const char* str1, const char* str2);
 
 /**
  * @brief Function that checks if the path of the dataset is valid.
@@ -382,4 +402,15 @@ int remove_duplicates(GArray* data);
  * @return The number of unique passengers of type 'int'
  */
 void get_airport_info_list(gpointer key, gpointer value, gpointer user_data);
+
+/**
+ * @brief Compare two files
+ *
+ * @param fp1 File pointer to the first file
+ * @param fp2 File pointer to the second file
+ *
+ * @return 0 if the files are equal, 1 if they are different
+ */
+int compare_files(FILE* fp1, FILE* fp2);
+
 #endif
