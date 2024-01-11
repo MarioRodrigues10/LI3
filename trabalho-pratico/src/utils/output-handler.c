@@ -77,25 +77,35 @@ void write_query2(bool has_f, FILE *output_file, GArray *query_result_array) {
   for (guint i = 0; i < query_result_array->len; i++) {
     QUERY2_RESULT_HELPER query_result =
         g_array_index(query_result_array, QUERY2_RESULT_HELPER, i);
+
+    char *date = query_result->date;
+
+    int year, month, day, hour, minute, second;
+    sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
+           &second);
+
+    char *new_date = format_date(year, month, day);
+
     j = i + 1;
     if (strcmp(query_result->type, "nada") == 0) {
       if (has_f) {
         if (i != 0) fprintf(output_file, "\n");
         fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\n", j,
-                query_result->id, query_result->date);
+                query_result->id, new_date);
       } else {
-        fprintf(output_file, "%s;%s\n", query_result->id, query_result->date);
+        fprintf(output_file, "%s;%s\n", query_result->id, new_date);
       }
     } else {
       if (has_f) {
         if (i != 0) fprintf(output_file, "\n");
         fprintf(output_file, "--- %d ---\nid: %s\ndate: %s\ntype: %s\n", j,
-                query_result->id, query_result->date, query_result->type);
+                query_result->id, new_date, query_result->type);
       } else {
-        fprintf(output_file, "%s;%s;%s\n", query_result->id, query_result->date,
+        fprintf(output_file, "%s;%s;%s\n", query_result->id, new_date,
                 query_result->type);
       }
     }
+    free(new_date);
   }
 }
 

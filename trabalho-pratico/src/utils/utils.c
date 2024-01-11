@@ -158,12 +158,12 @@ int compare_query2_result(const void* a, const void* b) {
   const QUERY2_RESULT_HELPER* query2_result_b = (const QUERY2_RESULT_HELPER*)b;
 
   int dateComparison =
-      strcoll((*query2_result_b)->date, (*query2_result_a)->date);
+      strcmp((*query2_result_b)->date, (*query2_result_a)->date);
 
   if (dateComparison != 0) {
     return dateComparison;
   } else {
-    return strcoll((*query2_result_a)->id, (*query2_result_b)->id);
+    return -strcmp((*query2_result_a)->id, (*query2_result_b)->id);
   }
 }
 

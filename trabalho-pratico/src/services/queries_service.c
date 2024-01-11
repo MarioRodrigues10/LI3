@@ -242,19 +242,14 @@ void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
     QUERY2_RESULT_HELPER result_helper = malloc(sizeof(QUERY2_RESULT_HELPER));
     char *date = get_schedule_departure_date(flight);
 
-    int year, month, day, hour, minute, second;
-    sscanf(date, "%d/%d/%d %d:%d:%d", &year, &month, &day, &hour, &minute,
-           &second);
     char *flight_id_str = int_to_flight_id(id, count_digits(id));
-    char *new_date = format_date(year, month, day);
 
     result_helper->id = strdup(flight_id_str);
-    result_helper->date = strdup(new_date);
+    result_helper->date = strdup(date);
     result_helper->type = strdup(type);
 
     g_array_append_val(output_array, result_helper);
     free(date);
-    free(new_date);
     free(flight_id_str);
   }
 }
@@ -271,12 +266,15 @@ void query2_seed_reservations(ReservationsData *reservations_data, char *type,
     char *reservation_id = int_to_reservation_id(id);
     char *date = date_to_string(get_begin_date(reservation));
 
+    char *new_date = concatenate_strings(date, " 00:00:00");
+
     result_helper->id = strdup(reservation_id);
-    result_helper->date = strdup(date);
+    result_helper->date = strdup(new_date);
     result_helper->type = strdup(type);
 
     g_array_append_val(output_array, result_helper);
     free(reservation_id);
+    free(new_date);
     free(date);
   }
 }
