@@ -2,12 +2,44 @@
 #include "utils/utils.h"
 
 #include <ctype.h>
+#include <dirent.h>
 #include <glib.h>
 #include <locale.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+int check_dataset_path(const char* path) {
+  DIR* directory;
+  struct dirent* file;
+
+  directory = opendir(path);
+
+  if (directory) {
+    int users = 0, flights = 0, passengers = 0, reservations = 0;
+
+    while ((file = readdir(directory)) != NULL) {
+      if (strcmp(file->d_name, "users.csv") == 0) {
+        users = 1;
+      } else if (strcmp(file->d_name, "flights.csv") == 0) {
+        flights = 1;
+      } else if (strcmp(file->d_name, "passengers.csv") == 0) {
+        passengers = 1;
+      } else if (strcmp(file->d_name, "reservations.csv") == 0) {
+        reservations = 1;
+      }
+    }
+
+    closedir(directory);
+
+    if (users && flights && passengers && reservations) {
+      return 1;
+    }
+  }
+
+  return 0;
+}
 
 int calculate_age(int birth_date) {
   int birth_date_year, birth_date_month, birth_date_day;

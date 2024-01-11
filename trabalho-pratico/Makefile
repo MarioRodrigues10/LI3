@@ -3,7 +3,7 @@ CC := gcc
 EXEC := programa-principal
 FLAGS := -std=c11 -Wall -Wextra -Wdouble-promotion -Werror=pedantic -Werror=vla -pedantic-errors -Wfatal-errors -Ofast -g -ftree-vectorize -mavx -freorder-functions -freorder-blocks
 
-LIBS := -lm `pkg-config --libs glib-2.0`
+LIBS := -lm -lncurses `pkg-config --libs glib-2.0`
 PKG_CONFIG := `pkg-config --cflags glib-2.0`
 INC := -I include/
 SRC := $(shell find src/ -name "*.c")
@@ -15,7 +15,7 @@ INC_TEST := $(INC)
 SRC_TEST := $(shell find tests/ -name "*.c")
 OBJ_TEST := $(filter-out build/main.o, $(OBJ)) $(SRC_TEST:tests/%.c=build/%.o)
 
-BUILD_DIR := $(shell mkdir -p build/models build/controllers build/services build/utils build/stats)
+BUILD_DIR := $(shell mkdir -p build/models build/controllers build/services build/utils build/stats build/components build/views)
 INCLUDE_FILES := $(shell find include/ -name "*.h")
 
 .PHONY: all

@@ -1,10 +1,20 @@
 #include "utils/input-handler.h"
 
+#include <locale.h>
+#include <ncurses.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
+
+#include "utils/utils.h"
+#include "views/load_dataset_page.h"
+#include "views/query_menu_page.h"
+#include "views/query_result_page.h"
+#include "views/title_only_page.h"
 
 int create_directory(const char *folder) {
   struct stat st = {0};
@@ -29,10 +39,12 @@ FILE *create_output_file(int queries_counter) {
   return output_file;
 }
 
-int input_handler(char **argv) {
+int batch(char **argv) {
   // MODO BATCH
+
+  setlocale(LC_ALL, "");
+
   FlightsData *flights_data = flights_data_new();
-  PassengersData *passengers_data = passengers_data_new();
   ReservationsData *reservations_data = reservations_data_new();
   UsersData *users_data = users_data_new();
   StatsUserInfo *users_stats = create_stats_user_information();
@@ -66,8 +78,8 @@ int input_handler(char **argv) {
       return 1;
     }
 
-    query_manager(line, flights_data, passengers_data, reservations_data,
-                  general_data, users_data, users_stats, output_file);
+    query_manager(line, flights_data, reservations_data, general_data,
+                  users_data, users_stats, output_file);
 
     fclose(output_file);
     number_of_queries++;
@@ -76,11 +88,81 @@ int input_handler(char **argv) {
   fclose(queries_file);
 
   flights_data_free(flights_data);
-  passengers_data_free(passengers_data);
   reservations_data_free(reservations_data);
   users_data_free(users_data);
   free_stats_user_information(users_stats);
   general_data_free(general_data);
 
+  return 0;
+}
+
+int interactive() {
+  // MODO INTERATIVO
+
+  setlocale(LC_ALL, "");
+
+  initscr();
+  cbreak();
+  keypad(stdscr, TRUE);
+  noecho();
+  curs_set(0);
+
+  char dataset_path[256];
+  do {
+    dataset_path[0] = '\0';
+    dataset_page(dataset_path);
+    if (!check_dataset_path(dataset_path)) {
+      title_only_page("Dataset inválido...", 2);
+    }
+  } while (!check_dataset_path(dataset_path));
+
+  FlightsData *flights_data = flights_data_new();
+  ReservationsData *reservations_data = reservations_data_new();
+  UsersData *users_data = users_data_new();
+  StatsUserInfo *users_stats = create_stats_user_information();
+  GeneralData *general_data = general_data_new();
+
+  title_only_page("A carregar dataset...", 1);
+
+  if (create_directory("Resultados") != 0) {
+    return 1;
+  }
+
+  feeder(dataset_path, flights_data, general_data, reservations_data,
+         users_data, users_stats);
+
+  char line[256];
+  line[0] = '\0';
+  int number_of_queries = 1;
+
+  int choice = 0;
+  while (choice != 11) {
+    FILE *output_file = create_output_file(number_of_queries);
+    if (output_file == NULL) {
+      return 1;
+    }
+    choice = query_menu_page(line);
+
+    if (choice == 11) {
+      break;
+
+    } else if (choice >= 1 && choice <= 10) {
+      query_manager(line, flights_data, reservations_data, general_data,
+                    users_data, users_stats, output_file);
+    }
+    fclose(output_file);
+    query_result_page(number_of_queries);
+    number_of_queries++;
+  }
+
+  title_only_page("A libertar dataset...", 1);
+
+  flights_data_free(flights_data);
+  reservations_data_free(reservations_data);
+  users_data_free(users_data);
+  free_stats_user_information(users_stats);
+  general_data_free(general_data);
+
+  endwin();
   return 0;
 }

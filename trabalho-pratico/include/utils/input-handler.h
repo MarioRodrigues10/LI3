@@ -34,6 +34,13 @@ FILE* create_output_file(int queries_counter);
  *
  * @return 0 if the program should continue running, 1 if it should stop.
  */
-int input_handler(char** argv);
+int batch(char** argv);
+
+/**
+ * @brief Handles the interactive mode.
+ *
+ * @return 0 if the program should continue running, 1 if it should stop.
+ */
+int interactive();
 
 #endif

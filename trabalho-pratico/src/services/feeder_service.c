@@ -82,6 +82,8 @@ void close_csv_files(FILE** files, int num_files) {
 
 // FEEDER
 
+#include <ncurses.h>
+
 void feeder(char* data_folder, FlightsData* flights_data,
             GeneralData* general_data, ReservationsData* reservations_data,
             UsersData* users_data, StatsUserInfo* users_stats) {

@@ -72,7 +72,6 @@ typedef struct query7_result *QUERY7_RESULT;
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
- *
  */
 void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
@@ -88,7 +87,6 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
  * @param N The number of parameters.
- *
  */
 void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
@@ -167,7 +165,7 @@ void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
  * @param line The line with the quey parameters.
  * @param reservations_data The reservations data struct.
  * @param output_file The pointer to the output file.
- *
+ * @param mode The mode of the program.
  */
 void query3(bool has_f, char **query_parameters,
             ReservationsData *reservations_data, FILE *output_file);
@@ -182,7 +180,7 @@ void query3(bool has_f, char **query_parameters,
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
- *
+ * @param mode The mode of the program.
  */
 void query4(bool has_f, char **query_parameters,
             ReservationsData *reservations_data, FILE *output_file);
@@ -194,7 +192,7 @@ void query4(bool has_f, char **query_parameters,
  * @param line The line with the quey parameters.
  * @param flights_data The flights data struct.
  * @param output_file The pointer to the output file.
- *
+ * @param mode The mode of the program.
  */
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
             FILE *output_file);
@@ -205,15 +203,9 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param has_f If the query has the modifier 'F'.
  * @param line The line with the quey parameters.
  * @param flights_data The flights data struct.
- * @param passengers_data The passengers data struct.
- * @param reservations_data The reservations data struct.
- * @param users_data The users data struct.
  * @param output_file The pointer to the output file.
- *
  */
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file);
 
 /**
@@ -223,7 +215,6 @@ void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param line The line with the quey parameters.
  * @param flights_data The flights data struct.
  * @param output_file The pointer to the output file.
- *
  */
 void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
             FILE *output_file);
@@ -235,7 +226,7 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
  * @param line The line with the quey parameters.
  * @param reservations_data The reservations data struct.
  * @param output_file The pointer to the output file.
- *
+ * @param mode The mode of the program.
  */
 void query8(bool has_f, char **query_parameters,
             ReservationsData *reservations_data, FILE *output_file);
@@ -269,7 +260,6 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
  *
  * @param line The line with the quey parameters.
  * @param flights_data The flights data struct.
- * @param passengers_data The passengers data struct.
  * @param reservations_data The reservations data struct.
  * @param general_data The general data struct.
  * @param users_data The users data struct.
@@ -277,7 +267,6 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
  * @param output_file The pointer to the output file.
  */
 void query_manager(char *line, FlightsData *flights_data,
-                   PassengersData *passengers_data,
                    ReservationsData *reservations_data,
                    GeneralData *general_data, UsersData *users_data,
                    StatsUserInfo *users_stats, FILE *output_file);

@@ -1,6 +1,7 @@
 #include "utils/output-handler.h"
 
 #include <glib.h>
+#include <ncurses.h>
 #include <stdbool.h>
 #include <stdio.h>
 

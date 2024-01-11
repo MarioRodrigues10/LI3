@@ -125,6 +125,9 @@ void query2(bool has_f, char **query_parameters, FlightsData *flights_data,
   }
 
   UserInfo *user = get_user_by_username(users_data, id);
+
+  if (user == NULL) return;
+
   bool account_status = get_account_status(user);
 
   if (!account_status) return;
@@ -306,6 +309,7 @@ void query4(bool has_f, char **query_parameters,
             ReservationsData *reservations_data, FILE *output_file) {
   char *id = query_parameters[0];
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
+  if (hotel_stats == NULL) return;
   GArray *reservations = get_hotel_reservations(hotel_stats);
   if (reservations == NULL) return;
 
@@ -381,6 +385,11 @@ struct query5_result {
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
             FILE *output_file) {
   char *id = query_parameters[0];
+
+  if (query_parameters[1] == NULL || query_parameters[2] == NULL ||
+      query_parameters[3] == NULL || query_parameters[4] == NULL)
+    return;
+
   char *begin_date =
       concatenate_and_modify_strings(query_parameters[1], query_parameters[2]);
   char *end_date =
@@ -450,9 +459,6 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
   free(result);
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
 struct query7_result {
   char *airport;
   int median_delay;
@@ -462,15 +468,17 @@ struct airport_info {
   GHashTable *airports_list;
 };
 void query6(bool has_f, char **query_parameters, FlightsData *flights_data,
-            PassengersData *passengers_data,
-            ReservationsData *reservations_data, UsersData *users_data,
             FILE *output_file) {
+  if (query_parameters[0] == NULL || query_parameters[1] == NULL) return;
+
   int year = strtol(query_parameters[0], NULL, 10);
   int length = strtol(query_parameters[1], NULL, 10);
 
   GArray *output = g_array_new(FALSE, FALSE, sizeof(struct query7_result));
 
   GHashTable *airport = get_airports_list(flights_data, year * 10000);
+
+  if (airport == NULL) return;
 
   g_hash_table_foreach(airport, (GHFunc)get_airport_info_list, output);
 
@@ -503,6 +511,8 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
   GArray *medians = g_array_new(FALSE, FALSE, sizeof(struct query7_result));
 
   GHashTable *airport = get_airport_stats(flights_data);
+
+  if (airport == NULL) return;
 
   g_hash_table_foreach(airport, (GHFunc)calculate_median_for_airport, medians);
 
@@ -537,6 +547,7 @@ void query8(bool has_f, char **query_parameters,
   char *begin_date = query_parameters[1];
   char *end_date = query_parameters[2];
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
+  if (hotel_stats == NULL) return;
   GArray *reservations = get_hotel_reservations(hotel_stats);
   if (reservations == NULL) return;
 
@@ -585,6 +596,7 @@ void query9(bool has_f, char **query_parameters, UsersData *users_data,
 
   if (prefix == NULL) return;
   GArray *stats_user = get_stats_user_info(users_stats);
+  if (stats_user == NULL) return;
   char **user_ids = malloc(sizeof(char *) * stats_user->len);
   char **user_names = malloc(sizeof(char *) * stats_user->len);
   GArray *respond = g_array_new(FALSE, FALSE, sizeof(UserInfoStats *));
@@ -762,7 +774,6 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
 }
 
 void query_manager(char *line, FlightsData *flights_data,
-                   PassengersData *passengers_data,
                    ReservationsData *reservations_data,
                    GeneralData *general_data, UsersData *users_data,
                    StatsUserInfo *users_stats, FILE *output_file) {
@@ -808,8 +819,7 @@ void query_manager(char *line, FlightsData *flights_data,
       query5(has_f, query_parameters, flights_data, output_file);
       break;
     case 6:
-      query6(has_f, query_parameters, flights_data, passengers_data,
-             reservations_data, users_data, output_file);
+      query6(has_f, query_parameters, flights_data, output_file);
       break;
     case 7:
       query7(has_f, query_parameters, flights_data, output_file);

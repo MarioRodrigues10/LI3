@@ -10,6 +10,15 @@
 #define MASTER_DATE "2023/10/01"
 
 /**
+ * @brief Function that checks if the path of the dataset is valid.
+ *
+ * @param path The path of the dataset of type 'const char*'
+ *
+ * @return True if the path is valid or False if it isn't of type 'int'
+ */
+int check_dataset_path(const char* path);
+
+/**
  * @brief Function that calculates the age of a passenger.
  *
  * @param birth_date The birth date of the passenger of type 'int'
