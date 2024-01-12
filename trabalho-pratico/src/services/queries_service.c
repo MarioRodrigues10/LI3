@@ -550,92 +550,45 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
 void query8(bool has_f, char **query_parameters,
             ReservationsData *reservations_data, FILE *output_file) {
   char *id = query_parameters[0];
-  char *begin_date = query_parameters[1];
-  char *end_date = query_parameters[2];
+  char *begin_date_str = query_parameters[1];
+  char *end_date_str = query_parameters[2];
   HotelStats *hotel_stats = get_hotel_stats_by_hotel_id(reservations_data, id);
   if (hotel_stats == NULL) return;
   GArray *reservations = get_hotel_reservations(hotel_stats);
   if (reservations == NULL) return;
 
   double revenue = 0;
+
+  int begin_date = normalize_date(begin_date_str);
+  int end_date = normalize_date(end_date_str);
+
   for (guint i = 0; i < reservations->len; i++) {
     int reservation_id = g_array_index(reservations, int, i);
     ReservationInfo *reservation =
         get_reservation_by_reservation_id(reservations_data, reservation_id);
-    char *begin_date_reservation = date_to_string(get_begin_date(reservation));
-    char *end_date_reservation = date_to_string(get_end_date(reservation));
-    int price_per_night = get_price_per_night(reservation);
 
-    // Data de entrada e saida limites iguais (8)
-    if (strcmp(begin_date_reservation, begin_date) == 0 &&
-        strcmp(begin_date, end_date) == 0) {
-      printf("Entrei 1: %s %s %d\n", begin_date_reservation,
-             end_date_reservation, 1);
+    int begin_date_reservation = (get_begin_date(reservation));
+    int end_date_reservation = (get_end_date(reservation));
 
-      revenue += price_per_night;
+    if (begin_date_reservation <= end_date &&
+        end_date_reservation >= begin_date) {
+      int min_date = (begin_date_reservation > begin_date)
+                         ? begin_date_reservation
+                         : begin_date;
 
-    }
-    // Data de entrada , igual a data de saida do limite (7)
-    else if (strcmp(begin_date_reservation, end_date) == 0) {
-      printf("Entrei 2: %s %s %d\n", begin_date_reservation,
-             end_date_reservation,
-             calculate_number_of_nights(begin_date_reservation, end_date));
-      // revenue +=  calculate_number_of_nights(begin_date_reservation,
-      // end_date) * price_per_night;
-    }
-    // Data de saida , igual a data de entrada do limite (2)
-    else if (strcmp(end_date_reservation, begin_date) == 0) {
-      // printf("Entrei 3: %s %s %d\n", begin_date_reservation,
-      //        end_date_reservation,
-      //        calculate_number_of_nights(end_date_reservation, begin_date));
-      revenue += 0;
-    }
-    // Ambas Datas Gerais Fora (4)
-    else if (strcmp(begin_date_reservation, begin_date) < 0 &&
-             strcmp(end_date_reservation, end_date) > 0) {
-      printf("Entrei 4: %s %s %d\n", begin_date_reservation,
-             end_date_reservation,
-             calculate_number_of_nights(begin_date, end_date));
-      revenue +=
-          (calculate_number_of_nights(begin_date, end_date)) * price_per_night;
-    }
-    // Data Geral Entrada Fora e Data Geral Saida Dentro (3)
-    else if (strcmp(begin_date_reservation, begin_date) < 0 &&
-             strcmp(end_date_reservation, begin_date) >= 0 &&
-             strcmp(end_date_reservation, end_date) <= 0) {
+      int max_date =
+          (end_date_reservation < end_date) ? end_date_reservation : end_date;
 
+      int num_nights =
+          (max_date - min_date) + ((max_date < end_date_reservation) ? 1 : 0);
+
+      if (num_nights > 0) {
+        int price_per_night = get_price_per_night(reservation);
+        revenue += price_per_night * num_nights;
+      }
     }
-    // Data Geral Entrada Dentro e Data Geral Saida Fora (6)
-    else if (strcmp(begin_date_reservation, begin_date) >= 0 &&
-             strcmp(begin_date_reservation, end_date) <= 0 &&
-             strcmp(end_date_reservation, end_date) >= 0) {
-      printf("Entrei 6: %s %s %d\n", begin_date_reservation,
-             end_date_reservation,
-             calculate_number_of_nights(begin_date_reservation, end_date) +
-             1);
-      revenue +=
-          (calculate_number_of_nights(begin_date_reservation, end_date) + 1) *
-          price_per_night;
-    }
-    // Data Geral Entrada e Data Geral Saida Dentro (1) e (5)
-    else if (strcmp(begin_date_reservation, begin_date) >= 0 &&
-             strcmp(begin_date_reservation, end_date) <= 0 &&
-             strcmp(end_date_reservation, end_date) <= 0 &&
-             strcmp(end_date_reservation, begin_date) >= 0 &&
-             strcmp(begin_date_reservation, end_date_reservation) <= 0) {
-      printf("Entrei 7: %s %s %d\n", begin_date_reservation,
-             end_date_reservation,
-             calculate_number_of_nights(begin_date_reservation,
-                                        end_date_reservation));
-      revenue += calculate_number_of_nights(begin_date_reservation,
-                                            end_date_reservation) *
-                 price_per_night;
-    
-  } 
-    free(begin_date_reservation);
-    free(end_date_reservation);
   }
-  printf("\n\n");
+
   write_query8(has_f, output_file, revenue);
 }
 
