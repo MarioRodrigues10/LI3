@@ -109,6 +109,8 @@ int calculate_number_of_nights(const char* begin_date_str,
   if (strcmp(begin_date_str, end_date_str) == 0) return 1;
   int begin_year, begin_month, begin_day;
   int end_year, end_month, end_day;
+  if (begin_date_str != NULL && strcmp(begin_date_str, end_date_str) == 0)
+    return 1;
 
   sscanf(begin_date_str, "%d/%d/%d", &begin_year, &begin_month, &begin_day);
   sscanf(end_date_str, "%d/%d/%d", &end_year, &end_month, &end_day);
@@ -118,6 +120,20 @@ int calculate_number_of_nights(const char* begin_date_str,
 
   int nights = end_date - begin_date;
   return nights;
+}
+
+int is_day_next(const char* begin_date_str, const char* end_date_str) {
+  int begin_year, begin_month, begin_day;
+  int end_year, end_month, end_day;
+
+  sscanf(begin_date_str, "%d/%d/%d", &begin_year, &begin_month, &begin_day);
+  sscanf(end_date_str, "%d/%d/%d", &end_year, &end_month, &end_day);
+
+  int begin_date = begin_year * 10000 + begin_month * 100 + begin_day;
+  int end_date = end_year * 10000 + end_month * 100 + end_day;
+
+  if (end_date - begin_date == 1 || end_date - begin_date == 2) return 1;
+  return 0;
 }
 
 int calculate_delay(char* scheduled_date, char* actual_date) {

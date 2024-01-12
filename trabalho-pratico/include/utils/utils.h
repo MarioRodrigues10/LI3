@@ -77,6 +77,16 @@ int calculate_number_of_nights(const char* begin_date_str,
                                const char* end_date_str);
 
 /**
+ * @brief Function that if end date is next to begin date.
+ *
+ * @param begin_date_str The begin date of type 'const char*'
+ * @param end_date_str The end date of type 'const char*'
+ *
+ * @return if end date is next to begin date of type 'int'
+ */
+int is_day_next(const char* begin_date_str, const char* end_date_str);
+
+/**
  * @brief Function that calculates the delay of a flight.
  *
  * @param scheduled_date The scheduled date of type 'char*'
