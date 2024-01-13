@@ -603,64 +603,39 @@ void query9(bool has_f, char **query_parameters, UsersData *users_data,
   char *prefix = create_prefix(query_parameters, num_parameters);
 
   if (prefix == NULL) return;
+
   GArray *stats_user = get_stats_user_info(users_stats);
   if (stats_user == NULL) return;
-  char **user_ids = malloc(sizeof(char *) * stats_user->len);
-  char **user_names = malloc(sizeof(char *) * stats_user->len);
+
   GArray *respond = g_array_new(FALSE, FALSE, sizeof(UserInfoStats *));
 
-  g_array_sort(stats_user, (GCompareFunc)compare);
+  for (guint i = 0; i < stats_user->len; i++) {
+    UserInfoStats *user = g_array_index(stats_user, UserInfoStats *, i);
 
-  guint matched_index;
-  gboolean aux = g_array_binary_search(
-      stats_user, prefix, (GCompareFunc)check_prefix, &matched_index);
-
-  if (aux) {
-    UserInfoStats *matched_user =
-        g_array_index(stats_user, UserInfoStats *, matched_index);
-    for (int i = matched_index; i >= 0 && strncmp(matched_user->user_name,
-                                                  prefix, strlen(prefix)) == 0;
-         i--) {
-      bool account_status = get_account_status(
-          get_user_by_username(users_data, matched_user->user_id));
-
-      if (account_status) {
-        g_array_prepend_val(respond,
-                            g_array_index(stats_user, UserInfoStats *, i));
-      }
-      matched_user = g_array_index(stats_user, UserInfoStats *, i - 1);
-    }
-
-    matched_user =
-        g_array_index(stats_user, UserInfoStats *, matched_index + 1);
-
-    for (guint j = matched_index + 1;
-         j < stats_user->len &&
-         strncmp(matched_user->user_name, prefix, strlen(prefix)) == 0;
-         j++) {
-      bool account_status = get_account_status(
-          get_user_by_username(users_data, matched_user->user_id));
-      if (account_status) {
-        g_array_append_val(respond,
-                           g_array_index(stats_user, UserInfoStats *, j));
-      }
-      matched_user = g_array_index(stats_user, UserInfoStats *, j + 1);
-    }
-
-    g_array_sort(respond, (GCompareFunc)compare_respond);
-
-    for (int k = 0; k < (int)respond->len; k++) {
-      UserInfoStats *user =
-          (UserInfoStats *)(g_array_index(respond, void *, k));
-
-      user_ids[k] = (user->user_id);
-      user_names[k] = (user->user_name);
+    if (strncmp(user->user_name, prefix, strlen(prefix)) == 0 &&
+        get_account_status(get_user_by_username(users_data, user->user_id))) {
+      g_array_append_val(respond, user);
     }
   }
-  write_query9(has_f, output_file, user_ids, user_names, respond->len);
+
+  g_array_sort(respond, (GCompareFunc)compare_respond);
+
+  // Write results test
+  if (has_f) {
+    for (int i = 0; i < (int)respond->len; i++) {
+      UserInfoStats *user = g_array_index(respond, UserInfoStats *, i);
+      if (i != 0) fprintf(output_file, "\n");
+      fprintf(output_file, "--- %d ---\nid: %s\nname: %s\n", i + 1,
+              user->user_id, user->user_name);
+    }
+  } else {
+    for (int i = 0; i < (int)respond->len; i++) {
+      UserInfoStats *user = g_array_index(respond, UserInfoStats *, i);
+      fprintf(output_file, "%s;%s\n", user->user_id, user->user_name);
+    }
+  }
+
   g_array_free(respond, TRUE);
-  free(user_names);
-  free(user_ids);
 }
 
 void query10(bool has_f, char **query_parameters, int num_parameters,
