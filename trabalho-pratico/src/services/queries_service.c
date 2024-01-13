@@ -518,7 +518,10 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
 
   GHashTable *airport = get_airport_stats(flights_data);
 
-  if (airport == NULL) return;
+  if (airport == NULL) {
+    g_array_free(medians, TRUE);
+    return;
+  }
 
   g_hash_table_foreach(airport, (GHFunc)calculate_median_for_airport, medians);
 
@@ -533,14 +536,16 @@ void query7(bool has_f, char **query_parameters, FlightsData *flights_data,
     struct query7_result *result =
         &g_array_index(medians, struct query7_result, i);
 
-    airport_result[i] = result->airport;
+    airport_result[i] = g_strdup(result->airport);
     medians_result[i] = result->median_delay;
   }
 
   write_query7(has_f, output_file, airport_result, medians_result, length);
+
   for (guint i = 0; i < length; i++) {
     g_free(airport_result[i]);
   }
+
   free(airport_result);
   free(medians_result);
 

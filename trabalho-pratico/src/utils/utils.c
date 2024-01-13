@@ -491,25 +491,55 @@ void calculate_median_for_airport(gpointer key, gpointer value,
   GArray* delays = get_delays(airport);
   int median = calculate_median(delays);
 
-  char* airport_name_copy = g_strdup((char*)key);
-
   struct query7_result result_entry;
-  result_entry.airport = airport_name_copy;
+  result_entry.airport = (char*)key;
   result_entry.median_delay = median;
 
   g_array_append_val((GArray*)user_data, result_entry);
 }
 
-double calculate_median(GArray* delays) {
-  g_array_sort(delays, (GCompareFunc)ascending_order);
+void swap(GArray* array, int i, int j) {
+  int temp = g_array_index(array, int, i);
+  g_array_index(array, int, i) = g_array_index(array, int, j);
+  g_array_index(array, int, j) = temp;
+}
 
+int partition(GArray* array, int left, int right) {
+  int pivotValue = g_array_index(array, int, right);
+  int i = left;
+  for (int j = left; j < right; j++) {
+    if (g_array_index(array, int, j) < pivotValue) {
+      swap(array, i, j);
+      i++;
+    }
+  }
+  swap(array, i, right);
+  return i;
+}
+
+int quickselect(GArray* array, int k) {
+  int left = 0, right = array->len - 1;
+  while (left <= right) {
+    int pivotIndex = partition(array, left, right);
+    if (pivotIndex == k) {
+      return g_array_index(array, int, pivotIndex);
+    } else if (pivotIndex < k) {
+      left = pivotIndex + 1;
+    } else {
+      right = pivotIndex - 1;
+    }
+  }
+  return -1;
+}
+
+double calculate_median(GArray* delays) {
   int n = delays->len;
   if (n % 2 == 0) {
-    int mid1 = g_array_index(delays, int, n / 2 - 1);
-    int mid2 = g_array_index(delays, int, n / 2);
+    int mid1 = quickselect(delays, n / 2 - 1);
+    int mid2 = quickselect(delays, n / 2);
     return (double)((mid1 + mid2) / 2);
   } else {
-    return g_array_index(delays, int, n / 2);
+    return quickselect(delays, n / 2);
   }
 }
 
@@ -520,21 +550,19 @@ gint ascending_order(gconstpointer a, gconstpointer b) {
   if (int_a < int_b) return -1;
   if (int_a > int_b) return 1;
 
-  return 0;  // Elements are equal
+  return 0;
 }
 
 gint compare_median(gconstpointer a, gconstpointer b) {
   const struct query7_result* result_a = (const struct query7_result*)a;
   const struct query7_result* result_b = (const struct query7_result*)b;
 
-  // Compare medians in descending order
   if (result_a->median_delay > result_b->median_delay) {
     return -1;
   } else if (result_a->median_delay < result_b->median_delay) {
     return 1;
   }
 
-  // If medians are equal, compare airport names
   return g_strcmp0(result_a->airport, result_b->airport);
 }
 
