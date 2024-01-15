@@ -11,6 +11,7 @@
 #include "models/reservation.h"
 #include "models/user.h"
 #include "services/parser_service.h"
+#include "utils/maping.h"
 
 #define NUM_FILES 4
 
@@ -79,10 +80,11 @@ void close_csv_files(FILE** files, int num_files);
  * @param reservations_data Reservations data of type 'ReservationsData*'.
  * @param users_data Users data of type 'UsersData*'.
  * @param users_stats Users stats of type 'StatsUserInfo*'.
+ * @param map Map of type 'Maping*'.
  *
  */
 void feeder(char* data_folder, FlightsData* flights_data,
             GeneralData* general_data, ReservationsData* reservations_data,
-            UsersData* users_data, StatsUserInfo* users_stats);
+            UsersData* users_data, StatsUserInfo* users_stats, Maping* map);
 
 #endif

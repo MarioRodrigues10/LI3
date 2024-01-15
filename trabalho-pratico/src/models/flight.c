@@ -3,8 +3,6 @@
 #include <glib.h>
 
 struct flight {
-  char *airline;
-  char *plane_model;
   char *origin;
   char *destination;
   char *schedule_departure_date;
@@ -12,6 +10,8 @@ struct flight {
   char *real_departure_date;
   int flight_id;
   short int total_seats;
+  char airline;
+  char plane_model;
 };
 
 // CREATE
@@ -28,12 +28,12 @@ void set_flight_id(FlightInfo *flight, int flight_id) {
   flight->flight_id = flight_id;
 }
 
-void set_airline(FlightInfo *flight, char *airline) {
-  flight->airline = g_strdup(airline);
+void set_airline(FlightInfo *flight, char airline) {
+  flight->airline = airline;
 }
 
-void set_plane_model(FlightInfo *flight, char *plane_model) {
-  flight->plane_model = g_strdup(plane_model);
+void set_plane_model(FlightInfo *flight, char plane_model) {
+  flight->plane_model = plane_model;
 }
 
 void set_total_seats(FlightInfo *flight, short int total_seats) {
@@ -69,13 +69,13 @@ int get_flight_id(FlightInfo *flight) {
   return flight_id;
 }
 
-char *get_airline(FlightInfo *flight) {
-  char *airline = g_strdup(flight->airline);
+char get_airline(FlightInfo *flight) {
+  char airline = flight->airline;
   return airline;
 }
 
-char *get_plane_model(FlightInfo *flight) {
-  char *plane_model = g_strdup(flight->plane_model);
+char get_plane_model(FlightInfo *flight) {
+  char plane_model = flight->plane_model;
   return plane_model;
 }
 
@@ -112,8 +112,6 @@ char *get_real_departure_date(FlightInfo *flight) {
 // DESTROYER
 
 void destroy_flight(FlightInfo *flight) {
-  g_free(flight->airline);
-  g_free(flight->plane_model);
   g_free(flight->origin);
   g_free(flight->destination);
   g_free(flight->schedule_departure_date);

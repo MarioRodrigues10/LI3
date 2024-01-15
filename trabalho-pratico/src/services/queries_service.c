@@ -21,7 +21,7 @@
 
 void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file) {
+            Maping *map, FILE *output_file) {
   char *id = query_parameters[0];
 
   if (strncmp(id, "Book", 4) == 0) {
@@ -36,7 +36,7 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
     int hotel_id_int = get_hotel_id(reservation_info);
     char *hotel_id = malloc(sizeof(char) * 10);
     sprintf(hotel_id, "HTL%d", hotel_id_int);
-    char *hotel_name = get_hotel_name(reservation_info);
+    char *hotel_name = char_to_string(map, get_hotel_name(reservation_info));
     char hotel_stars = get_hotel_stars(reservation_info);
     char *begin_date = date_to_string(get_begin_date(reservation_info));
     char *end_date = date_to_string(get_end_date(reservation_info));
@@ -63,8 +63,8 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
 
     char *real_departure_date = get_real_departure_date(flight_info);
 
-    char *airline_company = get_airline(flight_info);
-    char *plane_model = get_plane_model(flight_info);
+    char *airline_company = char_to_string(map, get_airline(flight_info));
+    char *plane_model = char_to_string(map, get_plane_model(flight_info));
     char *origin = get_origin(flight_info);
     char *destination = get_destination(flight_info);
     char *schedule_departure_date = get_schedule_departure_date(flight_info);
@@ -389,7 +389,7 @@ struct query5_result {
 };
 
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
-            FILE *output_file) {
+            Maping *map, FILE *output_file) {
   char *id = query_parameters[0];
 
   if (query_parameters[1] == NULL || query_parameters[2] == NULL ||
@@ -419,8 +419,8 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
     FlightInfo *flight = get_flight_by_flight_id(flights_data, flight_id);
     char *departure_date = get_schedule_departure_date(flight);
     char *destination = get_destination(flight);
-    char *airline = get_airline(flight);
-    char *plane_model = get_plane_model(flight);
+    char *airline = char_to_string(map, get_airline(flight));
+    char *plane_model = char_to_string(map, get_plane_model(flight));
 
     char *flight_id_str = int_to_flight_id(flight_id, count_digits(flight_id));
     if (strcmp(departure_date, begin_date) >= 0 &&
@@ -764,7 +764,7 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
 void query_manager(char *line, FlightsData *flights_data,
                    ReservationsData *reservations_data,
                    GeneralData *general_data, UsersData *users_data,
-                   StatsUserInfo *users_stats, FILE *output_file) {
+                   StatsUserInfo *users_stats, Maping *map, FILE *output_file) {
   int query_type;
   char modifier;
   char *parameters = malloc(sizeof(char) * 100);
@@ -791,7 +791,7 @@ void query_manager(char *line, FlightsData *flights_data,
   switch (query_type) {
     case 1:
       query1(has_f, query_parameters, flights_data, reservations_data,
-             users_data, output_file);
+             users_data, map, output_file);
       break;
     case 2:
       query2(has_f, query_parameters, flights_data, reservations_data,
@@ -804,7 +804,7 @@ void query_manager(char *line, FlightsData *flights_data,
       query4(has_f, query_parameters, reservations_data, output_file);
       break;
     case 5:
-      query5(has_f, query_parameters, flights_data, output_file);
+      query5(has_f, query_parameters, flights_data, map, output_file);
       break;
     case 6:
       query6(has_f, query_parameters, flights_data, output_file);
@@ -857,8 +857,8 @@ void write_input(bool has_f, int query_type, int line, double time) {
 void query_manager_test(char *line, FlightsData *flights_data,
                         ReservationsData *reservations_data,
                         GeneralData *general_data, UsersData *users_data,
-                        StatsUserInfo *users_stats, FILE *output_file,
-                        FILE *output_file_expected) {
+                        StatsUserInfo *users_stats, Maping *map,
+                        FILE *output_file, FILE *output_file_expected) {
   int query_type;
   char modifier;
   char *parameters = malloc(sizeof(char) * 100);
@@ -890,7 +890,7 @@ void query_manager_test(char *line, FlightsData *flights_data,
     case 1:
       start_time = clock();
       query1(has_f, query_parameters, flights_data, reservations_data,
-             users_data, output_file);
+             users_data, map, output_file);
 
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
@@ -934,7 +934,7 @@ void query_manager_test(char *line, FlightsData *flights_data,
     case 5:
       start_time = clock();
 
-      query5(has_f, query_parameters, flights_data, output_file);
+      query5(has_f, query_parameters, flights_data, map, output_file);
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 

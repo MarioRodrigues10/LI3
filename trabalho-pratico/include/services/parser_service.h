@@ -10,6 +10,7 @@
 #include "services/passenger_service.h"
 #include "services/reservation_service.h"
 #include "services/user_service.h"
+#include "utils/maping.h"
 
 #define SEPARATOR ";"
 #define MAX_LINE_LENGTH 16384  // 16KB which means 16 * 1024
@@ -37,11 +38,13 @@ int parse_line(char* line, char* tokens[], int num_tokens);
  * @param users_data The users data.
  * @param stats_user_info The stats user info.
  * @param type The type of the struct.
+ * @param map Map of type 'Maping*'.
  *
  * @return The number of lines parsed.
  */
 int parse_file(FILE* file, FILE* errors_file, FlightsData* flights_data,
                GeneralData* general_data, ReservationsData* reservations_data,
-               UsersData* users_data, StatsUserInfo* stats_user_info, int type);
+               UsersData* users_data, StatsUserInfo* stats_user_info,
+               Maping* map, int type);
 
 #endif

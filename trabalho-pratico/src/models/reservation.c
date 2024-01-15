@@ -5,12 +5,12 @@
 
 struct reservation {
   char *user_id;
-  char *hotel_name;
   int reservation_id;
   int hotel_id;
   int begin_date;
   int end_date;
   int price_per_night;
+  char hotel_name;
   char hotel_stars;
   char city_tax;
   char rating;
@@ -39,8 +39,8 @@ void set_hotel_id(ReservationInfo *reservation, int hotel_id) {
   reservation->hotel_id = hotel_id;
 }
 
-void set_hotel_name(ReservationInfo *reservation, char *hotel_name) {
-  reservation->hotel_name = g_strdup(hotel_name);
+void set_hotel_name(ReservationInfo *reservation, char hotel_name) {
+  reservation->hotel_name = hotel_name;
 }
 
 void set_hotel_stars(ReservationInfo *reservation, char hotel_stars) {
@@ -86,8 +86,8 @@ char *get_user_id_reservation(ReservationInfo *reservation) {
 
 int get_hotel_id(ReservationInfo *reservation) { return reservation->hotel_id; }
 
-char *get_hotel_name(ReservationInfo *reservation) {
-  char *hotel_name = g_strdup(reservation->hotel_name);
+char get_hotel_name(ReservationInfo *reservation) {
+  char hotel_name = reservation->hotel_name;
   return hotel_name;
 }
 
@@ -125,6 +125,5 @@ char get_rating(ReservationInfo *reservation) {
 
 void destroy_reservation(ReservationInfo *reservation) {
   g_free(reservation->user_id);
-  g_free(reservation->hotel_name);
   g_free(reservation);
 }

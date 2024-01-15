@@ -42,9 +42,9 @@ void set_hotel_id(ReservationInfo *reservation, int hotel_id);
  * @brief Sets the hotel name of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @param hotel_name Hotel name of type 'char*'.
+ * @param hotel_name Hotel name of type 'char'.
  */
-void set_hotel_name(ReservationInfo *reservation, char *hotel_name);
+void set_hotel_name(ReservationInfo *reservation, char hotel_name);
 
 /**
  * @brief Sets the hotel stars of a reservation.
@@ -131,9 +131,9 @@ int get_hotel_id(ReservationInfo *reservation);
  * @brief Gets the hotel name of a reservation.
  *
  * @param reservation ReservationInfo pointer of type 'ReservationInfo*'.
- * @return char pointer of type 'char*'.
+ * @return char pointer of type 'char'.
  */
-char *get_hotel_name(ReservationInfo *reservation);
+char get_hotel_name(ReservationInfo *reservation);
 
 /**
  * @brief Gets the hotel stars of a reservation.

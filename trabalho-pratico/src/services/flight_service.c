@@ -52,7 +52,7 @@ int verify_flight_input(char **parameters) {
 }
 
 void construct_flight(char **parameters, void *flights_data, void *general_data,
-                      FILE *errors_file) {
+                      Maping *map, FILE *errors_file) {
   if (!verify_flight_input(parameters)) {
     int i;
     for (i = 0; i < MAX_TOKENS_FLIGHT - 1; i++) {
@@ -78,8 +78,8 @@ void construct_flight(char **parameters, void *flights_data, void *general_data,
   normalize_string_to_upper(parameters[5]);
 
   set_flight_id(flight_info, strtol(parameters[0], NULL, 10));
-  set_airline(flight_info, parameters[1]);
-  set_plane_model(flight_info, parameters[2]);
+  set_airline(flight_info, string_to_char(map, parameters[1]));
+  set_plane_model(flight_info, string_to_char(map, parameters[2]));
   set_total_seats(flight_info, strtol(parameters[3], NULL, 10));
   set_origin(flight_info, parameters[4]);
   set_destination(flight_info, parameters[5]);

@@ -8,6 +8,7 @@
 #include "controllers/user_controller.h"
 #include "services/feeder_service.h"
 #include "services/queries_service.h"
+#include "utils/maping.h"
 
 /**
  * @brief Creates a directory.

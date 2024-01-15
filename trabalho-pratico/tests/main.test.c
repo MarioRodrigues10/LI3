@@ -48,6 +48,7 @@ int main() {
   UsersData *users_data = users_data_new();
   StatsUserInfo *users_stats = create_stats_user_information();
   GeneralData *general_data = general_data_new();
+  Maping *map = maping_init();
 
   char *data_folder = dataset_path;
   if (create_directory("Resultados") != 0) {
@@ -55,7 +56,7 @@ int main() {
   }
 
   feeder(data_folder, flights_data, general_data, reservations_data, users_data,
-         users_stats);
+         users_stats, map);
 
   char *queries_filename = queries_path;
   FILE *queries_file = fopen(queries_filename, "r");
@@ -92,7 +93,7 @@ int main() {
     free(filename_output_expected);
     free(output_path_expected);
     query_manager_test(line, flights_data, reservations_data, general_data,
-                       users_data, users_stats, output_file,
+                       users_data, users_stats, map, output_file,
                        output_file_expected);
 
     fclose(output_file);
@@ -107,6 +108,7 @@ int main() {
   users_data_free(users_data);
   free_stats_user_information(users_stats);
   general_data_free(general_data);
+  maping_free(map);
 
   printf("Memory usage: %ld KB\n", r_usage.ru_maxrss);
   return 0;

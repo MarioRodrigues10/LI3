@@ -86,7 +86,7 @@ void close_csv_files(FILE** files, int num_files) {
 
 void feeder(char* data_folder, FlightsData* flights_data,
             GeneralData* general_data, ReservationsData* reservations_data,
-            UsersData* users_data, StatsUserInfo* users_stats) {
+            UsersData* users_data, StatsUserInfo* users_stats, Maping* map) {
   // Create filenames
   char* flights_filename = create_filename(data_folder, FLIGHTS_FILENAME);
   char* passengers_filename = create_filename(data_folder, PASSENGERS_FILENAME);
@@ -142,13 +142,13 @@ void feeder(char* data_folder, FlightsData* flights_data,
 
   // Parse files
   parse_file(files[0], flights_errors_file, flights_data, general_data,
-             reservations_data, users_data, users_stats, 0);
+             reservations_data, users_data, users_stats, map, 0);
   parse_file(files[3], users_errors_file, flights_data, general_data,
-             reservations_data, users_data, users_stats, 3);
+             reservations_data, users_data, users_stats, map, 3);
   parse_file(files[2], reservations_errors_file, flights_data, general_data,
-             reservations_data, users_data, users_stats, 2);
+             reservations_data, users_data, users_stats, map, 2);
   parse_file(files[1], passengers_errors_file, flights_data, general_data,
-             reservations_data, users_data, users_stats, 1);
+             reservations_data, users_data, users_stats, map, 1);
 
   // Close files
   close_csv_files(files, NUM_FILES);

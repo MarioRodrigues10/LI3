@@ -24,17 +24,17 @@ void set_flight_id(FlightInfo *flight, int flight_id);
  * @brief Sets the airline of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param airline Airline of type 'char*'.
+ * @param airline Airline of type 'char'.
  */
-void set_airline(FlightInfo *flight, char *airline);
+void set_airline(FlightInfo *flight, char airline);
 
 /**
  * @brief Sets the plane model of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param plane_model Plane model of type 'char*'.
+ * @param plane_model Plane model of type 'char'.
  */
-void set_plane_model(FlightInfo *flight, char *plane_model);
+void set_plane_model(FlightInfo *flight, char plane_model);
 
 /**
  * @brief Sets the total seats of a flight.
@@ -97,17 +97,17 @@ int get_flight_id(FlightInfo *flight);
  * @brief Gets the airline of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Airline of type 'char*'.
+ * @return char Airline of type 'char'.
  */
-char *get_airline(FlightInfo *flight);
+char get_airline(FlightInfo *flight);
 
 /**
  * @brief Gets the plane model of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Plane model of type 'char*'.
+ * @return char Plane model of type 'char'.
  */
-char *get_plane_model(FlightInfo *flight);
+char get_plane_model(FlightInfo *flight);
 
 /**
  * @brief Gets the total seats of a flight.

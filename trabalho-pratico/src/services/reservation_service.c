@@ -50,7 +50,7 @@ int verify_reservation_input(char **parameters, UsersData *users_data) {
 void construct_reservation(char **parameters,
                            ReservationsData *reservations_data,
                            UsersData *users_data, GeneralData *general_data,
-                           FILE *errors_file) {
+                           Maping *map, FILE *errors_file) {
   if (!verify_reservation_input(parameters, users_data)) {
     int i;
     for (i = 0; i < MAX_TOKENS_RESERVATION - 1; i++) {
@@ -72,7 +72,7 @@ void construct_reservation(char **parameters,
   set_reservation_id(reservation_info, reservation_id);
   set_user_id_reservation(reservation_info, parameters[1]);
   set_hotel_id(reservation_info, normalize_hotel_id(parameters[2]));
-  set_hotel_name(reservation_info, parameters[3]);
+  set_hotel_name(reservation_info, string_to_char(map, parameters[3]));
   set_hotel_stars(reservation_info, strtol(parameters[4], NULL, 10));
   set_city_tax(reservation_info, strtol(parameters[5], NULL, 10));
   set_begin_date(reservation_info, begin_date_day);

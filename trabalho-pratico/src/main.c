@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/resource.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
 
 #include "utils/input-handler.h"
@@ -21,5 +23,6 @@ int main(int argc, char **argv) {
     printf("Invalid number of arguments\n");
     return 1;
   }
+
   return 0;
 }

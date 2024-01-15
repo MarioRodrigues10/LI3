@@ -18,6 +18,7 @@
 #include "services/reservation_service.h"
 #include "services/user_service.h"
 #include "stats/user_stats.h"
+#include "utils/maping.h"
 #include "utils/output-handler.h"
 #include "utils/utils.h"
 
@@ -71,11 +72,12 @@ typedef struct query7_result *QUERY7_RESULT;
  * @param flights_data The flights data struct.
  * @param reservations_data The reservations data struct.
  * @param users_data The users data struct.
+ * @param map The maping struct.
  * @param output_file The pointer to the output file.
  */
 void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
             ReservationsData *reservations_data, UsersData *users_data,
-            FILE *output_file);
+            Maping *map, FILE *output_file);
 
 /**
  * @brief Queries the data structs.
@@ -191,11 +193,12 @@ void query4(bool has_f, char **query_parameters,
  * @param has_f If the query has the modifier 'F'.
  * @param line The line with the quey parameters.
  * @param flights_data The flights data struct.
+ * @param Maping* The maping struct.
  * @param output_file The pointer to the output file.
  * @param mode The mode of the program.
  */
 void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
-            FILE *output_file);
+            Maping *map, FILE *output_file);
 
 /**
  * @brief Queries the data structs.
@@ -264,12 +267,13 @@ void query10(bool has_f, char **query_parameters, int num_parameters,
  * @param general_data The general data struct.
  * @param users_data The users data struct.
  * @param users_stats The users stats struct.
+ * @param map The maping struct.
  * @param output_file The pointer to the output file.
  */
 void query_manager(char *line, FlightsData *flights_data,
                    ReservationsData *reservations_data,
                    GeneralData *general_data, UsersData *users_data,
-                   StatsUserInfo *users_stats, FILE *output_file);
+                   StatsUserInfo *users_stats, Maping *map, FILE *output_file);
 
 /**
  * @brief Manages the queries test.
@@ -280,12 +284,14 @@ void query_manager(char *line, FlightsData *flights_data,
  * @param general_data The general data struct.
  * @param users_data The users data struct.
  * @param users_stats The users stats struct.
+ * @param map The maping struct.
  * @param output_file The pointer to the output file.
  * @param output_file_expected The pointer to the output file expected.
  */
 void query_manager_test(char *line, FlightsData *flights_data,
                         ReservationsData *reservations_data,
                         GeneralData *general_data, UsersData *users_data,
-                        StatsUserInfo *users_stats, FILE *output_file,
-                        FILE *output_file_expected);
+                        StatsUserInfo *users_stats, Maping *map,
+                        FILE *output_file, FILE *output_file_expected);
+
 #endif

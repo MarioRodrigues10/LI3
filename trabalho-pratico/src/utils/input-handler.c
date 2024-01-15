@@ -49,6 +49,7 @@ int batch(char **argv) {
   UsersData *users_data = users_data_new();
   StatsUserInfo *users_stats = create_stats_user_information();
   GeneralData *general_data = general_data_new();
+  Maping *map = maping_init();
 
   char *data_folder = argv[1];
   if (create_directory("Resultados") != 0) {
@@ -56,7 +57,7 @@ int batch(char **argv) {
   }
 
   feeder(data_folder, flights_data, general_data, reservations_data, users_data,
-         users_stats);
+         users_stats, map);
 
   char *queries_filename = argv[2];
   FILE *queries_file = fopen(queries_filename, "r");
@@ -79,7 +80,7 @@ int batch(char **argv) {
     }
 
     query_manager(line, flights_data, reservations_data, general_data,
-                  users_data, users_stats, output_file);
+                  users_data, users_stats, map, output_file);
 
     fclose(output_file);
     number_of_queries++;
@@ -92,6 +93,7 @@ int batch(char **argv) {
   users_data_free(users_data);
   free_stats_user_information(users_stats);
   general_data_free(general_data);
+  maping_free(map);
 
   return 0;
 }
@@ -121,6 +123,7 @@ int interactive() {
   UsersData *users_data = users_data_new();
   StatsUserInfo *users_stats = create_stats_user_information();
   GeneralData *general_data = general_data_new();
+  Maping *map = maping_init();
 
   title_only_page("A carregar dataset...", 1);
 
@@ -129,7 +132,7 @@ int interactive() {
   }
 
   feeder(dataset_path, flights_data, general_data, reservations_data,
-         users_data, users_stats);
+         users_data, users_stats, map);
 
   char line[256];
   line[0] = '\0';
@@ -148,7 +151,7 @@ int interactive() {
 
     } else if (choice >= 1 && choice <= 10) {
       query_manager(line, flights_data, reservations_data, general_data,
-                    users_data, users_stats, output_file);
+                    users_data, users_stats, map, output_file);
     }
     fclose(output_file);
     query_result_page(number_of_queries);
@@ -162,6 +165,7 @@ int interactive() {
   users_data_free(users_data);
   free_stats_user_information(users_stats);
   general_data_free(general_data);
+  maping_free(map);
 
   endwin();
   return 0;

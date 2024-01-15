@@ -6,6 +6,7 @@
 #include "controllers/user_controller.h"
 #include "models/reservation.h"
 #include "stats/user_stats.h"
+#include "utils/maping.h"
 #include "utils/utils.h"
 #include "utils/validation.h"
 
@@ -26,12 +27,14 @@ int verify_reservation_input(char **parameters, UsersData *users_data);
  * @param parameters Parameters of type 'char**'.
  * @param reservations_data Pointer to the ReservationsData struct.
  * @param users_data Pointer to the UsersData struct.
+ * @param general_data Pointer to the GeneralData struct.
+ * @param map Map of type 'Maping*'.
  * @param errors_file The file to put the wrong lines.
  *
  */
 void construct_reservation(char **parameters,
                            ReservationsData *reservations_data,
                            UsersData *users_data, GeneralData *general_data,
-                           FILE *errors_file);
+                           Maping *map, FILE *errors_file);
 
 #endif
