@@ -55,17 +55,9 @@ UserStats *update_user_stats_controller(UsersData *users_data, char *user_id,
   return user_stats;
 }
 
-// ACCESS
-
 // USER
 
-#include <ncurses.h>
-
 UserInfo *get_user_by_username(UsersData *users_data, char *username) {
-  // clear();
-  // printw(" [PASSOU 2] CONTROLLEr func: query1 -> user | ID passado: |%s|",
-  // username); refresh(); getch();
-
   return g_hash_table_lookup(users_data->users, username);
 }
 

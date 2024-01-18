@@ -1,14 +1,4 @@
-
-#include <glib.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/resource.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <time.h>
-
-#include "utils/input-handler.h"
+#include "utils/input_handler.h"
 
 int main(int argc, char **argv) {
   // ./programa-principal dataset/data_clean dataset/input.txt

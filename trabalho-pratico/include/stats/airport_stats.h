@@ -36,6 +36,14 @@ char *get_airport_name_from_airport_stats(AirportStats *airport_stats);
 GArray *get_airport_flights_from_airport_stats(AirportStats *airport_stats);
 
 /**
+ * @brief Gets the year from airport info.
+ *
+ * @param airport_info Airport info of type 'AirportInfo*'.
+ *
+ */
+int get_year_from_airport_info(AirportInfo *airport_info);
+
+/**
  * @brief Gets the delays from airport stats.
  *
  * @param airport_stats Airport stats of type 'AirportStats*'.
@@ -44,6 +52,27 @@ GArray *get_airport_flights_from_airport_stats(AirportStats *airport_stats);
  *
  */
 GArray *get_delays(AirportStats *airport_stats);
+
+/**
+ * @brief Gets the number of passengers from airport info list.
+ *
+ * @param airport_info_list Airport info list of type 'AirportInfoList*'.
+ *
+ * @returns The number of passengers of type 'int'.
+ *
+ */
+int get_number_of_passengers_from_airport_info_list(
+    AirportInfoList *airport_info_list);
+
+/**
+ * @brief Gets the airport info list from airport stats.
+ *
+ * @param airport_stats Airport stats of type 'AirportStats*'.
+ *
+ * @returns The airport info list of type 'GHashTable*'.
+ *
+ */
+void get_airport_info_list(gpointer key, gpointer value, gpointer user_data);
 
 /**
  * @brief Creates a new airport stats.

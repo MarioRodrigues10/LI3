@@ -98,32 +98,6 @@ int is_day_next(const char* begin_date_str, const char* end_date_str);
 int calculate_delay(char* scheduled_date, char* actual_date);
 
 /**
- * @brief Function that compares two dates.
- *
- * @param query4_content The content of the query4 of type 'void*'
- * @param N The number of reservations of type 'int'
- */
-void sort_by_date_and_value(void* query4_content, int N);
-
-/**
- * @brief Function that compares two results.
- *
- * @param a The first string of type 'const void*'
- * @param b The second string of type 'const void*'
- *
- * @return The result of the check of type 'int'
- */
-int compare_query2_result(const void* a, const void* b);
-
-/**
- * @brief Function that sorts the flights by date.
- *
- * @param result The result of the query of type 'void*'
- * @param N The number of flights of type 'int'
- */
-void sort_by_date(void* result, int N);
-
-/**
  * @brief Function that sorts the reservations by date.
  *
  * @param year The year of type 'int'
@@ -325,16 +299,6 @@ gint compare_median(gconstpointer a, gconstpointer b);
 void sort_by_departure_date(void* result, int N);
 
 /**
- * @brief Function that sorts the reservations by date.
- *
- * @param a The first string of type 'const void*'
- * @param b The second string of type 'const void*'
- *
- * @return The result of the check of type 'int'
- */
-int compare_query5_result(const void* a, const void* b);
-
-/**
  * @brief Function that normalizes the string to upper
  *
  * @param string The string of type 'char*'
@@ -401,17 +365,6 @@ int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
  * @return The number of unique passengers of type 'int'
  */
 int remove_duplicates(GArray* data);
-
-/**
- * @brief Auxiliar function that  gets airport info from the hastable.
- *
- * @param key The key of the airport of type 'gpointer'
- * @param value The value of the airport of type 'gpointer'
- * @param user_data The user data of type 'gpointer'
- *
- * @return The number of unique passengers of type 'int'
- */
-void get_airport_info_list(gpointer key, gpointer value, gpointer user_data);
 
 /**
  * @brief Compare two files

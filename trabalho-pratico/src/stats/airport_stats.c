@@ -2,6 +2,7 @@
 
 #include <glib.h>
 #include <stdio.h>
+
 struct airport_stats {
   char *airport_name;
   GArray *delays;
@@ -18,7 +19,7 @@ void set_airport_name_of_airport_stats(AirportStats *airport_stats,
 // GETTERS
 
 char *get_airport_name_from_airport_stats(AirportStats *airport_stats) {
-  char *airport_name = g_strdup(airport_stats->airport_name);
+  char *airport_name = (airport_stats->airport_name);
   return airport_name;
 }
 
@@ -87,8 +88,27 @@ void set_year_of_airport_info(AirportInfo *airport_info, int year) {
 }
 // GETTERS
 
+int get_year_from_airport_info(AirportInfo *airport_info) {
+  return airport_info->year;
+}
+
 GHashTable *get_airports_list_from_airport_info(AirportInfo *airport_info) {
   return airport_info->airports_list;
+}
+
+int get_number_of_passengers_from_airport_info_list(
+    AirportInfoList *airport_info_list) {
+  return airport_info_list->number_of_passengers;
+}
+
+void get_airport_info_list(gpointer key, gpointer value, gpointer user_data) {
+  AirportInfoList *airport_info_list = (AirportInfoList *)value;
+
+  struct airport_info_list result_entry;
+  result_entry.airport = key;
+  result_entry.number_of_passengers = airport_info_list->number_of_passengers;
+
+  g_array_append_val((GArray *)user_data, result_entry);
 }
 
 AirportInfo *create_airport_info(int year, char *origin, char *destination,

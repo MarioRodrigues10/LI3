@@ -15,7 +15,7 @@ INC_TEST := $(INC)
 SRC_TEST := $(shell find tests/ -name "*.c")
 OBJ_TEST := $(filter-out build/main.o, $(OBJ)) $(SRC_TEST:tests/%.c=build/%.o)
 
-BUILD_DIR := $(shell mkdir -p build/models build/controllers build/services build/utils build/stats build/components build/views)
+BUILD_DIR := $(shell mkdir -p build/models build/controllers build/services build/utils build/stats build/components build/views build/services/queries)
 INCLUDE_FILES := $(shell find include/ -name "*.h")
 
 .PHONY: all

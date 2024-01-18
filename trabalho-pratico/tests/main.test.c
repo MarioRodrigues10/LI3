@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "utils/input-handler.h"
+#include "utils/input_handler.h"
 #include "utils/utils.h"
 
 int main() {

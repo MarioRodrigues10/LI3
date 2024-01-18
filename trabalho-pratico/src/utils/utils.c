@@ -158,38 +158,6 @@ int calculate_delay(char* scheduled_date, char* actual_date) {
   return time_difference_seconds;
 }
 
-struct query2_result_helper {
-  char* id;
-  char* date;
-  char* type;
-};
-
-struct query2_result {
-  GArray* query2_result;
-};
-
-int compare_query2_result(const void* a, const void* b) {
-  setlocale(LC_COLLATE, "en_US.UTF-8");
-  const QUERY2_RESULT_HELPER* query2_result_a = (const QUERY2_RESULT_HELPER*)a;
-  const QUERY2_RESULT_HELPER* query2_result_b = (const QUERY2_RESULT_HELPER*)b;
-
-  int dateComparison =
-      strcoll((*query2_result_b)->date, (*query2_result_a)->date);
-
-  if (dateComparison != 0) {
-    return dateComparison;
-  } else {
-    return strcoll((*query2_result_a)->id, (*query2_result_b)->id);
-  }
-}
-
-void sort_by_date(void* result, int N) {
-  QUERY2_RESULT* query_result = (QUERY2_RESULT*)result;
-
-  qsort((*query_result)->query2_result, N, sizeof(QUERY2_RESULT),
-        compare_query2_result);
-}
-
 char* format_date(int year, int month, int day) {
   char* new_date = malloc(38 * sizeof(char));
   if (day < 10 && month < 10) {
@@ -234,76 +202,6 @@ char* create_prefix(char** paramenters, int N) {
   }
 }
 
-struct query4_result_helper {
-  char* reservation_id;
-  char* begin_date;
-  char* end_date;
-  char* user_id;
-  float total_price;
-  char rating;
-};
-
-struct query4_result {
-  GArray* query4_result;
-};
-
-int compare_query4_result(const void* a, const void* b) {
-  setlocale(LC_COLLATE, "en_US.UTF-8");
-  const QUERY4_RESULT_HELPER* query4_result_a = (const QUERY4_RESULT_HELPER*)a;
-  const QUERY4_RESULT_HELPER* query4_result_b = (const QUERY4_RESULT_HELPER*)b;
-
-  int dateComparison =
-      strcoll((*query4_result_b)->begin_date, (*query4_result_a)->begin_date);
-
-  if (dateComparison != 0) {
-    return dateComparison;
-  } else {
-    return strcoll((*query4_result_a)->reservation_id,
-                   (*query4_result_b)->reservation_id);
-  }
-}
-
-void sort_by_date_and_value(void* result, int N) {
-  QUERY4_RESULT* query_result = (QUERY4_RESULT*)result;
-
-  qsort((*query_result)->query4_result, N, sizeof(QUERY4_RESULT),
-        compare_query4_result);
-}
-
-struct query5_result_helper {
-  char* flight_id;
-  char* departure_date;
-  char* destination;
-  char* airline;
-  char* plane_model;
-};
-
-struct query5_result {
-  GArray* query5_result;
-};
-
-int compare_query5_result(const void* a, const void* b) {
-  setlocale(LC_COLLATE, "en_US.UTF-8");
-  const QUERY5_RESULT_HELPER* query5_result_a = (const QUERY5_RESULT_HELPER*)a;
-  const QUERY5_RESULT_HELPER* query5_result_b = (const QUERY5_RESULT_HELPER*)b;
-  int dateComparison = strcoll((*query5_result_b)->departure_date,
-                               (*query5_result_a)->departure_date);
-
-  if (dateComparison != 0) {
-    return dateComparison;
-  } else {
-    return strcoll((*query5_result_a)->flight_id,
-                   (*query5_result_b)->flight_id);
-  }
-}
-
-void sort_by_departure_date(void* result, int N) {
-  QUERY5_RESULT* query_result = (QUERY5_RESULT*)result;
-
-  qsort((*query_result)->query5_result, N, sizeof(QUERY5_RESULT),
-        compare_query5_result);
-}
-
 char* concatenate_and_modify_strings(char* str1, char* str2) {
   size_t size = strlen(str1) + strlen(str2) + 2;
 
@@ -321,54 +219,6 @@ char* concatenate_and_modify_strings(char* str1, char* str2) {
   memmove(result, result + 1, strlen(result));
 
   return result;
-}
-struct user_info {
-  char* user_id;
-  char* user_name;
-};
-
-int compare(const void* a, const void* b) {
-  const UserInfoStats* user_a = *(const UserInfoStats**)a;
-  const UserInfoStats* user_b = *(const UserInfoStats**)b;
-
-  // Ensure null termination
-  g_assert(user_a->user_name[strlen(user_a->user_name)] == '\0');
-  g_assert(user_b->user_name[strlen(user_b->user_name)] == '\0');
-  g_assert(user_a->user_id[strlen(user_a->user_id)] == '\0');
-  g_assert(user_b->user_id[strlen(user_b->user_id)] == '\0');
-
-  int nameComparison = strcmp(user_a->user_name, user_b->user_name);
-  if (nameComparison != 0) {
-    return nameComparison;
-  } else {
-    return strcmp(user_a->user_id, user_b->user_id);
-  }
-}
-
-int check_prefix(const void* a, const void* b) {
-  const UserInfoStats* user = *(const UserInfoStats**)a;
-  const char* prefix = b;
-
-  return strncmp(user->user_name, prefix, strlen(prefix));
-}
-
-int compare_respond(const void* a, const void* b) {
-  setlocale(LC_COLLATE, "en_US.UTF-8");
-  const UserInfoStats* user_a = *(const UserInfoStats**)a;
-  const UserInfoStats* user_b = *(const UserInfoStats**)b;
-
-  // Ensure null termination
-  g_assert(user_a->user_name[strlen(user_a->user_name)] == '\0');
-  g_assert(user_b->user_name[strlen(user_b->user_name)] == '\0');
-  g_assert(user_a->user_id[strlen(user_a->user_id)] == '\0');
-  g_assert(user_b->user_id[strlen(user_b->user_id)] == '\0');
-
-  int nameComparison = strcoll(user_a->user_name, user_b->user_name);
-  if (nameComparison != 0) {
-    return nameComparison;
-  } else {
-    return strcoll(user_a->user_id, user_b->user_id);
-  }
 }
 
 void normalize_string_to_upper(char* string) {
@@ -473,75 +323,6 @@ int count_digits(int n) {
   }
   return counter;
 }
-struct airport_stats {
-  char* airport_name;
-  GArray* delays;
-  GArray* airport_flights;
-};
-
-struct query7_result {
-  char* airport;
-  int median_delay;
-};
-
-void calculate_median_for_airport(gpointer key, gpointer value,
-                                  gpointer user_data) {
-  AirportStats* airport = (AirportStats*)value;
-
-  GArray* delays = get_delays(airport);
-  int median = calculate_median(delays);
-
-  struct query7_result result_entry;
-  result_entry.airport = (char*)key;
-  result_entry.median_delay = median;
-
-  g_array_append_val((GArray*)user_data, result_entry);
-}
-
-void swap(GArray* array, int i, int j) {
-  int temp = g_array_index(array, int, i);
-  g_array_index(array, int, i) = g_array_index(array, int, j);
-  g_array_index(array, int, j) = temp;
-}
-
-int partition(GArray* array, int left, int right) {
-  int pivotValue = g_array_index(array, int, right);
-  int i = left;
-  for (int j = left; j < right; j++) {
-    if (g_array_index(array, int, j) < pivotValue) {
-      swap(array, i, j);
-      i++;
-    }
-  }
-  swap(array, i, right);
-  return i;
-}
-
-int quickselect(GArray* array, int k) {
-  int left = 0, right = array->len - 1;
-  while (left <= right) {
-    int pivotIndex = partition(array, left, right);
-    if (pivotIndex == k) {
-      return g_array_index(array, int, pivotIndex);
-    } else if (pivotIndex < k) {
-      left = pivotIndex + 1;
-    } else {
-      right = pivotIndex - 1;
-    }
-  }
-  return -1;
-}
-
-double calculate_median(GArray* delays) {
-  int n = delays->len;
-  if (n % 2 == 0) {
-    int mid1 = quickselect(delays, n / 2 - 1);
-    int mid2 = quickselect(delays, n / 2);
-    return (double)((mid1 + mid2) / 2);
-  } else {
-    return quickselect(delays, n / 2);
-  }
-}
 
 gint ascending_order(gconstpointer a, gconstpointer b) {
   int int_a = *(const int*)a;
@@ -551,19 +332,6 @@ gint ascending_order(gconstpointer a, gconstpointer b) {
   if (int_a > int_b) return 1;
 
   return 0;
-}
-
-gint compare_median(gconstpointer a, gconstpointer b) {
-  const struct query7_result* result_a = (const struct query7_result*)a;
-  const struct query7_result* result_b = (const struct query7_result*)b;
-
-  if (result_a->median_delay > result_b->median_delay) {
-    return -1;
-  } else if (result_a->median_delay < result_b->median_delay) {
-    return 1;
-  }
-
-  return g_strcmp0(result_a->airport, result_b->airport);
 }
 
 char* int_to_flight_id(int flight_id, int num_digits) {
@@ -616,21 +384,6 @@ int remove_duplicates(GArray* data) {
     if (!found) count++;
   }
   return count;
-}
-
-struct airport_info_list {
-  char* airport;
-  int number_of_passengers;
-};
-
-void get_airport_info_list(gpointer key, gpointer value, gpointer user_data) {
-  AirportInfoList* airport_info_list = (AirportInfoList*)value;
-
-  struct airport_info_list result_entry;
-  result_entry.airport = key;
-  result_entry.number_of_passengers = airport_info_list->number_of_passengers;
-
-  g_array_append_val((GArray*)user_data, result_entry);
 }
 
 int compare_files(FILE* fp1, FILE* fp2) {

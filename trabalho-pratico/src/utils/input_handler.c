@@ -1,4 +1,4 @@
-#include "utils/input-handler.h"
+#include "utils/input_handler.h"
 
 #include <locale.h>
 #include <ncurses.h>

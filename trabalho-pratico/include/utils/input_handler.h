@@ -1,5 +1,5 @@
-#ifndef INPUT_HANDLER_CONTROLLER_H
-#define INPUT_HANDLER_CONTROLLER_H
+#ifndef INPUT_HANDLER_H
+#define INPUT_HANDLER_H
 
 #include "controllers/flight_controller.h"
 #include "controllers/general_controller.h"

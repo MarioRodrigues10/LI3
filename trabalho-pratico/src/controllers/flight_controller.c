@@ -96,17 +96,11 @@ FlightStats *get_flight_stats_by_flight_id(FlightsData *flights_data,
                              GINT_TO_POINTER(flight_id));
 }
 
-// AIRPORT STATS
-struct airport_stats {
-  char *airport_name;
-  GArray delays;
-  GArray *airport_flights;
-};
-
 // Estrutura temporária
 void add_airport_stats_controller(FlightsData *flights_data,
                                   AirportStats *airport_stats) {
-  g_hash_table_insert(flights_data->airport_stats, airport_stats->airport_name,
+  g_hash_table_insert(flights_data->airport_stats,
+                      get_airport_name_from_airport_stats(airport_stats),
                       airport_stats);
 }
 
