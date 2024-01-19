@@ -63,14 +63,6 @@ void set_passport(UserInfo *user, char *passport);
 void set_country_code(UserInfo *user, char *country_code);
 
 /**
- * @brief Sets the account status of a user.
- *
- * @param user UserInfo pointer of type 'UserInfo*'.
- * @param account_status Account status of type 'char*'.
- */
-void set_account_creation(UserInfo *user, char *account_creation);
-
-/**
  * @brief Sets the account creation of a user.
  *
  * @param user UserInfo pointer of type 'UserInfo*'.
@@ -125,14 +117,6 @@ char *get_passport(UserInfo *user);
  * @return country_code of type 'char*'.
  */
 char *get_country_code(UserInfo *user);
-
-/**
- * @brief Gets the account creation of a user.
- *
- * @param user UserInfo pointer of type 'UserInfo*'.
- * @return account_creation of type 'char*'.
- */
-char *get_account_creation(UserInfo *user);
 
 /**
  * @brief Gets the account status of a user.

@@ -8,7 +8,6 @@ struct user {
   char *name;
   char *passport;
   char *country_code;
-  char *account_creation;
   int birth_date;
   bool sex;
   bool account_status;
@@ -44,10 +43,6 @@ void set_country_code(UserInfo *user, char *country_code) {
   user->country_code = g_strdup(country_code);
 }
 
-void set_account_creation(UserInfo *user, char *account_creation) {
-  user->account_creation = g_strdup(account_creation);
-}
-
 void set_account_status(UserInfo *user, bool account_status) {
   user->account_status = account_status;
 }
@@ -78,11 +73,6 @@ char *get_country_code(UserInfo *user) {
   return country_code;
 }
 
-char *get_account_creation(UserInfo *user) {
-  char *account_creation = g_strdup(user->account_creation);
-  return account_creation;
-}
-
 bool get_account_status(UserInfo *user) {
   if (user == NULL) return false;
   return user->account_status;
@@ -95,6 +85,5 @@ void destroy_user(UserInfo *user) {
   g_free(user->name);
   g_free(user->passport);
   g_free(user->country_code);
-  g_free(user->account_creation);
   g_free(user);
 }

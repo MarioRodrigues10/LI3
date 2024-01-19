@@ -88,7 +88,8 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
   for (guint i = 0; i < flights->len; ++i) {
     int flight_id = g_array_index(flights, int, i);
     FlightInfo *flight = get_flight_by_flight_id(flights_data, flight_id);
-    char *departure_date = get_schedule_departure_date(flight);
+    char *departure_date =
+        seconds_to_datetime(get_schedule_departure_date(flight));
     char *destination = get_destination(flight);
     char *airline = char_to_string(map, get_airline(flight));
     char *plane_model = char_to_string(map, get_plane_model(flight));

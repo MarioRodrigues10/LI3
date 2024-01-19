@@ -10,6 +10,56 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define D 9
+#define M 10
+#define Y 2022
+#define DATE_STR_SIZE 20
+
+guint32 datetime_to_seconds(const char* datetime) {
+  guint8 d = (datetime[8] - '0') * 10 + (datetime[9] - '0');
+  guint8 m = (datetime[5] - '0') * 10 + (datetime[6] - '0');
+  guint16 y = (datetime[0] - '0') * 1000 + (datetime[1] - '0') * 100 +
+              (datetime[2] - '0') * 10 + (datetime[3] - '0');
+  guint8 hh = (datetime[11] - '0') * 10 + (datetime[12] - '0');
+  guint8 mm = (datetime[14] - '0') * 10 + (datetime[15] - '0');
+  guint8 ss = (datetime[17] - '0') * 10 + (datetime[18] - '0');
+
+  y -= m <= 2;
+  const int era = y / 400;
+  const unsigned yoe = y - era * 400;
+  const unsigned doy = (153 * (m > 2 ? m - 3 : m + 9) + 2) / 5 + d - 1;
+  const unsigned doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+
+  // Convert hours, minutes, and seconds to seconds
+  guint32 total_seconds = ss + mm * 60 + hh * 3600;
+
+  // Convert days to seconds and add to total_seconds
+  total_seconds += (era * 146097 + doe - 719468) * 86400;
+
+  return total_seconds;
+}
+
+char* seconds_to_datetime(guint32 seconds) {
+  const int days = seconds / 86400;
+  const int z = days + 719468;
+  const int era = (z >= 0 ? z : z - 146096) / 146097;
+  const unsigned doe = (unsigned)(z - era * 146097);
+  const unsigned yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+  const unsigned doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+
+  const unsigned mp = (5 * doy + 2) / 153;
+  const unsigned char d = doy - (153 * mp + 2) / 5 + 1;
+  const unsigned char m = mp < 10 ? mp + 3 : mp - 9;
+  const unsigned short y = (int)(yoe) + era * 400 + (m <= 2);
+
+  char* datetime_str = malloc(DATE_STR_SIZE);
+  snprintf(datetime_str, DATE_STR_SIZE,
+           "%04hu/%02hhu/%02hhu %02hhu:%02hhu:%02hhu", y, m, d,
+           (seconds / 3600) % 24, (seconds / 60) % 60, seconds % 60);
+
+  return datetime_str;
+}
+
 int check_input_file(const char* path) {
   size_t len = strlen(path);
 
@@ -355,7 +405,7 @@ int calculate_number_unique_passengers(GList* users_list, UsersData* users_data,
         int flight = g_array_index(flights, int, i);
         FlightInfo* flight_info = get_flight_by_flight_id(flights_data, flight);
         char* schedule_departure_date =
-            get_schedule_departure_date(flight_info);
+            seconds_to_datetime(get_schedule_departure_date(flight_info));
         if (strncmp(date, schedule_departure_date, chars_to_compare) == 0) {
           number_of_unique_passengers++;
           free(schedule_departure_date);

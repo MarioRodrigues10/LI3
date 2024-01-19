@@ -42,7 +42,8 @@ void construct_passenger(char **parameters, UsersData *users_data,
   char *origin = get_origin(flight_info);
   char *destination = get_destination(flight_info);
 
-  char *schedule_departure_date = get_schedule_departure_date(flight_info);
+  char *schedule_departure_date =
+      seconds_to_datetime(get_schedule_departure_date(flight_info));
   int departure_date_day = normalize_date_with_day(schedule_departure_date);
   int departure_date_month = normalize_date_with_month(schedule_departure_date);
   int departure_date_year = normalize_date_with_year(schedule_departure_date);

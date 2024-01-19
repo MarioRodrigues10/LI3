@@ -83,9 +83,9 @@ void construct_flight(char **parameters, void *flights_data, void *general_data,
   set_total_seats(flight_info, strtol(parameters[3], NULL, 10));
   set_origin(flight_info, parameters[4]);
   set_destination(flight_info, parameters[5]);
-  set_schedule_departure_date(flight_info, parameters[6]);
-  set_schedule_arrival_date(flight_info, parameters[7]);
-  set_real_departure_date(flight_info, parameters[8]);
+  set_schedule_departure_date(flight_info, datetime_to_seconds(parameters[6]));
+  set_schedule_arrival_date(flight_info, datetime_to_seconds(parameters[7]));
+  set_real_departure_date(flight_info, datetime_to_seconds(parameters[8]));
 
   add_flight(flight_data, flight_info);
 

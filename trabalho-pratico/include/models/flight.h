@@ -3,6 +3,8 @@
 
 #define MAX_TOKENS_FLIGHT 13
 
+#include <glib.h>
+
 typedef struct flight FlightInfo;
 
 /**
@@ -64,26 +66,27 @@ void set_destination(FlightInfo *flight, char *destination);
  * @brief Sets the schedule departure date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param schedule_departure_date Schedule departure date of type 'char*'.
+ * @param schedule_departure_date Schedule departure date of type 'guint32'.
  */
 void set_schedule_departure_date(FlightInfo *flight,
-                                 char *schedule_departure_date);
+                                 guint32 schedule_departure_date);
 
 /**
  * @brief Sets the schedule arrival date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param schedule_arrival_date Schedule arrival date of type 'char*'.
+ * @param schedule_arrival_date Schedule arrival date of type 'guint32'.
  */
-void set_schedule_arrival_date(FlightInfo *flight, char *schedule_arrival_date);
+void set_schedule_arrival_date(FlightInfo *flight,
+                               guint32 schedule_arrival_date);
 
 /**
  * @brief Sets the real departure date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @param real_departure_date Real departure date of type 'char*'.
+ * @param real_departure_date Real departure date of type 'guint32'.
  */
-void set_real_departure_date(FlightInfo *flight, char *real_departure_date);
+void set_real_departure_date(FlightInfo *flight, guint32 real_departure_date);
 
 /**
  * @brief Gets the flight id of a flight.
@@ -137,25 +140,25 @@ char *get_destination(FlightInfo *flight);
  * @brief Gets the schedule departure date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Schedule departure date of type 'char*'.
+ * @return guint32 Schedule departure date of type 'guint32'.
  */
-char *get_schedule_departure_date(FlightInfo *flight);
+guint32 get_schedule_departure_date(FlightInfo *flight);
 
 /**
  * @brief Gets the schedule arrival date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Schedule arrival date of type 'char*'.
+ * @return guint32 Schedule arrival date of type 'guint32'.
  */
-char *get_schedule_arrival_date(FlightInfo *flight);
+guint32 get_schedule_arrival_date(FlightInfo *flight);
 
 /**
  * @brief Gets the real departure date of a flight.
  *
  * @param flight FlightInfo pointer of type 'FlightInfo*'.
- * @return char* Real departure date of type 'char*'.
+ * @return guint32 Real departure date of type 'guint32'.
  */
-char *get_real_departure_date(FlightInfo *flight);
+guint32 get_real_departure_date(FlightInfo *flight);
 
 /**
  * @brief Frees the memory allocated to a flight.
