@@ -5,9 +5,9 @@
 struct flight {
   char *origin;
   char *destination;
-  guint32 schedule_departure_date;
-  guint32 schedule_arrival_date;
-  guint32 real_departure_date;
+  char *schedule_departure_date;
+  char *schedule_arrival_date;
+  char *real_departure_date;
   int flight_id;
   short int total_seats;
   char airline;
@@ -49,17 +49,17 @@ void set_destination(FlightInfo *flight, char *destination) {
 }
 
 void set_schedule_departure_date(FlightInfo *flight,
-                                 guint32 schedule_departure_date) {
-  flight->schedule_departure_date = schedule_departure_date;
+                                 char *schedule_departure_date) {
+  flight->schedule_departure_date = g_strdup(schedule_departure_date);
 }
 
 void set_schedule_arrival_date(FlightInfo *flight,
-                               guint32 schedule_arrival_date) {
-  flight->schedule_arrival_date = schedule_arrival_date;
+                               char *schedule_arrival_date) {
+  flight->schedule_arrival_date = g_strdup(schedule_arrival_date);
 }
 
-void set_real_departure_date(FlightInfo *flight, guint32 real_departure_date) {
-  flight->real_departure_date = real_departure_date;
+void set_real_departure_date(FlightInfo *flight, char *real_departure_date) {
+  flight->real_departure_date = g_strdup(real_departure_date);
 }
 
 // GETTERS
@@ -94,18 +94,18 @@ char *get_destination(FlightInfo *flight) {
   return destination;
 }
 
-guint32 get_schedule_departure_date(FlightInfo *flight) {
-  guint32 schedule_departure_date = flight->schedule_departure_date;
+char *get_schedule_departure_date(FlightInfo *flight) {
+  char *schedule_departure_date = g_strdup(flight->schedule_departure_date);
   return schedule_departure_date;
 }
 
-guint32 get_schedule_arrival_date(FlightInfo *flight) {
-  guint32 schedule_arrival_date = flight->schedule_arrival_date;
+char *get_schedule_arrival_date(FlightInfo *flight) {
+  char *schedule_arrival_date = g_strdup(flight->schedule_arrival_date);
   return schedule_arrival_date;
 }
 
-guint32 get_real_departure_date(FlightInfo *flight) {
-  guint32 real_departure_date = flight->real_departure_date;
+char *get_real_departure_date(FlightInfo *flight) {
+  char *real_departure_date = g_strdup(flight->real_departure_date);
   return real_departure_date;
 }
 
@@ -114,5 +114,8 @@ guint32 get_real_departure_date(FlightInfo *flight) {
 void destroy_flight(FlightInfo *flight) {
   g_free(flight->origin);
   g_free(flight->destination);
+  g_free(flight->schedule_departure_date);
+  g_free(flight->schedule_arrival_date);
+  g_free(flight->real_departure_date);
   g_free(flight);
 }

@@ -11,24 +11,6 @@
 #define MASTER_DATE "2023/10/01"
 
 /**
- * @brief Function that converts a date to seconds.
- *
- * @param datetime The date of type 'const char*'
- *
- * @return The date in seconds of type 'guint32'
- */
-guint32 datetime_to_seconds(const char* datetime);
-
-/**
- * @brief Function that converts seconds to a date.
- *
- * @param seconds The date in seconds of type 'guint32'
- *
- * @return The date of type 'char*'
- */
-char* seconds_to_datetime(guint32 seconds);
-
-/**
  * @brief Function that checks if the input file is valid.
  *
  * @param path The path of the input file of type 'const char*'

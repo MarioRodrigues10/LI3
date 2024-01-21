@@ -67,6 +67,7 @@ void construct_user(char **parameters, void *struct_data,
   set_sex(user_info, sex);
   set_passport(user_info, parameters[6]);
   set_country_code(user_info, parameters[7]);
+  set_account_creation(user_info, parameters[9]);
   set_account_status(user_info, standardize_account_status(parameters[11]));
 
   char *user_id = get_user_id(user_info);

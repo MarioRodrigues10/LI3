@@ -101,16 +101,14 @@ void query1(bool has_f, char **query_parameters, FlightsData *flights_data,
 
     if (flight_info == NULL) return;
 
-    char *real_departure_date =
-        seconds_to_datetime(get_real_departure_date(flight_info));
+    char *real_departure_date = get_real_departure_date(flight_info);
+
     char *airline_company = char_to_string(map, get_airline(flight_info));
     char *plane_model = char_to_string(map, get_plane_model(flight_info));
     char *origin = get_origin(flight_info);
     char *destination = get_destination(flight_info);
-    char *schedule_departure_date =
-        seconds_to_datetime(get_schedule_departure_date(flight_info));
-    char *schedule_arrival_date =
-        seconds_to_datetime(get_schedule_arrival_date(flight_info));
+    char *schedule_departure_date = get_schedule_departure_date(flight_info);
+    char *schedule_arrival_date = get_schedule_arrival_date(flight_info);
     int passengers = get_number_of_passengers_from_flight_stats(
         get_flight_stats_by_flight_id(flights_data, new_id));
     int delay = calculate_delay(schedule_departure_date, real_departure_date);

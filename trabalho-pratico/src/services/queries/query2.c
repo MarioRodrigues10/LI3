@@ -190,7 +190,7 @@ void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
     FlightInfo *flight = get_flight_by_flight_id(flights_data, id);
     if (flight == NULL) return;
     QUERY2_RESULT_HELPER result_helper = malloc(sizeof(QUERY2_RESULT_HELPER));
-    char *date = seconds_to_datetime(get_schedule_departure_date(flight));
+    char *date = get_schedule_departure_date(flight);
 
     char *flight_id_str = int_to_flight_id(id, count_digits(id));
 
