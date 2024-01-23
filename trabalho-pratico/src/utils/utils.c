@@ -386,7 +386,7 @@ int remove_duplicates(GArray* data) {
   return count;
 }
 
-int compare_files(FILE* fp1, FILE* fp2) {
+int compare_files(FILE* fp1, FILE* fp2, char* error_line, char* correct_line) {
   char line1[16384], line2[16384];
   int lineNum = 0;
 
@@ -394,19 +394,18 @@ int compare_files(FILE* fp1, FILE* fp2) {
          fgets(line2, sizeof(line2), fp2) != NULL) {
     lineNum++;
 
-    // Remove a quebra de linha do final de cada linha
     line1[strcspn(line1, "\n")] = '\0';
     line2[strcspn(line2, "\n")] = '\0';
-    printf("%s\n", line1);
-    printf("%s\n", line2);
 
     if (strcmp(line1, line2) != 0 || strlen(line1) != strlen(line2)) {
-      return lineNum;  // Arquivos são diferentes
+      strcpy(error_line, line1);
+      strcpy(correct_line, line2);
+      return lineNum;
     }
   }
 
   if (strcmp(line1, line2) != 0) {
-    return lineNum;  // Arquivos são diferentes
+    return lineNum;
   }
-  return 0;  // Arquivos são iguais
+  return 0;
 }

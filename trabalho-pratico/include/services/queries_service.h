@@ -47,6 +47,6 @@ void query_manager_test(char *line, FlightsData *flights_data,
                         ReservationsData *reservations_data,
                         GeneralData *general_data, UsersData *users_data,
                         StatsUserInfo *users_stats, Maping *map,
-                        FILE *output_file, FILE *output_file_expected);
+                        FILE *output_file, FILE *output_file_expected, int num);
 
 #endif

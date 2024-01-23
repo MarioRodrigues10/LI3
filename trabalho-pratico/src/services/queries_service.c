@@ -92,13 +92,16 @@ void query_manager(char *line, FlightsData *flights_data,
   free(query_parameters);
 }
 
-void write_input(bool has_f, int query_type, int line, double time) {
+void write_input(bool has_f, int query_type, int line, double time,
+                 char *correct_line, char *error_line) {
   if (has_f) {
     if (line == 0) {
       printf(GREEN "Query %dF is correct\n" RESET, query_type);
     } else {
       printf(RED "Query %dF is wrong\n", query_type);
       printf(RED "Diferença na linha %d\n" RESET, line);
+      printf("Correct line: %s\n", correct_line);
+      printf("Error line: %s\n", error_line);
     }
   } else {
     if (line == 0) {
@@ -106,6 +109,8 @@ void write_input(bool has_f, int query_type, int line, double time) {
     } else {
       printf(RED "Query %d is wrong\n", query_type);
       printf(RED "Diferença na linha %d\n" RESET, line);
+      printf("Correct line: %s\n", correct_line);
+      printf("Error line: %s\n", error_line);
     }
   }
   printf(YELLOW "This Query took %f seconds to execute \n" RESET, time);
@@ -115,7 +120,8 @@ void query_manager_test(char *line, FlightsData *flights_data,
                         ReservationsData *reservations_data,
                         GeneralData *general_data, UsersData *users_data,
                         StatsUserInfo *users_stats, Maping *map,
-                        FILE *output_file, FILE *output_file_expected) {
+                        FILE *output_file, FILE *output_file_expected,
+                        int num) {
   int query_type;
   char modifier;
   char *parameters = malloc(sizeof(char) * 100);
@@ -142,6 +148,10 @@ void query_manager_test(char *line, FlightsData *flights_data,
   clock_t start_time, end_time;
   double time_taken;
   int lineNum;
+  char file_path[256];
+  char error_line[256];
+  char correct_line[256];
+  FILE *file_path_output;
 
   switch (query_type) {
     case 1:
@@ -152,8 +162,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
 
       break;
     case 2:
@@ -161,11 +177,18 @@ void query_manager_test(char *line, FlightsData *flights_data,
 
       query2(has_f, query_parameters, flights_data, reservations_data,
              users_data, output_file, num_parameters);
+
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
     case 3:
       start_time = clock();
@@ -174,8 +197,15 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
 
     case 4:
@@ -185,8 +215,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
     case 5:
       start_time = clock();
@@ -195,8 +231,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
     case 6:
       start_time = clock();
@@ -206,8 +248,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
 
       break;
     case 7:
@@ -218,8 +266,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
 
       break;
     case 8:
@@ -230,8 +284,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
     case 9:
       start_time = clock();
@@ -241,8 +301,14 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
       break;
     case 10:
       start_time = clock();
@@ -253,12 +319,17 @@ void query_manager_test(char *line, FlightsData *flights_data,
       end_time = clock();
       time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
-      lineNum = compare_files(output_file, output_file_expected);
-      write_input(has_f, query_type, lineNum, time_taken);
+      fclose(output_file);
+      sprintf(file_path, "Resultados/command%d_output.txt", num);
+      file_path_output = fopen(file_path, "r");
+
+      lineNum = compare_files(file_path_output, output_file_expected,
+                              error_line, correct_line);
+      write_input(has_f, query_type, lineNum, time_taken, error_line,
+                  correct_line);
 
       break;
     default:
-      // This is not suppose\d to happen
       printf("Error choosing the query\n");
       break;
   }

@@ -10,7 +10,7 @@
 #include "utils/utils.h"
 
 int main() {
-  setlocale(LC_ALL, "");
+  setlocale(LC_ALL, "us_US.UTF-8");
 
   char dataset_path[100];
   char queries_path[100];
@@ -90,11 +90,12 @@ int main() {
           "correta...\n");
       return 1;
     }
+
     free(filename_output_expected);
     free(output_path_expected);
     query_manager_test(line, flights_data, reservations_data, general_data,
                        users_data, users_stats, map, output_file,
-                       output_file_expected);
+                       output_file_expected, number_of_queries);
 
     fclose(output_file);
     number_of_queries++;

@@ -371,9 +371,12 @@ int remove_duplicates(GArray* data);
  *
  * @param fp1 File pointer to the first file
  * @param fp2 File pointer to the second file
+ * @param error_line The line where the files are different
+ * @param correct_line The line where the files are equal
+ *
  *
  * @return 0 if the files are equal, 1 if they are different
  */
-int compare_files(FILE* fp1, FILE* fp2);
+int compare_files(FILE* fp1, FILE* fp2, char* error_line, char* correct_line);
 
 #endif
