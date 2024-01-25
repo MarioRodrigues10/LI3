@@ -1,0 +1,194 @@
+digraph dependencies {
+    splines = ortho;
+    sep = "+30,30";
+    overlap = scalexy;
+    nodesep = 0.4;
+    
+    node [shape = Mrecord; fontsize = 12;];
+    
+    subgraph cluster_1 {
+        style = dashed;
+        label = "Input";
+        
+        node [shape = folder;];
+        "Batch Mode (commands.txt)";
+        
+        node [shape = tab;];
+        "Interactive Mode (in)";
+    }
+    
+    subgraph cluster_2 {
+        style = dashed;
+        label = "Output";
+        
+        node [shape = folder;];
+        "Batch Mode (outputs.txt)";
+        
+        node [shape = tab;];
+        "Interactive Mode (out)";
+        
+        node [shape = folder;];
+        "Error files (errors.csv)";
+    }
+    
+    "Batch Mode (commands.txt)" -> "input-handler.c";
+    "Interactive Mode (in)" -> "input-handler.c";
+    
+    "output-handler.c" -> "Batch Mode (outputs.txt)";
+    "output-handler.c" -> "Interactive Mode (out)";
+    "output-handler.c" -> "Error files (errors.csv)";
+    
+    subgraph cluster_3 {
+        style = dashed;
+        label = "Dataset";
+        
+        node [shape = folder;];
+        "flights.csv";
+        "passengers.csv";
+        "reservations.csv";
+        "users.csv";
+    }
+    
+    "flights.csv" -> "feeder_service.c";
+    "passengers.csv" -> "feeder_service.c";
+    "reservations.csv" -> "feeder_service.c";
+    "users.csv" -> "feeder_service.c";
+    
+    subgraph cluster_10 {
+        style = dashed;
+        label = "Application";
+        
+        subgraph cluster_4 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Models and stats";
+            
+            "flight.c";
+            "flight_stats.c";
+            "airport_stats.c";
+            "passenger.c";
+            "reservation.c";
+            "hotel_stats.c";
+            "user.c";
+            "user_stats.c";
+            "general_stats.c";
+        }
+        
+        subgraph cluster_5 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Controllers";
+            
+            "flight_controller.c";
+            "passenger_controller.c";
+            "reservation_controller.c";
+            "user_controller.c";
+            "general_controller.c";
+        }
+        
+        subgraph cluster_6 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Utils";
+            
+            "utils.c";
+            "validation.c";
+            "input-handler.c";
+            "output-handler.c";
+        }
+        
+        "utils.c" -> "main.c";
+        "validation.c" -> "main.c";
+        
+        subgraph cluster_7 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Services";
+            
+            "feeder_service.c";
+            "parser_service.c";
+            "queries_service.c";
+            "flight_service.c";
+            "passenger_service.c";
+            "reservation_service.c";
+            "user_service.c";
+            "query[1-10].c";
+        }
+        
+        subgraph cluster_8 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Components";
+            
+            "directory_chooser.c";
+            "input_getter.c";
+        }
+
+        "directory_chooser.c" -> "load_dataset_page.c";
+        "input_getter.c" -> "load_dataset_page.c";
+        "input_getter.c" -> "query_menu_page.c";
+        
+        subgraph cluster_9 {
+            style = filled;
+            fillcolor = lightgray;
+            label = "Views";
+            
+            "load_dataset_page.c";
+            "query_menu_page.c";
+            "query_result_page.c";
+            "title_only_page.c";
+        }
+        
+        "load_dataset_page.c" -> "output-handler.c";
+        "query_menu_page.c" -> "output-handler.c";
+        "query_result_page.c" -> "output-handler.c";
+        "title_only_page.c" -> "output-handler.c";
+        
+        "main.c" -> "input-handler.c";
+        
+        "input-handler.c" -> "feeder_service.c";
+        "input-handler.c" -> "queries_service.c";
+
+        "queries_service.c" -> "query[1-10].c";
+        
+        "feeder_service.c" -> "parser_service.c";
+        
+        "parser_service.c" -> "flight_service.c";
+        "parser_service.c" -> "passenger_service.c";
+        "parser_service.c" -> "reservation_service.c";
+        "parser_service.c" -> "user_service.c";
+        "parser_service.c" -> "general_controller.c";
+        
+        "flight_service.c" -> "flight_controller.c";
+        "passenger_service.c" -> "passenger_controller.c";
+        "reservation_service.c" -> "reservation_controller.c";
+        "user_service.c" -> "user_controller.c";
+        
+        "queries_service.c" -> "flight_controller.c";
+        "queries_service.c" -> "passenger_controller.c";
+        "queries_service.c" -> "reservation_controller.c";
+        "queries_service.c" -> "user_controller.c";
+        "queries_service.c" -> "general_controller.c";
+        "queries_service.c" -> "output-handler.c";
+        
+        "flight_controller.c" -> "flight.c";
+        "flight_controller.c" -> "flight_stats.c";
+        "flight_controller.c" -> "airport_stats.c";
+        "passenger_controller.c" -> "passenger.c";
+        "reservation_controller.c" -> "reservation.c";
+        "reservation_controller.c" -> "hotel_stats.c";
+        "user_controller.c" -> "user.c";
+        "user_controller.c" -> "user_stats.c";
+        "general_controller.c" -> "general_stats.c";
+    }
+    
+    subgraph cluster_20 {
+        style = dashed;
+        label = "Legenda";
+        
+        "Files" [shape = folder;];
+        "Interaction" [shape = tab;];
+        "Modules" [shape = Mrecord;];
+        "Contexts" [shape = box;];
+    }
+}
