@@ -38,15 +38,16 @@ void query_result_page(int number_of_queries) {
   int total_lines = read_lines_from_file(filename, &lines);
 
   if (total_lines == -1) {
-    printf("Erro ao abrir o arquivo.\n");
+    printf("Error opening file.\n");
     return;
   }
 
   if (total_lines <= 0) {
     clear();
     mvprintw(LINES / 2,
-             (COLS - strlen("Os parâmetros inseridos são inválidos...")) / 2,
-             "Os parâmetros inseridos são inválidos...");
+             (COLS - strlen("The inserted parameters are invalid...")) / 2,
+             "The inserted parameters are invalid...");
+
     refresh();
     sleep(2);
     return;
@@ -68,14 +69,14 @@ void query_result_page(int number_of_queries) {
       mvprintw(line_offset + j, col_offset, "%s", lines[i]);
     }
 
-    mvprintw(line_offset - 4, (COLS - 17) / 2, "Resultado da Query:");
+    mvprintw(line_offset - 4, (COLS - 17) / 2, "Query Result:");
 
-    mvprintw(LINES - 2, (COLS - 10) / 2, "Página %d de %d", page, max_pages);
+    mvprintw(LINES - 2, (COLS - 10) / 2, "Page %d of %d", page, max_pages);
 
     int button_row = LINES - 5;
-    mvprintw(button_row, COLS - 20, "Página anterior");
-    mvprintw(button_row + 1, COLS - 20, "Página seguinte");
-    mvprintw(button_row + 3, COLS - 20, "Sair");
+    mvprintw(button_row, COLS - 20, "Previous page");
+    mvprintw(button_row + 1, COLS - 20, "Next page");
+    mvprintw(button_row + 3, COLS - 20, "Exit");
 
     mvchgat(button_row, COLS - 20, -1,
             (selected_button == 1) ? A_REVERSE : A_NORMAL, 0, NULL);

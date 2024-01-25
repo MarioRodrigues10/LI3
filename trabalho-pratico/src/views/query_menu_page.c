@@ -10,8 +10,8 @@ void draw_buttons(WINDOW *win, const char *options[], int n_options,
   int max_y, max_x;
   getmaxyx(win, max_y, max_x);
 
-  int title_x = (max_x - strlen("Escolha a query a executar:")) / 2;
-  mvwprintw(win, 5, title_x, "Escolha a query a executar:");
+  int title_x = (max_x - strlen("Choose the query to execute:")) / 2;
+  mvwprintw(win, 5, title_x, "Choose the query to execute:");
 
   int start_y = (max_y - n_options * 2) / 2 - 2;
   int start_x = max_x / 2;
@@ -35,7 +35,7 @@ int query_menu_page(char *line) {
   int key;
   const char *options[] = {"Query 1", "Query 2",  "Query 3", "Query 4",
                            "Query 5", "Query 6",  "Query 7", "Query 8",
-                           "Query 9", "Query 10", "Sair"};
+                           "Query 9", "Query 10", "Exit"};
   int n_options = sizeof(options) / sizeof(options[0]);
 
   while (1) {
@@ -67,7 +67,45 @@ int query_menu_page(char *line) {
           return 11;
         } else {
           mvprintw(max_y - 1, 1, "                                        ");
-          mvprintw(max_y - 1, 1, "Insira os argumentos: %d ", choice + 1);
+
+          switch (choice + 1) {
+            case 1:
+              mvprintw(max_y - 2, 1, "Example:. <ID> ");
+              break;
+            case 2:
+              mvprintw(max_y - 2, 1,
+                       "Example:. <User-ID> [flighst|reservations]");
+              break;
+            case 3:
+              mvprintw(max_y - 2, 1, "Example:. <Hotel-ID> ");
+              break;
+            case 4:
+              mvprintw(max_y - 2, 1, "Example:. <Hotel-ID> ");
+              break;
+            case 5:
+              mvprintw(max_y - 2, 1,
+                       "Example:. <Airport-name> <Begin_date> <End_date> ");
+              break;
+            case 6:
+              mvprintw(max_y - 2, 1, "Example:. <Year> <N> ");
+              break;
+            case 7:
+              mvprintw(max_y - 2, 1, "Example:. <N> ");
+              break;
+            case 8:
+              mvprintw(max_y - 2, 1,
+                       "Example:. <Hotel-ID> <Begin_date> <End_date> ");
+              break;
+            case 9:
+              mvprintw(max_y - 2, 1, "Example:. <Prefix> ");
+              break;
+            case 10:
+              mvprintw(max_y - 2, 1, "Example:. [Year[Month]] ");
+              break;
+          }
+
+          mvprintw(max_y - 1, 1, "Insert arguments for query %d: ", choice + 1);
+
           refresh();
           flushinp();
 

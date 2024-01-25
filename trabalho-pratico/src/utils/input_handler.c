@@ -114,7 +114,7 @@ int interactive() {
     dataset_path[0] = '\0';
     dataset_page(dataset_path);
     if (!check_dataset_path(dataset_path)) {
-      title_only_page("Dataset inválido...", 2);
+      title_only_page("Invalid dataset...", 2);
     }
   } while (!check_dataset_path(dataset_path));
 
@@ -125,7 +125,7 @@ int interactive() {
   GeneralData *general_data = general_data_new();
   Maping *map = maping_init();
 
-  title_only_page("A carregar dataset...", 1);
+  title_only_page("Loading dataset...", 1);
 
   if (create_directory("Resultados") != 0) {
     return 1;
@@ -158,7 +158,7 @@ int interactive() {
     number_of_queries++;
   }
 
-  title_only_page("A libertar dataset...", 1);
+  title_only_page("Freeing dataset...", 1);
 
   flights_data_free(flights_data);
   reservations_data_free(reservations_data);

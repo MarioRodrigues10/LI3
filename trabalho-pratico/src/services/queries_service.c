@@ -99,7 +99,7 @@ void write_input(bool has_f, int query_type, int line, double time,
       printf(GREEN "Query %dF is correct\n" RESET, query_type);
     } else {
       printf(RED "Query %dF is wrong\n", query_type);
-      printf(RED "Diferença na linha %d\n" RESET, line);
+      printf(RED "Difference in line %d\n" RESET, line);
       printf("Correct line: %s\n", correct_line);
       printf("Error line: %s\n", error_line);
     }
@@ -108,7 +108,7 @@ void write_input(bool has_f, int query_type, int line, double time,
       printf(GREEN "Query %d is correct\n" RESET, query_type);
     } else {
       printf(RED "Query %d is wrong\n", query_type);
-      printf(RED "Diferença na linha %d\n" RESET, line);
+      printf(RED "Difference in line %d\n" RESET, line);
       printf("Correct line: %s\n", correct_line);
       printf("Error line: %s\n", error_line);
     }

@@ -37,7 +37,7 @@ void display_ascii_art() {
     mvprintw(start_y + i, start_x, "%s", ascii_art[i]);
   }
 
-  char *modo_interativo = "Modo Interativo";
+  char *modo_interativo = "Interactive Mode";
   int text_length = strlen(modo_interativo);
   int text_x = (col - text_length) / 2;
   mvprintw(start_y + 8, text_x, "%s", modo_interativo);
@@ -46,7 +46,7 @@ void display_ascii_art() {
 }
 
 void display_buttons(int selected_option) {
-  const char *options[] = {"Escolher Dataset", "Escrever Dataset"};
+  const char *options[] = {"Choose Dataset", "Write Dataset"};
   int row, col;
   getmaxyx(stdscr, row, col);
   int start_y = (row - 20) / 2 + 10;
@@ -66,11 +66,12 @@ void display_buttons(int selected_option) {
 void input_textbox(char *dataset_path) {
   int row, col;
   getmaxyx(stdscr, row, col);
-  int textbox_length = strlen("Digite o caminho para o dataset: ");
+  int textbox_length = strlen("Enter the path to the dataset: ");
+
   int start_x = (col - textbox_length - 60) / 2;
   int start_y = row / 2 + 5;
 
-  mvprintw(start_y, start_x, "Digite o caminho para o dataset: ");
+  mvprintw(start_y, start_x, "Enter the path to the dataset: ");
   refresh();
 
   get_input(dataset_path);

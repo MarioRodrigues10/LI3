@@ -16,24 +16,19 @@ int main() {
   char queries_path[100];
   char outputs_path[100];
 
-  printf("===(TESTING)===\n");
+  printf("== (TESTING) ==\n");
 
   do {
-    printf(
-        "[DATASET] Insira um caminho válido para a pasta do Dataset a "
-        "testar: ");
+    printf("[Dataset] Insert a valid path to the Dataset folder: ");
     scanf("%s", dataset_path);
   } while (!check_dataset_path(dataset_path));
 
   do {
-    printf(
-        "[INPUTS] Insira um caminho válido para o ficheiro de inputs "
-        "esperados: ");
+    printf("[Inputs] Insert a valid path to the expected inputs file: ");
     scanf("%s", queries_path);
   } while (!check_input_file(queries_path));
 
-  printf(
-      "[OUTPUTS] Insira um caminho válido para a pasta de outputs esperados: ");
+  printf("[Outputs] Insert a valid path to the expected outputs folder: ");
   scanf("%s", outputs_path);
 
   printf("\n");
@@ -85,9 +80,7 @@ int main() {
 
     FILE *output_file_expected = fopen(output_path_expected, "r");
     if (output_file_expected == NULL) {
-      printf(
-          "[ERRO] Verifique se o caminho para a pasta de outputs está "
-          "correta...\n");
+      printf("[ERROR] Check if the path to the outputs folder is correct...\n");
       return 1;
     }
 
@@ -111,6 +104,7 @@ int main() {
   general_data_free(general_data);
   maping_free(map);
 
+  getrusage(RUSAGE_SELF, &r_usage);
   printf("Memory usage: %ld KB\n", r_usage.ru_maxrss);
   return 0;
 }

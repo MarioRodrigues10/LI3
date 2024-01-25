@@ -22,9 +22,10 @@ void choose_directory(char *dataset_path) {
 
   WINDOW *win = newwin(win_height, win_width, starty, startx);
   box(win, 0, 0);
-  mvwprintw(win, 1, (win_width - 24) / 2, "Selecione a pasta do Dataset:");
+
+  mvwprintw(win, 1, (win_width - 30) / 2, "Select the Dataset folder:");
   mvwprintw(win, 2, (win_width - 29) / 2,
-            "(Use as Setas para navegar e Enter para selecionar)");
+            "(Use the arrows to navigate and Enter to select)");
 
   wrefresh(win);
 
@@ -53,9 +54,10 @@ void choose_directory(char *dataset_path) {
       werase(win);
 
       box(win, 0, 0);
-      mvwprintw(win, 1, (win_width - 30) / 2, "Selecione a pasta do Dataset:");
+
+      mvwprintw(win, 1, (win_width - 30) / 2, "Select the Dataset folder:");
       mvwprintw(win, 2, (win_width - 50) / 2,
-                "(Use as Setas para navegar e Enter para selecionar)");
+                "(Use the arrows to navigate and Enter to select)");
 
       for (int i = 0; i < num_dirs; i++) {
         if (i == highlight) {
