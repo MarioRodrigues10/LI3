@@ -103,6 +103,6 @@ void query9(bool has_f, char **query_parameters, UsersData *users_data,
               get_user_name_from_user_info(user));
     }
   }
-
+  g_array_free(stats_user, TRUE);
   g_array_free(respond, TRUE);
 }

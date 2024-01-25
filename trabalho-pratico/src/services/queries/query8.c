@@ -49,6 +49,6 @@ void query8(bool has_f, char **query_parameters,
       }
     }
   }
-
+  g_array_free(reservations, TRUE);
   write_query8(has_f, output_file, revenue);
 }

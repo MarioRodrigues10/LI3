@@ -78,6 +78,7 @@ void calculate_median_for_airport(gpointer key, gpointer value,
   result_entry.median_delay = median;
 
   g_array_append_val((GArray *)user_data, result_entry);
+  g_array_free(delays, TRUE);
 }
 
 gint compare_median(gconstpointer a, gconstpointer b) {

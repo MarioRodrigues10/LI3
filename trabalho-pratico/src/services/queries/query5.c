@@ -130,6 +130,7 @@ void query5(bool has_f, char **query_parameters, FlightsData *flights_data,
     free(g_array_index(result->query5_result, QUERY5_RESULT_HELPER, i));
   }
 
+  g_array_free(flights, TRUE);
   g_array_free(result->query5_result, TRUE);
   free(begin_date);
   free(end_date);

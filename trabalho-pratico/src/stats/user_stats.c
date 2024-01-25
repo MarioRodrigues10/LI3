@@ -68,13 +68,13 @@ double get_total_spent_from_user_stats(UserStats *user_stats) {
 
 GArray *get_user_flights_from_user_stats(UserStats *user_stats) {
   if (user_stats == NULL) return NULL;
-  GArray *user_flights = user_stats->user_flights;
+  GArray *user_flights = g_array_copy(user_stats->user_flights);
   return user_flights;
 }
 
 GArray *get_user_reservations_from_user_stats(UserStats *user_stats) {
   if (user_stats == NULL) return NULL;
-  GArray *user_reservations = user_stats->user_reservations;
+  GArray *user_reservations = g_array_copy(user_stats->user_reservations);
   return user_reservations;
 }
 
@@ -153,7 +153,7 @@ void update_user_stats_info(StatsUserInfo *stats, char *user_id,
 }
 
 GArray *get_stats_user_info(StatsUserInfo *users_stats) {
-  GArray *user_info = users_stats->info;
+  GArray *user_info = g_array_copy(users_stats->info);
   return user_info;
 }
 

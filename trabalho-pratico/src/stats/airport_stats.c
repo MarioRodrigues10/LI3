@@ -13,22 +13,22 @@ struct airport_stats {
 
 void set_airport_name_of_airport_stats(AirportStats *airport_stats,
                                        char *airport_name) {
-  airport_stats->airport_name = g_strdup(airport_name);
+  airport_stats->airport_name = airport_name;
 }
 
 // GETTERS
 
 char *get_airport_name_from_airport_stats(AirportStats *airport_stats) {
-  char *airport_name = (airport_stats->airport_name);
+  char *airport_name = g_strdup(airport_stats->airport_name);
   return airport_name;
 }
 
 GArray *get_airport_flights_from_airport_stats(AirportStats *airport_stats) {
-  return airport_stats->airport_flights;
+  return g_array_copy(airport_stats->airport_flights);
 }
 
 GArray *get_delays(AirportStats *airport_stats) {
-  return airport_stats->delays;
+  return g_array_copy(airport_stats->delays);
 }
 
 // SET UP

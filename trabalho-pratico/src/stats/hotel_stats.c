@@ -45,7 +45,7 @@ int get_number_of_clients_from_hotel_stats(HotelStats *hotel_stats) {
 
 GArray *get_hotel_reservations(HotelStats *hotel_stats) {
   if (hotel_stats == NULL) return NULL;
-  GArray *hotel_reservations = hotel_stats->hotel_reservations;
+  GArray *hotel_reservations = g_array_copy(hotel_stats->hotel_reservations);
   return hotel_reservations;
 }
 

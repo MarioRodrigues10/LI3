@@ -123,6 +123,7 @@ void query4(bool has_f, char **query_parameters,
     free(g_array_index(result->query4_result, QUERY4_RESULT_HELPER, i));
   }
 
+  g_array_free(reservations, TRUE);
   g_array_free(result->query4_result, TRUE);
   free(result);
 }

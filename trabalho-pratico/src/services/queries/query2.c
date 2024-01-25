@@ -123,13 +123,17 @@ void query2_flights(bool has_f, UserStats *user_stats,
   }
   g_array_free(result->query2_result, TRUE);
   free(result);
+  g_array_free(flights, TRUE);
 }
 
 void query2_reservations(bool has_f, UserStats *user_stats,
                          ReservationsData *reservations_data,
                          FILE *output_file) {
   GArray *reservations = get_user_reservations_from_user_stats(user_stats);
-  if (reservations == NULL) return;
+  if (reservations == NULL) {
+    free(reservations);
+    return;
+  }
 
   int len = reservations->len;
   QUERY2_RESULT result = malloc(sizeof(QUERY2_RESULT));
@@ -149,6 +153,7 @@ void query2_reservations(bool has_f, UserStats *user_stats,
   }
   g_array_free(result->query2_result, TRUE);
   free(result);
+  g_array_free(reservations, TRUE);
 }
 
 void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
@@ -181,6 +186,8 @@ void query2_both(bool has_f, UserStats *user_stats, FlightsData *flights_data,
   }
   g_array_free(result->query2_result, TRUE);
   free(result);
+  g_array_free(flights, TRUE);
+  g_array_free(reservations, TRUE);
 }
 
 void query2_seed_flights(FlightsData *flights_data, char *type, GArray *array,
