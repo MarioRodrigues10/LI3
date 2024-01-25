@@ -3,8 +3,7 @@
 ## Grade: XX/20 ⭐️
 
 An [glib](https://docs.gtk.org/glib/) and [ncurses](https://invisible-island.net/ncurses/) based project, made for
-our [LI3](https://www4.di.uminho.pt/~jno/sitedi/uc_J303N1.html) class. It is licensed under the
-[Apache License](http://www.apache.org/licenses/LICENSE-2.0).
+our [LI3](https://www4.di.uminho.pt/~jno/sitedi/uc_J303N1.html) class. 
 
 Project requirements (set by the professors) are in `Requirements.pdf` (🇵🇹).
 
@@ -50,8 +49,13 @@ $ make clean
 
 ## Running
 
+Batch Mode:
 ```bash
 $ ./programa-principal <path to *.csv files> <path to input file>
+```
+Interactive Mode:
+```bash
+$ ./programa-principal
 ```
 
 ## Contributing

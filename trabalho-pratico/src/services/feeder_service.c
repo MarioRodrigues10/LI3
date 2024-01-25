@@ -140,6 +140,8 @@ void feeder(char* data_folder, FlightsData* flights_data,
           "rating;comment\n");
   fprintf(passengers_errors_file, "flight_id;user_id\n");
 
+  printf("[STATUS] Parsing files...\n\n");
+
   // Parse files
   parse_file(files[0], flights_errors_file, flights_data, general_data,
              reservations_data, users_data, users_stats, map, 0);

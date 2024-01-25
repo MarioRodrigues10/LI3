@@ -79,12 +79,16 @@ int batch(char **argv) {
       return 1;
     }
 
+    printf("[STATUS] Solving query %d\n\n", number_of_queries);
+
     query_manager(line, flights_data, reservations_data, general_data,
                   users_data, users_stats, map, output_file);
 
     fclose(output_file);
     number_of_queries++;
   }
+
+  printf("[STATUS] Freeing data...\n");
 
   fclose(queries_file);
 
