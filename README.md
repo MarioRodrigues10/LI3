@@ -1,6 +1,6 @@
 # Projeto LI3
 
-## Grade: XX/20 ⭐️
+## Grade: 18/20 ⭐️
 
 An [glib](https://docs.gtk.org/glib/) and [ncurses](https://invisible-island.net/ncurses/) based project, made for
 our [LI3](https://www4.di.uminho.pt/~jno/sitedi/uc_J303N1.html) class. 
